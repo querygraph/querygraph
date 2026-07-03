@@ -449,9 +449,18 @@ server boots on stdio).
 | **Cross-language signature verification** | `qg-rust` `agent::interop`: resolves Python's `did:key` verification methods, reconstructs the documented `querygraph-typedid-signing-v1` payload, verifies with `ed25519-dalek`, and recomputes Python's canonical payload JSON byte-exactly (`sort_keys` + compact separators + `ensure_ascii` escaping). Golden fixture in `cargo test`; live round-trip (Python signs → Rust `verify-envelope` accepts; tampering → exit 1) in the equivalence suite. |
 | **P1-6 `/v1` API, first slice** (§4.1) | `server` module (axum) + `querygraph serve --port`: `GET /v1/health`, `POST /v1/navigator/bundle`, `GET /v1/qglake/story`, `POST /v1/audit/verify-envelope` — the platform is network-reachable for the first time, and a Python-signed envelope verifies over HTTP. Invalid signatures return 200 + receipt (findings, not errors). Router tests cover every endpoint. |
 
-All work is committed as logical units and pushed to `querygraph/qg-python`
-and `querygraph/qg-rust` (the two CI-workflow commits remain local until the
-gh token gains the `workflow` scope).
+### Landed 2026-07-03, third wave (items 1–3 of the continuation)
+
+| Roadmap item | What landed |
+|---|---|
+| **§5.2 A2A Agent Card** | Both languages publish the same Agent2Agent v0.3.0 card (`a2a` modules, `agent-card` CLIs; served at `/.well-known/agent-card.json` by qg-server). Skills mirror `/v1`; the security scheme documents the TypeDID envelope contract. Card parity is asserted in the equivalence suite. |
+| **P0-2 official OpenLineage schema validation** | The 2-0-2 spec schema is vendored in qg-python and format-checked (`validation` extra). It immediately caught a real nonconformance — `run.runId` must be a UUID — so both implementations now emit deterministic UUIDv5 run ids under a shared namespace, pinned by a cross-language fixture. Both CLIs' events validate against the official schema in CI. |
+| **P1-6 `/v1` models + search** | `POST /v1/models/import/{osi,croissant}` (Croissant JSON-LD → OSI via the new Rust `from_croissant_json`, mirroring Python), `GET /v1/models[/{name}]`, `GET /v1/search?q=` over names/descriptions/ai_context/semantic types/ontology terms. |
+
+The workspace meta-repo now lives at `github.com/querygraph/querygraph`
+(private). All work is committed as logical units and pushed to
+`querygraph/qg-python` and `querygraph/qg-rust` (the two CI-workflow commits
+remain local until the gh token gains the `workflow` scope).
 
 ### Deliberately deferred (unchanged from the roadmap)
 
