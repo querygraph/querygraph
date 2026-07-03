@@ -62,4 +62,5 @@ uv run querygraph mcp-serve --osi path/to/model.yaml
 
 Stack releases are coordinated by codename across `grust`, `typesec`,
 `lakecat`, and `qg-*` (see each repo's `RELEASES.md`). Current: `qg-rust` /
-`qg-python` 0.2.0 "Peregrine" with 0.3.0-dev in progress.
+`qg-python` 0.3.0 "Goshawk" — the interoperability release (MCP, A2A,
+cross-language Ed25519, `/v1` API, official OpenLineage conformance).
