@@ -120,6 +120,23 @@ node publishing/scripts/render-mermaid.mjs \
   docs/book/diagrams
 ```
 
+## Illustrations and Figure Ledgers
+
+Illustrated books should treat images as source artifacts, not loose decoration.
+
+- keep book-ready images under `docs/book/figures/` or the repo-local book
+  equivalent;
+- copy or record downloaded originals under `sources/images/` when the repo
+  keeps a source corpus;
+- maintain a `FIGURES.md` ledger listing figures, diagrams, tables or ledgers,
+  file paths, source URLs, license/public-domain status, and placement;
+- prefer public-domain engravings, historical paintings, title pages, maps, and
+  extracted source-object plates for historical books;
+- render source-PDF plates with Poppler (`pdftoppm`) rather than taking
+  screenshots by hand;
+- verify final PDF pages visually when image density or table-heavy apparatus
+  changes.
+
 ## Build Workflow
 
 The reference script is `publishing/scripts/build-book.sh`. Copy it into a repo
@@ -168,6 +185,22 @@ Keep cover logic explicit and boring.
 - Use a placeholder such as `{{KINDLE_NAME}}` for the small version subtitle.
 - Build scripts should render the cover into a temporary file, never edit the
   source cover in place.
+
+## Troff Images
+
+Pandoc's `ms` writer can emit image references as commented lines such as
+`\" .IMAGE "figures/name.png" "0p"`. Those comments do not place images in the
+final troff PDF.
+
+For illustrated troff editions:
+
+- post-process the generated `.ms` body before calling `groff`;
+- convert image references to `.PDFPIC` calls;
+- wrap JPEG/PNG assets as one-page PDFs when gropdf will not ingest the raw
+  image format;
+- use `groff -Tpdf -P-e -U -k -t -ms` when `.PDFPIC` requires unsafe mode for
+  external files;
+- replace Pandoc `0p` image widths with explicit orientation-aware widths.
 
 Fast PDF checks:
 
