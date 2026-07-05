@@ -15,6 +15,8 @@ Use it as the source template when a repo needs a book/blog pipeline with:
 - repaired and validated EPUB metadata/layout;
 - exact-copy delivery to `~/icloud/books`.
 - versioned blog `.textpack` bundles delivered to `~/icloud/blogs`.
+- repo-pinned Python helper environments managed by asdf and uv, so publishing
+  never depends on a broken Homebrew or system Python.
 
 ## Canonical Layout
 
@@ -136,11 +138,57 @@ Illustrated books should treat images as source artifacts, not loose decoration.
   screenshots by hand;
 - verify final PDF pages visually when image density or table-heavy apparatus
   changes.
+- build contact sheets and image wrappers with the uv-managed Python
+  environment when Pillow is needed.
 
 ## Build Workflow
 
 The reference script is `publishing/scripts/build-book.sh`. Copy it into a repo
 or call it with environment variables from a repo-local `docs/book/build.sh`.
+
+Before a workflow uses Python for image conversion, contact-sheet QA, EPUB
+inspection, PDF page checks, textpack creation, or source extraction, pin and
+sync the repo-local Python environment:
+
+```text
+.tool-versions
+pyproject.toml
+uv.lock
+.venv/                 # ignored, created by uv sync
+```
+
+The recommended `.tool-versions` entry is the repo's asdf Python, for example:
+
+```text
+python 3.12.3
+```
+
+Declare publishing helpers in `pyproject.toml`; illustrated book pipelines
+should include Pillow:
+
+```toml
+[project]
+name = "my-book-publishing"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "pillow>=11.0.0",
+]
+```
+
+Then run:
+
+```sh
+asdf install
+uv sync --no-dev --python "$(asdf which python)"
+```
+
+Automation can resolve the correct Python with:
+
+```sh
+PYTHON="$(publishing/scripts/ensure-python-env.sh)"
+"$PYTHON" scripts/render-contact-sheet.py
+```
 
 Minimal single-formatter build:
 
@@ -174,6 +222,10 @@ The build script:
 10. runs `check_epub_metadata.sh` when present;
 11. builds MOBI when Calibre is available;
 12. optionally copies versioned EPUB/PDF artifacts to `~/icloud/books`.
+
+If any step needs Python, it should use the repo-local `.venv/bin/python` or
+the output of `publishing/scripts/ensure-python-env.sh`, not `/usr/bin/python3`
+or a Homebrew interpreter discovered incidentally on `PATH`.
 
 ## Cover Rules
 
