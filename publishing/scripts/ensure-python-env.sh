@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd "${REPO_ROOT:-.}" && pwd)"
+repo_root="$(cd "${1:-${REPO_ROOT:-.}}" && pwd)"
 python_path="${PUBLISHING_PYTHON:-$repo_root/.venv/bin/python}"
 
 if [[ -x "$python_path" ]]; then
