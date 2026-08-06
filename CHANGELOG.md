@@ -7,6 +7,9 @@ recorded here. The codename pool and the shared version line live in
 ## Unreleased — unified repository
 
 ### Changed
+- Expand the book with the released crate refactoring, standalone Marciana
+  boundaries, the `adversarial-cognition` benchmark and its comparative
+  results, and the Rust/Python/TypeScript release surfaces.
 - Consolidate the Rust runtime and Python API in the canonical
   `querygraph/querygraph` repository. The Rust crate remains `querygraph`; the
   Python distribution is now maintained under `python/` with its public import

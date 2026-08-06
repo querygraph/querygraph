@@ -116,6 +116,13 @@ published artifacts.
 
 ## Status log
 
+- **2026-08-06:** Updated the book manuscript and rebuilt the EPUB, PDF, HTML,
+  and MOBI artifacts. The new chapters document the released Rust/Python/
+  TypeScript crate surfaces, standalone Marciana extraction, and the pinned
+  `querygraph/adversarial-cognition` comparison (18 cases, nine hard gates,
+  Marciana P50 36.1 microseconds). New Mermaid diagrams and the verified
+  versioned artifacts were published through the existing FirstPair workflow.
+
 - **2026-08-06:** Confirmed the canonical `querygraph/querygraph` repository
   already exists as the workspace meta-repo. Confirmed qg-rust's released
   registry dependency line and qg-python's publishable `querygraph` package.

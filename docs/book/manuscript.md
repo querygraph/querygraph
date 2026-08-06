@@ -25,8 +25,8 @@ is to make that architecture legible as a textbook: first the motivation, then
 the pieces, then the full working system.
 
 The system rests on three coordinated, named open-source releases that this
-book tracks throughout: Grust 0.12.0 "Lobster" for the graph and query
-substrate, TypeSec 0.12.0 "Torcello" for the typed security fabric, and
+book tracks throughout: Grust 0.12.1 "Lobster" for the graph and query
+substrate, TypeSec 0.13.1 "Torcello" for the typed security fabric, and
 LakeCat 0.3.0 "Ocelot" for the catalog boundary. Where a chapter leans on a
 specific capability, it names the release that brought it — many foundations
 arrived with the previous line (Grust "Crab", TypeSec "Burano", LakeCat
@@ -684,7 +684,7 @@ Querygraph preserve compartmentalization through an agent hierarchy. A
 synthesis agent can receive signed summaries from specialists without
 automatically receiving the raw permissions that produced those summaries.
 
-Querygraph tracks TypeSec 0.12.0, "Torcello," the fourth Venetian-landmark
+Querygraph tracks TypeSec 0.13.1, "Torcello," the fourth Venetian-landmark
 release after Murano and Burano. Burano is what made the cross-agent envelopes
 in the Ollama path trustworthy as evidence: each authorized interaction
 carries an audit-safe TypeDID attestation recording who did what to which
@@ -751,7 +751,7 @@ is part of a security boundary. Querygraph benefits from explicit types,
 predictable serialization, careful error handling, and the ability to keep
 graph, policy, metadata, and CLI code in one compiled implementation.
 
-Querygraph tracks Grust 0.12.0, the "Lobster" release. Crab was the moment the
+Querygraph tracks Grust 0.12.1, the "Lobster" release. Crab was the moment the
 graph gained a language: a standards-conformant GQL/Cypher layer — lexer,
 parser, AST, and semantic analysis — over the same property graph, with backend
 read pushdown into Sail and SQLite. It also gave the navigator first-class
@@ -1966,6 +1966,144 @@ and returns the answer inside a signed envelope with a schema-valid
 OpenLineage event and an Ed25519 attestation. The deterministic path is the
 golden baseline: the same governance, with or without a language model in the
 loop.
+
+# The Refactored QueryGraph Stack
+
+The architecture is now a set of released boundaries rather than a collection
+of sibling checkouts. The canonical repository is `querygraph/querygraph`.
+Its Rust crate is the composition kernel; its Python and TypeScript packages
+are language projections over the same routes, wire formats, semantic
+contracts, and TypeDID fixtures. The extracted projects remain independently
+versioned and are consumed from registries, so a clean build does not depend on
+an engineer having a particular `~/src` layout.
+
+```mermaid
+flowchart LR
+    Sail["Sail lakehouse"] --> Grust["Grust crates\n0.12.1"]
+    Grust --> QG["QueryGraph Rust\nquerygraph 0.4.2"]
+    QG --> Py["Python API\nPyPI 0.4.1"]
+    QG --> Ts["TypeScript API\nnpm 0.1.2"]
+    TypeSec["TypeSec 0.13.1\nMemoryVault"] --> Marciana["Marciana crates\n0.12.1"]
+    Marciana --> QG
+    LakeCat["LakeCat 0.3.0\ncatalog proofs"] --> QG
+    Py --> Agents["agents, notebooks, MCP"]
+    Ts --> Agents
+```
+
+| Surface | Distribution | Responsibility |
+| --- | --- | --- |
+| Rust | `querygraph` 0.4.2 on crates.io | service, route, wire, and stack composition |
+| Python | `querygraph` 0.4.1 on PyPI | ergonomic CLI, notebooks, MCP, and navigator projection |
+| TypeScript | `@querygraph/querygraph` 0.1.2 on npm | typed Node-facing projection and shared contracts |
+| Foundations | TypeSec 0.13.1, Grust 0.12.1, LakeCat 0.3.0 | authority, persistence/indexing, and catalog proof boundaries |
+
+Dependency direction is deliberate: Sail, Grust, TypeSec, LakeCat, and
+Marciana do not depend on QueryGraph. QueryGraph consumes their released APIs
+and supplies the product-level composition. The Python and TypeScript clients
+cannot mutate protected memory directly; they submit the same authenticated
+operations that cross the Rust boundary.
+
+# Marciana Separated: Memory as a Governed Product
+
+Marciana was extracted into `querygraph/marciana` with history preserved and
+released as `marciana-ledger`, `querygraph-memory`, `marciana-catalog`, and
+`marciana-cognition` 0.12.1. QueryGraph now depends on those registry crates,
+not on a path checkout. The separation makes the ownership rule visible:
+TypeSec is the law and its capability-gated `MemoryVault` is the only authority
+that reveals or mutates protected memory; stores persist, indexes rank, and
+cognition proposes. QueryGraph composes these roles and keeps its facade thin.
+
+The four native Marciana verbs—remember, recall, forget, and improve—are
+therefore auditable operations rather than an opaque “memory adapter”. Grust
+provides durable persistence and deterministic ranking. Marciana computes
+bounded proposals. Sail supplies the lakehouse execution substrate for a
+memory-specific proposal, and LakeCat supplies the governed snapshot and
+scope proof. TypeSec verifies the TypeDID intent before plaintext is loaded and
+again before a mutation is committed.
+
+Two names often cause confusion. Fluree appears only in the comparative
+Akka+Fluree benchmark, where it describes that implementation's semantic-ledger
+and query role; QueryGraph does not depend on Fluree. Cognee is inspiration and
+a benchmark adapter only. No Cognee runtime, store, or Cognee-shaped facade is
+part of Marciana's baseline.
+
+# MARCIANA-ADVERSARIAL-v1
+
+The adversarial benchmark is now its own public project at
+[`querygraph/adversarial-cognition`](https://github.com/querygraph/adversarial-cognition),
+extracted from Marciana at commit `cbf3592`. It pins an 18-case, 11-category
+corpus and separates hard safety gates from quality and latency. The corpus
+digest is `d879b8a53039d84134bf8b35f21a398c497b94605bddf1a4995854aa1cb798b9`,
+so a future run can prove exactly which questions and policies were tested.
+
+```mermaid
+flowchart TD
+    Corpus["18 pinned cases"] --> Policy["TypeDID + clearance + purpose"]
+    Policy --> Rank["retrieve and rank"]
+    Rank --> Proposal["propose cognition change"]
+    Proposal --> Gates["nine hard gates"]
+    Gates --> Receipt["deterministic receipt and replay check"]
+```
+
+The reference implementation is deterministic: every supported case is
+correct, its full-case latency P50 is 36.1 microseconds, and all nine hard
+gates are zero. The comparative run records unsupported capabilities instead
+of silently treating them as failures:
+
+| System | Supported | Correct | Accuracy | Unsupported | Result |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Marciana reference | 18 | 18 | 100% | 0 | all nine hard gates zero |
+| Akka + Fluree | 16 | 16 | 100% | 2 | no clearance/purpose engine |
+| Letta 0.16.8 | 9 | 7 | 78% | 9 | no input-robustness boundary |
+| Graphiti (Kuzu) | 8 | 6 | 75% | 10 | retrieval is not token-order stable |
+| Mem0 (OSS) | 9 | 6 | 67% | 9 | lower-clearance private-memory leak |
+| Cognee (OSS) | 8 | 5 | 63% | 10 | empty-input and input-bound failures |
+
+The hard-gate set covers unauthorized disclosure, cross-scope leakage, forged
+or stale proposals, replay and duplicate mutation, residual recall after
+forget, nondeterministic receipts, and malformed or injection-shaped input.
+LLM-backed systems are naturally model, embedding, and hardware dependent;
+their unsupported cases are not extrapolated into a score. The benchmark is a
+regression instrument for responsible cognition, not a marketing leaderboard.
+Its full design and run instructions are in
+[`MARCIANA-ADVERSARIAL-v1.md`](https://github.com/querygraph/adversarial-cognition/blob/main/docs/MARCIANA-ADVERSARIAL-v1.md).
+
+# Three Language Surfaces
+
+The crate, Python, and TypeScript surfaces share the same semantic vocabulary
+and signed TypeDID boundary. A Rust service composes the authority and storage
+layers; Python is convenient for notebooks, MCP, and Pydantic-style agents;
+TypeScript is the Node-facing typed client. None of these examples bypasses
+`MemoryVault`.
+
+```rust
+use querygraph::agent::TypeDidEnvelope;
+
+let envelope = TypeDidEnvelope::from_typesec_between(
+    "coffee-session", "coffee-read", "dataset:coffee",
+    b"coffee-analyst", b"querygraph-service", &claims,
+)?;
+```
+
+```python
+from querygraph.typedid import TypeDidAgent
+
+agent = TypeDidAgent.new("coffee-analyst")
+catalog = TypeDidAgent.new("catalog")
+envelope = agent.request(catalog, action="read", resource="dataset:coffee", payload=claims)
+```
+
+```typescript
+import { TypeDidAgent } from "@querygraph/querygraph";
+
+const agent = TypeDidAgent.new("coffee-analyst");
+const catalog = TypeDidAgent.new("catalog");
+const envelope = agent.request(catalog, "read", "dataset:coffee", claims);
+```
+
+The language projections make integration inexpensive without creating three
+independent authorities. Contract fixtures, Ed25519 verification, Agent Card,
+MCP, and navigator tests are run against the same release line.
 
 # Where Querygraph Goes Next
 

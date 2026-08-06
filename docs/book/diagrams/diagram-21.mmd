@@ -1,0 +1,10 @@
+flowchart LR
+    Sail["Sail lakehouse"] --> Grust["Grust crates\n0.12.1"]
+    Grust --> QG["QueryGraph Rust\nquerygraph 0.4.2"]
+    QG --> Py["Python API\nPyPI 0.4.1"]
+    QG --> Ts["TypeScript API\nnpm 0.1.2"]
+    TypeSec["TypeSec 0.13.1\nMemoryVault"] --> Marciana["Marciana crates\n0.12.1"]
+    Marciana --> QG
+    LakeCat["LakeCat 0.3.0\ncatalog proofs"] --> QG
+    Py --> Agents["agents, notebooks, MCP"]
+    Ts --> Agents
