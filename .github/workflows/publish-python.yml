@@ -1,0 +1,34 @@
+name: Publish Python package
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "python-v*"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out release
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.13"
+
+      - name: Build and verify distributions
+        working-directory: python
+        run: |
+          uv build
+          uvx twine check dist/*
+
+      - name: Publish to PyPI
+        working-directory: python
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: uv publish dist/*
