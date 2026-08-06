@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 — 2026-08-06
+
+- Complete the public client surface with Dataverse, lakehouse, MCP server,
+  and CLI helpers matching the Python module boundaries.
+
 ## 0.1.1 — 2026-08-06
 
 - Export `CRYPTO_AVAILABLE` to match the Python package's public capability

@@ -58,7 +58,7 @@ this product repository.
 | 6 | Release and publish | crates.io `0.4.2` and PyPI `0.4.1` are published; authenticated workflow is retained for future releases | **complete** |
 | 7 | Closeout | QGQG.md status, changelog, compatibility pin, and unified CI are committed and pushed; legacy-repository deprecation is a follow-up | **complete** |
 | 8 | TypeScript API | TypeScript mirrors Python semantic/security modules with shared contract tests | **complete** |
-| 9 | npm release | Public `@querygraph/querygraph@0.1.1` published; registry tag and access verified; clean-install verification is pending registry metadata propagation | **in progress** |
+| 9 | npm release | Public `@querygraph/querygraph@0.1.2` release candidate; registry tag/access verified after publication; clean-install verification is pending metadata propagation | **in progress** |
 
 ## Dependency and repository matrix
 

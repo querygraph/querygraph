@@ -1,0 +1,2 @@
+import { AiNavigator } from "./navigator.js";
+export function main(argv = process.argv.slice(2)): number { if (argv[0] !== "navigator") { console.error("Usage: querygraph navigator"); return 2; } const output = new AiNavigator().build({ datasetName: argv[1] ?? "Dataset", description: argv[2] ?? "Governed dataset", landingPage: "https://querygraph.ai/datasets/example", dataUrl: "https://querygraph.ai/datasets/example.csv" }); console.log(JSON.stringify(output)); return 0; }

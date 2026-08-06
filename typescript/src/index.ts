@@ -3,6 +3,7 @@ export * from "./agents.js";
 export * from "./api-auth.js";
 export * from "./base58.js";
 export * from "./cdif.js";
+export * from "./cli.js";
 export * from "./codata.js";
 export * from "./croissant.js";
 export * from "./crypto.js";
