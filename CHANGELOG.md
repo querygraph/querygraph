@@ -15,6 +15,8 @@ recorded here. The codename pool and the shared version line live in
   package metadata while preserving cross-language TypeDID fixtures.
 - Track the migration, dependency matrix, compatibility contract, and Fable
   review gates in [`QGQG.md`](QGQG.md).
+- Add the public TypeScript API under `typescript/`, with shared semantic and
+  TypeDID contracts, Node tests, and npm publication support.
 
 ## 0.5.0-dev — unreleased
 

@@ -2,6 +2,7 @@ import { createHash, createPrivateKey, createPublicKey, sign as nodeSign, verify
 import { b58encode, b58decode } from "./base58.js";
 
 export const SIGNATURE_PREFIX = "ed25519:";
+export const CRYPTO_AVAILABLE = true;
 const PRIVATE_PREFIX = Buffer.from("302e020100300506032b657004220420", "hex");
 const PUBLIC_PREFIX = Buffer.from("302a300506032b6570032100", "hex");
 export function sha256Hex(value: string | Uint8Array): string { return createHash("sha256").update(value).digest("hex"); }

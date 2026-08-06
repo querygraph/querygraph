@@ -1,6 +1,6 @@
 # QGQG: QueryGraph Unified Repository Goal
 
-Status: **in progress — consolidation baseline and migration contract**  
+Status: **in progress — TypeScript API and npm release handoff**  
 Owner: QueryGraph maintainers  
 Review audience: Fable  
 Started: 2026-08-06
@@ -57,8 +57,8 @@ this product repository.
 | 5 | Update organization references and dependency manifests | Unified CI/scripts/docs and released registry pins resolve; active runtime audit is clean | **complete** |
 | 6 | Release and publish | crates.io `0.4.2` and PyPI `0.4.1` are published; authenticated workflow is retained for future releases | **complete** |
 | 7 | Closeout | QGQG.md status, changelog, compatibility pin, and unified CI are committed and pushed; legacy-repository deprecation is a follow-up | **complete** |
-| 8 | TypeScript API | TypeScript mirrors Python semantic/security modules with shared contract tests | **in progress** |
-| 9 | npm release | Public `@querygraph/querygraph` package built, published, and install-verified | pending |
+| 8 | TypeScript API | TypeScript mirrors Python semantic/security modules with shared contract tests | **complete** |
+| 9 | npm release | Public `@querygraph/querygraph@0.1.1` published; registry tag and access verified; clean-install verification is pending registry metadata propagation | **in progress** |
 
 ## Dependency and repository matrix
 
@@ -136,6 +136,11 @@ published artifacts.
   `typescript/` package with Croissant, CDIF, OSI, ODRL, TypeDID/Ed25519,
   lineage, navigator, MCP, Dataverse, lakehouse, and capability surfaces.
   Initial build and four Node contract tests pass; npm publication remains.
+- **2026-08-06:** Published `@querygraph/querygraph@0.1.0` with public access.
+  `npm test`, strict TypeScript compilation, npm pack, npm dist-tag, and
+  package access checks pass. The npm registry currently reports the release
+  tag but its metadata endpoint has not yet become install-visible, so clean
+  registry installation remains an explicit follow-up gate.
 - **Handoff:** the former repositories remain recoverable outside the canonical
   checkout; deprecation/redirect notices can be added in a separate
   compatibility window without changing the unified runtime.

@@ -1,6 +1,6 @@
 {
   "name": "@querygraph/querygraph",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript API for the governed QueryGraph semantic layer",
   "type": "module",
   "license": "MIT",
