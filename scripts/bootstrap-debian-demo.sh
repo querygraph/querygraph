@@ -79,18 +79,14 @@ QG_INSTALL_OLLAMA="${QG_INSTALL_OLLAMA:-1}"
 QG_PULL_OLLAMA_MODEL="${QG_PULL_OLLAMA_MODEL:-0}"
 QG_OLLAMA_MODEL="${QG_OLLAMA_MODEL:-llama3.2}"
 
-QG_META_REPO="${QG_META_REPO:-https://github.com/querygraph/querygraph.git}"
-QG_RUST_REPO="${QG_RUST_REPO:-https://github.com/querygraph/qg-rust.git}"
-QG_PYTHON_REPO="${QG_PYTHON_REPO:-https://github.com/querygraph/qg-python.git}"
+QG_REPO="${QG_REPO:-https://github.com/querygraph/querygraph.git}"
 QG_SAIL_REPO="${QG_SAIL_REPO:-https://github.com/querygraph/sail.git}"
 QG_GRUST_REPO="${QG_GRUST_REPO:-https://github.com/querygraph/grust.git}"
 QG_LAKECAT_REPO="${QG_LAKECAT_REPO:-https://github.com/querygraph/lakecat.git}"
 QG_TYPESEC_REPO="${QG_TYPESEC_REPO:-https://github.com/querygraph/typesec.git}"
 QG_FIRSTPAIR_REPO="${QG_FIRSTPAIR_REPO:-https://github.com/firstpair/firstpair.git}"
 
-QG_META_BRANCH="${QG_META_BRANCH:-main}"
-QG_RUST_BRANCH="${QG_RUST_BRANCH:-main}"
-QG_PYTHON_BRANCH="${QG_PYTHON_BRANCH:-main}"
+QG_BRANCH="${QG_BRANCH:-main}"
 QG_SAIL_BRANCH="${QG_SAIL_BRANCH:-grust}"
 QG_GRUST_BRANCH="${QG_GRUST_BRANCH:-main}"
 QG_LAKECAT_BRANCH="${QG_LAKECAT_BRANCH:-master}"
@@ -103,8 +99,9 @@ RUN_DIR="$QG_DEMO_ROOT/run"
 LOG_DIR="$QG_DEMO_ROOT/log"
 WEB_DIR="$QG_DEMO_ROOT/web"
 
-QG_RUST_DIR="$SRC_DIR/querygraph/qg-rust"
-QG_PYTHON_DIR="$SRC_DIR/querygraph/qg-python"
+QG_DIR="$SRC_DIR/querygraph/querygraph"
+QG_RUST_DIR="$QG_DIR"
+QG_PYTHON_DIR="$QG_DIR/python"
 QG_SAIL_DIR="$SRC_DIR/querygraph/sail"
 QG_GRUST_DIR="$SRC_DIR/grust"
 QG_LAKECAT_DIR="$SRC_DIR/lakecat"
@@ -145,16 +142,14 @@ PY
 uv --version
 
 log "Cloning QueryGraph stack repositories"
-clone_or_update "$QG_META_REPO" "$SRC_DIR/querygraph/meta" "$QG_META_BRANCH"
-clone_or_update "$QG_RUST_REPO" "$QG_RUST_DIR" "$QG_RUST_BRANCH"
-clone_or_update "$QG_PYTHON_REPO" "$QG_PYTHON_DIR" "$QG_PYTHON_BRANCH"
+clone_or_update "$QG_REPO" "$QG_DIR" "$QG_BRANCH"
 clone_or_update "$QG_SAIL_REPO" "$QG_SAIL_DIR" "$QG_SAIL_BRANCH"
 clone_or_update "$QG_GRUST_REPO" "$QG_GRUST_DIR" "$QG_GRUST_BRANCH"
 clone_or_update "$QG_LAKECAT_REPO" "$QG_LAKECAT_DIR" "$QG_LAKECAT_BRANCH"
 clone_or_update "$QG_TYPESEC_REPO" "$QG_TYPESEC_DIR" "$QG_TYPESEC_BRANCH"
 clone_or_update "$QG_FIRSTPAIR_REPO" "$QG_FIRSTPAIR_DIR" "$QG_FIRSTPAIR_BRANCH"
 
-log "Building qg-rust"
+log "Building QueryGraph Rust runtime"
 run_as_demo "cd '$QG_RUST_DIR' && '$QG_DEMO_ROOT/.cargo/bin/cargo' build --release"
 install -D -m 0755 -o root -g root "$QG_RUST_DIR/target/release/querygraph" "$BIN_DIR/querygraph"
 
@@ -166,7 +161,7 @@ else
   log "Skipping local Sail source build; installing pysail CLI into Python environment instead"
 fi
 
-log "Syncing qg-python environment"
+log "Syncing QueryGraph Python environment"
 run_as_demo "cd '$QG_PYTHON_DIR' && uv sync --extra all"
 if [ ! -x "$BIN_DIR/sail" ]; then
   run_as_demo "cd '$QG_PYTHON_DIR' && uv pip install pysail pyspark-client"

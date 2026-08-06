@@ -1,0 +1,12 @@
+flowchart TD
+    Principal["DID principal"] --> RBAC["role assignment"]
+    Asset["Croissant/CDIF target"] --> ODRL["ODRL policy layer"]
+    RBAC --> ODRL
+    ODRL --> Permit["permission"]
+    ODRL --> Prohibit["prohibition"]
+    ODRL --> Constraint["constraint"]
+    Permit --> Decision{"allowed action?"}
+    Prohibit --> Decision
+    Constraint --> Decision
+    Decision -->|yes| Receipt["access receipt"]
+    Decision -->|no| Denial["signed denial"]

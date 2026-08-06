@@ -2,8 +2,13 @@
 __pycache__/
 **/__pycache__/
 *.py[cod]
-qg-rust/
-qg-python/
+/target/
+/python/.venv/
+/python/.pytest_cache/
+/python/dist/
+spark-warehouse/
+.querygraph/
 sail/
 semantic/
 docs/outreach/
+docs/**/dist/

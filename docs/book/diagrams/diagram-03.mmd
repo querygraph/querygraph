@@ -1,0 +1,11 @@
+flowchart TD
+    Broad["Broad human question"] --> Resolve["Resolve terms and intent"]
+    Resolve --> Ontology["Ontology and OSI concepts"]
+    Ontology --> Assets["Croissant/CDIF fields and datasets"]
+    Assets --> Policy["DID, RBAC, ODRL, TypeSec"]
+    Policy --> Narrow["Small permitted context"]
+    Narrow --> Compute["SQL, graph traversal, cached summaries"]
+    Compute --> Model["Optional local or governed model"]
+    Model --> Answer["Signed answer"]
+    Compute --> Answer
+    Answer --> Audit["OpenLineage and DID attestation"]

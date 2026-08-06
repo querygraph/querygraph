@@ -1,69 +1,62 @@
-# QueryGraph workspace
+# QueryGraph
 
-A governed semantic layer for enterprise agentic AI: four semantic projections
-(Semantic Croissant, CDIF, W3C DID, ODRL) plus OSI business semantics, RBAC+ODRL
-dual policy gating, TypeDID signed agent envelopes, and OpenLineage audit with
-Ed25519-anchored attestations — over a Sail (Spark-compatible) lakehouse with a
-Grust property graph and a Cypher extension compiled into Sail itself.
+QueryGraph is the governed semantic layer for enterprise agentic AI. The
+canonical repository contains the Rust runtime and the Python API together:
 
-See `FABLE-REVIEW-1.md` for the full architecture review, findings, and roadmap.
+| Path | Boundary | Distribution |
+| --- | --- | --- |
+| `src/`, `tests/`, `Cargo.toml` | Rust semantic projections, governance, Sail/lakehouse loaders, lineage, agent envelopes, memory and CLI | crates.io `querygraph` |
+| `python/querygraph/`, `python/tests/` | Python projection for notebooks, agents, MCP, LangChain, Pydantic AI v2 and PySpark | PyPI `querygraph` |
+| `sail/` | Sail checkout and integration assets | upstream Sail |
+| `semantic/` | Semantic-model research and fixtures | documentation/research |
 
-## Components (this directory)
-
-| Directory | What it is | Language |
-|---|---|---|
-| `qg-rust/` | Reference implementation: semantic projections, governance, lakehouse loaders, lineage, agent envelopes, CLI | Rust |
-| `qg-python/` | Pythonic mirror (Pydantic v2): same layers plus LangChain adapter, tool-schema export, MCP server, PySpark/Sail helpers | Python |
-| `sail/` | Fork of [lakehq/sail](https://github.com/lakehq/sail), branch `grust`, adding a Cypher graph query extension | Rust |
-| `semantic/` | Research repos (`claude/`, `codex/`): Polaris `SemanticModel` architecture, OSI↔OpenLineage↔Navigator bundle round-trips, OPA/Rego policies | Python/docs |
-
-## Sibling repositories (required for qg-rust builds)
-
-`qg-rust` uses path dependencies that expect this exact layout:
-
-```
-~/src/
-├── querygraph/          # this directory
-│   ├── qg-rust/
-│   ├── qg-python/
-│   ├── sail/
-│   └── semantic/
-├── grust/               # github.com/querygraph/grust   (property graph + Cypher)
-├── lakecat/             # github.com/querygraph/lakecat (catalog bootstrap bundles)
-└── typesec/             # optional; typesec-* crates come from crates.io
-```
+The Rust and Python APIs share the same TypeDID, ODRL, Semantic Croissant,
+OpenLineage, OSI, and cross-language fixture contracts. Python is an ergonomic
+client projection; it is not a second memory or policy authority. TypeSec's
+capability-gated `MemoryVault` remains the only protected-memory authority.
 
 ## Quick start
 
 ```bash
-# Rust reference CLI (needs ../grust and ../lakecat checkouts)
-cd qg-rust && cargo test && cargo run -- qglake-story --json
+# Rust runtime and CLI
+cargo test
+cargo run -- qglake-story --json
 
-# Python mirror
-cd qg-python && uv sync --extra test --extra crypto --extra agents --extra mcp
-uv run pytest                       # includes the Rust↔Python equivalence suite
+# Python API and CLI
+cd python
+uv sync --extra test --extra crypto --extra agents --extra mcp
+uv run pytest
 uv run querygraph qglake-story --pretty
-
-# Serve the governed semantic layer over MCP (Claude, LangChain, PydanticAI, …)
-uv run querygraph mcp-serve --osi path/to/model.yaml
 ```
 
-## Cross-language contract
+The Python package keeps its public import and command names:
 
-`qg-python/tests/test_rust_equivalence.py` runs both CLIs and asserts:
+```python
+from querygraph import AiNavigator, TypeDidAgent
+```
 
-- `navigator` bundles are byte-identical modulo timestamps (Croissant, CDIF,
-  DID, ODRL layers, deterministic `did:oyd` identities);
-- `qglake-story` governance semantics match: same specialist roster, the
-  restricted broker (and only it) denied, complete OpenLineage + Ed25519
-  attested evidence chain on both sides.
+The full migration contract, dependency matrix, release gates, and status are
+maintained in [`QGQG.md`](QGQG.md). The architecture review remains in
+[`FABLE-REVIEW-1.md`](FABLE-REVIEW-1.md), and the stack guide is in
+[`docs/guide`](docs/guide).
+
+## Stack boundaries
+
+QueryGraph consumes released TypeSec, Grust, Marciana, and LakeCat crates and
+an explicit Sail upstream revision. Those projects never depend on QueryGraph.
+Cognee and Fluree are comparative benchmark references only; neither is a
+runtime dependency.
+
+```text
+Sail lakehouse <- Grust graph <- QueryGraph Rust <- Python API <- agents
+       ^              ^              ^              ^
+       |              |              |              |
+  LakeCat proofs  Marciana memory  TypeSec law  Pydantic/MCP clients
+```
 
 ## Release discipline
 
-Stack releases are coordinated by codename across `grust`, `typesec`,
-`lakecat`, and `qg-*` (see each repo's `RELEASES.md`). Current: `qg-rust` /
-`qg-python` 0.4.0 "Sentinel" — the governed-answer release (navigator loop
-under receipts, TypeDID envelope auth on `/v1`, Rust MCP server), following
-0.3.0 "Goshawk" (MCP, A2A, cross-language Ed25519, `/v1` API, official
-OpenLineage conformance) — over the 0.12 substrate wave: Grust 0.12.0
-"Lobster", TypeSec 0.12.0 "Torcello", and LakeCat 0.3.0 "Ocelot".
+Rust and Python release metadata lives beside each distribution. A release
+must pass formatting, strict lint, complete tests, clean package builds, the
+cross-language TypeDID fixtures, and the live Sail gate applicable to the
+change. See [`RELEASES.md`](RELEASES.md) and [`python/RELEASES.md`](python/RELEASES.md).

@@ -11,7 +11,7 @@ of flattening useful local conventions.
 |---|---|---|---|---|---|---|
 | `typesec` | Book PDF/EPUB/MOBI, blog textpacks | `docs/book/`, `docs/blog/<post>/` | Pandoc + Typst PDF; Pandoc EPUB | Book uses inline Mermaid Lua render; blogs use committed PNGs | `~/icloud/books`; blog textpacks increasingly go to `~/icloud/blogs` | Original template for title/version/EPUB discipline |
 | `lakecat` | Book PDF/EPUB/MOBI | `docs/book/` | Pandoc + Typst PDF; Pandoc EPUB | Extracts fenced Mermaid to persistent `.mmd` + `.png` | `~/icloud/books` when available | Best current model for persistent book diagrams |
-| `querygraph/qg-rust` | Book PDF/EPUB/MOBI plus blog diagram assets | `qg-rust/docs/book/`, `docs/blog/assets/querygraph/` | Pandoc to Typst body, direct `typst compile`; Pandoc EPUB | Renders book diagrams and mirrors them to blog assets | `~/icloud/books` and archive repo byte-match | Best current model for book/blog shared diagrams |
+| `querygraph/querygraph` | Book PDF/EPUB/MOBI plus blog diagram assets | `docs/book/`, `docs/blog/assets/querygraph/` | Pandoc to Typst body, direct `typst compile`; Pandoc EPUB | Renders book diagrams and mirrors them to blog assets | `~/icloud/books` and archive repo byte-match | Canonical book/blog asset bridge |
 | `omnighost` | Dual formatter book outputs; textpack tooling | `docs/book/`, `scripts/textpack.py` | Typst and troff/ms PDFs; Pandoc EPUB | Book diagrams rendered before build | `~/icloud/books`; textpack import into Omnighost | Best current model for Typst/troff comparison and importable textpacks |
 | `slavapost` | Newsletter/blog drafts | `articles/`, `edited/`, `publish-ready/` | Manual Ulysses/Ghost publishing | Uses local `file://` images for Ulysses resolution | Ulysses to Ghost | Operational publishing knowledge, not a book pipeline |
 | `books/chiefscientist-books` | Archive refresh and delivery | per-book archive folders | Reuses source repo artifacts | No source diagram generation | `~/icloud/books` | Best model for exact `VERSION.md` delivery checks |
@@ -34,7 +34,7 @@ of flattening useful local conventions.
 |---|---|---|---|---|---|
 | `typesec` | `docs/book/` | `typesec.md` | `mktemp` only | `docs/book/dist/` | `docs/book/dist/VERSION.md` |
 | `lakecat` | `docs/book/` | `lakecat.md` | `mktemp`, Pandoc runs inside scratch | `docs/book/dist/` or `LAKECAT_BOOK_DIST_DIR` | `docs/book/dist/VERSION.md` |
-| `querygraph/qg-rust` | `qg-rust/docs/book/` | `manuscript.md` | tracked `build/` plus `mktemp` | `qg-rust/docs/book/dist/` | `qg-rust/docs/book/dist/VERSION.md` |
+| `querygraph/querygraph` | `docs/book/` | `manuscript.md` | tracked `build/` plus `mktemp` | `docs/book/dist/` | `docs/book/dist/VERSION.md` |
 | `omnighost` | `docs/book/` | `omnighost.md` | `mktemp` | `docs/book/dist/` | `docs/book/dist/VERSION.md` |
 
 The central workflow defaults to `docs/book/manuscript.md`, but every important
@@ -53,7 +53,7 @@ publishing/scripts/build-book.sh
 |---|---|---|---|---|---|
 | `typesec` | `[workspace.package].version` in `Cargo.toml` | `typesec` | `typesec (<version>-<hash>).epub` in current script | Yes in current script | Older docs sometimes describe `typesec (<version>)`; newer artifacts use traceable hash stamps |
 | `lakecat` | `[workspace.package].version` in `Cargo.toml` | `lakecat` | `lakecat (<version>-<hash>).epub` | Yes | Also creates versioned PDF links |
-| `querygraph/qg-rust` | `[package].version` in `qg-rust/Cargo.toml` | `querygraph` | `querygraph (<version>-<hash>).epub` | Yes | Mirrors diagrams to blog assets |
+| `querygraph/querygraph` | `[package].version` in `Cargo.toml` | `querygraph` | `querygraph (<version>-<hash>).epub` | Yes | Mirrors diagrams to blog assets |
 | `omnighost` | root `package.json` | `obsidian-typst`, `obsidian-troff` | `<stem> (<version>-<hash>).epub` | Yes | Keeps catalog title at `<stem> (<version>)` but delivery link includes hash |
 | Blog textpacks | Cargo/package/override | `<slug>` | `<slug> (<version>-<hash>).textpack` | Yes | Delivery target is `~/icloud/blogs` |
 
@@ -76,7 +76,7 @@ For compatibility, the helper scripts also accept older `kindle_link` fields.
 |---|---|---|---|---|---|
 | `typesec` | Pandoc Markdown cover through Typst | Pandoc Markdown through Typst | Pandoc EPUB, then `fix_epub_layout.sh` | Calibre app bundle | Clean visible title; versioned Kindle metadata |
 | `lakecat` | Pandoc Markdown cover through Typst | Pandoc Markdown through Typst | Pandoc EPUB, then `fix_epub_layout.sh` | Calibre app bundle | Scratch isolation and artifact contract script |
-| `querygraph/qg-rust` | Pandoc Markdown cover through Typst | Pandoc to Typst, inject outline, direct `typst compile` | Pandoc EPUB, then `fix_epub_layout.sh` | PATH or Calibre app bundle | Blog diagram mirroring and first-diagram font-scale normalization |
+| `querygraph/querygraph` | Pandoc Markdown cover through Typst | Pandoc to Typst, inject outline, direct `typst compile` | Pandoc EPUB, then `fix_epub_layout.sh` | PATH or Calibre app bundle | Blog diagram mirroring and first-diagram font-scale normalization |
 | `omnighost` | Raw Typst block and raw ms block | Typst path plus troff/ms path | Pandoc EPUB for both stems | Optional PATH Calibre | Troff font embedding and dual formatter artifacts |
 
 Key excerpt, dual formatter naming from `omnighost/docs/book/build.sh`:
@@ -103,7 +103,7 @@ BOOK_FORMATS=typst,troff publishing/scripts/build-book.sh
 |---|---|---|---|---|---|
 | `typesec` | Inline fenced Mermaid in manuscript | Temporary PNGs via Lua filter | Build-time only | Blog posts require committed PNGs | Good for simple book builds, weaker for reusable assets |
 | `lakecat` | Inline fenced Mermaid in manuscript | Persistent `docs/book/diagrams/diagram-NN.{mmd,png}` | Rendered manuscript references `diagrams/*.png` | Not mirrored by default | Strong book reproducibility |
-| `querygraph/qg-rust` | Inline fenced Mermaid in manuscript | Persistent book diagrams and copied blog diagrams | Rendered manuscript references `diagrams/*.png` | `docs/blog/assets/querygraph/diagrams/` | Strongest book/blog asset bridge |
+| `querygraph/querygraph` | Inline fenced Mermaid in manuscript | Persistent book diagrams and copied blog diagrams | Rendered manuscript references `diagrams/*.png` | `docs/blog/assets/querygraph/diagrams/` | Strongest book/blog asset bridge |
 | `omnighost` | Diagram files and rendered PNGs | Persistent `docs/book/diagrams/` | Manuscript references PNGs | Textpacks bundle PNGs | Strong delivery compatibility |
 | Blog posts | `diagrams/*.mmd` next to `post.md` | `diagrams/*.png` | Not applicable | Bundled into `.textpack/assets/` | Final posts should not ship raw Mermaid |
 
@@ -134,7 +134,7 @@ node publishing/scripts/render-mermaid.mjs \
 |---|---|---|---|---|---|
 | `typesec` | `docs/book/fix_epub_layout.sh` | `check_epub_metadata.sh` | Yes | Yes | Yes |
 | `lakecat` | `docs/book/fix_epub_layout.sh` | `check_epub_metadata.sh` | Hard-coded LakeCat in current checks | Yes | Yes |
-| `querygraph/qg-rust` | `fix_epub_layout.sh` | `check_epub_metadata.sh` | Expected visible title argument | Yes | Yes |
+| `querygraph/querygraph` | `fix_epub_layout.sh` | `check_epub_metadata.sh` | Expected visible title argument | Yes | Yes |
 | `omnighost` | `fix_epub_layout.sh` | `check_epub_metadata.sh` | Versioned formatter titles | Yes | Yes |
 
 Common repair duties:
