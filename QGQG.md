@@ -53,7 +53,7 @@ this product repository.
 | 3 | Consolidate qg-rust into the canonical repository root | Root Cargo build/tests pass; crate metadata points to `querygraph/querygraph` | **complete** |
 | 4 | Roll qg-python into `python/` | `uv build`, 52 Python tests, CLI imports, and cross-language tests pass | **complete** |
 | 5 | Update organization references and dependency manifests | Unified CI/scripts/docs and released registry pins resolve; active runtime audit is clean | **complete** |
-| 6 | Release and publish | crates.io release complete; Python artifact built and metadata-checked (PyPI upload awaits publisher credentials) | **complete** |
+| 6 | Release and publish | crates.io `0.4.2` and PyPI `0.4.1` are published; authenticated workflow is retained for future releases | **complete** |
 | 7 | Closeout | QGQG.md status, changelog, compatibility pin, and unified CI are committed and pushed; legacy-repository deprecation is a follow-up | **complete** |
 
 ## Dependency and repository matrix
@@ -122,13 +122,11 @@ published artifacts.
   2 integration tests pass. Python `uv build`, `twine check`, and 52 tests
   pass, including the root-binary cross-language equivalence suite. Cargo
   package and publish dry-run pass for `querygraph 0.4.2`.
-- **2026-08-06:** Published `querygraph 0.4.2` to crates.io from the canonical
-  repository. Built and metadata-checked Python `querygraph 0.4.1`; PyPI upload
-  is ready but this environment has no publisher token or trusted-publishing
-  OIDC context.
-- **Handoff:** publish the Python artifacts with a maintainer-owned PyPI token
-  when available. The former repositories remain recoverable outside the
-  canonical checkout; deprecation/redirect notices can be added in a separate
+- **2026-08-06:** Published `querygraph 0.4.2` to crates.io and `querygraph
+  0.4.1` to PyPI through the authenticated GitHub Actions workflow. The
+  repository is public OSS; future Python releases use the same workflow.
+- **Handoff:** the former repositories remain recoverable outside the canonical
+  checkout; deprecation/redirect notices can be added in a separate
   compatibility window without changing the unified runtime.
 
 ## Fable review questions
