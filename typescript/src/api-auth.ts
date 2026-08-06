@@ -1,0 +1,3 @@
+import { TypeDidAgent } from "./typedid.js";
+export function mintEnvelopeHeader(agent: TypeDidAgent, recipient: string, action: string, resource: string, payload: Record<string, unknown>): string { const envelope = agent.request(TypeDidAgent.new("QueryGraphService", recipient), action, resource, payload); return Buffer.from(JSON.stringify(envelope.toJson())).toString("base64url"); }
+export async function governedPost(url: string, agent: TypeDidAgent, recipient: string, action: string, resource: string, payload: Record<string, unknown>): Promise<Response> { return fetch(url, { method: "POST", headers: { "content-type": "application/json", "x-qg-envelope": mintEnvelopeHeader(agent, recipient, action, resource, payload) }, body: JSON.stringify(payload) }); }

@@ -1,0 +1,2 @@
+import { runIdFor, OpenLineageRunEvent } from "./lineage.js";
+export function buildTypeScriptQglakeStory(): Record<string, unknown> { const event = new OpenLineageRunEvent({ eventType: "COMPLETE", runId: runIdFor("typescript-qglake"), jobName: "querygraph-typescript-qglake-story" }); return { protocol: "typedid/a2a", agents: ["supervisor", "finance", "synthesis"], denied: ["restricted-data-broker"], openlineage: event.toJson() }; }

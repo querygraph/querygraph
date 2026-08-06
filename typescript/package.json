@@ -1,0 +1,41 @@
+{
+  "name": "@querygraph/querygraph",
+  "version": "0.1.0",
+  "description": "TypeScript API for the governed QueryGraph semantic layer",
+  "type": "module",
+  "license": "MIT",
+  "author": "QueryGraph",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/querygraph/querygraph.git",
+    "directory": "typescript"
+  },
+  "homepage": "https://querygraph.ai",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
+    }
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "prepublishOnly": "npm run build && npm run typecheck"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

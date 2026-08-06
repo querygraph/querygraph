@@ -1,0 +1,3 @@
+export interface StoredPayload { id: string; payload: Record<string, unknown> }
+export interface AnchoredDid { did: string; stored: StoredPayload }
+export class CodataOdrlClient { constructor(public readonly baseUrl = "https://odrl.dev.codata.org") {} async anchorUrl(url: string): Promise<AnchoredDid> { const response = await fetch(`${this.baseUrl}/api/did/create_from_url`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ url }) }); if (!response.ok) throw new Error(`CODATA request failed: ${response.status}`); return await response.json() as AnchoredDid; } }

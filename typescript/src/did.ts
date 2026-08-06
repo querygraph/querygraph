@@ -1,0 +1,3 @@
+import { sha256Hex } from "./crypto.js";
+export interface DidDocumentInit { id: string; name?: string; controller?: string }
+export class DidDocument { id: string; name?: string; controller: string; constructor(init: DidDocumentInit) { this.id = init.id; this.name = init.name; this.controller = init.controller ?? init.id; } static newOyd(seed: string, name: string): DidDocument { return new DidDocument({ id: `did:oyd:${sha256Hex(seed).slice(0, 32)}`, name }); } toJson(): Record<string, unknown> { return { "@context": ["https://www.w3.org/ns/did/v1"], id: this.id, controller: this.controller, ...(this.name ? { name: this.name } : {}) }; } }

@@ -1,0 +1,3 @@
+export interface RolePermission { resource: string; actions: string[] }
+export interface RoleGrant { subject: string; role: string }
+export class RbacPolicy { permissions: Record<string, RolePermission[]>; grants: RoleGrant[]; constructor(init: { permissions?: Record<string, RolePermission[]>; grants?: RoleGrant[] } = {}) { this.permissions = init.permissions ?? {}; this.grants = init.grants ?? []; } allows(subject: string, action: string, resource: string): boolean { return this.grants.some((grant) => grant.subject === subject && (this.permissions[grant.role] ?? []).some((p) => p.resource === resource && p.actions.includes(action))); } }

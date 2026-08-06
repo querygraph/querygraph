@@ -1,0 +1,4 @@
+export function validateOpenlineage(value: Record<string, unknown>): string[] { const errors: string[] = []; for (const key of ["eventType", "eventTime", "run", "job", "producer"]) if (!(key in value)) errors.push(`missing ${key}`); const run = value.run as Record<string, unknown> | undefined; if (run && typeof run.runId !== "string") errors.push("run.runId must be a string"); return errors; }
+export function validateCroissant(value: Record<string, unknown>): string[] { return ["@id", "name", "description", "distribution", "recordSet"].filter((key) => !(key in value)).map((key) => `missing ${key}`); }
+export function validateCdif(value: Record<string, unknown>): string[] { return ["@id", "dct:title", "dcat:distribution"].filter((key) => !(key in value)).map((key) => `missing ${key}`); }
+export function validateOpenlineageSchema(value: Record<string, unknown>): string[] { return validateOpenlineage(value); }

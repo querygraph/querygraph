@@ -1,0 +1,4 @@
+export enum Action { READ = "read", WRITE = "write", DELETE = "delete", INFER = "infer", SUMMARIZE = "summarize" }
+export interface RuleInit { action: Action | string; resource: string; subjects?: string[]; constraints?: Record<string, unknown>[] }
+export class Rule { action: string; resource: string; subjects: string[]; constraints: Record<string, unknown>[]; constructor(init: RuleInit) { this.action = init.action; this.resource = init.resource; this.subjects = init.subjects ?? []; this.constraints = init.constraints ?? []; } }
+export class Policy { id: string; rules: Rule[]; constructor(id: string, rules: Rule[] = []) { this.id = id; this.rules = rules; } toJson(): Record<string, unknown> { return { "@context": "http://www.w3.org/ns/odrl.jsonld", "@type": "Policy", "@id": this.id, permission: this.rules.map((rule) => ({ action: rule.action, target: rule.resource, assignee: rule.subjects, constraint: rule.constraints })) }; } }

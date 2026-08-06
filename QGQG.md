@@ -8,11 +8,11 @@ Started: 2026-08-06
 ## Objective
 
 Make `querygraph/querygraph` the single source repository for the QueryGraph
-runtime and its Python API. The former `querygraph/qg-rust` implementation
+runtime and its Python and TypeScript APIs. The former `querygraph/qg-rust` implementation
 becomes the repository's root Rust crate (`querygraph` on crates.io), while the
 former `querygraph/qg-python` distribution becomes the sibling `python/`
-project in the same repository. The public Python import remains
-`querygraph`, so users do not need an application migration.
+project in the same repository. The public Python import remains `querygraph`
+and the TypeScript package is `@querygraph/querygraph`.
 
 The existing `querygraph/querygraph` GitHub repository is a workspace
 meta-repository. Because that canonical destination already exists, this goal
@@ -26,6 +26,8 @@ querygraph/querygraph
 ├── Rust crate at the repository root      -> cargo package: querygraph
 ├── python/querygraph/                     -> Python package: querygraph
 ├── python/tests/                          -> Python API tests
+├── typescript/src/                         -> TypeScript package: @querygraph/querygraph
+├── typescript/tests/                       -> Node contract tests
 └── docs/, lakehouse/, scripts/            -> shared product/docs tooling
 
 TypeSec, Grust, Marciana, LakeCat, and Sail remain independent upstream
@@ -55,6 +57,8 @@ this product repository.
 | 5 | Update organization references and dependency manifests | Unified CI/scripts/docs and released registry pins resolve; active runtime audit is clean | **complete** |
 | 6 | Release and publish | crates.io `0.4.2` and PyPI `0.4.1` are published; authenticated workflow is retained for future releases | **complete** |
 | 7 | Closeout | QGQG.md status, changelog, compatibility pin, and unified CI are committed and pushed; legacy-repository deprecation is a follow-up | **complete** |
+| 8 | TypeScript API | TypeScript mirrors Python semantic/security modules with shared contract tests | **in progress** |
+| 9 | npm release | Public `@querygraph/querygraph` package built, published, and install-verified | pending |
 
 ## Dependency and repository matrix
 
@@ -62,6 +66,7 @@ this product repository.
 | --- | --- | --- | --- |
 | QueryGraph Rust crate | `querygraph/qg-rust`, crates.io `querygraph` | `querygraph/querygraph`, crates.io `querygraph` | Change repository metadata; publish the next compatible release |
 | QueryGraph Python package | `querygraph/qg-python`, PyPI `querygraph` | `querygraph/querygraph/python`, PyPI `querygraph` | Move project, preserve import and CLI names; publish next release |
+| QueryGraph TypeScript package | none | `querygraph/querygraph/typescript`, npm `@querygraph/querygraph` | Share semantic/security wire contracts; publish public package |
 | Marciana | released `marciana-*` crates | unchanged released crates | Keep QueryGraph as consumer; update docs/paths only |
 | TypeSec | released `typesec-*` crates | unchanged released crates | No reverse dependency on QueryGraph |
 | Grust | released `grust-*` crates | unchanged released crates | No reverse dependency on QueryGraph |
@@ -93,6 +98,8 @@ Every release records:
   Sail binary gate applicable to the release.
 - Python: `uv sync`, the complete pytest suite, CLI smoke tests, `uv build`,
   `twine check`, and a clean virtual-environment install of the built wheel.
+- TypeScript: `npm ci`, strict `tsc`, Node contract tests, `npm pack --dry-run`,
+  and a clean Node install from the published npm tarball.
 - Cross-language: TypeDID signing/verification fixtures and semantic output
   equivalence continue to run from `python/tests` against the root binary.
 - Organization: targeted search confirms no active manifest, workflow, or
@@ -125,6 +132,10 @@ published artifacts.
 - **2026-08-06:** Published `querygraph 0.4.2` to crates.io and `querygraph
   0.4.1` to PyPI through the authenticated GitHub Actions workflow. The
   repository is public OSS; future Python releases use the same workflow.
+- **2026-08-06:** Started the TypeScript API goal. Added the modular
+  `typescript/` package with Croissant, CDIF, OSI, ODRL, TypeDID/Ed25519,
+  lineage, navigator, MCP, Dataverse, lakehouse, and capability surfaces.
+  Initial build and four Node contract tests pass; npm publication remains.
 - **Handoff:** the former repositories remain recoverable outside the canonical
   checkout; deprecation/redirect notices can be added in a separate
   compatibility window without changing the unified runtime.
