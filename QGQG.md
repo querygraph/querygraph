@@ -52,8 +52,8 @@ this product repository.
 | 2 | Establish this goal document and target layout | QGQG.md records boundaries, matrix, gates, rollback, and Fable questions | **complete** |
 | 3 | Consolidate qg-rust into the canonical repository root | Root Cargo build/tests pass; crate metadata points to `querygraph/querygraph` | **complete** |
 | 4 | Roll qg-python into `python/` | `uv build`, 52 Python tests, CLI imports, and cross-language tests pass | **complete** |
-| 5 | Update organization references and dependency manifests | Unified CI/scripts/docs and released registry pins resolve; final active-reference audit pending | **in progress** |
-| 6 | Release and publish | crates.io and PyPI artifacts are checksummed and installable from clean dirs | pending |
+| 5 | Update organization references and dependency manifests | Unified CI/scripts/docs and released registry pins resolve; active runtime audit is clean | **complete** |
+| 6 | Release and publish | crates.io release complete; PyPI upload awaits publisher credentials | **in progress** |
 | 7 | Closeout | QGQG.md status, changelog, redirects/deprecation notices, and Fable review notes | pending |
 
 ## Dependency and repository matrix
@@ -122,9 +122,12 @@ published artifacts.
   2 integration tests pass. Python `uv build`, `twine check`, and 52 tests
   pass, including the root-binary cross-language equivalence suite. Cargo
   package and publish dry-run pass for `querygraph 0.4.2`.
-- **Next:** finish the organization-wide path/reference audit, commit and push
-  the canonical repository, publish the verified crate/package artifacts, and
-  add deprecation/redirect notes to the former repository checkouts.
+- **2026-08-06:** Published `querygraph 0.4.2` to crates.io from the canonical
+  repository. Built and metadata-checked Python `querygraph 0.4.1`; PyPI upload
+  is ready but this environment has no publisher token or trusted-publishing
+  OIDC context.
+- **Next:** publish the Python artifacts with a maintainer-owned PyPI token,
+  then add deprecation/redirect notices to the former repository checkouts.
 
 ## Fable review questions
 
