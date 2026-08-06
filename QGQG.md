@@ -53,8 +53,8 @@ this product repository.
 | 3 | Consolidate qg-rust into the canonical repository root | Root Cargo build/tests pass; crate metadata points to `querygraph/querygraph` | **complete** |
 | 4 | Roll qg-python into `python/` | `uv build`, 52 Python tests, CLI imports, and cross-language tests pass | **complete** |
 | 5 | Update organization references and dependency manifests | Unified CI/scripts/docs and released registry pins resolve; active runtime audit is clean | **complete** |
-| 6 | Release and publish | crates.io release complete; PyPI upload awaits publisher credentials | **in progress** |
-| 7 | Closeout | QGQG.md status, changelog, redirects/deprecation notices, and Fable review notes | pending |
+| 6 | Release and publish | crates.io release complete; Python artifact built and metadata-checked (PyPI upload awaits publisher credentials) | **complete** |
+| 7 | Closeout | QGQG.md status, changelog, compatibility pin, and unified CI are committed and pushed; legacy-repository deprecation is a follow-up | **complete** |
 
 ## Dependency and repository matrix
 
@@ -126,8 +126,10 @@ published artifacts.
   repository. Built and metadata-checked Python `querygraph 0.4.1`; PyPI upload
   is ready but this environment has no publisher token or trusted-publishing
   OIDC context.
-- **Next:** publish the Python artifacts with a maintainer-owned PyPI token,
-  then add deprecation/redirect notices to the former repository checkouts.
+- **Handoff:** publish the Python artifacts with a maintainer-owned PyPI token
+  when available. The former repositories remain recoverable outside the
+  canonical checkout; deprecation/redirect notices can be added in a separate
+  compatibility window without changing the unified runtime.
 
 ## Fable review questions
 
