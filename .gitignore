@@ -8,7 +8,7 @@ __pycache__/
 /python/dist/
 spark-warehouse/
 .querygraph/
-sail/
-semantic/
+/sail/
+/semantic/
 docs/outreach/
 docs/**/dist/
