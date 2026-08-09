@@ -19,6 +19,7 @@ set -euo pipefail
 #   QG_RUST_BRANCH=main
 #   QG_PYTHON_BRANCH=main
 #   QG_SAIL_BRANCH=grust
+#   QG_SAIL_REVISION=<40-hex revision; defaults to compat/sail-revision.txt>
 #   QG_GRUST_BRANCH=main
 #   QG_LAKECAT_BRANCH=master
 #   QG_TYPESEC_BRANCH=main
@@ -57,6 +58,16 @@ clone_or_update() {
   fi
 }
 
+checkout_exact_revision() {
+  local dir="$1"
+  local revision="$2"
+  if [[ ! "$revision" =~ ^[0-9a-f]{40}$ ]]; then
+    die "Sail revision must be an exact lowercase 40-character Git hash: $revision"
+  fi
+  log "Checking out exact Sail revision $revision"
+  run_as_demo "cd '$dir' && git fetch --depth 1 origin '$revision' && git checkout --detach '$revision' && test \"\$(git rev-parse HEAD)\" = '$revision'"
+}
+
 write_file() {
   local path="$1"
   local mode="$2"
@@ -88,6 +99,7 @@ QG_FIRSTPAIR_REPO="${QG_FIRSTPAIR_REPO:-https://github.com/firstpair/firstpair.g
 
 QG_BRANCH="${QG_BRANCH:-main}"
 QG_SAIL_BRANCH="${QG_SAIL_BRANCH:-grust}"
+QG_SAIL_REVISION="${QG_SAIL_REVISION:-}"
 QG_GRUST_BRANCH="${QG_GRUST_BRANCH:-main}"
 QG_LAKECAT_BRANCH="${QG_LAKECAT_BRANCH:-master}"
 QG_TYPESEC_BRANCH="${QG_TYPESEC_BRANCH:-main}"
@@ -143,7 +155,15 @@ uv --version
 
 log "Cloning QueryGraph stack repositories"
 clone_or_update "$QG_REPO" "$QG_DIR" "$QG_BRANCH"
+if [[ -z "$QG_SAIL_REVISION" ]]; then
+  sail_revision_file="$QG_DIR/compat/sail-revision.txt"
+  if [[ ! -f "$sail_revision_file" ]]; then
+    die "QueryGraph Sail pin is missing: $sail_revision_file"
+  fi
+  QG_SAIL_REVISION="$(tr -d '[:space:]' < "$sail_revision_file")"
+fi
 clone_or_update "$QG_SAIL_REPO" "$QG_SAIL_DIR" "$QG_SAIL_BRANCH"
+checkout_exact_revision "$QG_SAIL_DIR" "$QG_SAIL_REVISION"
 clone_or_update "$QG_GRUST_REPO" "$QG_GRUST_DIR" "$QG_GRUST_BRANCH"
 clone_or_update "$QG_LAKECAT_REPO" "$QG_LAKECAT_DIR" "$QG_LAKECAT_BRANCH"
 clone_or_update "$QG_TYPESEC_REPO" "$QG_TYPESEC_DIR" "$QG_TYPESEC_BRANCH"
@@ -154,9 +174,12 @@ run_as_demo "cd '$QG_RUST_DIR' && '$QG_DEMO_ROOT/.cargo/bin/cargo' build --relea
 install -D -m 0755 -o root -g root "$QG_RUST_DIR/target/release/querygraph" "$BIN_DIR/querygraph"
 
 if [ "$QG_BUILD_SAIL_FROM_SOURCE" = "1" ]; then
-  log "Building Sail CLI from querygraph/sail ($QG_SAIL_BRANCH)"
-  run_as_demo "cd '$QG_SAIL_DIR' && '$QG_DEMO_ROOT/.cargo/bin/cargo' build --release -p sail-cli"
+  log "Building optimized Sail CLI from exact revision $QG_SAIL_REVISION"
+  run_as_demo "cd '$QG_SAIL_DIR' && RUSTFLAGS='-C target-cpu=native' CARGO_PROFILE_RELEASE_LTO=thin CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1 CARGO_PROFILE_RELEASE_STRIP=symbols CARGO_PROFILE_RELEASE_INCREMENTAL=false '$QG_DEMO_ROOT/.cargo/bin/cargo' build --locked --release -p sail-cli --bin sail -j1"
   install -D -m 0755 -o root -g root "$QG_SAIL_DIR/target/release/sail" "$BIN_DIR/sail"
+  write_file "$BIN_DIR/sail.revision" 0644 root root <<EOF
+$QG_SAIL_REVISION
+EOF
 else
   log "Skipping local Sail source build; installing pysail CLI into Python environment instead"
 fi
