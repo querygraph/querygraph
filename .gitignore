@@ -12,3 +12,4 @@ spark-warehouse/
 /semantic/
 docs/outreach/
 docs/**/dist/
+docs/book/build/

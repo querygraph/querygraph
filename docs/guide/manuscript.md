@@ -1776,6 +1776,44 @@ model (`--osi`) and your RBAC+ODRL policy (`--rights governance.json` —
 `{"rbac": {...}, "odrl": {...}}`); the demo policies are defaults, not
 assumptions.
 
+### AgentGym: test the adapter at execution time
+
+AgentGym extends this framework story from interoperability to adversarial
+authority. Its audited deterministic run sends fourteen benign/attack pairs
+and twelve applicable provider-fault trials through Pydantic AI, LangChain, and
+CrewAI across native, WorkOS, Arcade, OPA, Cerbos, OPA-mediated,
+Cerbos-mediated, and TypeSec profiles. Fault applicability makes the matrix
+non-rectangular: the
+[`schema-v2 report`](https://github.com/querygraph/adversarial-agents/blob/master/results/agentgym-docker-2026-08-19.json)
+contains 846 case-runs and 24 score records.
+
+All three frameworks produced the same score vector. Native, provider-only,
+and raw policy-engine profiles retained 100% benign utility but earned grade D
+because attacks escaped, exact-call binding was absent, or positive evidence
+was not verified. OPA-mediated, Cerbos-mediated, and TypeSec each passed 40/40
+applicable cases per framework and earned grade A with 100% safety, utility,
+exact binding, applicable fault closure, and verified evidence.
+
+The parity is the important result. Giving OPA or Cerbos the same last-moment
+execution-state mediator and single-use verified permit closes the runtime gap
+in this corpus. It does not establish a policy-engine or agent-framework
+ceiling. TypeSec's additional evidence is separate: four Rust compile-fail
+cases reject capability forgery, permission substitution, authority requests
+from unauthenticated state, and sensitive reveal with ordinary read authority.
+
+The scope is deliberately bounded. Calls and provider responses are scripted;
+database, memory, approval, replay, branch, and parallel boundaries are
+stateful simulations rather than live QueryGraph, LakeCat, Sail, WorkOS, or
+Arcade operations. CrewAI uses its offline hook-bearing executor, not a full
+model-driven `Crew.kickoff()` loop. Model attack choice and post-denial recovery
+are unscored. The custom PyO3 `AgentGymGate` uses TypeSec 0.13.1 RBAC/ODRL
+engines but is not the upstream TypeSec `ToolGate`, and its public deterministic
+receipt key proves exact binding and tamper detection rather than production
+issuer custody. At runtime the effect boundary consumes an opaque Rust
+`ExecutionPermit`; the separate compile-fail suite concerns construction and
+use of generic Rust `Capability<P, R>` values. The runtime and Rust
+construction-safety results therefore remain related but distinct claims.
+
 ## Chapter 27. Operating and Releasing
 
 **Build and test.**

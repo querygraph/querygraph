@@ -116,6 +116,15 @@ published artifacts.
 
 ## Status log
 
+- **2026-08-19:** Added the audited AgentGym security-boundary benchmark to
+  both book manuscripts. The recorded run contains 846 applicable case-runs
+  and 24 scores across Pydantic AI, LangChain, CrewAI, and eight enforcement
+  profiles. OPA-mediated, Cerbos-mediated, and TypeSec each pass 40/40 per
+  framework at grade A; the text treats that runtime parity as evidence for
+  exact last-moment mediation, keeps TypeSec's four compile-fail checks as a
+  separate construction-safety result, and records the deterministic suite's
+  provider, service, model, receipt-key, and CrewAI limitations.
+
 - **2026-08-06:** Updated the book manuscript and rebuilt the EPUB, PDF, HTML,
   and MOBI artifacts. The new chapters document the released Rust/Python/
   TypeScript crate surfaces, standalone Marciana extraction, and the pinned
