@@ -2068,6 +2068,120 @@ regression instrument for responsible cognition, not a marketing leaderboard.
 Its full design and run instructions are in
 [`MARCIANA-ADVERSARIAL-v1.md`](https://github.com/querygraph/adversarial-cognition/blob/main/docs/MARCIANA-ADVERSARIAL-v1.md).
 
+# AGENTGYM: Authority Under Adversarial Composition
+
+Memory is only one place where an agent can cross a security boundary. A
+planner also crosses from model output into a tool call, from an identity
+provider into a local authorization decision, from a catalog name into a
+physical table, and from governed data into a delegated SaaS action. AgentGym
+is the deterministic adversarial benchmark for those crossings. Its source is
+the public
+[`querygraph/adversarial-agents`](https://github.com/querygraph/adversarial-agents)
+repository, and its audited schema-v2 result is the
+[`2026-08-19 Docker report`](https://github.com/querygraph/adversarial-agents/blob/master/results/agentgym-docker-2026-08-19.json).
+
+The corpus starts with fourteen paired scenarios: every permitted operation has
+a matched attack that changes identity, tenant, resource, action, arguments,
+purpose, delegation, approval state, memory label, policy version, receipt, or
+execution order. Twelve additional trials inject provider faults such as
+timeouts, malformed responses, string values masquerading as booleans, stale
+allows, wrong-resource decisions, wrong-user authorization, and replayed
+completion. Pydantic AI, LangChain, and CrewAI each traverse eight enforcement
+profiles. Because provider-fault applicability differs by profile, the matrix
+is intentionally non-rectangular: the complete run contains **846 applicable
+case-runs** and **24 score records**, not 3 multiplied by 8 multiplied by one
+uniform case count.
+
+The eight profiles separate policy decision from execution enforcement:
+
+- **Native** is the deliberately weak floor: broad authentication and runtime
+  validation without exact-call authority.
+- **WorkOS** and **Arcade** exercise provider authorization at their natural
+  resource and delegated-tool boundaries.
+- **OPA** and **Cerbos** evaluate faithful translations of the shared RBAC and
+  ODRL policy using request-plane facts.
+- **OPA-mediated** and **Cerbos-mediated** add last-moment execution-state
+  mediation and a verified, single-use permit.
+- **TypeSec** uses the custom compiled Rust `AgentGymGate`, built on TypeSec
+  0.13.1 RBAC and ODRL engines, together with provider clients and execution-
+  time state checks.
+
+The framework paths are real interception surfaces but deterministic agent
+loops. Pydantic AI uses deferred approvals, LangChain uses registered
+middleware, and CrewAI uses its offline hook-bearing executor with a parsed
+deterministic action. The CrewAI track does **not** run a full model-driven
+`Crew.kickoff()` loop.
+
+All three frameworks produced the same score vector. The table therefore
+collapses identical Pydantic AI, LangChain, and CrewAI rows by profile:
+
+| Profile | Passed | Safety | Utility | Exact binding | Fault closure | Verified evidence | Grade |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | :---: |
+| Native | 21/38 | 0.0% | 100.0% | 0.0% | 70.0% | 0.0% | D |
+| WorkOS | 22/33 | 35.7% | 100.0% | 0.0% | 60.0% | 0.0% | D |
+| Arcade | 23/35 | 21.4% | 100.0% | 0.0% | 85.7% | 0.0% | D |
+| OPA | 23/28 | 64.3% | 100.0% | 0.0% | n/a | 0.0% | D |
+| Cerbos | 23/28 | 64.3% | 100.0% | 0.0% | n/a | 0.0% | D |
+| OPA-mediated | 40/40 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | A |
+| Cerbos-mediated | 40/40 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | A |
+| TypeSec | 40/40 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | A |
+
+`n/a` is not a perfect fault-closure score. Raw OPA and Cerbos do not call a
+provider with an eligible injected fault, so that metric has no denominator.
+Grade A requires perfect safety, utility, exact binding, applicable fault
+closure, and cryptographically verified positive evidence. A deny-all system
+therefore cannot earn a good grade, and an identifier that merely looks like a
+receipt does not count as evidence.
+
+The central result is the three-way parity at the bottom of the table. Once OPA
+or Cerbos receives the same last-moment state mediator and verified execution
+permit, it closes the runtime gap on this corpus. This is evidence that exact
+mediation and authority bound to the side effect matter. It is **not** evidence
+that OPA, Cerbos, WorkOS, Arcade, Pydantic AI, LangChain, or CrewAI has an
+intrinsic security ceiling. Each row represents only the checked-in
+configuration.
+
+TypeSec contributes a separate construction-safety result that the runtime
+table does not capture. Four Rust compile-fail cases prove that benchmark code
+cannot forge a capability, substitute read authority for write authority, ask
+for authority from an unauthenticated state, or reveal a sensitive value with
+ordinary read authority. The runtime extension then binds the canonical
+principal, tool, action, resource, arguments, purpose, delegated user, policy
+digest, and lease to a single-use permit. At the execution boundary,
+`_apply_effects` consumes that opaque Rust `ExecutionPermit`; Python cannot
+construct it or substitute an ordinary policy result. This runtime permit
+claim remains distinct from the four compile-fail `Capability<P, R>`
+construction claims, and the custom `AgentGymGate` is built from TypeSec's
+released RBAC and ODRL engines rather than being the upstream TypeSec
+`ToolGate`.
+
+## What This Result Does Not Prove
+
+The deterministic design makes policy regressions reproducible, but it is not
+a production penetration test. The normative suite uses scripted calls and
+provider emulators. Database, durable-memory, approval, receipt-replay, branch,
+and parallel-execution boundaries are stateful simulations; they are not live
+QueryGraph, LakeCat, Sail, WorkOS, or Arcade services. The suite does not score
+how often a live model chooses an attack, recovers after a denial, or loops in
+search of a permitted route. Recovery is unscored.
+
+The receipt signer uses a public deterministic benchmark key. It demonstrates
+tamper detection and exact-call binding, not production issuer trust, secret
+custody, rotation, or compromise recovery. Live-provider and live-model
+campaigns belong in separate conformance tiers where latency and operational
+failure are part of the measurement. Raw-versus-mediated OPA and Cerbos rows
+likewise compare integration architectures, not the maximum capability of
+either policy engine.
+
+The report is reproducible evidence, not a universal security certificate. It
+was generated with seed 0 from clean benchmark commit
+`75fc75caf9616b4a7d68b81ee4005c816d86b37d`, with scenario corpus digest
+`0cd75dbd956b9ca1b24e24d6e3d3d655b131246a6cba63c7d006309182a24076`
+and policy corpus digest
+`10c91cca971a14f8690e3180834e2aa27ae64a2a999383640ac4421f4c601b10`.
+Those values let a later run identify whether a changed score came from the
+enforcement implementation, the scenario set, or the policy itself.
+
 # Three Language Surfaces
 
 The crate, Python, and TypeScript surfaces share the same semantic vocabulary

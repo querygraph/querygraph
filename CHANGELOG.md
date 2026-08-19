@@ -7,6 +7,10 @@ recorded here. The codename pool and the shared version line live in
 ## Unreleased — unified repository
 
 ### Changed
+- Add the audited AgentGym adversarial-agent results to both QueryGraph books:
+  846 applicable case-runs across Pydantic AI, LangChain, and CrewAI, with
+  runtime grade-A parity for OPA-mediated, Cerbos-mediated, and TypeSec and
+  explicit simulation, provider, framework, receipt, and compile-time limits.
 - Expand the book with the released crate refactoring, standalone Marciana
   boundaries, the `adversarial-cognition` benchmark and its comparative
   results, and the Rust/Python/TypeScript release surfaces.
