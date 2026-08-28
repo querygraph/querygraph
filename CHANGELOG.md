@@ -6,7 +6,8 @@
   fixtures from the exact pinned Ossie model and create them through stock
   Spark's Iceberg REST catalog integration.
   The live runner binds Spark's standard S3 FileIO to the isolated benchmark
-  object-store endpoint explicitly.
+  object-store endpoint explicitly and loads the fixture planner without
+  importing QueryGraph's Python 3.11 package facade into Spark's Python 3.10.
 
 - Add an ordered semantic-publication admission pipeline proving malformed,
   unauthorized, missing-physical, schema/model drift, and unknown-version

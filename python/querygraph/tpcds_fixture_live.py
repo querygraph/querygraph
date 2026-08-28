@@ -2,12 +2,22 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
+import sys
 from pathlib import Path
 
 from pyspark.sql import SparkSession
 
-from querygraph.tpcds_fixture import fixture_plan, sql_literal
+_FIXTURE_PATH = Path(__file__).with_name("tpcds_fixture.py")
+_SPEC = importlib.util.spec_from_file_location("querygraph_tpcds_fixture", _FIXTURE_PATH)
+if _SPEC is None or _SPEC.loader is None:
+    raise RuntimeError("cannot load the QueryGraph TPC-DS fixture planner")
+_FIXTURE = importlib.util.module_from_spec(_SPEC)
+sys.modules[_SPEC.name] = _FIXTURE
+_SPEC.loader.exec_module(_FIXTURE)
+fixture_plan = _FIXTURE.fixture_plan
+sql_literal = _FIXTURE.sql_literal
 
 
 def main() -> None:
