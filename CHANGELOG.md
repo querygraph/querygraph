@@ -7,6 +7,9 @@
   verification under deliberate drift in every required dimension.
 - Canonicalize Spark decimal metric values as exact strings before hashing and
   serializing the semantic answer proof.
+- Record the pinned Ossie Polaris converter’s live TPC-DS structural,
+  semantic, extension, and loss outcomes; prepare an evidence-linked upstream
+  report-contract proposal and clean one-command demonstration guide.
 
 - Derive five deterministic, relationship-connected physical TPC-DS Iceberg
   fixtures from the exact pinned Ossie model and create them through stock

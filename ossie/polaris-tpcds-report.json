@@ -1,0 +1,38 @@
+{
+  "contract": "querygraph/ossie-polaris-tpcds-loss-report/v1",
+  "converter": {
+    "java": 21,
+    "maven_image": "maven:3.9.11-eclipse-temurin-21@sha256:6fdc855a6ed81d288ca7ca37ac6ff5e9308b612485c0801d70b25a858c83d237",
+    "pom_sha256": "sha256:d029be036b272411557ca3e69ee856b8f6197167129f9bb99e9d67c04b8c9128",
+    "tests": {"errors": 0, "failures": 0, "passed": 45, "skipped": 0}
+  },
+  "extension_preservation": {
+    "generated_common_dataset_extensions": 5,
+    "generated_polaris_field_extensions": 31,
+    "input_model_extensions": 2,
+    "input_model_extensions_retained": 0,
+    "status": "lossy"
+  },
+  "loss": {
+    "ai_context_retained": false,
+    "decimal_precision_default_warnings": 4,
+    "metrics_input": 5,
+    "metrics_retained": 0,
+    "relationships_input": 4,
+    "relationships_retained": 0
+  },
+  "ossie_revision": "1d9ebcea2932d3381c0840cc8304f0850d366509",
+  "roundtrip": {
+    "datasets_input": 5,
+    "datasets_retained": 5,
+    "fields_input": 31,
+    "fields_retained": 31,
+    "live_polaris_version": "1.7.0",
+    "models_input": 1,
+    "models_retained": 1,
+    "output_sha256": "sha256:3642634a11105738ba3067c24b0709b3d2369c377e5f0d7690a436e252a255df",
+    "source_sha256": "sha256:438372de9b8ca0f074aed72806f92ac9b84047851a0385423f004748efe5a316"
+  },
+  "status": "verified-with-loss",
+  "zero_cleanup_residue": {"containers": 0, "volumes": 0}
+}
