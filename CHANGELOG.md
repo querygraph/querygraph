@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add the executable HadoopCatalog-to-LakeCat legacy migration cookbook for the
+  catalog-community acceptance path.
+
 - Add the live QueryGraph catalog-migration harness for protocol-native
   LakeCat, Polaris, and Lakekeeper interoperability evidence.
 

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add a stock Spark HadoopCatalog-to-LakeCat migration verifier with explicit
+  schema, spec, snapshot, ref, metadata-pointer, and exact-data loss reporting.
+
 - Add an optional stock-PyIceberg live harness that creates non-empty REST
   catalog fixtures, registers their metadata in a destination catalog, and
   verifies semantic identity plus exact data scans without logging credentials;
