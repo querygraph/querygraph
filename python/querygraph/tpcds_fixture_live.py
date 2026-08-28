@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import sys
+import urllib.request
 from pathlib import Path
 
 from pyspark.sql import SparkSession
@@ -28,6 +29,8 @@ def main() -> None:
     parser.add_argument("--s3-endpoint", required=True)
     parser.add_argument("--namespace", default="tpcds")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--artifact-uri", required=True)
+    parser.add_argument("--artifact-hash", required=True)
     args = parser.parse_args()
     model_bytes = args.model.read_bytes()
     if args.model.suffix != ".json":
@@ -43,6 +46,7 @@ def main() -> None:
         .getOrCreate())
     spark.sql(f"CREATE NAMESPACE IF NOT EXISTS lakecat.{args.namespace}")
     tables = []
+    physical_bindings = {}
     for fixture in plan:
         target = f"lakecat.{args.namespace}.{fixture.name}"
         spark.sql(f"DROP TABLE IF EXISTS {target}")
@@ -50,8 +54,23 @@ def main() -> None:
         values = ",".join("(" + ",".join(sql_literal(value, fixture.columns[i][1]) for i, value in enumerate(row)) + ")" for row in fixture.rows)
         spark.sql(f"INSERT INTO {target} VALUES {values}")
         rows = spark.sql(f"SELECT * FROM {target} ORDER BY 1").toJSON().collect()
+        realized = [(field.name, field.dataType.simpleString(), field.nullable) for field in spark.table(target).schema.fields]
+        expected_names = [name for name, _ in fixture.columns]
+        if [name for name, _, _ in realized] != expected_names:
+            raise RuntimeError(f"physical schema drift for {fixture.name}")
+        schema_hash = "sha256:" + hashlib.sha256(json.dumps(realized, separators=(",", ":")).encode()).hexdigest()
+        physical_bindings[fixture.name] = {"table": f"local.{args.namespace}.{fixture.name}", "schema-hash": schema_hash}
         tables.append({"name": fixture.name, "columns": [name for name, _ in fixture.columns], "row-count": len(rows), "data-hash": "sha256:" + hashlib.sha256("\n".join(rows).encode()).hexdigest()})
-    output = {"status": "verified", "model-hash": "sha256:" + hashlib.sha256(model_bytes).hexdigest(), "tables": tables}
+    base = args.rest_uri.removesuffix("/catalog")
+    def request(method: str, path: str, body: dict | None = None):
+        encoded = None if body is None else json.dumps(body).encode()
+        req = urllib.request.Request(base + path, data=encoded, method=method, headers={"content-type": "application/json", "x-lakecat-principal": "querygraph-tpcds-publisher"})
+        with urllib.request.urlopen(req, timeout=30) as response: return json.load(response)
+    policy = request("PUT", "/management/v1/warehouses/local/policies/tpcds-semantic", {"enforced": True, "odrl": {"uid": "policy:tpcds-semantic", "permission": [{"action": "read"}]}})
+    publication = request("POST", "/management/v1/warehouses/local/models/tpcds_retail_model", {"version": 1, "expected-current-version": None, "artifact-uri": args.artifact_uri, "artifact-hash": args.artifact_hash, "physical-bindings": physical_bindings, "policy-binding-ids": ["tpcds-semantic"]})
+    admitted = request("GET", "/management/v1/warehouses/local/models/tpcds_retail_model")["publications"]
+    if admitted != [publication]: raise RuntimeError("model publication read-after-write drift")
+    output = {"status": "verified", "model-input-hash": "sha256:" + hashlib.sha256(model_bytes).hexdigest(), "artifact-hash": args.artifact_hash, "policy-id": policy["policy-id"], "publication": publication, "tables": tables}
     args.output.write_text(json.dumps(output, sort_keys=True, separators=(",", ":")) + "\n")
     spark.stop()
 

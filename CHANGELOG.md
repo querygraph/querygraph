@@ -9,6 +9,10 @@
   object-store endpoint explicitly and loads the fixture planner without
   importing QueryGraph's Python 3.11 package facade into Spark's Python 3.10.
 
+- Validate realized Spark schemas, bind every TPC-DS table by schema hash,
+  create the governed policy binding, and CAS-publish/read back the exact
+  upstream Ossie artifact through LakeCat's management boundary.
+
 - Add an ordered semantic-publication admission pipeline proving malformed,
   unauthorized, missing-physical, schema/model drift, and unknown-version
   failures occur before catalog publication, graph, or lineage promotion.
