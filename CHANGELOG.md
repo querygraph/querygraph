@@ -7,6 +7,10 @@ recorded here. The codename pool and the shared version line live in
 ## Unreleased — unified repository
 
 ### Changed
+- Add the QueryGraph-owned pure semantic boundary for LakeCat, Polaris, and
+  Lakekeeper migration/federation verification; live adapters cannot classify
+  registration as preserved when schema, spec, snapshot, ref, or pointer state
+  differs.
 - Add the audited AgentGym adversarial-agent results to both QueryGraph books:
   846 applicable case-runs across Pydantic AI, LangChain, and CrewAI, with
   runtime grade-A parity for OPA-mediated, Cerbos-mediated, and TypeSec and

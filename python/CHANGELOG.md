@@ -1,5 +1,9 @@
 # Changelog
 
+- Add a transport-free Iceberg REST migration verifier that canonicalizes and
+  compares table UUID, format, schemas, partition specs, sort orders, non-empty
+  snapshots, refs, current IDs, and metadata pointer with an explicit loss report.
+
 All notable changes to the QueryGraph Python port are recorded here. The
 codename pool and the shared version line live in [`RELEASES.md`](RELEASES.md);
 the canonical scheme is in `../RELEASES.md`.
