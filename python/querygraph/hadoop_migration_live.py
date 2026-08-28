@@ -159,7 +159,7 @@ def run(fixture: str) -> dict[str, Any]:
             "ORDER BY timestamp DESC LIMIT 1"
         ).first()[0]
         spark.sql(
-            f"CALL lakecat.system.register_table(table => '{identifier}', "
+            f"CALL lakecat.system.register_table(table => 'lakecat.{identifier}', "
             f"metadata_file => '{metadata_location}')"
         ).collect()
 
