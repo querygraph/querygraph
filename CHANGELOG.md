@@ -6,6 +6,10 @@
   artifact hashes, with a fetch-and-verify workflow that keeps upstream bytes
   outside QueryGraph source ownership.
 
+- Add a typed, multi-model Ossie artifact envelope with JSON/YAML round trips,
+  Draft 2020-12 structural errors, and explicit loss reporting while preserving
+  unknown model keys, custom extensions, and every dialect expression.
+
 - Add the executable HadoopCatalog-to-LakeCat legacy migration cookbook for the
   catalog-community acceptance path.
 

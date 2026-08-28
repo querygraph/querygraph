@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import copy
+import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +24,74 @@ SUPPORTED_DIALECTS = {
 
 # Dialects tried, in order, when a requested dialect has no expression.
 FALLBACK_DIALECTS = ("ANSI_SQL", "SAIL_SQL")
+
+
+@dataclass(frozen=True)
+class OsiLossReport:
+    losses: tuple[str, ...] = ()
+
+    @property
+    def lossless(self) -> bool:
+        return not self.losses
+
+
+class OsiArtifact:
+    """Lossless Ossie document plus an optional typed single-model view."""
+
+    def __init__(self, mapping: dict[str, Any]):
+        self._mapping = copy.deepcopy(mapping)
+        models = mapping.get("semantic_model")
+        if not isinstance(models, list) or not models:
+            raise ValueError("semantic_model must be a non-empty array")
+        self.models = tuple(OsiSemanticModel.model_validate(model) for model in models)
+
+    @classmethod
+    def from_json(cls, value: str | bytes) -> "OsiArtifact":
+        mapping = json.loads(value)
+        if not isinstance(mapping, dict):
+            raise ValueError("Ossie document must be an object")
+        return cls(mapping)
+
+    @classmethod
+    def from_yaml(cls, value: str) -> "OsiArtifact":
+        try:
+            import yaml
+        except ImportError as exc:  # pragma: no cover
+            raise RuntimeError("Install PyYAML to load Ossie YAML.") from exc
+        mapping = yaml.safe_load(value)
+        if not isinstance(mapping, dict):
+            raise ValueError("Ossie document must be an object")
+        return cls(mapping)
+
+    def to_mapping(self) -> dict[str, Any]:
+        return copy.deepcopy(self._mapping)
+
+    def to_json(self) -> str:
+        return json.dumps(self._mapping, sort_keys=True, separators=(",", ":"))
+
+    def to_yaml(self) -> str:
+        try:
+            import yaml
+        except ImportError as exc:  # pragma: no cover
+            raise RuntimeError("Install PyYAML to write Ossie YAML.") from exc
+        return yaml.safe_dump(self._mapping, sort_keys=False)
+
+    def validate(self, schema: dict[str, Any]) -> tuple[str, ...]:
+        try:
+            from jsonschema import Draft202012Validator
+        except ImportError as exc:  # pragma: no cover
+            raise RuntimeError("Install jsonschema to validate Ossie.") from exc
+        return tuple(
+            f"{'/'.join(map(str, error.absolute_path)) or '<root>'}: {error.message}"
+            for error in sorted(
+                Draft202012Validator(schema).iter_errors(self._mapping),
+                key=lambda error: tuple(str(part) for part in error.absolute_path),
+            )
+        )
+
+    def loss_report(self) -> OsiLossReport:
+        """Raw artifact round trips preserve every dialect and extension."""
+        return OsiLossReport()
 
 
 class OsiAiContext(BaseModel):

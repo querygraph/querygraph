@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from querygraph.osi import OsiDocument
+from querygraph.osi import OsiArtifact, OsiDocument
 
 
 OSI_UPSTREAM_STYLE = {
@@ -120,3 +120,30 @@ def test_find_by_synonym_matches_datasets_fields_and_metrics():
     assert any(m["kind"] == "field" for m in model.find_by_synonym("revenue"))
     assert any(m["kind"] == "metric" for m in model.find_by_synonym("budget headroom"))
     assert model.find_by_synonym("nonexistent") == []
+
+
+def test_artifact_round_trip_preserves_multiple_models_dialects_and_extensions():
+    mapping = {
+        "version": "0.2.0.dev0",
+        "semantic_model": [
+            {**OSI_UPSTREAM_STYLE["semantic_model"][0], "future_model_key": {"x": 1}},
+            {"name": "second", "datasets": [], "custom_extensions": [
+                {"vendor_name": "FUTURE", "data": '{"opaque":true}'}
+            ]},
+        ],
+    }
+    artifact = OsiArtifact.from_json(__import__("json").dumps(mapping))
+    assert len(artifact.models) == 2
+    assert OsiArtifact.from_yaml(artifact.to_yaml()).to_mapping() == mapping
+    assert OsiArtifact.from_json(artifact.to_json()).to_mapping() == mapping
+    assert artifact.loss_report().lossless
+
+
+def test_artifact_reports_schema_failures_without_mutating_content():
+    artifact = OsiArtifact.from_json('{"version":"wrong","semantic_model":[{"name":"m","datasets":[]}]}')
+    errors = artifact.validate({
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {"version": {"const": "0.2.0.dev0"}},
+    })
+    assert errors and "0.2.0.dev0" in errors[0]
