@@ -4,7 +4,8 @@
 
 - Add an optional stock-PyIceberg live harness that creates non-empty REST
   catalog fixtures, registers their metadata in a destination catalog, and
-  verifies semantic identity plus exact data scans without logging credentials.
+  verifies semantic identity plus exact data scans without logging credentials;
+  fixture Arrow nullability is explicit so required Iceberg fields are honored.
 
 - Add a transport-free Iceberg REST migration verifier that canonicalizes and
   compares table UUID, format, schemas, partition specs, sort orders, non-empty

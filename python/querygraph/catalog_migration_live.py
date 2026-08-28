@@ -68,7 +68,7 @@ def migrate(
     destination_endpoint: CatalogEndpoint,
     fixture: str,
 ) -> dict[str, Any]:
-    from pyarrow import Table as ArrowTable
+    import pyarrow
     from pyiceberg.catalog.rest import RestCatalog
     from pyiceberg.schema import Schema
     from pyiceberg.types import LongType, NestedField, StringType
@@ -93,7 +93,13 @@ def migrate(
                 NestedField(2, "event", StringType(), required=True),
             ),
         )
-        source_table.append(ArrowTable.from_pylist(rows))
+        arrow_schema = pyarrow.schema(
+            [
+                pyarrow.field("id", pyarrow.int64(), nullable=False),
+                pyarrow.field("event", pyarrow.string(), nullable=False),
+            ]
+        )
+        source_table.append(pyarrow.Table.from_pylist(rows, schema=arrow_schema))
         source_table.refresh()
         destination.create_namespace(namespace)
         destination.register_table(identifier, source_table.metadata_location)
