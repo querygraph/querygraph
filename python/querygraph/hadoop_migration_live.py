@@ -118,12 +118,7 @@ def run(fixture: str) -> dict[str, Any]:
         )
         .config("spark.sql.catalog.hadoop", "org.apache.iceberg.spark.SparkCatalog")
         .config("spark.sql.catalog.hadoop.type", "hadoop")
-        .config("spark.sql.catalog.hadoop.warehouse", "s3://warehouse/hadoop")
-        .config(
-            "spark.sql.catalog.hadoop.io-impl", "org.apache.iceberg.aws.s3.S3FileIO"
-        )
-        .config("spark.sql.catalog.hadoop.s3.endpoint", "http://minio:9000")
-        .config("spark.sql.catalog.hadoop.s3.path-style-access", "true")
+        .config("spark.sql.catalog.hadoop.warehouse", "file:///migration/hadoop")
         .config("spark.sql.catalog.lakecat", "org.apache.iceberg.spark.SparkCatalog")
         .config("spark.sql.catalog.lakecat.type", "rest")
         .config("spark.sql.catalog.lakecat.uri", "http://lakecat:8181/catalog")

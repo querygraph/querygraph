@@ -4,9 +4,11 @@ This cookbook proves metadata-pointer migration from Apache Iceberg's
 filesystem-backed `HadoopCatalog` to LakeCat's standard Iceberg REST API. It is
 an executable legacy-catalog path, not a claim about Hive Metastore or AWS Glue.
 
-The fresh runner in `querygraph/catalog-bench` starts shared MinIO and a
-source-built LakeCat, then runs stock Apache Spark 4.1.3 with Apache Iceberg
-1.11.0. The source table is partitioned and non-empty, receives an additive
+The fresh runner in `querygraph/catalog-bench` starts a run-owned filesystem
+volume and a source-built LakeCat, then runs stock Apache Spark 4.1.3 with
+Apache Iceberg 1.11.0. The identical volume path is mounted in Spark and
+LakeCat so the HadoopCatalog metadata pointer remains portable without adding
+an unpinned `s3a` plugin. The source table is partitioned and non-empty, receives an additive
 schema change, a second partition spec, multiple snapshots, and an `audit`
 branch. Spark registers its current metadata file through LakeCat's standard
 REST catalog and independently compares:
