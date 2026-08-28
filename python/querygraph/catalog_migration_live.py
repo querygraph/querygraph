@@ -67,6 +67,7 @@ def migrate(
     source_endpoint: CatalogEndpoint,
     destination_endpoint: CatalogEndpoint,
     fixture: str,
+    table_location: str | None = None,
 ) -> dict[str, Any]:
     import pyarrow
     from pyiceberg.catalog.rest import RestCatalog
@@ -86,13 +87,15 @@ def migrate(
     ]
     try:
         source.create_namespace(namespace)
-        source_table = source.create_table(
-            identifier,
-            schema=Schema(
+        create_options: dict[str, Any] = {
+            "schema": Schema(
                 NestedField(1, "id", LongType(), required=True),
                 NestedField(2, "event", StringType(), required=True),
             ),
-        )
+        }
+        if table_location:
+            create_options["location"] = table_location
+        source_table = source.create_table(identifier, **create_options)
         arrow_schema = pyarrow.schema(
             [
                 pyarrow.field("id", pyarrow.int64(), nullable=False),
@@ -168,7 +171,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--fixture", required=True)
     args = parser.parse_args(argv)
-    print(json.dumps(migrate(_endpoint("SOURCE"), _endpoint("DESTINATION"), args.fixture), sort_keys=True))
+    print(
+        json.dumps(
+            migrate(
+                _endpoint("SOURCE"),
+                _endpoint("DESTINATION"),
+                args.fixture,
+                os.environ.get("SOURCE_TABLE_LOCATION"),
+            ),
+            sort_keys=True,
+        )
+    )
     return 0
 
 
