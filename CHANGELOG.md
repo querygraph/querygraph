@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add an ordered semantic-publication admission pipeline proving malformed,
+  unauthorized, missing-physical, schema/model drift, and unknown-version
+  failures occur before catalog publication, graph, or lineage promotion.
+
 - Pin Apache Ossie's schema, validator, and TPC-DS model by upstream commit and
   artifact hashes, with a fetch-and-verify workflow that keeps upstream bytes
   outside QueryGraph source ownership.
