@@ -15,7 +15,7 @@ REST catalog and independently compares:
 - all partition specs and the current spec;
 - all snapshots and the current snapshot;
 - all refs, including `main` and `audit`;
-- the exact metadata location; and
+- the exact metadata location, retained in evidence by digest; and
 - exact source and destination data scans.
 
 Run from the catalog-bench checkout:

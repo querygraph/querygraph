@@ -186,7 +186,7 @@ def run(fixture: str) -> dict[str, Any]:
             "semantic": {
                 **asdict(verification),
                 "preserved": verification.preserved,
-                "metadata_location": source_state.metadata_location,
+                "metadata_location_digest": _digest(source_state.metadata_location),
             },
             "data": {
                 "source_count": source_count,
