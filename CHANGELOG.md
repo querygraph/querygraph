@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Derive five deterministic, relationship-connected physical TPC-DS Iceberg
+  fixtures from the exact pinned Ossie model and create them through stock
+  Spark's Iceberg REST catalog integration.
+
 - Add an ordered semantic-publication admission pipeline proving malformed,
   unauthorized, missing-physical, schema/model drift, and unknown-version
   failures occur before catalog publication, graph, or lineage promotion.
