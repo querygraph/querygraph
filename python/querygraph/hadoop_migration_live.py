@@ -124,10 +124,9 @@ def run(fixture: str) -> dict[str, Any]:
         .config("spark.sql.catalog.lakecat.uri", "http://lakecat:8181/catalog")
         .config("spark.sql.catalog.lakecat.warehouse", "local")
         .config(
-            "spark.sql.catalog.lakecat.io-impl", "org.apache.iceberg.aws.s3.S3FileIO"
+            "spark.sql.catalog.lakecat.io-impl",
+            "org.apache.iceberg.hadoop.HadoopFileIO",
         )
-        .config("spark.sql.catalog.lakecat.s3.endpoint", "http://minio:9000")
-        .config("spark.sql.catalog.lakecat.s3.path-style-access", "true")
         .getOrCreate()
     )
     spark.sparkContext.setLogLevel("WARN")

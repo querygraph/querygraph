@@ -5,7 +5,7 @@
 - Add a stock Spark HadoopCatalog-to-LakeCat migration verifier with explicit
   schema, spec, snapshot, ref, hash-only metadata-pointer, and exact-data loss
   reporting over a shared run-owned filesystem volume, using an explicit
-  catalog-qualified target for Spark's registration procedure.
+  catalog-qualified target and HadoopFileIO destination reads.
 
 - Add an optional stock-PyIceberg live harness that creates non-empty REST
   catalog fixtures, registers their metadata in a destination catalog, and
