@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add the live QueryGraph catalog-migration harness for protocol-native
+  LakeCat, Polaris, and Lakekeeper interoperability evidence.
+
 All notable changes to the QueryGraph Rust reference implementation are
 recorded here. The codename pool and the shared version line live in
 [`RELEASES.md`](RELEASES.md).
