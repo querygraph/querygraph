@@ -93,7 +93,10 @@ def main() -> None:
     }
     answers = {}
     for name, sql in plans.items():
-        rows = [row.asDict(recursive=True) for row in spark.sql(sql).collect()]
+        rows = json.loads(json.dumps(
+            [row.asDict(recursive=True) for row in spark.sql(sql).collect()],
+            default=str,
+        ))
         answers[name] = rows
     model_hash = "sha256:" + hashlib.sha256(model_bytes).hexdigest()
     answer_proof = _PROOF.build_answer_proof(model_hash=model_hash, artifact_hash=args.artifact_hash, policy=policy, snapshots=snapshots, plans=plans, answers=answers, drain=drain)

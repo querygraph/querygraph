@@ -5,6 +5,8 @@
 - Bind live TPC-DS semantic answers to exact physical snapshots, upstream model
   and artifact, policy, plans, graph replay, and OpenLineage replay; fail proof
   verification under deliberate drift in every required dimension.
+- Canonicalize Spark decimal metric values as exact strings before hashing and
+  serializing the semantic answer proof.
 
 - Derive five deterministic, relationship-connected physical TPC-DS Iceberg
   fixtures from the exact pinned Ossie model and create them through stock
