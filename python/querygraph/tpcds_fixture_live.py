@@ -15,6 +15,7 @@ def main() -> None:
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--rest-uri", required=True)
     parser.add_argument("--warehouse", required=True)
+    parser.add_argument("--s3-endpoint", required=True)
     parser.add_argument("--namespace", default="tpcds")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -27,6 +28,8 @@ def main() -> None:
         .config("spark.sql.catalog.lakecat.type", "rest")
         .config("spark.sql.catalog.lakecat.uri", args.rest_uri)
         .config("spark.sql.catalog.lakecat.warehouse", args.warehouse)
+        .config("spark.sql.catalog.lakecat.s3.endpoint", args.s3_endpoint)
+        .config("spark.sql.catalog.lakecat.s3.path-style-access", "true")
         .getOrCreate())
     spark.sql(f"CREATE NAMESPACE IF NOT EXISTS lakecat.{args.namespace}")
     tables = []

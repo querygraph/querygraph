@@ -5,6 +5,8 @@
 - Derive five deterministic, relationship-connected physical TPC-DS Iceberg
   fixtures from the exact pinned Ossie model and create them through stock
   Spark's Iceberg REST catalog integration.
+  The live runner binds Spark's standard S3 FileIO to the isolated benchmark
+  object-store endpoint explicitly.
 
 - Add an ordered semantic-publication admission pipeline proving malformed,
   unauthorized, missing-physical, schema/model drift, and unknown-version
