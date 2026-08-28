@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Pin Apache Ossie's schema, validator, and TPC-DS model by upstream commit and
+  artifact hashes, with a fetch-and-verify workflow that keeps upstream bytes
+  outside QueryGraph source ownership.
+
 - Add the executable HadoopCatalog-to-LakeCat legacy migration cookbook for the
   catalog-community acceptance path.
 

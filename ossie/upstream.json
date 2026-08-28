@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/apache/ossie",
+  "revision": "1d9ebcea2932d3381c0840cc8304f0850d366509",
+  "artifacts": {
+    "core-spec/osi-schema.json": "8ce9f82aa92080265f9ae119e31cda5bef062f489674d3c467245c2d4c5ff264",
+    "validation/validate.py": "dc3ef8914a283d0568f65843343ed7592377aa813230e1990c6adbb2241a2be3",
+    "examples/tpcds_semantic_model.yaml": "438372de9b8ca0f074aed72806f92ac9b84047851a0385423f004748efe5a316"
+  }
+}
