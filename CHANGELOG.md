@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+## 0.5.0 "Harrier" — 2026-09-04
+
+The alignment release. Harrier moves the whole stack onto one released
+dependency line — Grust **0.13.0 (Prawn)**, TypeSec **0.14.0 (Dorsoduro)**,
+Marciana **0.13.1**, and LakeCat **0.4.0** — and ships everything that landed
+on the development line since Sentinel: the live TPC-DS semantic supply chain
+bound to seven proof bases, the Apache Ossie loss-report contract, the
+catalog-migration harness, the audited AgentGym results, the
+performance-aligned Sail pin, and the unified Rust/Python/TypeScript
+repository.
+
+### Dependency alignment
+- Track Grust `0.13.0` (`grust-graph` with `sail`, `grust-cypher`), TypeSec
+  `0.14.0` (`typesec-agent`, `-core`, `-integrations`, `-memory`, `-rbac`),
+  Marciana `0.13.1` (`marciana-cognition`, `querygraph-memory`), and LakeCat
+  `0.4.0` (`qglake-bundle`, `lakecat-core`) from crates.io; the stack-wide pin
+  matrix and its checker live in `QUERYGRAPH.md`.
+- Bump the Rust crate and the Python distribution to `0.5.0`.
+
+### Semantic supply chain and evidence
 - Bind live TPC-DS semantic answers to exact physical snapshots, upstream model
   and artifact, policy, plans, graph replay, and OpenLineage replay; fail proof
   verification under deliberate drift in every required dimension.
@@ -44,7 +64,7 @@ All notable changes to the QueryGraph Rust reference implementation are
 recorded here. The codename pool and the shared version line live in
 [`RELEASES.md`](RELEASES.md).
 
-## Unreleased — unified repository
+### Unified repository
 
 ### Changed
 - Add the QueryGraph-owned pure semantic boundary for LakeCat, Polaris, and
@@ -73,7 +93,7 @@ recorded here. The codename pool and the shared version line live in
 - Add the public TypeScript API under `typescript/`, with shared semantic and
   TypeDID contracts, Node tests, and npm publication support.
 
-## 0.5.0-dev — unreleased
+### Development line since Sentinel
 
 ### Added
 - **Registry-backed 0.4.1 release line:** QueryGraph now publishes against

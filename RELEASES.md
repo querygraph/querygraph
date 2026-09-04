@@ -8,13 +8,15 @@ TypeSec, and LakeCat — which carry their own codenames.
 
 ## Release log
 
-The current release line consumes the published TypeSec `0.13.1`, Marciana
-`0.12.1`, Grust `0.12.1`, and LakeCat `0.3.0` crates. Development snapshots
+The current release line consumes the published TypeSec `0.14.0`, Marciana
+`0.13.1`, Grust `0.13.0`, and LakeCat `0.4.0` crates; the stack-wide pin
+matrix lives in [`QUERYGRAPH.md`](QUERYGRAPH.md). Development snapshots
 remain separate Git-revision integration work and are not part of a published
 dependency line.
 
 | Version | Codename | Notes |
 |---|---|---|
+| 0.5.0 | Harrier | The **alignment** release: one released dependency line — Grust 0.13.0 "Prawn", TypeSec 0.14.0 "Dorsoduro", Marciana 0.13.1, LakeCat 0.4.0 "Caracal" — recorded and checked through `QUERYGRAPH.md`; plus the live TPC-DS semantic supply chain (seven proof bases, six-way drift rejection), the Apache Ossie converter loss-report contract, the catalog-migration harness, the audited AgentGym results, the performance-aligned Sail pin `c5309365`, and the unified Rust/Python/TypeScript repository. |
 | 0.4.2 | Sentinel Patch | Unified `querygraph/querygraph` repository: root Rust crate and `python/` API, with released registry dependencies unchanged. |
 | 0.4.1 | Sentinel Patch | Registry-backed dependency line for TypeSec 0.13.1, Marciana 0.12.1, Grust 0.12.1, and LakeCat 0.3.0; includes the QueryGraph-owned TypeSec–Marciana stack facade. |
 | 0.4.0 | Sentinel | The **governed-answer** release. TypeDID envelope auth on `/v1` (`serve --require-auth`: path- and body-bound, Ed25519-verified, 401s carry receipts); `POST /v1/answer` and the semantic-model registry; a dependency-free MCP stdio server (`mcp-serve`); Rust mints qg-python-compatible envelopes (reverse crypto direction closed); stack realigned to Grust 0.12.0 "Lobster", TypeSec 0.12.0 "Torcello", LakeCat 0.3.0 "Ocelot". Adds the second book — *The QueryGraph Stack* guide — plus the review deck and tri-format one-pager. |
@@ -30,7 +32,7 @@ Names already assigned are struck through.
 1. ~~Peregrine~~ — assigned to `0.2.0`
 2. ~~Goshawk~~ — assigned to `0.3.0`
 3. ~~Sentinel~~ — assigned to `0.4.0`
-4. Harrier
+4. ~~Harrier~~ — assigned to `0.5.0`
 5. Merlin
 6. Gyrfalcon
 7. Talon

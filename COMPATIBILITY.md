@@ -1,15 +1,15 @@
 # QueryGraph compatibility baseline
 
-Verified baseline for the unified `querygraph/querygraph` repository (2026-08-09):
+Verified baseline for the unified `querygraph/querygraph` repository (2026-09-04):
 
 | Component | Version/revision | Role |
 | --- | --- | --- |
-| QueryGraph Rust crate | 0.4.2 | Root runtime and published `querygraph` crate |
-| QueryGraph Python API | 0.4.1 | `python/` project and published wheel/sdist candidate |
-| TypeSec | 0.13.1 | Capability and TypeDID authority |
-| Marciana | 0.12.1 | Cognition and governed memory |
-| Grust | 0.12.1 | Graph and Sail integration substrate |
-| LakeCat | 0.3.0 | Catalog/bootstrap proof boundary |
+| QueryGraph Rust crate | 0.5.0 | Root runtime and published `querygraph` crate |
+| QueryGraph Python API | 0.5.0 | `python/` project and published wheel/sdist candidate |
+| TypeSec | 0.14.0 | Capability and TypeDID authority |
+| Marciana | 0.13.1 | Cognition and governed memory |
+| Grust | 0.13.0 | Graph and Sail integration substrate |
+| LakeCat | 0.4.0 | Catalog/bootstrap proof boundary |
 | Sail | `c530936541da340d3d466fff8ea17f8b41542017` | Exact reachable QueryGraph graph revision; see `compat/sail-revision.txt` |
 
 The Rust package resolves all QueryGraph stack dependencies from released
