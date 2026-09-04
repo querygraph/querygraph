@@ -55,6 +55,10 @@ recorded here. The codename pool and the shared version line live in
   846 applicable case-runs across Pydantic AI, LangChain, and CrewAI, with
   runtime grade-A parity for OPA-mediated, Cerbos-mediated, and TypeSec and
   explicit simulation, provider, framework, receipt, and compile-time limits.
+- Pin and verify the QueryGraph graph-enabled Sail revision that carries the
+  open upstream performance PR, then pass the live Dataverse, graph/Cypher,
+  OpenLineage-to-file-and-Sail, TypeDID authorization, and DID-ledger path with
+  source-verified, fully optimized production Sail and QueryGraph executables.
 - Expand the book with the released crate refactoring, standalone Marciana
   boundaries, the `adversarial-cognition` benchmark and its comparative
   results, and the Rust/Python/TypeScript release surfaces.
