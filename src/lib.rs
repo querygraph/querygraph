@@ -7,6 +7,8 @@ pub mod croissant;
 pub mod cypher;
 pub mod dataverse;
 pub mod did;
+/// Compatibility path for the standalone Fihrist registry and adapters.
+pub use fihrist;
 pub mod lakecat;
 pub mod lakehouse;
 pub mod lineage;

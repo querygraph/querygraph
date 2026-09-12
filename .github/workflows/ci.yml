@@ -6,6 +6,16 @@ on:
   pull_request:
 
 jobs:
+  stack-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+      - run: publishing/scripts/ensure-python-env.sh python
+      - run: uv run --project python python scripts/test_stack_dependencies.py
+
   rust:
     runs-on: ubuntu-latest
     steps:

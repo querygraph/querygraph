@@ -31,6 +31,11 @@ struct Cli {
 #[derive(Debug, Subcommand)]
 #[allow(clippy::large_enum_variant)]
 enum Commands {
+    /// Validate, compare, and export Fihrist enterprise contracts.
+    Fihrist {
+        #[command(subcommand)]
+        command: FihristCommands,
+    },
     /// Build a four-layer semantic bundle: Croissant, CDIF, DID, and ODRL.
     Navigator {
         #[arg(long)]
@@ -175,10 +180,13 @@ enum Commands {
     McpServe,
 }
 
+use fihrist::cli::FihristCommands;
+
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
+        Commands::Fihrist { command } => command.run()?,
         Commands::Navigator {
             dataset_name,
             description,

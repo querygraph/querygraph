@@ -4,7 +4,7 @@
 
 [`QUERYGRAPH.md`](QUERYGRAPH.md) is the authoritative record of which released
 sibling versions every repository in the QueryGraph family pins. Before any
-release of QueryGraph, Grust, TypeSec, Marciana, or LakeCat, run
+release of QueryGraph, Grust, TypeSec, Marciana, LakeCat, or Fihrist, run
 
 ```bash
 scripts/check-stack-dependencies.py --check
@@ -12,8 +12,8 @@ scripts/check-stack-dependencies.py --check
 
 and regenerate the matrix with `--write` in the same change that bumps a pin.
 Release order is the graph order (`grust → typesec → marciana → lakecat →
-querygraph`); a stale pin anywhere in that chain is a release blocker, and
-committed manifests never reach a sibling through a `path` or `git`
+fihrist → querygraph`); a stale pin anywhere in that chain is a release blocker,
+and committed manifests never reach a sibling through a `path` or `git`
 dependency.
 
 ## Rust Engineering

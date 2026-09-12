@@ -9,13 +9,15 @@ TypeSec, and LakeCat — which carry their own codenames.
 ## Release log
 
 The current release line consumes the published TypeSec `0.14.0`, Marciana
-`0.13.1`, Grust `0.13.0`, and LakeCat `0.4.0` crates; the stack-wide pin
+`0.13.1`, Grust `0.13.0`, LakeCat `0.4.0`, and Fihrist `0.1.0` crates; the
+stack-wide pin
 matrix lives in [`QUERYGRAPH.md`](QUERYGRAPH.md). Development snapshots
 remain separate Git-revision integration work and are not part of a published
 dependency line.
 
 | Version | Codename | Notes |
 |---|---|---|
+| 0.5.1 | Harrier Patch | Consume standalone Fihrist 0.1.0; preserve the Rust compatibility path, CLI commands, and MCP validation; track Fihrist in the stack matrix. |
 | 0.5.0 | Harrier | The **alignment** release: one released dependency line — Grust 0.13.0 "Prawn", TypeSec 0.14.0 "Dorsoduro", Marciana 0.13.1, LakeCat 0.4.0 "Caracal" — recorded and checked through `QUERYGRAPH.md`; plus the live TPC-DS semantic supply chain (seven proof bases, six-way drift rejection), the Apache Ossie converter loss-report contract, the catalog-migration harness, the audited AgentGym results, the performance-aligned Sail pin `c5309365`, and the unified Rust/Python/TypeScript repository. |
 | 0.4.2 | Sentinel Patch | Unified `querygraph/querygraph` repository: root Rust crate and `python/` API, with released registry dependencies unchanged. |
 | 0.4.1 | Sentinel Patch | Registry-backed dependency line for TypeSec 0.13.1, Marciana 0.12.1, Grust 0.12.1, and LakeCat 0.3.0; includes the QueryGraph-owned TypeSec–Marciana stack facade. |

@@ -1256,6 +1256,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28dea519a9695b9977216879a3ebfddf92f1c08c05d984f8996aecd6ecdc811d"
 
 [[package]]
+name = "fihrist"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c21db22abd7b5547321f28b4499381ab281fe46f5eecc25c6b5a11a51f6bffa"
+dependencies = [
+ "anyhow",
+ "clap",
+ "lakecat-core",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "sha2",
+ "thiserror",
+ "typesec-core",
+]
+
+[[package]]
 name = "find-msvc-tools"
 version = "0.1.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2850,7 +2867,7 @@ dependencies = [
 
 [[package]]
 name = "querygraph"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "anyhow",
  "arrow",
@@ -2862,6 +2879,7 @@ dependencies = [
  "clap",
  "csv",
  "ed25519-dalek",
+ "fihrist",
  "grust-cypher",
  "grust-graph",
  "http-body-util",

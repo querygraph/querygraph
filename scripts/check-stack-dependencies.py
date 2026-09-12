@@ -26,9 +26,10 @@ REPOS: dict[str, dict[str, object]] = {
     "typesec": {"env": "QG_STACK_TYPESEC", "default": "../typesec"},
     "marciana": {"env": "QG_STACK_MARCIANA", "default": "../marciana"},
     "lakecat": {"env": "QG_STACK_LAKECAT", "default": "../lakecat"},
+    "fihrist": {"env": "QG_STACK_FIHRIST", "default": "../fihrist"},
     "querygraph": {"env": "QG_STACK_QUERYGRAPH", "default": "."},
 }
-ORDER = ["grust", "typesec", "marciana", "lakecat", "querygraph"]
+ORDER = ["grust", "typesec", "marciana", "lakecat", "fihrist", "querygraph"]
 BEGIN = "<!-- stack-dependency-matrix:begin -->"
 END = "<!-- stack-dependency-matrix:end -->"
 
