@@ -22,7 +22,7 @@ types, stewardship metadata, and TypeSec security bindings. Its Rust API checks
 compatibility, exports and submits LakeCat create requests, and authorizes
 schema-checked Sail scan planning. Start with `querygraph fihrist --help`;
 agents can check drafts through the `validate_fihrist` MCP tool. Both use the
-standalone Fihrist crate; see [integration touchpoints](docs/fr-gq.md).
+standalone Fihrist crate; see [integration touchpoints](docs/frqg.md).
 
 ## Quick start
 

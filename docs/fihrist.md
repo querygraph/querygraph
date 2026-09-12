@@ -7,5 +7,5 @@ are maintained there.
 
 QueryGraph consumes the released standalone crate and retains its Rust compatibility path,
 `querygraph fihrist` commands, and `validate_fihrist` MCP tool. See
-[Fihrist and QueryGraph touchpoints](fr-gq.md) for ownership, shared contracts,
+[Fihrist and QueryGraph touchpoints](frqg.md) for ownership, shared contracts,
 service composition, and release coordination.
