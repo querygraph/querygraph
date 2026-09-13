@@ -1,6 +1,6 @@
 {
   "date": "2026-09-13",
-  "description": "Whole-stack walkthrough: lakehouse, catalog, enterprise standards, ontology, MCP and agent workflows. Commits identify source bases; SOURCE-SHA256SUMS identifies every delivered file.",
+  "description": "Part I catalog/lakehouse/Pinax/MCP discovery of customer terminology; graph workflows are an explicit Part II. Commits identify original prepared bases; the customer overlay receipt identifies changed files. SOURCE-SHA256SUMS identifies every delivered file.",
   "repositories": [
     {
       "name": "querygraph",
@@ -21,6 +21,13 @@
       "name": "sail",
       "commit": "efab86db37948eb6285ca0473b25e03fbae53999",
       "dirty": false
+    }
+  ],
+  "overlays": [
+    {
+      "repository": "querygraph",
+      "commit": "af3e6fd047a643dc79dae1119cf311c291b8e7a7",
+      "receipt": "src/querygraph/demo/pinax/evidence/customer-discovery-source.json"
     }
   ]
 }

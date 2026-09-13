@@ -1,0 +1,28 @@
+{
+  "source_commit": "af3e6fd047a643dc79dae1119cf311c291b8e7a7",
+  "description": "Customer discovery overlay on the prepared demo source bases. Exact changed-file hashes; full package SOURCE-SHA256SUMS remains authoritative.",
+  "files": {
+    "demo/pinax/README.md": "611b3d9ba310053db1c657dea3e35601e0ec7f81e1b2f9197dcd2c831efbdad7",
+    "demo/pinax/console.html": "3bc8a5f24768b5a827aa0ae2ebf144434bbd095840d33cb1b33acc382508e253",
+    "demo/pinax/customer-discovery-design.md": "d735f7a9145ac5277eeaa48dd1ae6c4419e091b2de71e8864f2fb848b0b02035",
+    "demo/pinax/customer-meaning.json": "242f81aec4025f160c09b486e58c7dbe76a078c4d936e2ea79b727c45b7fb8a5",
+    "demo/pinax/demo-narrative.md": "a0de78dada52a8cbd2b84d4d59f271eba20048ee63ba359f3896931223b9eb0d",
+    "demo/pinax/dist/querygraph-pinax-slides.pdf": "9cf6f8e54643c8a465eae5026c4243573f9a02059c3764b32d9b30859d197c67",
+    "demo/pinax/evidence/grust-customer-discovery-console.json": "5084fbdfdc91b95147975018af82853dcc068678856edbaf1dc1e47bb0ca0e64",
+    "demo/pinax/install-services.sh": "e8c8dd731bbf0e3d1db2397c2eab9922cd09d2d3a45fb6ae51b725c4fec6558b",
+    "demo/pinax/ontology-review.md": "2b0694b98c17537004a958ada79d48d871c096ce86c9a0efdea991163543dc1b",
+    "demo/pinax/prepare-services.sh": "512a69409b252bd6d533fad50de7f80dbce80301e492bcbcc8d17791d378e5d5",
+    "demo/pinax/run-ec2.sh": "93609c4f975c7673ce01dc95a9bcd78873ada0be72fbb55553583a242f673b73",
+    "demo/pinax/run-live.sh": "d781d13a6a20344e49c29de7388a118560a28d84a89ec86823959643755cee47",
+    "demo/pinax/slides.html": "284346d3589ebb236881f9e28250e2f4d84a54c5ba8f0dd34f644cc2fb72e3d5",
+    "demo/pinax/verify-console.mjs": "325879746c04237dbcc7d6ed3078149a66e2dd0ff04432be40fe401cc53afe89",
+    "demo/pinax/wait-services.sh": "3c8f65ba4916e96c07d438400e6fcbc6a13423071cc6751575ac5e07236a8755",
+    "examples/pinax-client.rs": "aa949a5fbccc119bba9829b7d0e5426bc832354f1b0b2d30f9bd3b0beff49fed",
+    "examples/pinax-demo.rs": "97e3f95e4cd8ed394efa939c5d92bf26eb8e5ed3e425f566064b04890ee53473",
+    "examples/pinax-mcp-client.rs": "20ebd8cad7b5708b2a2d4fa41938262a603013d3ba7b7f6a8e938447836522d5",
+    "examples/pinax-ontology-seed.rs": "5ef50f73b2984ac2b8c052b568329b329aefe179e76ed3e6ad8aaf60150dfc01",
+    "examples/pinax_mcp_client/customer_discovery.rs": "d9ea221e5b7c69fcc7ae60e1012632cae93fdbf7312c8401629be0fda5d85228",
+    "integration/pinax/prepare_customers.py": "82486e6ead915d2dc581e4be573b5034adece612afcf629851ad1680713493ed",
+    "integration/pinax/server.rs": "bb2a81f9349a6565351bfcaf6d5ed23018309e2697f8493ee516ebbfd75d759b"
+  }
+}
