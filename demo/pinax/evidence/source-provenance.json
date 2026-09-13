@@ -4,8 +4,8 @@
   "repositories": [
     {
       "name": "querygraph",
-      "commit": "97a363b5f2041ae9eae9585127fd1b9c9ece4a29",
-      "dirty": true
+      "commit": "c77e294d40b19938c4c15082024f67c8611fb26f",
+      "dirty": false
     },
     {
       "name": "pinax",

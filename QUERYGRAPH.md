@@ -66,7 +66,7 @@ The block below is generated; do not edit it by hand.
 | marciana | `0.13.1` | `94e0b517` | grust, lakecat, typesec |
 | lakecat | `0.4.0` | `27e18f39` | grust, typesec |
 | pinax | `0.2.0` | `524e03c0` | lakecat, typesec |
-| querygraph | `0.5.1` | `97a363b5` | grust, lakecat, marciana, pinax, typesec |
+| querygraph | `0.5.1` | `c77e294d` | grust, lakecat, marciana, pinax, typesec |
 
 | Consumer | Manifest | Crate | Owner | Required | Owner version | Status |
 |---|---|---|---|---|---|---|
