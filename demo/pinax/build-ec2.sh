@@ -16,7 +16,7 @@ cargo --version | tee "$demo_root/reports/cargo.txt"
 cd "$demo_root/src/querygraph"
 # Pinax 0.2.0 (`pinax-registry`) is published; the lockfile pins the reviewed registry checksum.
 cargo build --locked \
-  --bin querygraph --example pinax-client --example pinax-demo --example pinax-ontology-seed --example pinax-mcp-client 2>&1 | tee "$demo_root/logs/querygraph-build.log"
+  --bin querygraph --example pinax-client --example pinax-demo --example pinax-ontology-seed --example pinax-mcp-client --example pinax-delta-seed --example pinax-delta-read 2>&1 | tee "$demo_root/logs/querygraph-build.log"
 sha256sum target/debug/querygraph > "$demo_root/reports/querygraph-binary.sha256"
 cargo build --locked --manifest-path "$demo_root/src/sail/Cargo.toml" \
   --target-dir "$demo_root/src/lakecat/target" -p sail-cli --bin sail \

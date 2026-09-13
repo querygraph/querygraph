@@ -2,7 +2,7 @@
 use anyhow::{Context, Result, bail};
 use axum::{
     Json, Router,
-    extract::{Path, State},
+    extract::{Path, Query, State},
     http::{HeaderMap, StatusCode, header},
     response::{Html, IntoResponse, Response},
     routing::{get, post},
@@ -28,7 +28,10 @@ struct Demo {
 }
 
 impl Demo {
-    fn fixture(&self) -> PathBuf {
+    fn fixture(&self, format: TableFormat) -> PathBuf {
+        if matches!(format, TableFormat::Delta) {
+            return self.root.join("run/customer-delta");
+        }
         let active = self.root.join("run/active-pinax");
         if active.exists() {
             active
@@ -36,6 +39,53 @@ impl Demo {
             self.root.join("run/pinax")
         }
     }
+}
+
+#[derive(Clone, Copy, Debug, Default, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "lowercase")]
+enum TableFormat {
+    #[default]
+    Iceberg,
+    Delta,
+}
+impl TableFormat {
+    fn slug(self) -> &'static str {
+        match self {
+            Self::Iceberg => "iceberg",
+            Self::Delta => "delta",
+        }
+    }
+    fn label(self) -> &'static str {
+        match self {
+            Self::Iceberg => "Iceberg",
+            Self::Delta => "Delta Lake",
+        }
+    }
+    fn snapshot_label(self) -> &'static str {
+        match self {
+            Self::Iceberg => "snapshot",
+            Self::Delta => "transaction-log version",
+        }
+    }
+    fn mcp_url(self) -> &'static str {
+        match self {
+            Self::Iceberg => "http://127.0.0.1:18082/mcp",
+            Self::Delta => "http://127.0.0.1:18084/mcp",
+        }
+    }
+}
+#[derive(Default, Deserialize)]
+struct Selection {
+    #[serde(default)]
+    format: TableFormat,
+}
+fn page(template: &str, format: TableFormat) -> Html<String> {
+    Html(
+        template
+            .replace("{{format_name}}", format.label())
+            .replace("{{format}}", format.slug())
+            .replace("{{snapshot_label}}", format.snapshot_label()),
+    )
 }
 
 #[derive(Clone, Copy, Deserialize)]
@@ -82,11 +132,15 @@ fn router(demo: Arc<Demo>) -> Router {
     Router::new()
         .route(
             "/",
-            get(|| async { Html(include_str!("../demo/pinax/console.html")) }),
+            get(|Query(selection): Query<Selection>| async move {
+                page(include_str!("../demo/pinax/console.html"), selection.format)
+            }),
         )
         .route(
             "/slides",
-            get(|| async { Html(include_str!("../demo/pinax/slides.html")) }),
+            get(|Query(selection): Query<Selection>| async move {
+                page(include_str!("../demo/pinax/slides.html"), selection.format)
+            }),
         )
         .route(
             "/assets/pinax-headboard.png",
@@ -113,6 +167,7 @@ fn router(demo: Arc<Demo>) -> Router {
 async fn run(
     State(demo): State<Arc<Demo>>,
     Path(operation): Path<Operation>,
+    Query(selection): Query<Selection>,
     headers: HeaderMap,
 ) -> Response {
     // A custom header prevents cross-origin form submissions; exact Host checks
@@ -141,8 +196,17 @@ async fn run(
         )
             .into_response();
     };
-    match tokio::time::timeout(Duration::from_secs(120), execute(&demo, operation)).await {
-        Ok(Ok(value)) => Json(value).into_response(),
+    match tokio::time::timeout(
+        Duration::from_secs(120),
+        execute(&demo, operation, selection.format),
+    )
+    .await
+    {
+        Ok(Ok(mut value)) => {
+            value["table_format"] = json!(selection.format.slug());
+            value["table_format_name"] = json!(selection.format.label());
+            Json(value).into_response()
+        }
         Ok(Err(error)) => (
             StatusCode::BAD_GATEWAY,
             Json(json!({"error":error.to_string()})),
@@ -166,14 +230,14 @@ async fn bounded_output(reader: impl tokio::io::AsyncRead + Unpin) -> Result<Vec
     Ok(output)
 }
 
-async fn execute(demo: &Demo, operation: Operation) -> Result<Value> {
+async fn execute(demo: &Demo, operation: Operation, format: TableFormat) -> Result<Value> {
     // The operator console shows only the public synthetic fixture's schema.
     // A fresh signed plan verifies the catalog/registry agreement; seed metadata
     // is labelled as such and is never substituted for live agent discovery.
     if matches!(operation, Operation::Lakehouse) {
-        let customer_path = demo.fixture().join("customer-tables.json");
+        let customer_path = demo.fixture(format).join("customer-tables.json");
         if customer_path.exists() {
-            let discovery = execute_operation(demo, Operation::Discover).await?;
+            let discovery = execute_operation(demo, Operation::Discover, format).await?;
             let bytes = tokio::task::spawn_blocking(move || -> Result<Vec<u8>> {
                 use std::io::Read;
                 let mut bytes = Vec::new();
@@ -189,12 +253,12 @@ async fn execute(demo: &Demo, operation: Operation) -> Result<Value> {
             let tables: Value = serde_json::from_slice(&bytes)?;
             return Ok(json!({"status":"passed", "result":{
                 "tables":tables, "discovery":discovery["result"],
-                "schema_source":"operator-owned real Iceberg seed metadata; live catalog activation checks the registered contracts",
+                "schema_source":format!("Operator-owned {} schema; live LakeCat activation checks the registered contracts", format.label()),
                 "engine":"Sail", "catalog":"LakeCat", "registry":"Pinax"
             }}));
         }
-        let plan = execute_operation(demo, Operation::Plan).await?;
-        let path = demo.fixture().join("seed.json");
+        let plan = execute_operation(demo, Operation::Plan, format).await?;
+        let path = demo.fixture(format).join("seed.json");
         let seed = tokio::task::spawn_blocking(move || -> Result<Value> {
             use std::io::Read;
             let mut bytes = Vec::new();
@@ -225,24 +289,28 @@ async fn execute(demo: &Demo, operation: Operation) -> Result<Value> {
         operation,
         Operation::Navigator | Operation::Qglake | Operation::Semantic
     ) {
-        Some(execute_operation(demo, Operation::Ontology).await?)
+        Some(execute_operation(demo, Operation::Ontology, format).await?)
     } else {
         None
     };
-    let mut result = execute_operation(demo, operation).await?;
+    let mut result = execute_operation(demo, operation, format).await?;
     if let Some(consultation) = consultation {
         result["ontology_consultation"] = consultation["result"].clone();
     }
     Ok(result)
 }
 
-async fn execute_operation(demo: &Demo, operation: Operation) -> Result<Value> {
+async fn execute_operation(
+    demo: &Demo,
+    operation: Operation,
+    format: TableFormat,
+) -> Result<Value> {
     let target = demo.root.join("src/querygraph/target/debug");
     let mut command = if let Some(argument) = operation.client_argument() {
         let mut command = Command::new(target.join("examples/pinax-client"));
         command
             .arg("--config")
-            .arg(demo.fixture().join("registry-service.json"))
+            .arg(demo.fixture(format).join("registry-service.json"))
             .arg(argument);
         if matches!(operation, Operation::Discover | Operation::Ontology) {
             command.args(["--purpose", "customer_discovery"]);
@@ -270,7 +338,7 @@ async fn execute_operation(demo: &Demo, operation: Operation) -> Result<Value> {
         let mut command = Command::new(target.join("examples/pinax-mcp-client"));
         command.args([
             "--url",
-            "http://127.0.0.1:18082/mcp",
+            format.mcp_url(),
             "--scenario",
             "customer-discovery",
         ]);

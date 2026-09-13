@@ -7,5 +7,6 @@ bash "$scripts/build-ec2.sh" "$demo_root"
 bash "$scripts/run-ec2.sh" "$demo_root"
 bash "$scripts/prepare-services.sh" "$demo_root"
 bash "$scripts/install-services.sh" "$demo_root"
+bash "$scripts/install-delta.sh" "$demo_root"
 bash "$scripts/run-live.sh" "$demo_root"
 printf 'Open an SSH tunnel for port 18081, then visit http://localhost:18081\n'

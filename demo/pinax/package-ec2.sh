@@ -21,6 +21,8 @@ for executable in \
   src/querygraph/target/debug/examples/pinax-demo \
   src/querygraph/target/debug/examples/pinax-ontology-seed \
   src/querygraph/target/debug/examples/pinax-mcp-client \
+  src/querygraph/target/debug/examples/pinax-delta-seed \
+  src/querygraph/target/debug/examples/pinax-delta-read \
   src/lakecat/target/debug/sail \
   src/lakecat/target/debug/querygraph-registry-live-fixture; do
   (cd "$demo_root" && sha256sum "$executable")

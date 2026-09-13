@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-13",
+  "host": "grust",
+  "url": "https://demo.rust.ai",
+  "formats": {
+    "iceberg": {
+      "actions": {
+        "lakehouse": "passed",
+        "discover": "passed",
+        "ontology": "passed",
+        "mcp": "passed",
+        "standards": "passed",
+        "plan": "passed",
+        "execute": "passed",
+        "semantic": "passed",
+        "navigator": "passed",
+        "qglake": "passed",
+        "deny-column": "denied",
+        "deny-purpose": "denied"
+      },
+      "browser_errors": [],
+      "evidence_sha256": "03a23f4533aed45f9884926fb66c5ec5448f90a0cac5baf14f344a0437c622f1"
+    },
+    "delta": {
+      "actions": {
+        "lakehouse": "passed",
+        "discover": "passed",
+        "ontology": "passed",
+        "mcp": "passed",
+        "standards": "passed",
+        "plan": "passed",
+        "execute": "passed",
+        "semantic": "passed",
+        "navigator": "passed",
+        "qglake": "passed",
+        "deny-column": "denied",
+        "deny-purpose": "denied"
+      },
+      "browser_errors": [],
+      "evidence_sha256": "a7c08a155663f0c91a8a1dd497f54ea87821ec21610c5fb23c0233fca4be41ca"
+    }
+  },
+  "delta_mcp": {
+    "protocol": "2026-07-28",
+    "transport": "stateless-streamable-http",
+    "requests": 2,
+    "rows": [
+      {
+        "id": 2
+      }
+    ],
+    "isError": false
+  },
+  "validation": {
+    "rust": "cargo test --all-targets --locked; cargo clippy --all-targets --locked -- -D warnings; cargo fmt --all --check",
+    "public_unauthenticated_status": 401,
+    "public_delta_read": [
+      {
+        "id": 2
+      }
+    ]
+  }
+}

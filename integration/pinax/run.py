@@ -123,7 +123,7 @@ path = {json.dumps(str(ROOT / "integration/pinax/server.rs"))}
 typesec = {{ version = "=0.14.0", default-features = false, features = ["integrations", "rbac"] }}
 bs58 = "0.5"
 uuid = {{ version = "1", features = ["v4"] }}
-tokio = {{ version = "1", features = ["macros", "rt-multi-thread", "net"] }}
+tokio = {{ version = "1", features = ["macros", "rt-multi-thread", "net", "process", "io-util", "time"] }}
 axum = "0.8"
 async-trait = "0.1"
 serde = {{ version = "1", features = ["derive"] }}

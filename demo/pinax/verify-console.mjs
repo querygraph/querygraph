@@ -7,13 +7,17 @@ import {join, resolve} from 'node:path';
 const require = createRequire(join(process.env.FIRSTPAIR_ROOT ?? join(homedir(),'src/firstpair'),'package.json'));
 const {chromium}=require('playwright');
 const output=resolve(process.argv[2] ?? '/tmp/querygraph-pinax-console-check');
+const format=process.argv[3] ?? 'iceberg';
+assert.ok(['iceberg','delta'].includes(format));
 await mkdir(output,{recursive:true});
 const browser=await chromium.launch({headless:true});
 try {
   const page=await browser.newPage({viewport:{width:1440,height:1050}});
   const errors=[];
   page.on('pageerror',error=>errors.push(String(error)));
-  await page.goto('http://localhost:18081');
+  await page.goto('http://localhost:18081/?format='+format);
+  assert.equal(await page.locator('[data-format="'+format+'"]').getAttribute('aria-current'),'page');
+  assert.ok((await page.locator('a[href^="/slides"]').getAttribute('href')).includes('format='+format));
   await page.screenshot({path:join(output,'console-desktop.png'),fullPage:true});
   assert.equal(await page.locator('#part-ii').evaluate(e=>e.open),false);
   assert.equal(await page.locator('[data-component="Grust"]').isVisible(),false);
@@ -43,7 +47,8 @@ try {
     assert.ok(text,action+': '+await page.locator('#status').innerText()+' '+await page.locator('#summary').innerText());
     assert.ok(!(await page.locator('#status').innerText()).includes('failed'),await page.locator('#summary').innerText());
     const value=JSON.parse(text);
-    console.log('Verified action:',action);
+    console.log('Verified action:',format,action);
+    assert.equal(value.table_format,format);
     assert.equal(value.status,action.startsWith('deny-')?'denied':'passed',JSON.stringify(value));
     if(action==='lakehouse') {assert.equal(value.result.catalog,'LakeCat');assert.deepEqual(value.result.tables.map(t=>t.name).sort(),['billing_accounts','crm_customers','product_users']);}
     if(action==='standards') assert.deepEqual(value.result.tables.map(t=>t.name).sort(),['customers','employees','transactions']);
@@ -86,6 +91,9 @@ try {
   assert.ok((await page.locator('#result-title').innerText()).startsWith('Grust'));
   assert.equal(await page.evaluate(()=>document.querySelector('.controls').scrollHeight>document.querySelector('.controls').clientHeight),true);
   assert.deepEqual(errors,[]);
+  await page.locator('[data-format="'+(format==='delta'?'iceberg':'delta')+'"]').click();
+  assert.equal(await page.locator('#output').textContent(),'');
+  assert.ok((await page.locator('.format-switch strong').textContent()).includes(format==='delta'?'Iceberg':'Delta Lake'));
   await writeFile(join(output,'results.json'),JSON.stringify({browser_errors:errors,actions:results},null,2)+'\n');
   console.log('All twelve live browser actions and component/layout regressions passed; desktop/mobile screenshots saved.');
 } finally {await browser.close();}

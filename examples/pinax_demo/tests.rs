@@ -59,3 +59,45 @@ async fn refuses_output_larger_than_the_console_budget() {
     let bytes = vec![0; 2 * 1024 * 1024 + 1];
     assert!(bounded_output(bytes.as_slice()).await.is_err());
 }
+
+#[tokio::test]
+async fn format_selection_is_per_request_and_rejects_unknown_formats() {
+    let demo = Arc::new(Demo {
+        root: PathBuf::from("/nonexistent-demo"),
+        port: 18081,
+        capacity: Semaphore::new(1),
+    });
+    for (path, label, other) in [
+        ("/?format=delta", "Delta Lake", "real Iceberg"),
+        ("/?format=iceberg", "Iceberg", "real Delta Lake"),
+        (
+            "/slides?format=delta&part=all",
+            "Delta Lake",
+            "Real Iceberg",
+        ),
+    ] {
+        let response = router(demo.clone())
+            .oneshot(Request::get(path).body(Body::empty()).unwrap())
+            .await
+            .unwrap();
+        assert_eq!(response.status(), StatusCode::OK);
+        let body = axum::body::to_bytes(response.into_body(), 1024 * 1024)
+            .await
+            .unwrap();
+        let text = std::str::from_utf8(&body).unwrap();
+        assert!(text.contains(label));
+        assert!(!text.contains(other));
+        assert!(!text.contains("{{format"));
+    }
+    let response = router(demo)
+        .oneshot(
+            Request::post("/api/run/execute?format=unknown")
+                .header(header::HOST, "localhost:18081")
+                .header("x-querygraph-demo", "1")
+                .body(Body::empty())
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::BAD_REQUEST);
+}

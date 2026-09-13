@@ -15,6 +15,7 @@ use typesec::integrations::{
 };
 use typesec::{Did, DidEnvelope, Ed25519DidKey, Ed25519DidKeyStore, TypeDidGateway};
 
+mod delta;
 mod read_mutation;
 
 #[tokio::main]
@@ -218,6 +219,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }),
         None => state.sail.clone(),
     };
+    let sail: Arc<dyn lakecat_core::sail::SailCatalogEngine> =
+        match std::env::var_os("QG_DELTA_READER") {
+            Some(reader) => Arc::new(delta::DeltaDemoEngine {
+                inner: sail,
+                reader: reader.into(),
+            }),
+            None => sail,
+        };
     let state = state
         .with_integrations(
             sail,

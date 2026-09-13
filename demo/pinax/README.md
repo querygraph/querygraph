@@ -164,3 +164,32 @@ digests and compare-and-swap. Runtime store contents stay out of source bundles.
 `integration/pinax/prepare_customers.py` extends a preserved single-table fixture into a **new** directory, creating three Iceberg tables and Parquet files. It never overwrites the old fixture. `pinax-ontology-seed` reviews only the exact source-owned synthetic contracts and publishes into a new central store. After verifying catalog activation, point the retained services at the new directory and restart consumers with its exact registry/ontology pins. Keep the original directory for rollback.
 
 The MCP customer-discovery scenario is metadata-only. The original `--scenario governed-read` still checks the original analytics fixture. The source archive and older evidence files describe their recorded runs; new customer-discovery evidence is stored separately.
+
+### Choose Iceberg or Delta Lake
+
+Open https://demo.rust.ai/ and choose **Iceberg** or **Delta Lake** in the header.
+The same selection is carried into Slides. Direct links:
+
+- `https://demo.rust.ai/?format=iceberg`
+- `https://demo.rust.ai/?format=delta`
+
+Both use real table files on grust, independent catalog owners and MCP endpoints,
+with the same business inventory, reviewed ontology and access policy. Switching
+clears the current result; it never changes another visitor's selection.
+Delta's transaction-log version appears in the existing `snapshot_id` wire field.
+The Delta bridge is read-only and scoped to this retained demo; see
+[table-formats.md](table-formats.md) for the exact compatibility boundary.
+Grust's optional graph extension uses Delta internally with either selection.
+
+Fresh `deploy.sh` builds and installs both. To add Delta to a running prepared
+Iceberg deployment, rebuild the Rust examples and owner using the current
+sources, then run `install-delta.sh DEMO_ROOT`. The extra services are
+`querygraph-pinax-delta-owner` (18182) and `querygraph-pinax-delta-mcp` (18084),
+both loopback-only. Keep the existing owner (18181) and MCP (18082) running.
+
+To export both complete decks through the local SSH tunnel:
+
+```bash
+node demo/pinax/render-slides.mjs 'http://localhost:18081/slides?format=iceberg&part=all' /tmp/pinax-slides-iceberg
+node demo/pinax/render-slides.mjs 'http://localhost:18081/slides?format=delta&part=all' /tmp/pinax-slides-delta
+```

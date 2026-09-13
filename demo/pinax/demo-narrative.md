@@ -25,7 +25,7 @@ ssh -N -L 18081:127.0.0.1:18081 grust
 
 ## 1. Inspect the company inventory
 
-Click **Inspect lakehouse & catalog**. Three departments have real Iceberg
+Choose **Iceberg** or **Delta Lake** in the header, then click **Inspect lakehouse & catalog**. Three departments have real selected-format
 metadata and Parquet records in the synthetic `acme` namespace:
 
 | Department | Table | Fields | What one row means |
@@ -40,7 +40,7 @@ one-to-many and missing relationships concrete. Part I discovers metadata; it
 does not execute a join or count these populations.
 
 Sail supplies lakehouse execution. LakeCat catalogs physical table state.
-The operator schema display reads retained Iceberg metadata; the fresh service
+The operator schema display reads retained metadata for the selected format; the fresh service
 activation checks registered contracts against live LakeCat. Do not call a
 seed display a remote catalog enumeration. The next step is the agent's
 actual authorized discovery response.
@@ -197,3 +197,23 @@ from seed metadata on restart. This is a correctness demo, not a durability clai
 
 See [customer-discovery-design.md](customer-discovery-design.md) for the change
 contract and [README.md](README.md) for build, lifecycle, and source packaging.
+
+## Presenting either table format
+
+Start with the header's Iceberg / Delta Lake choice. Explain that the company
+already has a lakehouse and a table format; the business question stays the same.
+Sales, Finance and Product have the same records and schemas in both prepared
+versions. The toggle chooses independent live files, LakeCat owner and MCP
+endpoint. Pinax's reviewed definitions and field bindings do not change.
+
+In Iceberg mode, refer to snapshots and Iceberg metadata. In Delta Lake mode,
+refer to transaction-log versions and Delta metadata. The optional read executes
+through Sail's native format reader and returns the same permitted customer ID.
+The wire contract currently calls the version `snapshot_id`; the Delta demo
+adapter uses actual Delta version 1. It is a read-only integration bridge, not a
+claim of general Delta write support in the released Iceberg REST catalog.
+
+The slide link carries the selected format. Switching clears the current result
+so a previous Iceberg result cannot be mistaken for a Delta result or vice versa.
+Grust's separate graph storage is Delta-based regardless of the company table
+format; the optional graph presentation identifies it separately.
