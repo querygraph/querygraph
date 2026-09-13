@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>QueryGraph with Pinax</title>
+<title>The QueryGraph stack</title>
 <style>
 :root{color-scheme:light;--ink:#112b3b;--paper:#faf5e9;--copper:#a6532d}
 *{box-sizing:border-box}body{margin:0;background:#102633;color:var(--ink);font-family:Arial,sans-serif}
@@ -14,130 +14,27 @@
 </style>
 </head>
 <body>
-<section class="slide opening active">
-  <h1>QueryGraph with Pinax</h1>
-  <p>Enterprise contracts for governed agent reads</p>
-  <p class="muted">Alexy Khrabrov, QueryGraph, September 2026</p>
-  <img class="banner" src="assets/pinax-headboard.png" alt="Pinax cataloger's workshop and connected records">
-  <aside class="notes">Introduce Pinax as the table-contract layer. The cover artwork belongs to the Pinax repository. The technical implementation uses Rust 2024. This presentation covers a prepared integration source build, not a claim that every execution extension is released.</aside>
-</section>
-<section class="slide">
-  <h2>The stack's responsibilities</h2>
-  <table><tr><th>Component</th><th>Responsibility</th></tr>
-  <tr><td>Grust</td><td>Property graphs and graph queries</td></tr>
-  <tr><td>TypeSec</td><td>Identity and policy evaluation</td></tr>
-  <tr><td>Marciana</td><td>Semantic catalog and agent workflows</td></tr>
-  <tr><td>LakeCat + Sail</td><td>Catalog authority and physical execution</td></tr>
-  <tr><td>Pinax</td><td>Validated, versioned table contracts</td></tr>
-  <tr><td>QueryGraph</td><td>Trusted composition and MCP</td></tr></table>
-  <aside class="notes">Source: Pinax docs/pinax.md and QueryGraph's Cargo dependencies. LakeCat owns the governed operation; Sail interprets the physical table. Pinax preserves these domain boundaries.</aside>
-</section>
-<section class="slide">
-  <h2>The original semantic demo</h2>
-  <p class="large">A question connects semantic discovery to a signed agent workflow and lineage</p>
-  <pre>querygraph dataverse-e2e --live-sail \
-  --sail-dir "$RUN/sail" \
-  --openlineage-file "$RUN/events.jsonl" \
-  --did-ledger-file "$RUN/attestations.jsonl"</pre>
-  <p class="muted">Live Sail: two datasets, 34 graph nodes, 33 edges and appended lineage.</p>
-  <aside class="notes">Source: evidence/grust-live-services.json. Set QG_SAIL_WAREHOUSE to an absolute run directory and use the Spark Connect endpoint on port 15051. Grust graph writes and a node readback passed on Sail, as did lineage append. The report's Cypher summary is computed in memory; it is not server-side Cypher pushdown.</aside>
-</section>
-<section class="slide">
-  <h2>What Pinax adds</h2>
-  <p class="large">A reviewed contract accompanies the table through discovery, planning and result release</p>
-  <ul><li>Stable field IDs, types and business semantics</li><li>Owner, steward and exact policy binding</li><li>Compatible revisions checked against a predecessor</li><li>Catalog schema and registry pins checked at use</li></ul>
-  <aside class="notes">Source: Pinax src/model.rs, src/registry.rs and docs/pinax.md. Retention and primary-key declarations need enforcement by lifecycle and ingestion systems. Classification does not grant access.</aside>
-</section>
-<section class="slide dark">
-  <h2>A bounded request</h2>
-  <pre>{
-  "table": "rows",
-  "columns": ["id"],
-  "purpose": "analytics",
-  "limit": 10
-}</pre>
-  <p>The host supplies identity, registry, policy and catalog credentials.</p>
-  <p class="muted">The request cannot choose a storage path or policy engine.</p>
-  <aside class="notes">Source: integration/pinax/execute_rows.py. The execution fixture uses the column name id. The book's separate custom authoring example uses customer_id. Signed MCP arguments include the exact intent string and an operation-bound envelope.</aside>
-</section>
-<section class="slide">
-  <h2>Checks before returning rows</h2>
-  <table><tr><th>Boundary</th><th>Required check</th></tr>
-  <tr><td>Pinax</td><td>Purpose, table and projected columns</td></tr>
-  <tr><td>Catalog</td><td>Exact contract and current state</td></tr>
-  <tr><td>LakeCat</td><td>Separate authority to execute</td></tr>
-  <tr><td>Sail</td><td>Exact snapshot and mandatory predicate</td></tr>
-  <tr><td>Release</td><td>Fresh authority and evidence integrity</td></tr></table>
-  <aside class="notes">Source: docs/governed-execution-contract.md and src/registry_service/. The owner buffers results and revalidates after reads and lineage work. QueryGraph independently checks returned scope and digests and reloads current catalog state.</aside>
-</section>
-<section class="slide">
-  <h2>The real-row experiment</h2>
-  <table><tr><th>Stored record</th><th>Tenant</th><th>Result</th></tr>
-  <tr><td>ID 1</td><td>other</td><td>Excluded by owner predicate</td></tr>
-  <tr><td>ID 2</td><td>acme</td><td>Returned as <code>{"id":2}</code></td></tr></table>
-  <p class="large">The private email stays out of the projection</p>
-  <p class="muted">Real Iceberg metadata and Parquet files. Direct Rust MCP and the Python CLI handoff both passed on EC2.</p>
-  <aside class="notes">Source: integration/pinax/execute_rows.py and evidence/grust-pinax-execution.json. The test verifies exact returned rows and independently recomputes row/evidence digests.</aside>
-</section>
-<section class="slide dark">
-  <h2>Changes after the read</h2>
-  <p class="large">Sail reads actual rows. Authority changes. The owner discards the buffer.</p>
-  <table><tr><th>Mutation</th><th>Observed outcome on grust</th></tr>
-  <tr><td>Purpose revoked</td><td>No protected rows released</td></tr>
-  <tr><td>Registry drift</td><td>No protected rows released</td></tr>
-  <tr><td>Snapshot drift</td><td>No protected rows released</td></tr></table>
-  <aside class="notes">Source: integration/pinax/read_mutation.rs, execute_rows.py and the grust report. A fixture decorator changes state after nonempty real engine reads. This proves the release check, rather than only admission-time denial.</aside>
-</section>
-<section class="slide">
-  <h2>Revision two</h2>
-  <p class="large">A reviewed optional column becomes a controlled consumer cutover</p>
-  <ol><li>Close consumers for the old registry</li><li>Apply the reviewed target and reconcile catalog pins</li><li>Start consumers pinned to the target digest</li><li>Read real rows under revision two</li></ol>
-  <p class="muted">Activation is an observation. The operator owns the maintenance window.</p>
-  <aside class="notes">Source: integration/pinax/execute_rows.py and run.py. The recorded EC2 execution fixture passed real_rows_after_reviewed_consumer_cutover. The separate deployment fixture covers full registry creation/reconciliation and stale activation rejection. No distributed publication transaction is claimed.</aside>
-</section>
-<section class="slide">
-  <h2>Stateless MCP · 2026-07-28</h2>
-  <ul><li>Per-request context; no modern initialization handshake</li><li>Central ontology discovery over stdio and HTTP</li><li>Explicit model handles keep conversations separate</li><li>Up to 16 requests; disconnect cancels its HTTP work</li></ul>
-  <p class="muted">A completed response cannot be retracted. Remote HTTP work may continue after local cancellation.</p>
-  <aside class="notes">Sources: docs/mcp-stateless.md, src/mcp/http.rs and separate transport tests. Modern HTTP, direct stdio and Python handoff passed on grust; captured wire results validate against the official 2026-07-28 schema. Legacy stdio remains compatible. MCP endpoint: loopback 18082/mcp.</aside>
-</section>
-<section class="slide dark">
-  <h2>Build and run on EC2</h2>
-  <pre>bash demo/pinax/deploy.sh "$DEMO_ROOT"
+<section class="slide opening active"><h1>The QueryGraph stack</h1><p>Shared data, shared meaning, capable agents</p><p class="muted">Sail · LakeCat · Pinax · TypeSec · MCP · Marciana · Grust</p><img class="banner" src="assets/pinax-headboard.png" alt="Pinax cataloger overlooking Alexandria"><aside class="notes">Introduce the whole stack. A company has data in a lakehouse, a catalog of physical tables, a registry of common table shapes, and agents that discover and use them. No prior demo or product version knowledge is assumed.</aside></section>
+<section class="slide "><h2>A company asks a question</h2><p class="large">“Where is our customer data, and what can an analytics agent do with it?”</p><ul><li>Business teams use different words for the same concept</li><li>Systems represent similar records with different columns</li><li>Agents need meaning, structure, and usable operations</li></ul><aside class="notes">Explain a large enterprise with many teams and datasets. Pinax helps standardize common table shapes and connects shared definitions to actual fields. We demonstrate the process on a small synthetic fixture, not a company-wide production inventory.</aside></section>
+<section class="slide "><h2>A lakehouse in Sail</h2><p>Sail executes reads over Iceberg tables and Parquet records.</p><table><tr><th>Field ID</th><th>Customer fixture column</th><th>Physical type</th></tr><tr><td>1</td><td>id</td><td>long, required</td></tr><tr><td>2</td><td>tenant</td><td>string, optional</td></tr><tr><td>3</td><td>private_email</td><td>string, optional</td></tr></table><p class="muted">Console step 1 · Inspect lakehouse &amp; catalog</p><aside class="notes">Source: retained run/pinax/seed.json and live LakeCat plan. The fixture is named rows and represents synthetic customer identifiers. Schema display comes from the retained seed; the signed plan checks the live catalog against the registered contract. Sail runs from our source checkout.</aside></section>
+<section class="slide "><h2>A catalog in LakeCat</h2><p class="large">The catalog identifies the physical table and the snapshot an operation will use.</p><ul><li>Table identity and schema</li><li>Current snapshot and catalog state</li><li>Planning and execution through the Sail adapter</li></ul><p class="muted">One table, described physically by LakeCat and semantically by Pinax</p><aside class="notes">Keep physical catalog and enterprise registry distinct. LakeCat is the authority for physical table operations. Pinax maps company conventions to that physical identity. Step 1 displays a fresh plan. The demo catalog is an in-memory fixture and resets to its seed when its owner restarts.</aside></section>
+<section class="slide "><h2>A registry in Pinax</h2><p class="large">Standardize the shape of tables across a large company</p><table><tr><th>Shared profile</th><th>Common foundation</th></tr><tr><td>Customers</td><td>Stable identities, typed fields, semantic terms</td></tr><tr><td>Employees</td><td>Common HR records and stewardship</td></tr><tr><td>Transactions</td><td>Consistent financial record structure</td></tr></table><p class="muted">Console step 2 · Generate enterprise standards</p><aside class="notes">The live command querygraph pinax init generates actual Pinax profile definitions. These are templates, not newly created physical tables. Display the returned columns rather than inventing sample names. Teams review ownership, definitions, and requirements for their use. Source: pinax/src/cli.rs and standard_columns.</aside></section>
+<section class="slide dark"><h2>Shared meaning in the ontology</h2><p class="large">Account number → Customer identifier → rows.id</p><ul><li>Stable concepts, definitions, and aliases</li><li>Reviewed bindings to registered tables and field IDs</li><li>One maintained vocabulary for agents and exports</li></ul><p class="muted">Console steps 3–4 · Discover tables, then consult the ontology</p><aside class="notes">Pinax owns the central ontology. A name match returns a definition and a physical binding. Complete coverage refers to the registered inventory. New schema imports remain drafts until reviewed. The MCP action searches account number; the direct ontology action searches Customer identifier.</aside></section>
+<section class="slide "><h2>Agents with TypeSec access</h2><p class="large">An identified agent discovers the tables and fields appropriate to its task.</p><ul><li>The analytics agent carries a TypeSec identity</li><li>Pinax returns its usable table inventory</li><li>Its requested operation carries a purpose and signature</li></ul><p class="muted">Access is part of the normal workflow, alongside schema and meaning.</p><aside class="notes">Introduce TypeSec affirmatively as what enables authenticated agents to work across the stack. The primary story is successful discovery and execution. Optional field and purpose checks are available after the main walkthrough. The public demo identity is only for synthetic fixture records.</aside></section>
+<section class="slide dark"><h2>MCP is the agent’s interface</h2><pre>Discover tools
+  → Search “account number” in Pinax
+  → Resolve the table and field
+  → Call execute_pinax_scan
+  → Receive rows and semantic metadata</pre><p class="muted">Console step 5 · Discover &amp; read through MCP</p><aside class="notes">The actual pinax-mcp-client uses the live HTTP MCP service at loopback 18082/mcp. It discovers tools and derives the execution projection from the ontology response. TypeSec signs exact intents. Raw responses include additional protocol and access assertions; the presenter view leads with the successful journey.</aside></section>
+<section class="slide "><h2>Plan and read the selected table</h2><pre>{"table":"rows","columns":["id"],
+ "purpose":"analytics","limit":10}</pre><p>The plan identifies the current LakeCat snapshot.</p><p class="large">Sail returns <code>[{"id":2}]</code></p><p>Pinax’s semantic exports preserve the selected field’s meaning.</p><p class="muted">Console steps 6–7 · Inspect plan, read selected rows</p><aside class="notes">The two stored seed records belong to different synthetic tenants. The configured analytics scope selects the Acme identifier. Explain this as the chosen agent context, not the opening premise. Results contain Croissant inline data, CDIF metadata, ontology and registry digests, and execution evidence.</aside></section>
+<section class="slide "><h2>Grust connects the data</h2><p class="large">Datasets → files → fields → concepts</p><table><tr><th>Live demonstration</th><th>Result</th></tr><tr><td>Dataset descriptions</td><td>Two Dataverse fixtures</td></tr><tr><td>Property graph</td><td>34 nodes and 33 edges stored through Sail</td></tr><tr><td>Verification</td><td>Dataset node read back from Sail</td></tr><tr><td>Provenance</td><td>OpenLineage appended to the lakehouse</td></tr></table><p class="muted">Console step 8 · Build graph &amp; run workflow</p><aside class="notes">Source: dataverse-e2e live report. Graph storage and node readback use Sail Spark Connect. The fixture answer and Cypher summary are computed locally. These two descriptive datasets are separate from the retained customer row fixture; do not claim a single joined data model.</aside></section>
+<section class="slide "><h2>Marciana and semantic workflows</h2><p>QueryGraph composes semantic and cognition capabilities into agent workflows.</p><ul><li>Navigator packages descriptions for discovery and reuse</li><li>Specialists contribute domain summaries</li><li>A supervisor coordinates and a synthesis agent combines</li><li>TypeSec identities and lineage accompany the work</li></ul><p class="muted">Console steps 9–10 · Semantic bundle and specialist workflow</p><aside class="notes">Navigator creates Croissant, CDIF, identity, and usage layers. QGLake Resilience Desk is deterministic specialist orchestration, not fresh model inference or a scan of every named dataset. Each action consults the central ontology before its fixture workflow. For the concrete ontology-derived read, use MCP step 5.</aside></section>
+<section class="slide dark"><h2>Meaning travels with results</h2><table><tr><th>Surface</th><th>What an agent can reuse</th></tr><tr><td>Croissant</td><td>Record sets, fields, and bounded inline results</td></tr><tr><td>CDIF projection</td><td>Data elements linked to shared concepts</td></tr><tr><td>SKOS vocabulary</td><td>Labels, aliases, definitions, relationships</td></tr><tr><td>Lineage</td><td>The operations and inputs behind an answer</td></tr></table><p class="muted">One central ontology feeds the semantic projections.</p><aside class="notes">Discovery exports are metadata-only. Successful row exports supply loadable Croissant 1.1 inline data; reference loader acceptance is in the retained evidence. CDIF metadata is an implemented projection, not all CDIF profiles.</aside></section>
+<section class="slide "><h2>Run the whole-stack walkthrough</h2><pre>ssh -N -L 18081:127.0.0.1:18081 grust
 
-ssh -N -L 18081:127.0.0.1:18081 grust
-# Open http://localhost:18081</pre>
-  <p>Our Sail source checkout and stack compile using Rust 2024.</p>
-  <p>The console and services stay available for the presentation.</p>
-  <p class="muted">Source overrides remain explicit. This correctness run makes no performance claim.</p>
-  <aside class="notes">Source: demo/pinax/README.md and deploy.sh. The fresh-deployment runner builds the prepared sources, runs destructive fault scenarios in temporary fixtures, creates a separate retained fixture and installs systemd services. Retained catalog state is seeded on restart. Use run-live.sh to repeat an existing deployment without replacing data.</aside>
-</section>
-<section class="slide">
-  <h2>Evidence and published release</h2>
-  <table><tr><th>Verified</th><th>Scope</th></tr>
-  <tr><td>EC2 build</td><td>QueryGraph and prepared owner/engine</td></tr>
-  <tr><td>Live Sail</td><td>Graph load, node readback and lineage append</td></tr>
-  <tr><td>Governed reads</td><td>Actual rows through both MCP entry paths</td></tr>
-  <tr><td>Rejection</td><td>Policy, projection, drift and backend failure</td></tr>
-  <tr><td>Cutover</td><td>Real rows after revision-two activation</td></tr></table>
-  <p class="muted">Persistent demo services are running. Pinax 0.2.0 (<code>pinax-registry</code>) is published on crates.io.</p>
-  <aside class="notes">Source: docs/pinax-integration-goal.md and the retained evidence files. The systemd services survive process exits and boot; the fixture catalog itself is in memory. This is a prepared-source demo, not a production catalog deployment.</aside>
-</section>
-<section class="slide dark">
-  <h2>A central ontology agents actually consult</h2>
-  <p class="large">“Account number” → Customer identifier → <code>rows.id</code></p>
-  <ul><li>Pinax inventories every registered table and field</li><li>Stewards review concepts and field mappings separately</li><li>Signed discovery filters metadata through current policy</li><li>The agent builds its read from the resolved binding</li></ul>
-  <p class="muted">Versioned central publication · Croissant 1.1 result data · CDIF and SKOS</p>
-  <aside class="notes">Source: docs/central-ontology.md and ontology acceptance evidence. The synthetic central inventory has one table and three fields. Only id is visible to the demo agent. Discovery descriptions are metadata-only; successful governed reads provide loadable Croissant inline data. New imported mappings remain drafts. Source inventory does not claim coverage of unregistered remote tables.</aside>
-</section>
-<section class="slide">
-  <div class="book-copy"><h2>Pinax</h2>
-  <p class="large">The contract, the implementation and the operational workflow</p>
-  <p>firstpair.org</p><p>github.com/querygraph/pinax</p>
-  <p class="muted">Book, source examples and the <code>announcing-pinax</code> story</p></div>
-  <img class="cover" src="assets/pinax-cover.png" alt="Pinax book by Alexy Khrabrov, First Pair Press">
-  <aside class="notes">Cover source: Pinax cover/pinax-cover.png. Book routes: https://firstpair.org/pinax/pdf/, https://firstpair.org/pinax/epub/, https://firstpair.org/read/pinax/. The story slug is announcing-pinax.</aside>
-</section>
+# Open http://localhost:18081</pre><p>Results stay on the left. Steps scroll on the right.</p><p>Click any component to see its role and a related operation.</p><p class="muted">Ten main steps · optional access checks · inspectable JSON</p><aside class="notes">Allow 15–20 minutes. Run the numbered actions in order. The console runs one operation at a time and gives each 120 seconds. Repeated graph actions use isolated report directories. Services are boot-enabled. Rust 2024 and our Sail source checkout remain the build basis.</aside></section>
+<section class="slide "><div class="book-copy"><h2>Pinax</h2><p class="large">The agentic entrypoint to the QueryGraph stack</p><p>Shared table shapes<br>Shared business meaning<br>Discoverable operations</p><p class="muted">firstpair.org/books/pinax/<br>querygraph.ai/announcing-pinax/</p></div><img class="cover" src="assets/pinax-cover.png" alt="Pinax book by Alexy Khrabrov"><aside class="notes">Close by returning to the enterprise question: company-wide conventions make tables understandable; the central ontology makes them discoverable; the composed stack gives agents a way to operate on them. The book and announcement are published.</aside></section>
 <div id="help">← → slides · Home / End · P print</div>
 <script>
 const slides=[...document.querySelectorAll('.slide')];

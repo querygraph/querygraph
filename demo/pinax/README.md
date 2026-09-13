@@ -1,8 +1,6 @@
 # QueryGraph stack demo with Pinax
 
-This extension retains the semantic `dataverse-e2e` workflow used by
-`scripts/bootstrap-debian-demo.sh` and adds authenticated Pinax execution
-through LakeCat and Sail, including both Rust MCP and the Python CLI handoff.
+Introduce the whole QueryGraph stack: a lakehouse and schemas in Sail, a physical catalog in LakeCat, and enterprise table standards and a central ontology in Pinax. Agents with TypeSec access discover tables and operate through MCP, with Marciana workflows and Grust graph storage. The console follows ten main steps; access checks are optional.
 
 Sail is built from our selected source checkout. The demo and integration do
 not depend on upstream Sail review, merge or release. `build-ec2.sh` compiles
@@ -34,7 +32,7 @@ ssh -N -L 18081:127.0.0.1:18081 grust
 # Open http://localhost:18081
 ```
 
-The browser console runs nine live actions, serves the presentation, and links
+The browser console runs ten main actions and two optional access checks, serves the presentation, and links
 to the published book. It uses a signed Rust fixture client. The separate
 acceptance runner exercises both MCP entry paths and the mutation scenarios.
 No EC2 security-group change is needed for the SSH tunnel.
@@ -130,11 +128,12 @@ separate temporary data and never mutate this retained presentation fixture.
 Stop only these demo services when finished:
 
 ```bash
-sudo systemctl disable --now querygraph-pinax-{console,api,owner,sail}
+sudo systemctl disable --now querygraph-pinax-{console,mcp,api,owner,sail}
 ```
 
 ## Presentation and evidence
 
+- [`evidence/grust-whole-stack-console.json`](evidence/grust-whole-stack-console.json): all ten main actions, two optional checks, and component/layout regressions against the redesigned live console.
 - [`demo-narrative.md`](demo-narrative.md): complete presenter walkthrough, commands, and evidence.
 - [`slides.html`](slides.html): 14 editable slides with embedded speaker notes.
 - [`dist/querygraph-pinax-slides.pdf`](dist/querygraph-pinax-slides.pdf): exported deck.
@@ -144,9 +143,8 @@ sudo systemctl disable --now querygraph-pinax-{console,api,owner,sail}
 - [`evidence/grust-console.json`](evidence/grust-console.json): the original eight browser operations against EC2.
 - [Pinax book](https://firstpair.org/read/pinax/), [PDF](https://firstpair.org/pinax/pdf/), [EPUB](https://firstpair.org/pinax/epub/).
 
-The library story points to `https://querygraph.ai/announcing-pinax/`.
-The announcement is delivered as an iCloud textpack; the blog itself has not
-been published. Released dependency resolution remains a separate integration
+The published library story is `https://querygraph.ai/announcing-pinax/`.
+The announcement is also delivered as an iCloud textpack. Released dependency resolution remains a separate integration
 gate. This package records prepared-source correctness, not release acceptance
 or a performance benchmark.
 

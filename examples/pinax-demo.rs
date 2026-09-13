@@ -30,6 +30,9 @@ struct Demo {
 #[derive(Clone, Copy, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 enum Operation {
+    Lakehouse,
+    Standards,
+    Mcp,
     Ontology,
     Discover,
     Plan,
@@ -50,7 +53,12 @@ impl Operation {
             Self::Execute => Some("execute"),
             Self::DenyColumn => Some("deny-column"),
             Self::DenyPurpose => Some("deny-purpose"),
-            Self::Semantic | Self::Navigator | Self::Qglake => None,
+            Self::Lakehouse
+            | Self::Standards
+            | Self::Mcp
+            | Self::Semantic
+            | Self::Navigator
+            | Self::Qglake => None,
         }
     }
 
@@ -148,6 +156,38 @@ async fn bounded_output(reader: impl tokio::io::AsyncRead + Unpin) -> Result<Vec
 }
 
 async fn execute(demo: &Demo, operation: Operation) -> Result<Value> {
+    // The operator console shows only the public synthetic fixture's schema.
+    // A fresh signed plan verifies the catalog/registry agreement; seed metadata
+    // is labelled as such and is never substituted for live agent discovery.
+    if matches!(operation, Operation::Lakehouse) {
+        let plan = execute_operation(demo, Operation::Plan).await?;
+        let path = demo.root.join("run/pinax/seed.json");
+        let seed = tokio::task::spawn_blocking(move || -> Result<Value> {
+            use std::io::Read;
+            let mut bytes = Vec::new();
+            std::fs::File::open(path)?
+                .take(2 * 1024 * 1024 + 1)
+                .read_to_end(&mut bytes)?;
+            if bytes.len() > 2 * 1024 * 1024 {
+                bail!("Fixture metadata exceeded 2 MiB");
+            }
+            Ok(serde_json::from_slice(&bytes)?)
+        })
+        .await??;
+        let schemas = seed["metadata"]["schemas"]
+            .as_array()
+            .context("Fixture schemas")?;
+        let schema_id = &seed["metadata"]["current-schema-id"];
+        let schema = schemas
+            .iter()
+            .find(|schema| &schema["schema-id"] == schema_id)
+            .context("Current fixture schema")?;
+        return Ok(json!({"status":"passed", "result":{
+            "schema_source":"retained synthetic Iceberg seed; live catalog agreement checked by the signed plan",
+            "schema":schema, "catalog_plan":plan["result"],
+            "engine":"Sail", "catalog":"LakeCat", "registry":"Pinax"
+        }}));
+    }
     let consultation = if matches!(
         operation,
         Operation::Navigator | Operation::Qglake | Operation::Semantic
@@ -171,6 +211,25 @@ async fn execute_operation(demo: &Demo, operation: Operation) -> Result<Value> {
             .arg("--config")
             .arg(demo.root.join("run/pinax/registry-service.json"))
             .arg(argument);
+        command
+    } else if matches!(operation, Operation::Standards) {
+        let mut command = Command::new(target.join("querygraph"));
+        command.args([
+            "pinax",
+            "init",
+            "--enterprise",
+            "acme",
+            "--owner",
+            "platform",
+            "--steward",
+            "data",
+            "--policy",
+            "enterprise",
+        ]);
+        command
+    } else if matches!(operation, Operation::Mcp) {
+        let mut command = Command::new(target.join("examples/pinax-mcp-client"));
+        command.args(["--url", "http://127.0.0.1:18082/mcp"]);
         command
     } else if matches!(operation, Operation::Navigator) {
         let mut command = Command::new(target.join("querygraph"));
