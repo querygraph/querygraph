@@ -1,6 +1,6 @@
 {
   "date": "2026-09-13",
-  "description": "Part I catalog/lakehouse/Pinax/MCP discovery of customer terminology; graph workflows are an explicit Part II. Commits identify original prepared bases; the customer overlay receipt identifies changed files. SOURCE-SHA256SUMS identifies every delivered file.",
+  "description": "Part I catalog/lakehouse/Pinax/MCP discovery of customer terminology; graph workflows are an explicit Part II. Commits identify original prepared bases; the customer overlay receipt identifies changed files. SOURCE-SHA256SUMS identifies every delivered file. The table-formats overlay adds independent Iceberg and native Sail Delta read-only demo owners and per-request console/slide selection.",
   "repositories": [
     {
       "name": "querygraph",
@@ -28,6 +28,11 @@
       "repository": "querygraph",
       "commit": "af3e6fd047a643dc79dae1119cf311c291b8e7a7",
       "receipt": "src/querygraph/demo/pinax/evidence/customer-discovery-source.json"
+    },
+    {
+      "repository": "querygraph",
+      "commit": "169edd62b4f86cfe49577e92ecb9621d630b1cc7",
+      "receipt": "src/querygraph/demo/pinax/evidence/table-formats.json"
     }
   ]
 }
