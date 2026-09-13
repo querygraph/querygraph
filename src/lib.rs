@@ -7,8 +7,8 @@ pub mod croissant;
 pub mod cypher;
 pub mod dataverse;
 pub mod did;
-/// Compatibility path for the standalone Fihrist registry and adapters.
-pub use fihrist;
+/// Compatibility path for the standalone Pinax registry and adapters.
+pub use pinax;
 pub mod lakecat;
 pub mod lakehouse;
 pub mod lineage;
@@ -19,6 +19,7 @@ pub mod odrl;
 pub mod osi;
 pub mod qglake;
 pub mod rbac;
+pub mod registry_service;
 pub mod sail;
 pub mod server;
 pub mod stack;

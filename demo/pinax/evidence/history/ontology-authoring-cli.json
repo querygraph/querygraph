@@ -1,0 +1,13 @@
+{
+  "commands": [
+    "init",
+    "validate",
+    "publish",
+    "revise",
+    "inspect"
+  ],
+  "inventory_tables": 3,
+  "bindings": 15,
+  "revision": 2,
+  "stale_publication_rejected": true
+}

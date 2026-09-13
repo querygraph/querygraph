@@ -13,3 +13,5 @@ spark-warehouse/
 docs/outreach/
 docs/**/dist/
 docs/book/build/
+/demo/pinax/dist/*.tar.gz
+/demo/pinax/dist/*.tar.gz.sha256

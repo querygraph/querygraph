@@ -1,8 +1,9 @@
 """Real Ed25519 signing for QueryGraph TypeDID envelopes and lineage attestations.
 
-Mirrors the Rust port's TypeSec `Ed25519DidKey::from_seed` pattern: a 32-byte
-private key is derived deterministically from a seed via SHA-256, so agents
-recreated from the same seed sign identically across processes. Signatures are
+The legacy QueryGraph seed API derives a 32-byte private key via SHA-256, so
+agents recreated from the same seed sign identically across processes. TypeSec
+uses domain-separated derivation; equal seed bytes do not imply equal keys
+across those APIs. Signatures are
 prefixed `ed25519:`; when the optional `cryptography` dependency is missing,
 callers fall back to digests prefixed `unsigned:sha256:` that can never be
 mistaken for signatures.

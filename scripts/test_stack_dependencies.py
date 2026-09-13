@@ -1,4 +1,4 @@
-"""Exercise Fihrist's edges without depending on live sibling checkouts."""
+"""Exercise Pinax's edges without depending on live sibling checkouts."""
 import importlib.util
 import os
 from pathlib import Path
@@ -14,13 +14,13 @@ stack = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(stack)
 
 
-class FihristEdges(unittest.TestCase):
+class PinaxEdges(unittest.TestCase):
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)
         self.root = Path(self.directory.name)
         environment = {}
-        versions = {"typesec": "0.14.0", "lakecat": "0.4.0", "fihrist": "0.1.0"}
+        versions = {"typesec": "0.14.0", "lakecat": "0.4.0", "pinax": "0.1.0"}
         packages = {"typesec": "typesec-core", "lakecat": "lakecat-core"}
         for name in stack.ORDER:
             root = self.root / name
@@ -33,44 +33,44 @@ class FihristEdges(unittest.TestCase):
         self.environment = patch.dict(os.environ, environment)
         self.environment.start()
         self.addCleanup(self.environment.stop)
-        self.dependencies("fihrist", 'lakecat-core = "0.4.0"\ntypesec-core = "0.14.0"')
+        self.dependencies("pinax", 'lakecat-core = "0.4.0"\ntypesec-core = "0.14.0"')
 
     def dependencies(self, consumer, dependencies):
         with (self.root / consumer / "Cargo.toml").open("a") as manifest:
             manifest.write(f"\n[dependencies]\n{dependencies}\n")
 
-    def test_released_fihrist_edges_are_tracked_in_both_directions(self):
-        self.dependencies("querygraph", 'fihrist = "0.1.0"')
+    def test_released_pinax_edges_are_tracked_in_both_directions(self):
+        self.dependencies("querygraph", 'pinax = "0.1.0"')
         roots, versions, edges, problems, warnings = stack.collect()
         self.assertEqual(problems, [])
         self.assertEqual(warnings, [])
         self.assertEqual(
             {(edge[0], edge[3]) for edge in edges},
-            {("querygraph", "fihrist"), ("fihrist", "lakecat"), ("fihrist", "typesec")},
+            {("querygraph", "pinax"), ("pinax", "lakecat"), ("pinax", "typesec")},
         )
-        self.assertLess(stack.ORDER.index("lakecat"), stack.ORDER.index("fihrist"))
-        self.assertLess(stack.ORDER.index("fihrist"), stack.ORDER.index("querygraph"))
-        self.assertIn("| querygraph | `Cargo.toml` | `fihrist` | fihrist |", stack.render(roots, versions, edges))
+        self.assertLess(stack.ORDER.index("lakecat"), stack.ORDER.index("pinax"))
+        self.assertLess(stack.ORDER.index("pinax"), stack.ORDER.index("querygraph"))
+        self.assertIn("| querygraph | `Cargo.toml` | `pinax` | pinax |", stack.render(roots, versions, edges))
 
-    def test_unreleased_source_and_stale_fihrist_pin_block_release(self):
-        for requirement in ['"0.0.1"', '{ version = "0.1.0", path = "../fihrist" }']:
+    def test_unreleased_source_and_stale_pinax_pin_block_release(self):
+        for requirement in ['"0.0.1"', '{ version = "0.1.0", path = "../pinax" }']:
             with self.subTest(requirement=requirement):
                 manifest = self.root / "querygraph" / "Cargo.toml"
                 manifest.write_text(
                     '[package]\nname = "querygraph"\nversion = "0.1.0"\n'
-                    f'[dependencies]\nfihrist = {requirement}\n'
+                    f'[dependencies]\npinax = {requirement}\n'
                 )
                 *_, problems, warnings = stack.collect()
                 self.assertEqual(len(problems), 1)
-                self.assertIn("fihrist", problems[0])
+                self.assertIn("pinax", problems[0])
                 self.assertEqual(warnings, [])
 
-    def test_stale_typesec_pin_in_fihrist_blocks_release(self):
-        manifest = self.root / "fihrist" / "Cargo.toml"
+    def test_stale_typesec_pin_in_pinax_blocks_release(self):
+        manifest = self.root / "pinax" / "Cargo.toml"
         manifest.write_text(manifest.read_text().replace('"0.14.0"', '"0.13.0"'))
         *_, problems, warnings = stack.collect()
         self.assertEqual(len(problems), 1)
-        self.assertIn("fihrist/Cargo.toml: typesec-core", problems[0])
+        self.assertIn("pinax/Cargo.toml: typesec-core", problems[0])
         self.assertEqual(warnings, [])
 
 

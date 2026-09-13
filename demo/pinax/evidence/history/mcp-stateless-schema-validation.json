@@ -1,0 +1,26 @@
+{
+  "protocol": "2026-07-28",
+  "official_schema_sha256": "ef70b61f99b6d2e5e3b46863822eab08dff6a45bedc7a08914e0e5b133f40203",
+  "validated_live_responses": [
+    "discovery",
+    "tools",
+    "ontology",
+    "execution",
+    "purpose_denial",
+    "signature_rejection",
+    "direct/discover",
+    "direct/ontology",
+    "direct/execution",
+    "python_handoff/discover",
+    "python_handoff/ontology",
+    "python_handoff/execution"
+  ],
+  "validated_signed_requests": 2,
+  "errors": [],
+  "tool_output_contracts_validated": [
+    "ontology",
+    "execution",
+    "purpose_denial"
+  ],
+  "tool_input_contracts_validated": 2
+}

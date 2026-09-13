@@ -46,6 +46,21 @@ def test_navigator_cli_matches_rust_bundle_shape_and_content():
 
     rust["generatedAt"] = "<normalized>"
     python["generatedAt"] = "<normalized>"
+    # Rust emits the corrected context and stable field IDs; the legacy Python
+    # model retains its old wire shape. Assert the migration differences before
+    # comparing the unchanged dataset semantics and other bundle layers.
+    current = rust["layers"]["semanticCroissant"]
+    legacy = python["layers"]["semanticCroissant"]
+    assert current["@type"] == "sc:Dataset"
+    assert current["@context"]["sc"] == "https://schema.org/"
+    assert current["qg:metadataOnly"] is True
+    assert legacy["@type"] == "cr:Dataset"
+    current["@context"] = legacy["@context"]
+    current["@type"] = legacy["@type"]
+    del current["qg:metadataOnly"]
+    for record in current["recordSet"]:
+        for column in record["field"]:
+            assert column.pop("@id") == f"{record['@id']}/field/{column['name']}"
     assert python == rust
 
 

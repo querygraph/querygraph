@@ -31,10 +31,15 @@ struct Cli {
 #[derive(Debug, Subcommand)]
 #[allow(clippy::large_enum_variant)]
 enum Commands {
-    /// Validate, compare, and export Fihrist enterprise contracts.
-    Fihrist {
+    /// Validate, compare, and export Pinax enterprise contracts.
+    Pinax {
         #[command(subcommand)]
-        command: FihristCommands,
+        command: PinaxCommands,
+    },
+    /// Review or reconcile a whole-registry catalog deployment.
+    RegistryDeployment {
+        #[command(subcommand)]
+        command: querygraph::registry_service::deployment::cli::RegistryDeploymentCommands,
     },
     /// Build a four-layer semantic bundle: Croissant, CDIF, DID, and ODRL.
     Navigator {
@@ -176,17 +181,28 @@ enum Commands {
         #[arg(long, default_value = "http://localhost:8080")]
         base_url: String,
     },
-    /// Serve the governed semantic layer over the Model Context Protocol (stdio).
-    McpServe,
+    /// Serve MCP over stdio (dual-era) or stateless Streamable HTTP.
+    McpServe {
+        /// Host-owned Pinax registry, policy, and authenticated catalog configuration.
+        #[arg(long)]
+        registry_config: Option<PathBuf>,
+        /// Listen on this loopback address for MCP 2026-07-28 HTTP at /mcp.
+        #[arg(long)]
+        listen: Option<std::net::SocketAddr>,
+        /// Exact browser Origin permitted by the HTTP endpoint (repeatable).
+        #[arg(long, requires = "listen")]
+        allow_origin: Vec<String>,
+    },
 }
 
-use fihrist::cli::FihristCommands;
+use pinax::cli::PinaxCommands;
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Fihrist { command } => command.run()?,
+        Commands::Pinax { command } => command.run()?,
+        Commands::RegistryDeployment { command } => command.run()?,
         Commands::Navigator {
             dataset_name,
             description,
@@ -463,8 +479,21 @@ fn main() -> Result<()> {
                 serde_json::to_string_pretty(&querygraph::a2a::agent_card(&base_url))?
             );
         }
-        Commands::McpServe => {
-            querygraph::mcp::McpServer::new().run_stdio()?;
+        Commands::McpServe {
+            registry_config,
+            listen,
+            allow_origin,
+        } => {
+            let mut server = querygraph::mcp::McpServer::new();
+            if let Some(path) = registry_config {
+                let service = querygraph::registry_service::config::load_registry_service(&path)?;
+                server = server.with_registry_service(std::sync::Arc::new(service));
+            }
+            if let Some(address) = listen {
+                tokio::runtime::Runtime::new()?.block_on(server.run_http(address, allow_origin))?;
+            } else {
+                server.run_stdio()?;
+            }
         }
     }
 

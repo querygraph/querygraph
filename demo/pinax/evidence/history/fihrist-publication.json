@@ -1,0 +1,23 @@
+{
+  "crate": "fihrist",
+  "version": "0.1.1",
+  "registry": "crates-io",
+  "published": true,
+  "date": "2026-09-12",
+  "checksum": "88958f70ce619caea5492fdf6717290ab0a3247870bcb2f849a25bc76fb1af0c",
+  "authorization": "User: publish it",
+  "consumer": "querygraph",
+  "consumer_source_override": false,
+  "validation": {
+    "locked_check": true,
+    "locked_build": true,
+    "rust_unit_tests": 121,
+    "integration_tests": 5,
+    "console_tests": 3,
+    "python_tests": 82,
+    "strict_clippy": true,
+    "docs": true,
+    "doctests": true,
+    "stack_alignment": true
+  }
+}

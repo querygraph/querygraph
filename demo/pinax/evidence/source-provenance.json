@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-13",
+  "description": "Pinax rename; exact delivered sources are identified by SOURCE-SHA256SUMS",
+  "repositories": [
+    {
+      "name": "querygraph",
+      "commit": "97a363b5f2041ae9eae9585127fd1b9c9ece4a29",
+      "dirty": true
+    },
+    {
+      "name": "pinax",
+      "commit": "524e03c081083df377fe0e7afb9b1ad676e1e6f8",
+      "dirty": false
+    },
+    {
+      "name": "lakecat",
+      "commit": "4b6aab05af7d311d355d2c2c373212d815ff7f4f",
+      "dirty": false
+    },
+    {
+      "name": "sail",
+      "commit": "efab86db37948eb6285ca0473b25e03fbae53999",
+      "dirty": false
+    }
+  ]
+}

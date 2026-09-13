@@ -1,0 +1,17 @@
+{
+  "review_digest_enforced": true,
+  "real_sail_schema_update": true,
+  "all_registry_pins_updated": true,
+  "physical_metadata_readback": true,
+  "completed_updates_not_repeated": true,
+  "stale_owner_token_rejected": true,
+  "registry_drift_blocks_deployment": true,
+  "reviewed_consumer_stop_apply_restart": true,
+  "unready_or_stale_consumer_rejected": true,
+  "target_digest": "sha256:e927101f44f61b2b5f3c4d8732e1b93e3fa3aacb23f1db7cc9d8d631f85b9b1e",
+  "governed_row_execution": "not_tested",
+  "fixture_process_stopped": true,
+  "fixture_directory_removed": true,
+  "lakecat_commit": "4b6aab05af7d311d355d2c2c373212d815ff7f4f",
+  "querygraph_binary_sha256": "ef78f08abd1ad490b48e8f8d2df80035c52c7659c93bd2c31d36ec80316d5102"
+}

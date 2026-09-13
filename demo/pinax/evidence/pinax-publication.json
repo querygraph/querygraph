@@ -1,0 +1,26 @@
+{
+  "crate": "pinax-registry",
+  "version": "0.2.0",
+  "library": "pinax",
+  "binary": "pinax",
+  "registry": "crates-io",
+  "published": true,
+  "date": "2026-09-13",
+  "release_commit": "534f8a5fb83e506e09d1035b4c60a41d604a02bb",
+  "release_tag": "v0.2.0",
+  "consumer_source_override": false,
+  "validation": {
+    "owner_tests": 35,
+    "querygraph_unit_tests": 121,
+    "querygraph_integration_tests": 5,
+    "console_tests": 3,
+    "python_tests": 82,
+    "clippy": true,
+    "docs": true,
+    "local_registry": true,
+    "local_rows": true,
+    "grust_rows": true,
+    "live_browser_actions": 9
+  },
+  "checksum": "2d97b608ff4a2e396629eb958d7fe907a2679d8d74ee9d5c0369ffb599a9dfb1"
+}

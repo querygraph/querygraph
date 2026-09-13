@@ -1,0 +1,56 @@
+{
+  "kind": "prepared-source-demo",
+  "created_at": "2026-09-12T17:34:49.612Z",
+  "host": "grust",
+  "deployment_root": "/home/admin/querygraph-fihrist-demo-20260912",
+  "rust_edition": 2024,
+  "rustc": "1.98.1",
+  "profile": "dev; debug=0; incremental=false",
+  "sources": {
+    "querygraph": {
+      "base_commit": "97a363b5f2041ae9eae9585127fd1b9c9ece4a29",
+      "working_tree": "prepared changes included; use SOURCE-SHA256SUMS"
+    },
+    "fihrist": {
+      "base_commit": "41d50ad95038db938dba753d8e24a60b4d768a27",
+      "working_tree": "Prepared ontology changes included; use SOURCE-SHA256SUMS"
+    },
+    "lakecat": {
+      "base_commit": "1097fca186e88e8a17351c643d4fc5ee981b18f5",
+      "working_tree": "prepared changes included; use SOURCE-SHA256SUMS"
+    },
+    "sail": {
+      "base_commit": "12b127b34d772a546b601f146909df82d3e8a908",
+      "working_tree": "prepared changes included; use SOURCE-SHA256SUMS"
+    }
+  },
+  "dependencies": "Released Grust, TypeSec, Marciana and other transitive source versions/checksums are recorded in Cargo.lock. Fihrist and owner/engine integration use explicit temporary source overrides.",
+  "limitations": [
+    "Not release acceptance: Fihrist 0.1.1 and owner extensions are not published.",
+    "In-memory owner catalog resets on restart.",
+    "Semantic Cypher summary is computed in memory; graph storage/readback and lineage use live Sail.",
+    "Synthetic fixture data; deterministic answer without optional Ollama."
+  ],
+  "ontology_extension": {
+    "updated_at": "2026-09-12T19:42:23.339Z",
+    "scope": "Fihrist central ontology, governed discovery, Croissant/CDIF result exports and demo consultation",
+    "evidence": [
+      "grust-ontology-console.json",
+      "grust-ontology-execution.json",
+      "grust-ontology-mcp.json",
+      "croissant-ontology-validation.json"
+    ]
+  },
+  "mcp_stateless_extension": {
+    "date": "2026-09-12",
+    "protocol": "2026-07-28",
+    "service": "querygraph-fihrist-mcp",
+    "endpoint": "http://127.0.0.1:18082/mcp",
+    "spec_commit": "aa8ce049f089f92618340190d4ece141f663310d",
+    "evidence": [
+      "grust-mcp-stateless.json",
+      "grust-mcp-stateless-stdio.json",
+      "mcp-stateless-schema-validation.json"
+    ]
+  }
+}

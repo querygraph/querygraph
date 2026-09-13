@@ -1,0 +1,9 @@
+{
+  "validator": "mlcroissant",
+  "version": "1.1.0",
+  "croissant_version": "1.1",
+  "records_loaded": 1,
+  "id": 2,
+  "ontology_digest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+  "private_fields_absent": true
+}

@@ -1,0 +1,31 @@
+{
+  "enterprise": "acme",
+  "next_cursor": null,
+  "registry_digest": "sha256:16cda43f09e9897160249d154a5236bdf49c1282b5b9935b7c7cf4c3acb87379",
+  "tables": [
+    {
+      "columns": [
+        {
+          "classification": "internal",
+          "data_type": {
+            "kind": "int64"
+          },
+          "description": "id",
+          "id": 1,
+          "name": "id",
+          "nullability": "required",
+          "semantic": "row.id"
+        }
+      ],
+      "metadata": {
+        "description": "Customer identifiers",
+        "owner": "platform",
+        "retention_days": 30,
+        "steward": "data"
+      },
+      "name": "rows",
+      "profile": "custom",
+      "revision": 1
+    }
+  ]
+}

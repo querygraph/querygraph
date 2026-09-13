@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+- Harden MCP initialization, protocol negotiation, typed arguments, error
+  handling, and message/session limits; publish shared tool schemas and preserve
+  the singular semantic-search name as an alias.
+- Add a Python CLI handoff to the Rust MCP server with persistent session state
+  and direct-versus-handoff SDK conformance checks in CI.
+- Keep reading cancellation controls during governed I/O, bound in-flight work
+  to 16 requests with a 30-second deadline, and abort/join owned work at EOF.
+- Compose signed Pinax scan intents with deployment-owned TypeSec policy and
+  an authenticated LakeCat REST adapter through `plan_pinax_scan` and
+  `mcp-serve --registry-config`. Return planning evidence, reject catalog drift,
+  and expose separately signed `execute_pinax_scan` through the prepared
+  LakeCat owner extension. Validate returned scope and evidence, then recheck
+  catalog state and Pinax authorization before releasing bounded rows.
+- Add signed, purpose-bound `discover_pinax_tables` through Pinax's filtered
+  discovery API, including direct and bridged SDK tests for protected columns.
+- Add `registry-deployment plan` and read-only `reconcile` commands covering
+  every whole-registry pin, partial deployment, missing tables, and drift.
+  Add reviewed conditional catalog application with full preflight, owner state
+  tokens, stable field IDs, and reconciliation after uncertain writes. Consumer
+  startup can pin a reviewed activation digest and require every catalog table
+  to match before MCP initialization. A live stop/apply/restart fixture covers
+  premature activation, stale configurations, and later drift.
+  Mint fresh TypeSec credentials per HTTP request
+  so multi-request operations preserve the catalog gateway's replay protection.
+- Rename the registry integration to Pinax and consume the published
+  `pinax-registry` 0.2.0 crate. CLI, MCP tools, policy resources and ontology
+  namespaces use Pinax. Existing documents require explicit migration.
+
 ## 0.5.0 "Harrier" — 2026-09-04
 
 The alignment release. Harrier moves the whole stack onto one released

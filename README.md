@@ -15,14 +15,14 @@ OpenLineage, OSI, and cross-language fixture contracts. Python is an ergonomic
 client projection; it is not a second memory or policy authority. TypeSec's
 capability-gated `MemoryVault` remains the only protected-memory authority.
 
-[Fihrist](https://github.com/querygraph/fihrist) is the standalone Typesafe
+[Pinax](https://github.com/querygraph/pinax) is the standalone Typesafe
 Enterprise Lakehouse Registry:
 versioned HR, customer, transaction and custom table contracts, explicit column
 types, stewardship metadata, and TypeSec security bindings. Its Rust API checks
 compatibility, exports and submits LakeCat create requests, and authorizes
-schema-checked Sail scan planning. Start with `querygraph fihrist --help`;
-agents can check drafts through the `validate_fihrist` MCP tool. Both use the
-standalone Fihrist crate; see [integration touchpoints](docs/frqg.md).
+schema-checked Sail scan planning. Start with `querygraph pinax --help`;
+agents can check drafts through the `validate_pinax` MCP tool. Both use the
+standalone Pinax crate; see [integration touchpoints](docs/frqg.md).
 
 ## Quick start
 
@@ -51,7 +51,7 @@ maintained in [`QGQG.md`](QGQG.md). The architecture review remains in
 
 ## Stack boundaries
 
-QueryGraph consumes versioned TypeSec, Grust, Marciana, LakeCat, and Fihrist
+QueryGraph consumes versioned TypeSec, Grust, Marciana, LakeCat, and Pinax
 crates and an explicit Sail upstream revision. Those projects never depend on QueryGraph.
 Cognee and Fluree are comparative benchmark references only; neither is a
 runtime dependency.

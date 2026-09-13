@@ -13,7 +13,7 @@ stack quietly forks.
 ## The rule
 
 1. **Release order is the graph order.** `grust` → `typesec` → `marciana` →
-   `lakecat` → `fihrist` → `querygraph`. A release of any repository is followed
+   `lakecat` → `pinax` → `querygraph`. A release of any repository is followed
    by a release of every repository downstream of it in this order, each bumping
    its pins to the new line, before the release is considered complete.
 2. **Committed manifests use released versions only.** No `path` or `git`
@@ -29,7 +29,7 @@ stack quietly forks.
    ```
 
    The script reads each sibling checkout (`../grust`, `../typesec`,
-   `../marciana`, `../lakecat`, `../fihrist`, `.`; override with
+   `../marciana`, `../lakecat`, `../pinax`, `.`; override with
    `QG_STACK_<REPO>`), derives every cross-repository edge from the Cargo manifests, and compares each
    requirement with the sibling's current workspace version. Lag inside a
    `publish = false` crate is reported as a warning (it cannot break a
@@ -46,7 +46,7 @@ stack quietly forks.
 | typesec | 0.14.0 | Dorsoduro | `v0.14.0` | Tracks Grust 0.13 from crates.io only (sibling `path` deps removed). |
 | marciana | 0.13.1 | — | `v0.13.1` | Tracks Grust 0.13, TypeSec 0.14, LakeCat 0.4. |
 | lakecat | 0.4.0 | Caracal | `v0.4.0` | Tracks Grust 0.13, TypeSec 0.14, Turso 0.7.2; Sail from `querygraph/sail#lakecat`. |
-| fihrist | 0.1.0 | — | `v0.1.0` | Standalone registry; LakeCat 0.4.0 and TypeSec 0.14.0. |
+| pinax | 0.2.0 | — | `v0.2.0` | Published as `pinax-registry`; library and CLI `pinax`. LakeCat 0.4.0 and TypeSec 0.14.0. |
 | querygraph | 0.5.1 | Harrier Patch | `v0.5.1` | Released Fihrist 0.1.0 integration; other sibling pins and Sail pin `c5309365` unchanged. |
 
 Sail is consumed by LakeCat as a Cargo `git` dependency on the
@@ -65,8 +65,8 @@ The block below is generated; do not edit it by hand.
 | typesec | `0.14.0` | `3f12e622` | grust |
 | marciana | `0.13.1` | `94e0b517` | grust, lakecat, typesec |
 | lakecat | `0.4.0` | `27e18f39` | grust, typesec |
-| fihrist | `0.1.0` | `0444a9b6` | lakecat, typesec |
-| querygraph | `0.5.1` | `a1715301` | fihrist, grust, lakecat, marciana, typesec |
+| pinax | `0.2.0` | `524e03c0` | lakecat, typesec |
+| querygraph | `0.5.1` | `97a363b5` | grust, lakecat, marciana, pinax, typesec |
 
 | Consumer | Manifest | Crate | Owner | Required | Owner version | Status |
 |---|---|---|---|---|---|---|
@@ -92,14 +92,14 @@ The block below is generated; do not edit it by hand.
 | lakecat | `Cargo.toml` | `grust-graph` | grust | `0.13.0` | `0.13.0` | aligned |
 | lakecat | `Cargo.toml` | `grust-turso` | grust | `0.13.0` | `0.13.0` | aligned |
 | lakecat | `Cargo.toml` | `typesec` | typesec | `0.14.0` | `0.14.0` | aligned |
-| fihrist | `Cargo.toml` | `lakecat-core` | lakecat | `0.4.0` | `0.4.0` | aligned |
-| fihrist | `Cargo.toml` | `typesec-core` | typesec | `0.14.0` | `0.14.0` | aligned |
-| fihrist | `Cargo.toml` | `typesec-rbac` | typesec | `0.14.0` | `0.14.0` | aligned |
-| querygraph | `Cargo.toml` | `fihrist` | fihrist | `0.1.0` | `0.1.0` | aligned |
+| pinax | `Cargo.toml` | `lakecat-core` | lakecat | `0.4.0` | `0.4.0` | aligned |
+| pinax | `Cargo.toml` | `typesec-core` | typesec | `0.14.0` | `0.14.0` | aligned |
+| pinax | `Cargo.toml` | `typesec-rbac` | typesec | `0.14.0` | `0.14.0` | aligned |
 | querygraph | `Cargo.toml` | `grust-cypher` | grust | `0.13.0` | `0.13.0` | aligned |
 | querygraph | `Cargo.toml` | `grust-graph` | grust | `0.13.0` | `0.13.0` | aligned |
 | querygraph | `Cargo.toml` | `lakecat-core` | lakecat | `0.4.0` | `0.4.0` | aligned |
 | querygraph | `Cargo.toml` | `marciana-cognition` | marciana | `0.13.1` | `0.13.1` | aligned |
+| querygraph | `Cargo.toml` | `pinax-registry` | pinax | `0.2.0` | `0.2.0` | aligned |
 | querygraph | `Cargo.toml` | `qglake-bundle` | lakecat | `0.4.0` | `0.4.0` | aligned |
 | querygraph | `Cargo.toml` | `querygraph-memory` | marciana | `0.13.1` | `0.13.1` | aligned |
 | querygraph | `Cargo.toml` | `typesec-agent` | typesec | `0.14.0` | `0.14.0` | aligned |

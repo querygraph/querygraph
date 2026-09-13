@@ -29,6 +29,15 @@ jobs:
       - run: cargo fmt --check
       - run: cargo clippy --all-targets -- -D warnings
       - run: cargo test --all-targets
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+      - run: publishing/scripts/ensure-python-env.sh python
+      - run: uv sync --project python --extra test --extra mcp
+      - run: cargo build --locked --bin querygraph
+      - run: uv run --project python pytest python/tests/test_mcp_bridge.py -q
+        env:
+          QG_RUST_MCP_BIN: ${{ github.workspace }}/target/debug/querygraph
 
   python:
     runs-on: ubuntu-latest

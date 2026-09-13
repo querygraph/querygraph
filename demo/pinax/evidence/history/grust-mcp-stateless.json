@@ -1,0 +1,1531 @@
+{
+  "discovery": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+      "_meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "querygraph",
+          "version": "0.5.1"
+        }
+      },
+      "cacheScope": "public",
+      "capabilities": {
+        "tools": {}
+      },
+      "instructions": "Consult discover_fihrist_ontology with a purpose-bound signed intent for reviewed central ontology mappings, Croissant/CDIF and digest evidence. Discovery grants no read authority. Imported models return a model_handle; pass model_handles explicitly to search/answer. Handles expire after one hour and on process restart.",
+      "resultType": "complete",
+      "supportedVersions": [
+        "2026-07-28"
+      ],
+      "ttlMs": 0
+    }
+  },
+  "execution": {
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+      "_meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "querygraph",
+          "version": "0.5.1"
+        }
+      },
+      "content": [
+        {
+          "text": "{\"evidence\":{\"catalog_state\":\"sha256:cdcda17fec8b34f4f8b4c2557b49e2830b068c2bf8029c9662400eaa32ab69a6\",\"execution_authorization_digest\":\"sha256:de34ec69ef68a9006c9e1805f545a476f22bde35955cc7d4fa9f60d0bc11441d\",\"fresh_authorization_digest\":\"sha256:4fcfd26acf6a58706ad23f5bb320decc9ebe617225bcdcefd174b32e490dbe0e\",\"fresh_policy_decision_digest\":\"sha256:564c33586305014aef1894c95ca405d3e5c7d420924b1f64568fea4bf75cdd8a\",\"lineage\":{\"event_hash\":\"sha256:07568f109ffb2e72179539a59899ae3f9459e2f9097a177c84c6edb25a16a2ad\",\"open_lineage_hash\":\"sha256:aa53949fba88fd56b08e251c4e59b832b88aeb6bc0bea0005f7b988c2d7a275a\",\"sink\":\"lakecat-openlineage-hash\"},\"proof\":{\"authorizationReceiptDigest\":\"sha256:c6935d96d29e7a28dc93d870004918079b8f2349354d09147ec7ac307ae9bdb7\",\"catalogIdentity\":\"lakecat://warehouse\",\"effectiveProjection\":[\"id\"],\"grantId\":\"sha256:f9a401e92ed3605e268eaa92d14184fdbc19c4c3a809b1d2c4f668c86e47ab47\",\"identityContextDigest\":\"sha256:d1926efc8fdf7f450cd28e07eeb99d1629dfbdd6ec4bf9b1b51e43c635e1e212\",\"planTaskDigest\":\"sha256:a5223385ccbb4ad4e035d77ec1b7c57ed3e86ad30cadcb4041078b1c34b0d4e8\",\"policyDecisionDigest\":\"sha256:564c33586305014aef1894c95ca405d3e5c7d420924b1f64568fea4bf75cdd8a\",\"principalSubject\":\"did:key:z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3\",\"purpose\":\"analytics\",\"snapshotId\":2861732854189750127,\"table\":{\"name\":\"rows\",\"namespace\":[\"acme\"],\"warehouse\":\"warehouse\"},\"tableVersion\":0,\"version\":\"lakecat.governed-scan-proof.v2\"},\"revalidated_at\":\"2026-09-12T19:58:22.227312856Z\",\"row_digest\":\"sha256:1f92c9cf43d29e6d3ba3dfa1caab7ca803117f269375663311f1676526948df8\"},\"evidence_digest\":\"sha256:cade5d60e9ebee918ab582ff15d2be09caf4a953172b516185764179cfdb4346\",\"rows\":[{\"id\":2}],\"semantic_exports\":{\"datasets\":[{\"cdif\":{\"@context\":{\"@language\":\"en\",\"@vocab\":\"https://schema.org/\",\"arrayShape\":\"cr:arrayShape\",\"cdif\":\"https://cdif.codata.org/\",\"citeAs\":\"cr:citeAs\",\"column\":\"cr:column\",\"conformsTo\":\"dct:conformsTo\",\"containedIn\":\"cr:containedIn\",\"cr\":\"http://mlcommons.org/croissant/\",\"data\":{\"@id\":\"cr:data\",\"@type\":\"@json\"},\"dataType\":{\"@id\":\"cr:dataType\",\"@type\":\"@vocab\"},\"dcat\":\"http://www.w3.org/ns/dcat#\",\"dct\":\"http://purl.org/dc/terms/\",\"description\":{\"@container\":\"@language\"},\"equivalentProperty\":\"cr:equivalentProperty\",\"examples\":{\"@id\":\"cr:examples\",\"@type\":\"@json\"},\"extract\":\"cr:extract\",\"field\":\"cr:field\",\"fileObject\":\"cr:fileObject\",\"fileProperty\":\"cr:fileProperty\",\"fileSet\":\"cr:fileSet\",\"format\":\"cr:format\",\"includes\":\"cr:includes\",\"isArray\":\"cr:isArray\",\"isLiveDataset\":\"cr:isLiveDataset\",\"jsonPath\":\"cr:jsonPath\",\"key\":\"cr:key\",\"md5\":\"cr:md5\",\"name\":{\"@container\":\"@language\"},\"odrl\":\"http://www.w3.org/ns/odrl/2/\",\"parentField\":\"cr:parentField\",\"path\":\"cr:path\",\"qg\":\"https://querygraph.ai/ns#\",\"rai\":\"http://mlcommons.org/croissant/RAI/\",\"recordSet\":\"cr:recordSet\",\"references\":\"cr:references\",\"regex\":\"cr:regex\",\"repeated\":\"cr:repeated\",\"replace\":\"cr:replace\",\"samplingRate\":\"cr:samplingRate\",\"sc\":\"https://schema.org/\",\"separator\":\"cr:separator\",\"skos\":\"http://www.w3.org/2004/02/skos/core#\",\"source\":\"cr:source\",\"subField\":\"cr:subField\",\"transform\":\"cr:transform\"},\"@id\":\"urn:fihrist:table:acme:rows\",\"@type\":\"dcat:Dataset\",\"cdif:dataElement\":[{\"@id\":\"urn:fihrist:table:acme:rows:field:1\",\"@type\":\"cdif:DataElement\",\"cdif:dataType\":\"sc:Integer\",\"cdif:recordSet\":{\"@id\":\"urn:fihrist:table:acme:rows:records\"},\"cdif:semanticType\":{\"@id\":\"urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba\"},\"dct:description\":\"id\",\"dct:title\":\"id\"}],\"dct:description\":\"Customer identifiers\",\"dct:title\":\"rows\",\"qg:ontologyDigest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"qg:registryDigest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\"},\"croissant\":{\"@context\":{\"@language\":\"en\",\"@vocab\":\"https://schema.org/\",\"arrayShape\":\"cr:arrayShape\",\"cdif\":\"https://cdif.codata.org/\",\"citeAs\":\"cr:citeAs\",\"column\":\"cr:column\",\"conformsTo\":\"dct:conformsTo\",\"containedIn\":\"cr:containedIn\",\"cr\":\"http://mlcommons.org/croissant/\",\"data\":{\"@id\":\"cr:data\",\"@type\":\"@json\"},\"dataType\":{\"@id\":\"cr:dataType\",\"@type\":\"@vocab\"},\"dcat\":\"http://www.w3.org/ns/dcat#\",\"dct\":\"http://purl.org/dc/terms/\",\"description\":{\"@container\":\"@language\"},\"equivalentProperty\":\"cr:equivalentProperty\",\"examples\":{\"@id\":\"cr:examples\",\"@type\":\"@json\"},\"extract\":\"cr:extract\",\"field\":\"cr:field\",\"fileObject\":\"cr:fileObject\",\"fileProperty\":\"cr:fileProperty\",\"fileSet\":\"cr:fileSet\",\"format\":\"cr:format\",\"includes\":\"cr:includes\",\"isArray\":\"cr:isArray\",\"isLiveDataset\":\"cr:isLiveDataset\",\"jsonPath\":\"cr:jsonPath\",\"key\":\"cr:key\",\"md5\":\"cr:md5\",\"name\":{\"@container\":\"@language\"},\"odrl\":\"http://www.w3.org/ns/odrl/2/\",\"parentField\":\"cr:parentField\",\"path\":\"cr:path\",\"qg\":\"https://querygraph.ai/ns#\",\"rai\":\"http://mlcommons.org/croissant/RAI/\",\"recordSet\":\"cr:recordSet\",\"references\":\"cr:references\",\"regex\":\"cr:regex\",\"repeated\":\"cr:repeated\",\"replace\":\"cr:replace\",\"samplingRate\":\"cr:samplingRate\",\"sc\":\"https://schema.org/\",\"separator\":\"cr:separator\",\"skos\":\"http://www.w3.org/2004/02/skos/core#\",\"source\":\"cr:source\",\"subField\":\"cr:subField\",\"transform\":\"cr:transform\"},\"@id\":\"urn:fihrist:table:acme:rows\",\"@type\":\"sc:Dataset\",\"about\":{\"@id\":\"urn:fihrist:concept:051930a2daa0fe887d6481bd5d2dcb16c4261e589e5b18b0b27cf6d7f55449ba\"},\"dct:conformsTo\":\"http://mlcommons.org/croissant/1.1\",\"description\":\"Customer identifiers\",\"license\":\"Access requires the deployment's Fihrist and TypeSec policy approval.\",\"name\":\"rows\",\"qg:ontologyDigest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"qg:registryDigest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\",\"qg:tableRevision\":1,\"recordSet\":[{\"@id\":\"urn:fihrist:table:acme:rows:records\",\"@type\":\"cr:RecordSet\",\"data\":[{\"urn:fihrist:table:acme:rows:field:1\":2}],\"description\":\"Customer identifiers\",\"field\":[{\"@id\":\"urn:fihrist:table:acme:rows:field:1\",\"@type\":\"cr:Field\",\"dataType\":\"sc:Integer\",\"description\":\"id\",\"name\":\"id\",\"qg:concept\":{\"@id\":\"urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba\"},\"qg:fieldId\":1,\"qg:nullability\":\"required\",\"qg:physicalType\":{\"kind\":\"int64\"}}],\"name\":\"rows\"}],\"version\":\"contract-1\"}}],\"ontology_digest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"registry_digest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\",\"vocabulary\":{\"@context\":{\"@language\":\"en\",\"@vocab\":\"https://schema.org/\",\"arrayShape\":\"cr:arrayShape\",\"cdif\":\"https://cdif.codata.org/\",\"citeAs\":\"cr:citeAs\",\"column\":\"cr:column\",\"conformsTo\":\"dct:conformsTo\",\"containedIn\":\"cr:containedIn\",\"cr\":\"http://mlcommons.org/croissant/\",\"data\":{\"@id\":\"cr:data\",\"@type\":\"@json\"},\"dataType\":{\"@id\":\"cr:dataType\",\"@type\":\"@vocab\"},\"dcat\":\"http://www.w3.org/ns/dcat#\",\"dct\":\"http://purl.org/dc/terms/\",\"description\":{\"@container\":\"@language\"},\"equivalentProperty\":\"cr:equivalentProperty\",\"examples\":{\"@id\":\"cr:examples\",\"@type\":\"@json\"},\"extract\":\"cr:extract\",\"field\":\"cr:field\",\"fileObject\":\"cr:fileObject\",\"fileProperty\":\"cr:fileProperty\",\"fileSet\":\"cr:fileSet\",\"format\":\"cr:format\",\"includes\":\"cr:includes\",\"isArray\":\"cr:isArray\",\"isLiveDataset\":\"cr:isLiveDataset\",\"jsonPath\":\"cr:jsonPath\",\"key\":\"cr:key\",\"md5\":\"cr:md5\",\"name\":{\"@container\":\"@language\"},\"odrl\":\"http://www.w3.org/ns/odrl/2/\",\"parentField\":\"cr:parentField\",\"path\":\"cr:path\",\"qg\":\"https://querygraph.ai/ns#\",\"rai\":\"http://mlcommons.org/croissant/RAI/\",\"recordSet\":\"cr:recordSet\",\"references\":\"cr:references\",\"regex\":\"cr:regex\",\"repeated\":\"cr:repeated\",\"replace\":\"cr:replace\",\"samplingRate\":\"cr:samplingRate\",\"sc\":\"https://schema.org/\",\"separator\":\"cr:separator\",\"skos\":\"http://www.w3.org/2004/02/skos/core#\",\"source\":\"cr:source\",\"subField\":\"cr:subField\",\"transform\":\"cr:transform\"},\"@graph\":[{\"@id\":\"urn:fihrist:concept:051930a2daa0fe887d6481bd5d2dcb16c4261e589e5b18b0b27cf6d7f55449ba\",\"@type\":\"skos:Concept\",\"dct:source\":[\"fihrist:acme/rows\"],\"qg:steward\":\"data\",\"skos:altLabel\":[\"customer table\"],\"skos:broader\":[],\"skos:definition\":\"Synthetic tenant-scoped customer records for the governed execution demonstration.\",\"skos:prefLabel\":\"Customer records\",\"skos:related\":[]},{\"@id\":\"urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba\",\"@type\":\"skos:Concept\",\"dct:source\":[\"fihrist:acme/rows\"],\"qg:steward\":\"data\",\"skos:altLabel\":[\"account number\",\"customer id\"],\"skos:broader\":[],\"skos:definition\":\"Stable identifier of a synthetic customer record; not a tenant identifier.\",\"skos:prefLabel\":\"Customer identifier\",\"skos:related\":[]}]}},\"summary\":{\"columns\":[\"id\"],\"enterprise\":\"acme\",\"limit\":10,\"planned_by\":\"sail-rest-models\",\"purpose\":\"analytics\",\"registry_digest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\",\"revision\":1,\"snapshot_id\":2861732854189750127,\"table\":\"rows\"}}",
+          "type": "text"
+        }
+      ],
+      "isError": false,
+      "resultType": "complete",
+      "structuredContent": {
+        "evidence": {
+          "catalog_state": "sha256:cdcda17fec8b34f4f8b4c2557b49e2830b068c2bf8029c9662400eaa32ab69a6",
+          "execution_authorization_digest": "sha256:de34ec69ef68a9006c9e1805f545a476f22bde35955cc7d4fa9f60d0bc11441d",
+          "fresh_authorization_digest": "sha256:4fcfd26acf6a58706ad23f5bb320decc9ebe617225bcdcefd174b32e490dbe0e",
+          "fresh_policy_decision_digest": "sha256:564c33586305014aef1894c95ca405d3e5c7d420924b1f64568fea4bf75cdd8a",
+          "lineage": {
+            "event_hash": "sha256:07568f109ffb2e72179539a59899ae3f9459e2f9097a177c84c6edb25a16a2ad",
+            "open_lineage_hash": "sha256:aa53949fba88fd56b08e251c4e59b832b88aeb6bc0bea0005f7b988c2d7a275a",
+            "sink": "lakecat-openlineage-hash"
+          },
+          "proof": {
+            "authorizationReceiptDigest": "sha256:c6935d96d29e7a28dc93d870004918079b8f2349354d09147ec7ac307ae9bdb7",
+            "catalogIdentity": "lakecat://warehouse",
+            "effectiveProjection": [
+              "id"
+            ],
+            "grantId": "sha256:f9a401e92ed3605e268eaa92d14184fdbc19c4c3a809b1d2c4f668c86e47ab47",
+            "identityContextDigest": "sha256:d1926efc8fdf7f450cd28e07eeb99d1629dfbdd6ec4bf9b1b51e43c635e1e212",
+            "planTaskDigest": "sha256:a5223385ccbb4ad4e035d77ec1b7c57ed3e86ad30cadcb4041078b1c34b0d4e8",
+            "policyDecisionDigest": "sha256:564c33586305014aef1894c95ca405d3e5c7d420924b1f64568fea4bf75cdd8a",
+            "principalSubject": "did:key:z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3",
+            "purpose": "analytics",
+            "snapshotId": 2861732854189750127,
+            "table": {
+              "name": "rows",
+              "namespace": [
+                "acme"
+              ],
+              "warehouse": "warehouse"
+            },
+            "tableVersion": 0,
+            "version": "lakecat.governed-scan-proof.v2"
+          },
+          "revalidated_at": "2026-09-12T19:58:22.227312856Z",
+          "row_digest": "sha256:1f92c9cf43d29e6d3ba3dfa1caab7ca803117f269375663311f1676526948df8"
+        },
+        "evidence_digest": "sha256:cade5d60e9ebee918ab582ff15d2be09caf4a953172b516185764179cfdb4346",
+        "rows": [
+          {
+            "id": 2
+          }
+        ],
+        "semantic_exports": {
+          "datasets": [
+            {
+              "cdif": {
+                "@context": {
+                  "@language": "en",
+                  "@vocab": "https://schema.org/",
+                  "arrayShape": "cr:arrayShape",
+                  "cdif": "https://cdif.codata.org/",
+                  "citeAs": "cr:citeAs",
+                  "column": "cr:column",
+                  "conformsTo": "dct:conformsTo",
+                  "containedIn": "cr:containedIn",
+                  "cr": "http://mlcommons.org/croissant/",
+                  "data": {
+                    "@id": "cr:data",
+                    "@type": "@json"
+                  },
+                  "dataType": {
+                    "@id": "cr:dataType",
+                    "@type": "@vocab"
+                  },
+                  "dcat": "http://www.w3.org/ns/dcat#",
+                  "dct": "http://purl.org/dc/terms/",
+                  "description": {
+                    "@container": "@language"
+                  },
+                  "equivalentProperty": "cr:equivalentProperty",
+                  "examples": {
+                    "@id": "cr:examples",
+                    "@type": "@json"
+                  },
+                  "extract": "cr:extract",
+                  "field": "cr:field",
+                  "fileObject": "cr:fileObject",
+                  "fileProperty": "cr:fileProperty",
+                  "fileSet": "cr:fileSet",
+                  "format": "cr:format",
+                  "includes": "cr:includes",
+                  "isArray": "cr:isArray",
+                  "isLiveDataset": "cr:isLiveDataset",
+                  "jsonPath": "cr:jsonPath",
+                  "key": "cr:key",
+                  "md5": "cr:md5",
+                  "name": {
+                    "@container": "@language"
+                  },
+                  "odrl": "http://www.w3.org/ns/odrl/2/",
+                  "parentField": "cr:parentField",
+                  "path": "cr:path",
+                  "qg": "https://querygraph.ai/ns#",
+                  "rai": "http://mlcommons.org/croissant/RAI/",
+                  "recordSet": "cr:recordSet",
+                  "references": "cr:references",
+                  "regex": "cr:regex",
+                  "repeated": "cr:repeated",
+                  "replace": "cr:replace",
+                  "samplingRate": "cr:samplingRate",
+                  "sc": "https://schema.org/",
+                  "separator": "cr:separator",
+                  "skos": "http://www.w3.org/2004/02/skos/core#",
+                  "source": "cr:source",
+                  "subField": "cr:subField",
+                  "transform": "cr:transform"
+                },
+                "@id": "urn:fihrist:table:acme:rows",
+                "@type": "dcat:Dataset",
+                "cdif:dataElement": [
+                  {
+                    "@id": "urn:fihrist:table:acme:rows:field:1",
+                    "@type": "cdif:DataElement",
+                    "cdif:dataType": "sc:Integer",
+                    "cdif:recordSet": {
+                      "@id": "urn:fihrist:table:acme:rows:records"
+                    },
+                    "cdif:semanticType": {
+                      "@id": "urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba"
+                    },
+                    "dct:description": "id",
+                    "dct:title": "id"
+                  }
+                ],
+                "dct:description": "Customer identifiers",
+                "dct:title": "rows",
+                "qg:ontologyDigest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+                "qg:registryDigest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d"
+              },
+              "croissant": {
+                "@context": {
+                  "@language": "en",
+                  "@vocab": "https://schema.org/",
+                  "arrayShape": "cr:arrayShape",
+                  "cdif": "https://cdif.codata.org/",
+                  "citeAs": "cr:citeAs",
+                  "column": "cr:column",
+                  "conformsTo": "dct:conformsTo",
+                  "containedIn": "cr:containedIn",
+                  "cr": "http://mlcommons.org/croissant/",
+                  "data": {
+                    "@id": "cr:data",
+                    "@type": "@json"
+                  },
+                  "dataType": {
+                    "@id": "cr:dataType",
+                    "@type": "@vocab"
+                  },
+                  "dcat": "http://www.w3.org/ns/dcat#",
+                  "dct": "http://purl.org/dc/terms/",
+                  "description": {
+                    "@container": "@language"
+                  },
+                  "equivalentProperty": "cr:equivalentProperty",
+                  "examples": {
+                    "@id": "cr:examples",
+                    "@type": "@json"
+                  },
+                  "extract": "cr:extract",
+                  "field": "cr:field",
+                  "fileObject": "cr:fileObject",
+                  "fileProperty": "cr:fileProperty",
+                  "fileSet": "cr:fileSet",
+                  "format": "cr:format",
+                  "includes": "cr:includes",
+                  "isArray": "cr:isArray",
+                  "isLiveDataset": "cr:isLiveDataset",
+                  "jsonPath": "cr:jsonPath",
+                  "key": "cr:key",
+                  "md5": "cr:md5",
+                  "name": {
+                    "@container": "@language"
+                  },
+                  "odrl": "http://www.w3.org/ns/odrl/2/",
+                  "parentField": "cr:parentField",
+                  "path": "cr:path",
+                  "qg": "https://querygraph.ai/ns#",
+                  "rai": "http://mlcommons.org/croissant/RAI/",
+                  "recordSet": "cr:recordSet",
+                  "references": "cr:references",
+                  "regex": "cr:regex",
+                  "repeated": "cr:repeated",
+                  "replace": "cr:replace",
+                  "samplingRate": "cr:samplingRate",
+                  "sc": "https://schema.org/",
+                  "separator": "cr:separator",
+                  "skos": "http://www.w3.org/2004/02/skos/core#",
+                  "source": "cr:source",
+                  "subField": "cr:subField",
+                  "transform": "cr:transform"
+                },
+                "@id": "urn:fihrist:table:acme:rows",
+                "@type": "sc:Dataset",
+                "about": {
+                  "@id": "urn:fihrist:concept:051930a2daa0fe887d6481bd5d2dcb16c4261e589e5b18b0b27cf6d7f55449ba"
+                },
+                "dct:conformsTo": "http://mlcommons.org/croissant/1.1",
+                "description": "Customer identifiers",
+                "license": "Access requires the deployment's Fihrist and TypeSec policy approval.",
+                "name": "rows",
+                "qg:ontologyDigest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+                "qg:registryDigest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+                "qg:tableRevision": 1,
+                "recordSet": [
+                  {
+                    "@id": "urn:fihrist:table:acme:rows:records",
+                    "@type": "cr:RecordSet",
+                    "data": [
+                      {
+                        "urn:fihrist:table:acme:rows:field:1": 2
+                      }
+                    ],
+                    "description": "Customer identifiers",
+                    "field": [
+                      {
+                        "@id": "urn:fihrist:table:acme:rows:field:1",
+                        "@type": "cr:Field",
+                        "dataType": "sc:Integer",
+                        "description": "id",
+                        "name": "id",
+                        "qg:concept": {
+                          "@id": "urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba"
+                        },
+                        "qg:fieldId": 1,
+                        "qg:nullability": "required",
+                        "qg:physicalType": {
+                          "kind": "int64"
+                        }
+                      }
+                    ],
+                    "name": "rows"
+                  }
+                ],
+                "version": "contract-1"
+              }
+            }
+          ],
+          "ontology_digest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+          "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+          "vocabulary": {
+            "@context": {
+              "@language": "en",
+              "@vocab": "https://schema.org/",
+              "arrayShape": "cr:arrayShape",
+              "cdif": "https://cdif.codata.org/",
+              "citeAs": "cr:citeAs",
+              "column": "cr:column",
+              "conformsTo": "dct:conformsTo",
+              "containedIn": "cr:containedIn",
+              "cr": "http://mlcommons.org/croissant/",
+              "data": {
+                "@id": "cr:data",
+                "@type": "@json"
+              },
+              "dataType": {
+                "@id": "cr:dataType",
+                "@type": "@vocab"
+              },
+              "dcat": "http://www.w3.org/ns/dcat#",
+              "dct": "http://purl.org/dc/terms/",
+              "description": {
+                "@container": "@language"
+              },
+              "equivalentProperty": "cr:equivalentProperty",
+              "examples": {
+                "@id": "cr:examples",
+                "@type": "@json"
+              },
+              "extract": "cr:extract",
+              "field": "cr:field",
+              "fileObject": "cr:fileObject",
+              "fileProperty": "cr:fileProperty",
+              "fileSet": "cr:fileSet",
+              "format": "cr:format",
+              "includes": "cr:includes",
+              "isArray": "cr:isArray",
+              "isLiveDataset": "cr:isLiveDataset",
+              "jsonPath": "cr:jsonPath",
+              "key": "cr:key",
+              "md5": "cr:md5",
+              "name": {
+                "@container": "@language"
+              },
+              "odrl": "http://www.w3.org/ns/odrl/2/",
+              "parentField": "cr:parentField",
+              "path": "cr:path",
+              "qg": "https://querygraph.ai/ns#",
+              "rai": "http://mlcommons.org/croissant/RAI/",
+              "recordSet": "cr:recordSet",
+              "references": "cr:references",
+              "regex": "cr:regex",
+              "repeated": "cr:repeated",
+              "replace": "cr:replace",
+              "samplingRate": "cr:samplingRate",
+              "sc": "https://schema.org/",
+              "separator": "cr:separator",
+              "skos": "http://www.w3.org/2004/02/skos/core#",
+              "source": "cr:source",
+              "subField": "cr:subField",
+              "transform": "cr:transform"
+            },
+            "@graph": [
+              {
+                "@id": "urn:fihrist:concept:051930a2daa0fe887d6481bd5d2dcb16c4261e589e5b18b0b27cf6d7f55449ba",
+                "@type": "skos:Concept",
+                "dct:source": [
+                  "fihrist:acme/rows"
+                ],
+                "qg:steward": "data",
+                "skos:altLabel": [
+                  "customer table"
+                ],
+                "skos:broader": [],
+                "skos:definition": "Synthetic tenant-scoped customer records for the governed execution demonstration.",
+                "skos:prefLabel": "Customer records",
+                "skos:related": []
+              },
+              {
+                "@id": "urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba",
+                "@type": "skos:Concept",
+                "dct:source": [
+                  "fihrist:acme/rows"
+                ],
+                "qg:steward": "data",
+                "skos:altLabel": [
+                  "account number",
+                  "customer id"
+                ],
+                "skos:broader": [],
+                "skos:definition": "Stable identifier of a synthetic customer record; not a tenant identifier.",
+                "skos:prefLabel": "Customer identifier",
+                "skos:related": []
+              }
+            ]
+          }
+        },
+        "summary": {
+          "columns": [
+            "id"
+          ],
+          "enterprise": "acme",
+          "limit": 10,
+          "planned_by": "sail-rest-models",
+          "purpose": "analytics",
+          "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+          "revision": 1,
+          "snapshot_id": 2861732854189750127,
+          "table": "rows"
+        }
+      }
+    }
+  },
+  "ontology": {
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": {
+      "_meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "querygraph",
+          "version": "0.5.1"
+        }
+      },
+      "content": [
+        {
+          "text": "{\"exports\":{\"datasets\":[{\"cdif\":{\"@context\":{\"@language\":\"en\",\"@vocab\":\"https://schema.org/\",\"arrayShape\":\"cr:arrayShape\",\"cdif\":\"https://cdif.codata.org/\",\"citeAs\":\"cr:citeAs\",\"column\":\"cr:column\",\"conformsTo\":\"dct:conformsTo\",\"containedIn\":\"cr:containedIn\",\"cr\":\"http://mlcommons.org/croissant/\",\"data\":{\"@id\":\"cr:data\",\"@type\":\"@json\"},\"dataType\":{\"@id\":\"cr:dataType\",\"@type\":\"@vocab\"},\"dcat\":\"http://www.w3.org/ns/dcat#\",\"dct\":\"http://purl.org/dc/terms/\",\"description\":{\"@container\":\"@language\"},\"equivalentProperty\":\"cr:equivalentProperty\",\"examples\":{\"@id\":\"cr:examples\",\"@type\":\"@json\"},\"extract\":\"cr:extract\",\"field\":\"cr:field\",\"fileObject\":\"cr:fileObject\",\"fileProperty\":\"cr:fileProperty\",\"fileSet\":\"cr:fileSet\",\"format\":\"cr:format\",\"includes\":\"cr:includes\",\"isArray\":\"cr:isArray\",\"isLiveDataset\":\"cr:isLiveDataset\",\"jsonPath\":\"cr:jsonPath\",\"key\":\"cr:key\",\"md5\":\"cr:md5\",\"name\":{\"@container\":\"@language\"},\"odrl\":\"http://www.w3.org/ns/odrl/2/\",\"parentField\":\"cr:parentField\",\"path\":\"cr:path\",\"qg\":\"https://querygraph.ai/ns#\",\"rai\":\"http://mlcommons.org/croissant/RAI/\",\"recordSet\":\"cr:recordSet\",\"references\":\"cr:references\",\"regex\":\"cr:regex\",\"repeated\":\"cr:repeated\",\"replace\":\"cr:replace\",\"samplingRate\":\"cr:samplingRate\",\"sc\":\"https://schema.org/\",\"separator\":\"cr:separator\",\"skos\":\"http://www.w3.org/2004/02/skos/core#\",\"source\":\"cr:source\",\"subField\":\"cr:subField\",\"transform\":\"cr:transform\"},\"@id\":\"urn:fihrist:table:acme:rows\",\"@type\":\"dcat:Dataset\",\"cdif:dataElement\":[{\"@id\":\"urn:fihrist:table:acme:rows:field:1\",\"@type\":\"cdif:DataElement\",\"cdif:dataType\":\"sc:Integer\",\"cdif:recordSet\":{\"@id\":\"urn:fihrist:table:acme:rows:records\"},\"cdif:semanticType\":{\"@id\":\"urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba\"},\"dct:description\":\"id\",\"dct:title\":\"id\"}],\"dct:description\":\"Customer identifiers\",\"dct:title\":\"rows\",\"qg:ontologyDigest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"qg:registryDigest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\"},\"croissant\":{\"@context\":{\"@language\":\"en\",\"@vocab\":\"https://schema.org/\",\"arrayShape\":\"cr:arrayShape\",\"cdif\":\"https://cdif.codata.org/\",\"citeAs\":\"cr:citeAs\",\"column\":\"cr:column\",\"conformsTo\":\"dct:conformsTo\",\"containedIn\":\"cr:containedIn\",\"cr\":\"http://mlcommons.org/croissant/\",\"data\":{\"@id\":\"cr:data\",\"@type\":\"@json\"},\"dataType\":{\"@id\":\"cr:dataType\",\"@type\":\"@vocab\"},\"dcat\":\"http://www.w3.org/ns/dcat#\",\"dct\":\"http://purl.org/dc/terms/\",\"description\":{\"@container\":\"@language\"},\"equivalentProperty\":\"cr:equivalentProperty\",\"examples\":{\"@id\":\"cr:examples\",\"@type\":\"@json\"},\"extract\":\"cr:extract\",\"field\":\"cr:field\",\"fileObject\":\"cr:fileObject\",\"fileProperty\":\"cr:fileProperty\",\"fileSet\":\"cr:fileSet\",\"format\":\"cr:format\",\"includes\":\"cr:includes\",\"isArray\":\"cr:isArray\",\"isLiveDataset\":\"cr:isLiveDataset\",\"jsonPath\":\"cr:jsonPath\",\"key\":\"cr:key\",\"md5\":\"cr:md5\",\"name\":{\"@container\":\"@language\"},\"odrl\":\"http://www.w3.org/ns/odrl/2/\",\"parentField\":\"cr:parentField\",\"path\":\"cr:path\",\"qg\":\"https://querygraph.ai/ns#\",\"rai\":\"http://mlcommons.org/croissant/RAI/\",\"recordSet\":\"cr:recordSet\",\"references\":\"cr:references\",\"regex\":\"cr:regex\",\"repeated\":\"cr:repeated\",\"replace\":\"cr:replace\",\"samplingRate\":\"cr:samplingRate\",\"sc\":\"https://schema.org/\",\"separator\":\"cr:separator\",\"skos\":\"http://www.w3.org/2004/02/skos/core#\",\"source\":\"cr:source\",\"subField\":\"cr:subField\",\"transform\":\"cr:transform\"},\"@id\":\"urn:fihrist:table:acme:rows\",\"@type\":\"sc:Dataset\",\"about\":{\"@id\":\"urn:fihrist:concept:051930a2daa0fe887d6481bd5d2dcb16c4261e589e5b18b0b27cf6d7f55449ba\"},\"description\":\"Customer identifiers\",\"license\":\"Access requires the deployment's Fihrist and TypeSec policy approval.\",\"name\":\"rows\",\"qg:metadataOnly\":true,\"qg:ontologyDigest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"qg:registryDigest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\",\"qg:tableRevision\":1,\"recordSet\":[{\"@id\":\"urn:fihrist:table:acme:rows:records\",\"@type\":\"cr:RecordSet\",\"description\":\"Customer identifiers\",\"field\":[{\"@id\":\"urn:fihrist:table:acme:rows:field:1\",\"@type\":\"cr:Field\",\"dataType\":\"sc:Integer\",\"description\":\"id\",\"name\":\"id\",\"qg:concept\":{\"@id\":\"urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba\"},\"qg:fieldId\":1,\"qg:nullability\":\"required\",\"qg:physicalType\":{\"kind\":\"int64\"}}],\"name\":\"rows\"}]}}],\"ontology_digest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"registry_digest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\",\"vocabulary\":{\"@context\":{\"@language\":\"en\",\"@vocab\":\"https://schema.org/\",\"arrayShape\":\"cr:arrayShape\",\"cdif\":\"https://cdif.codata.org/\",\"citeAs\":\"cr:citeAs\",\"column\":\"cr:column\",\"conformsTo\":\"dct:conformsTo\",\"containedIn\":\"cr:containedIn\",\"cr\":\"http://mlcommons.org/croissant/\",\"data\":{\"@id\":\"cr:data\",\"@type\":\"@json\"},\"dataType\":{\"@id\":\"cr:dataType\",\"@type\":\"@vocab\"},\"dcat\":\"http://www.w3.org/ns/dcat#\",\"dct\":\"http://purl.org/dc/terms/\",\"description\":{\"@container\":\"@language\"},\"equivalentProperty\":\"cr:equivalentProperty\",\"examples\":{\"@id\":\"cr:examples\",\"@type\":\"@json\"},\"extract\":\"cr:extract\",\"field\":\"cr:field\",\"fileObject\":\"cr:fileObject\",\"fileProperty\":\"cr:fileProperty\",\"fileSet\":\"cr:fileSet\",\"format\":\"cr:format\",\"includes\":\"cr:includes\",\"isArray\":\"cr:isArray\",\"isLiveDataset\":\"cr:isLiveDataset\",\"jsonPath\":\"cr:jsonPath\",\"key\":\"cr:key\",\"md5\":\"cr:md5\",\"name\":{\"@container\":\"@language\"},\"odrl\":\"http://www.w3.org/ns/odrl/2/\",\"parentField\":\"cr:parentField\",\"path\":\"cr:path\",\"qg\":\"https://querygraph.ai/ns#\",\"rai\":\"http://mlcommons.org/croissant/RAI/\",\"recordSet\":\"cr:recordSet\",\"references\":\"cr:references\",\"regex\":\"cr:regex\",\"repeated\":\"cr:repeated\",\"replace\":\"cr:replace\",\"samplingRate\":\"cr:samplingRate\",\"sc\":\"https://schema.org/\",\"separator\":\"cr:separator\",\"skos\":\"http://www.w3.org/2004/02/skos/core#\",\"source\":\"cr:source\",\"subField\":\"cr:subField\",\"transform\":\"cr:transform\"},\"@graph\":[{\"@id\":\"urn:fihrist:concept:051930a2daa0fe887d6481bd5d2dcb16c4261e589e5b18b0b27cf6d7f55449ba\",\"@type\":\"skos:Concept\",\"dct:source\":[\"fihrist:acme/rows\"],\"qg:steward\":\"data\",\"skos:altLabel\":[\"customer table\"],\"skos:broader\":[],\"skos:definition\":\"Synthetic tenant-scoped customer records for the governed execution demonstration.\",\"skos:prefLabel\":\"Customer records\",\"skos:related\":[]},{\"@id\":\"urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba\",\"@type\":\"skos:Concept\",\"dct:source\":[\"fihrist:acme/rows\"],\"qg:steward\":\"data\",\"skos:altLabel\":[\"account number\",\"customer id\"],\"skos:broader\":[],\"skos:definition\":\"Stable identifier of a synthetic customer record; not a tenant identifier.\",\"skos:prefLabel\":\"Customer identifier\",\"skos:related\":[]}]}},\"next_cursor\":null,\"search\":{\"matches\":[{\"binding\":{\"concept\":\"urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba\",\"review\":{\"evidence\":\"demo/fihrist/ontology-review.md\",\"reviewer\":\"querygraph-demo-steward\",\"state\":\"approved\"},\"table_revision\":1,\"target\":{\"field_id\":1,\"kind\":\"field\",\"table\":\"rows\"}},\"concept\":{\"aliases\":[\"account number\",\"customer id\"],\"broader\":[],\"definition\":\"Stable identifier of a synthetic customer record; not a tenant identifier.\",\"id\":\"urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba\",\"label\":\"Customer identifier\",\"related\":[],\"sources\":[\"fihrist:acme/rows\"],\"status\":{\"evidence\":\"demo/fihrist/ontology-review.md\",\"reviewer\":\"querygraph-demo-steward\",\"state\":\"approved\"},\"steward\":\"data\"},\"reason\":{\"kind\":\"alias\",\"label\":\"account number\"}}],\"ontology_digest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"registry_digest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\",\"truncated\":false}}",
+          "type": "text"
+        }
+      ],
+      "isError": false,
+      "resultType": "complete",
+      "structuredContent": {
+        "exports": {
+          "datasets": [
+            {
+              "cdif": {
+                "@context": {
+                  "@language": "en",
+                  "@vocab": "https://schema.org/",
+                  "arrayShape": "cr:arrayShape",
+                  "cdif": "https://cdif.codata.org/",
+                  "citeAs": "cr:citeAs",
+                  "column": "cr:column",
+                  "conformsTo": "dct:conformsTo",
+                  "containedIn": "cr:containedIn",
+                  "cr": "http://mlcommons.org/croissant/",
+                  "data": {
+                    "@id": "cr:data",
+                    "@type": "@json"
+                  },
+                  "dataType": {
+                    "@id": "cr:dataType",
+                    "@type": "@vocab"
+                  },
+                  "dcat": "http://www.w3.org/ns/dcat#",
+                  "dct": "http://purl.org/dc/terms/",
+                  "description": {
+                    "@container": "@language"
+                  },
+                  "equivalentProperty": "cr:equivalentProperty",
+                  "examples": {
+                    "@id": "cr:examples",
+                    "@type": "@json"
+                  },
+                  "extract": "cr:extract",
+                  "field": "cr:field",
+                  "fileObject": "cr:fileObject",
+                  "fileProperty": "cr:fileProperty",
+                  "fileSet": "cr:fileSet",
+                  "format": "cr:format",
+                  "includes": "cr:includes",
+                  "isArray": "cr:isArray",
+                  "isLiveDataset": "cr:isLiveDataset",
+                  "jsonPath": "cr:jsonPath",
+                  "key": "cr:key",
+                  "md5": "cr:md5",
+                  "name": {
+                    "@container": "@language"
+                  },
+                  "odrl": "http://www.w3.org/ns/odrl/2/",
+                  "parentField": "cr:parentField",
+                  "path": "cr:path",
+                  "qg": "https://querygraph.ai/ns#",
+                  "rai": "http://mlcommons.org/croissant/RAI/",
+                  "recordSet": "cr:recordSet",
+                  "references": "cr:references",
+                  "regex": "cr:regex",
+                  "repeated": "cr:repeated",
+                  "replace": "cr:replace",
+                  "samplingRate": "cr:samplingRate",
+                  "sc": "https://schema.org/",
+                  "separator": "cr:separator",
+                  "skos": "http://www.w3.org/2004/02/skos/core#",
+                  "source": "cr:source",
+                  "subField": "cr:subField",
+                  "transform": "cr:transform"
+                },
+                "@id": "urn:fihrist:table:acme:rows",
+                "@type": "dcat:Dataset",
+                "cdif:dataElement": [
+                  {
+                    "@id": "urn:fihrist:table:acme:rows:field:1",
+                    "@type": "cdif:DataElement",
+                    "cdif:dataType": "sc:Integer",
+                    "cdif:recordSet": {
+                      "@id": "urn:fihrist:table:acme:rows:records"
+                    },
+                    "cdif:semanticType": {
+                      "@id": "urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba"
+                    },
+                    "dct:description": "id",
+                    "dct:title": "id"
+                  }
+                ],
+                "dct:description": "Customer identifiers",
+                "dct:title": "rows",
+                "qg:ontologyDigest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+                "qg:registryDigest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d"
+              },
+              "croissant": {
+                "@context": {
+                  "@language": "en",
+                  "@vocab": "https://schema.org/",
+                  "arrayShape": "cr:arrayShape",
+                  "cdif": "https://cdif.codata.org/",
+                  "citeAs": "cr:citeAs",
+                  "column": "cr:column",
+                  "conformsTo": "dct:conformsTo",
+                  "containedIn": "cr:containedIn",
+                  "cr": "http://mlcommons.org/croissant/",
+                  "data": {
+                    "@id": "cr:data",
+                    "@type": "@json"
+                  },
+                  "dataType": {
+                    "@id": "cr:dataType",
+                    "@type": "@vocab"
+                  },
+                  "dcat": "http://www.w3.org/ns/dcat#",
+                  "dct": "http://purl.org/dc/terms/",
+                  "description": {
+                    "@container": "@language"
+                  },
+                  "equivalentProperty": "cr:equivalentProperty",
+                  "examples": {
+                    "@id": "cr:examples",
+                    "@type": "@json"
+                  },
+                  "extract": "cr:extract",
+                  "field": "cr:field",
+                  "fileObject": "cr:fileObject",
+                  "fileProperty": "cr:fileProperty",
+                  "fileSet": "cr:fileSet",
+                  "format": "cr:format",
+                  "includes": "cr:includes",
+                  "isArray": "cr:isArray",
+                  "isLiveDataset": "cr:isLiveDataset",
+                  "jsonPath": "cr:jsonPath",
+                  "key": "cr:key",
+                  "md5": "cr:md5",
+                  "name": {
+                    "@container": "@language"
+                  },
+                  "odrl": "http://www.w3.org/ns/odrl/2/",
+                  "parentField": "cr:parentField",
+                  "path": "cr:path",
+                  "qg": "https://querygraph.ai/ns#",
+                  "rai": "http://mlcommons.org/croissant/RAI/",
+                  "recordSet": "cr:recordSet",
+                  "references": "cr:references",
+                  "regex": "cr:regex",
+                  "repeated": "cr:repeated",
+                  "replace": "cr:replace",
+                  "samplingRate": "cr:samplingRate",
+                  "sc": "https://schema.org/",
+                  "separator": "cr:separator",
+                  "skos": "http://www.w3.org/2004/02/skos/core#",
+                  "source": "cr:source",
+                  "subField": "cr:subField",
+                  "transform": "cr:transform"
+                },
+                "@id": "urn:fihrist:table:acme:rows",
+                "@type": "sc:Dataset",
+                "about": {
+                  "@id": "urn:fihrist:concept:051930a2daa0fe887d6481bd5d2dcb16c4261e589e5b18b0b27cf6d7f55449ba"
+                },
+                "description": "Customer identifiers",
+                "license": "Access requires the deployment's Fihrist and TypeSec policy approval.",
+                "name": "rows",
+                "qg:metadataOnly": true,
+                "qg:ontologyDigest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+                "qg:registryDigest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+                "qg:tableRevision": 1,
+                "recordSet": [
+                  {
+                    "@id": "urn:fihrist:table:acme:rows:records",
+                    "@type": "cr:RecordSet",
+                    "description": "Customer identifiers",
+                    "field": [
+                      {
+                        "@id": "urn:fihrist:table:acme:rows:field:1",
+                        "@type": "cr:Field",
+                        "dataType": "sc:Integer",
+                        "description": "id",
+                        "name": "id",
+                        "qg:concept": {
+                          "@id": "urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba"
+                        },
+                        "qg:fieldId": 1,
+                        "qg:nullability": "required",
+                        "qg:physicalType": {
+                          "kind": "int64"
+                        }
+                      }
+                    ],
+                    "name": "rows"
+                  }
+                ]
+              }
+            }
+          ],
+          "ontology_digest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+          "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+          "vocabulary": {
+            "@context": {
+              "@language": "en",
+              "@vocab": "https://schema.org/",
+              "arrayShape": "cr:arrayShape",
+              "cdif": "https://cdif.codata.org/",
+              "citeAs": "cr:citeAs",
+              "column": "cr:column",
+              "conformsTo": "dct:conformsTo",
+              "containedIn": "cr:containedIn",
+              "cr": "http://mlcommons.org/croissant/",
+              "data": {
+                "@id": "cr:data",
+                "@type": "@json"
+              },
+              "dataType": {
+                "@id": "cr:dataType",
+                "@type": "@vocab"
+              },
+              "dcat": "http://www.w3.org/ns/dcat#",
+              "dct": "http://purl.org/dc/terms/",
+              "description": {
+                "@container": "@language"
+              },
+              "equivalentProperty": "cr:equivalentProperty",
+              "examples": {
+                "@id": "cr:examples",
+                "@type": "@json"
+              },
+              "extract": "cr:extract",
+              "field": "cr:field",
+              "fileObject": "cr:fileObject",
+              "fileProperty": "cr:fileProperty",
+              "fileSet": "cr:fileSet",
+              "format": "cr:format",
+              "includes": "cr:includes",
+              "isArray": "cr:isArray",
+              "isLiveDataset": "cr:isLiveDataset",
+              "jsonPath": "cr:jsonPath",
+              "key": "cr:key",
+              "md5": "cr:md5",
+              "name": {
+                "@container": "@language"
+              },
+              "odrl": "http://www.w3.org/ns/odrl/2/",
+              "parentField": "cr:parentField",
+              "path": "cr:path",
+              "qg": "https://querygraph.ai/ns#",
+              "rai": "http://mlcommons.org/croissant/RAI/",
+              "recordSet": "cr:recordSet",
+              "references": "cr:references",
+              "regex": "cr:regex",
+              "repeated": "cr:repeated",
+              "replace": "cr:replace",
+              "samplingRate": "cr:samplingRate",
+              "sc": "https://schema.org/",
+              "separator": "cr:separator",
+              "skos": "http://www.w3.org/2004/02/skos/core#",
+              "source": "cr:source",
+              "subField": "cr:subField",
+              "transform": "cr:transform"
+            },
+            "@graph": [
+              {
+                "@id": "urn:fihrist:concept:051930a2daa0fe887d6481bd5d2dcb16c4261e589e5b18b0b27cf6d7f55449ba",
+                "@type": "skos:Concept",
+                "dct:source": [
+                  "fihrist:acme/rows"
+                ],
+                "qg:steward": "data",
+                "skos:altLabel": [
+                  "customer table"
+                ],
+                "skos:broader": [],
+                "skos:definition": "Synthetic tenant-scoped customer records for the governed execution demonstration.",
+                "skos:prefLabel": "Customer records",
+                "skos:related": []
+              },
+              {
+                "@id": "urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba",
+                "@type": "skos:Concept",
+                "dct:source": [
+                  "fihrist:acme/rows"
+                ],
+                "qg:steward": "data",
+                "skos:altLabel": [
+                  "account number",
+                  "customer id"
+                ],
+                "skos:broader": [],
+                "skos:definition": "Stable identifier of a synthetic customer record; not a tenant identifier.",
+                "skos:prefLabel": "Customer identifier",
+                "skos:related": []
+              }
+            ]
+          }
+        },
+        "next_cursor": null,
+        "search": {
+          "matches": [
+            {
+              "binding": {
+                "concept": "urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba",
+                "review": {
+                  "evidence": "demo/fihrist/ontology-review.md",
+                  "reviewer": "querygraph-demo-steward",
+                  "state": "approved"
+                },
+                "table_revision": 1,
+                "target": {
+                  "field_id": 1,
+                  "kind": "field",
+                  "table": "rows"
+                }
+              },
+              "concept": {
+                "aliases": [
+                  "account number",
+                  "customer id"
+                ],
+                "broader": [],
+                "definition": "Stable identifier of a synthetic customer record; not a tenant identifier.",
+                "id": "urn:fihrist:concept:ae86fd7c15e02db2d97c10005c73c21a45cf1dafb258c92304d6b62a9e6410ba",
+                "label": "Customer identifier",
+                "related": [],
+                "sources": [
+                  "fihrist:acme/rows"
+                ],
+                "status": {
+                  "evidence": "demo/fihrist/ontology-review.md",
+                  "reviewer": "querygraph-demo-steward",
+                  "state": "approved"
+                },
+                "steward": "data"
+              },
+              "reason": {
+                "kind": "alias",
+                "label": "account number"
+              }
+            }
+          ],
+          "ontology_digest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+          "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "protocol": "2026-07-28",
+  "purpose_denial": {
+    "id": 5,
+    "jsonrpc": "2.0",
+    "result": {
+      "_meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "querygraph",
+          "version": "0.5.1"
+        }
+      },
+      "content": [
+        {
+          "text": "{\"exports\":{\"datasets\":[],\"ontology_digest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"registry_digest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\",\"vocabulary\":{\"@context\":{\"@language\":\"en\",\"@vocab\":\"https://schema.org/\",\"arrayShape\":\"cr:arrayShape\",\"cdif\":\"https://cdif.codata.org/\",\"citeAs\":\"cr:citeAs\",\"column\":\"cr:column\",\"conformsTo\":\"dct:conformsTo\",\"containedIn\":\"cr:containedIn\",\"cr\":\"http://mlcommons.org/croissant/\",\"data\":{\"@id\":\"cr:data\",\"@type\":\"@json\"},\"dataType\":{\"@id\":\"cr:dataType\",\"@type\":\"@vocab\"},\"dcat\":\"http://www.w3.org/ns/dcat#\",\"dct\":\"http://purl.org/dc/terms/\",\"description\":{\"@container\":\"@language\"},\"equivalentProperty\":\"cr:equivalentProperty\",\"examples\":{\"@id\":\"cr:examples\",\"@type\":\"@json\"},\"extract\":\"cr:extract\",\"field\":\"cr:field\",\"fileObject\":\"cr:fileObject\",\"fileProperty\":\"cr:fileProperty\",\"fileSet\":\"cr:fileSet\",\"format\":\"cr:format\",\"includes\":\"cr:includes\",\"isArray\":\"cr:isArray\",\"isLiveDataset\":\"cr:isLiveDataset\",\"jsonPath\":\"cr:jsonPath\",\"key\":\"cr:key\",\"md5\":\"cr:md5\",\"name\":{\"@container\":\"@language\"},\"odrl\":\"http://www.w3.org/ns/odrl/2/\",\"parentField\":\"cr:parentField\",\"path\":\"cr:path\",\"qg\":\"https://querygraph.ai/ns#\",\"rai\":\"http://mlcommons.org/croissant/RAI/\",\"recordSet\":\"cr:recordSet\",\"references\":\"cr:references\",\"regex\":\"cr:regex\",\"repeated\":\"cr:repeated\",\"replace\":\"cr:replace\",\"samplingRate\":\"cr:samplingRate\",\"sc\":\"https://schema.org/\",\"separator\":\"cr:separator\",\"skos\":\"http://www.w3.org/2004/02/skos/core#\",\"source\":\"cr:source\",\"subField\":\"cr:subField\",\"transform\":\"cr:transform\"},\"@graph\":[]}},\"next_cursor\":null,\"search\":{\"matches\":[],\"ontology_digest\":\"sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465\",\"registry_digest\":\"sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d\",\"truncated\":false}}",
+          "type": "text"
+        }
+      ],
+      "isError": false,
+      "resultType": "complete",
+      "structuredContent": {
+        "exports": {
+          "datasets": [],
+          "ontology_digest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+          "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+          "vocabulary": {
+            "@context": {
+              "@language": "en",
+              "@vocab": "https://schema.org/",
+              "arrayShape": "cr:arrayShape",
+              "cdif": "https://cdif.codata.org/",
+              "citeAs": "cr:citeAs",
+              "column": "cr:column",
+              "conformsTo": "dct:conformsTo",
+              "containedIn": "cr:containedIn",
+              "cr": "http://mlcommons.org/croissant/",
+              "data": {
+                "@id": "cr:data",
+                "@type": "@json"
+              },
+              "dataType": {
+                "@id": "cr:dataType",
+                "@type": "@vocab"
+              },
+              "dcat": "http://www.w3.org/ns/dcat#",
+              "dct": "http://purl.org/dc/terms/",
+              "description": {
+                "@container": "@language"
+              },
+              "equivalentProperty": "cr:equivalentProperty",
+              "examples": {
+                "@id": "cr:examples",
+                "@type": "@json"
+              },
+              "extract": "cr:extract",
+              "field": "cr:field",
+              "fileObject": "cr:fileObject",
+              "fileProperty": "cr:fileProperty",
+              "fileSet": "cr:fileSet",
+              "format": "cr:format",
+              "includes": "cr:includes",
+              "isArray": "cr:isArray",
+              "isLiveDataset": "cr:isLiveDataset",
+              "jsonPath": "cr:jsonPath",
+              "key": "cr:key",
+              "md5": "cr:md5",
+              "name": {
+                "@container": "@language"
+              },
+              "odrl": "http://www.w3.org/ns/odrl/2/",
+              "parentField": "cr:parentField",
+              "path": "cr:path",
+              "qg": "https://querygraph.ai/ns#",
+              "rai": "http://mlcommons.org/croissant/RAI/",
+              "recordSet": "cr:recordSet",
+              "references": "cr:references",
+              "regex": "cr:regex",
+              "repeated": "cr:repeated",
+              "replace": "cr:replace",
+              "samplingRate": "cr:samplingRate",
+              "sc": "https://schema.org/",
+              "separator": "cr:separator",
+              "skos": "http://www.w3.org/2004/02/skos/core#",
+              "source": "cr:source",
+              "subField": "cr:subField",
+              "transform": "cr:transform"
+            },
+            "@graph": []
+          }
+        },
+        "next_cursor": null,
+        "search": {
+          "matches": [],
+          "ontology_digest": "sha256:65af2951380539d771def5b38418c030ba3bec437af1ebd1c914d9f4c28f1465",
+          "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "requests": [
+    {
+      "id": 3,
+      "jsonrpc": "2.0",
+      "method": "tools/call",
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/clientCapabilities": {},
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "querygraph-fihrist-acceptance",
+            "version": "1"
+          },
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+        },
+        "arguments": {
+          "envelope": {
+            "action": "invoke",
+            "payload": {
+              "bodySha256": "915658446b6acbcf11f61d98bf09e5c7a7c5c2e94bf6c32ad5fea128a6bb3c35"
+            },
+            "payload_sha256": "aab6255d2393e1557b3407330f3da6d80110b1c3c51a25b1dd1a11386cfd3612",
+            "recipient": "did:example:registry",
+            "resource": "/mcp/discover_fihrist_ontology",
+            "sender": "did:key:z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3",
+            "signature": "ed25519:8bdd5b97bafa55aaf9367d159f05bcf32f8b05e0fd386bf59ec653106bb2a06dc4310a5998d6bc08d0c73ece1523758f159c8808612f01345ba1526917441306",
+            "verification_method": "did:key:z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3#z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3"
+          },
+          "intent": "{\"limit\":10,\"purpose\":\"analytics\",\"query\":\"account number\"}"
+        },
+        "name": "discover_fihrist_ontology"
+      }
+    },
+    {
+      "id": 4,
+      "jsonrpc": "2.0",
+      "method": "tools/call",
+      "params": {
+        "_meta": {
+          "io.modelcontextprotocol/clientCapabilities": {},
+          "io.modelcontextprotocol/clientInfo": {
+            "name": "querygraph-fihrist-acceptance",
+            "version": "1"
+          },
+          "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+        },
+        "arguments": {
+          "envelope": {
+            "action": "invoke",
+            "payload": {
+              "bodySha256": "2b3abc20bc04d229173c9f3709e97dd53bd33b68941fdc763838e7dbd522467d"
+            },
+            "payload_sha256": "dda9bd9ba6741bf33be8deeac2649b36b7796b920788c251a830e6835980adab",
+            "recipient": "did:example:registry",
+            "resource": "/mcp/execute_fihrist_scan",
+            "sender": "did:key:z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3",
+            "signature": "ed25519:08e6d44391de3f7eaeb5e54573c218ab014a33671e002c10b1542e7dad0eac75656862556f1077a52de7fbb2e3156f698cbad1f7363daa0c001cb83d72bbf80c",
+            "verification_method": "did:key:z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3#z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3"
+          },
+          "intent": "{\"columns\":[\"id\"],\"limit\":10,\"purpose\":\"analytics\",\"table\":\"rows\"}"
+        },
+        "name": "execute_fihrist_scan"
+      }
+    }
+  ],
+  "signature_rejection": {
+    "id": 6,
+    "jsonrpc": "2.0",
+    "result": {
+      "_meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "querygraph",
+          "version": "0.5.1"
+        }
+      },
+      "content": [
+        {
+          "text": "registry request authentication failed",
+          "type": "text"
+        }
+      ],
+      "isError": true,
+      "resultType": "complete"
+    }
+  },
+  "tools": {
+    "id": 2,
+    "jsonrpc": "2.0",
+    "result": {
+      "_meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "querygraph",
+          "version": "0.5.1"
+        }
+      },
+      "cacheScope": "public",
+      "resultType": "complete",
+      "tools": [
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Validate a proposed Fihrist enterprise registry and optionally check compatibility against a previous snapshot. Does not publish or authorize access.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "document": {
+                "description": "Fihrist registry JSON text, at most 8 MiB",
+                "type": "string"
+              },
+              "previous": {
+                "description": "Optional previous Fihrist registry JSON text",
+                "type": "string"
+              }
+            },
+            "required": [
+              "document"
+            ],
+            "type": "object"
+          },
+          "name": "validate_fihrist",
+          "outputSchema": {
+            "properties": {
+              "digest": {
+                "type": "string"
+              },
+              "enterprise": {
+                "type": "string"
+              },
+              "tables": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "valid": {
+                "const": true,
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "valid",
+              "enterprise",
+              "tables",
+              "digest"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Build the four-layer semantic bundle: Croissant, CDIF, DID, ODRL.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "agent_name": {
+                "description": "Agent name",
+                "type": "string"
+              },
+              "creator": {
+                "description": "Creator name",
+                "type": "string"
+              },
+              "data_url": {
+                "description": "Data file URL",
+                "type": "string"
+              },
+              "dataset_name": {
+                "description": "Dataset name",
+                "type": "string"
+              },
+              "description": {
+                "description": "Dataset description",
+                "type": "string"
+              },
+              "landing_page": {
+                "description": "Landing page URL",
+                "type": "string"
+              }
+            },
+            "required": [
+              "dataset_name",
+              "description",
+              "landing_page",
+              "data_url",
+              "creator",
+              "agent_name"
+            ],
+            "type": "object"
+          },
+          "name": "build_navigator_bundle",
+          "outputSchema": {
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Run the governed multi-agent Resilience Desk story with the full evidence chain.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "name": "run_qglake_story",
+          "outputSchema": {
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Verify a TypeDID envelope's payload hash and Ed25519 signature.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "envelope": {
+                "description": "TypeDID envelope JSON",
+                "type": "object"
+              }
+            },
+            "required": [
+              "envelope"
+            ],
+            "type": "object"
+          },
+          "name": "verify_envelope",
+          "outputSchema": {
+            "properties": {
+              "payload_hash_valid": {
+                "type": "boolean"
+              },
+              "scheme": {
+                "type": "string"
+              },
+              "signature_valid": {
+                "type": "boolean"
+              },
+              "signed": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "payload_hash_valid",
+              "signed",
+              "signature_valid",
+              "scheme"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "Import an OSI or Croissant document as an immutable application object. Returns a model_handle valid for one hour or until server restart. Pass it explicitly in model_handles on search/answer calls; possession grants access to the imported document, never to lakehouse rows.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "oneOf": [
+              {
+                "required": [
+                  "osi"
+                ]
+              },
+              {
+                "required": [
+                  "croissant"
+                ]
+              }
+            ],
+            "properties": {
+              "croissant": {
+                "description": "Croissant JSON-LD document",
+                "type": "object"
+              },
+              "osi": {
+                "description": "OSI document",
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "name": "import_semantic_model",
+          "outputSchema": {
+            "properties": {
+              "datasets": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "expires_in_seconds": {
+                "type": "integer"
+              },
+              "imported": {
+                "type": "string"
+              },
+              "metrics": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "model_handle": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "imported",
+              "datasets",
+              "metrics"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Find datasets, fields, metrics, and ontology terms matching a term.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "model_handles": {
+                "description": "Explicit model handles returned by import_semantic_model; omitted means no imported models. Central governed ontology discovery uses discover_fihrist_ontology.",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 128,
+                "type": "array"
+              },
+              "term": {
+                "description": "Business term or synonym",
+                "type": "string"
+              }
+            },
+            "required": [
+              "term"
+            ],
+            "type": "object"
+          },
+          "name": "search_semantic_models",
+          "outputSchema": {
+            "properties": {
+              "matches": {
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "term": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "term",
+              "matches"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Answer over registered semantic models: search, plan SQL, synthesize, sign, and attach the OpenLineage run.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "model_handles": {
+                "description": "Explicit model handles returned by import_semantic_model; omitted means no imported models. Central governed ontology discovery uses discover_fihrist_ontology.",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 128,
+                "type": "array"
+              },
+              "question": {
+                "description": "Natural-language question",
+                "type": "string"
+              }
+            },
+            "required": [
+              "question"
+            ],
+            "type": "object"
+          },
+          "name": "answer_question",
+          "outputSchema": {
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "envelope": {
+                "type": "object"
+              },
+              "openlineage": {
+                "type": "object"
+              },
+              "plans": {
+                "type": "array"
+              },
+              "question": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "question",
+              "answer",
+              "plans",
+              "envelope",
+              "openlineage"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Compatibility alias for search_semantic_models.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "model_handles": {
+                "description": "Explicit model handles returned by import_semantic_model; omitted means no imported models. Central governed ontology discovery uses discover_fihrist_ontology.",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 128,
+                "type": "array"
+              },
+              "term": {
+                "description": "Business term or synonym",
+                "type": "string"
+              }
+            },
+            "required": [
+              "term"
+            ],
+            "type": "object"
+          },
+          "name": "search_semantic_model",
+          "outputSchema": {
+            "properties": {
+              "matches": {
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "term": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "term",
+              "matches"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": true,
+            "readOnlyHint": true
+          },
+          "description": "Authenticate and authorize a bounded Fihrist scan intent against a deployment-owned registry and catalog. Returns planning evidence, not rows or an execution capability. Requires a configured backend.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "envelope": {
+                "description": "TypeDID invoke envelope bound to /mcp/plan_fihrist_scan and the configured server DID.",
+                "type": "object"
+              },
+              "intent": {
+                "description": "Exact ScanIntent JSON text signed by envelope payload.bodySha256; at most 64 KiB.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "intent",
+              "envelope"
+            ],
+            "type": "object"
+          },
+          "name": "plan_fihrist_scan",
+          "outputSchema": {
+            "required": [
+              "enterprise",
+              "table",
+              "revision",
+              "registry_digest",
+              "snapshot_id",
+              "columns",
+              "purpose",
+              "limit",
+              "planned_by"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Discover table and column metadata allowed by Fihrist and TypeSec for a signed purpose. Bounded, registry-bound pages; no catalog access, execution, or grant issuance.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "envelope": {
+                "description": "TypeDID invoke envelope bound to /mcp/discover_fihrist_tables and the exact intent bytes.",
+                "type": "object"
+              },
+              "intent": {
+                "description": "Signed JSON: purpose, limit (1–100 tables examined), optional cursor; at most 64 KiB.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "intent",
+              "envelope"
+            ],
+            "type": "object"
+          },
+          "name": "discover_fihrist_tables",
+          "outputSchema": {
+            "properties": {
+              "enterprise": {
+                "type": "string"
+              },
+              "next_cursor": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "registry_digest": {
+                "type": "string"
+              },
+              "tables": {
+                "type": "array"
+              }
+            },
+            "required": [
+              "enterprise",
+              "registry_digest",
+              "tables",
+              "next_cursor"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": true,
+            "readOnlyHint": true
+          },
+          "description": "Execute a signed Fihrist scan through authenticated LakeCat and Sail. Requires separate owner execution permission; returns bounded rows and owner authorization/lineage evidence after fresh release checks.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "envelope": {
+                "description": "TypeDID invoke envelope bound to /mcp/execute_fihrist_scan and the exact intent bytes.",
+                "type": "object"
+              },
+              "intent": {
+                "description": "Signed JSON scan intent: table, columns, purpose, limit (1–1000); at most 64 KiB. No SQL, paths, tasks, or policy overrides.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "intent",
+              "envelope"
+            ],
+            "type": "object"
+          },
+          "name": "execute_fihrist_scan",
+          "outputSchema": {
+            "properties": {
+              "evidence": {
+                "type": "object"
+              },
+              "evidence_digest": {
+                "type": "string"
+              },
+              "rows": {
+                "type": "array"
+              },
+              "summary": {
+                "required": [
+                  "enterprise",
+                  "table",
+                  "revision",
+                  "registry_digest",
+                  "snapshot_id",
+                  "columns",
+                  "purpose",
+                  "limit",
+                  "planned_by"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "summary",
+              "rows",
+              "evidence",
+              "evidence_digest"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "Consult the host-maintained central Fihrist ontology for reviewed meanings, aliases and table/field mappings. Signed intent contains purpose, query, limit (1-100), optional cursor. Returns authorized Croissant/CDIF metadata and ontology digest. Never publishes or grants execution.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "envelope": {
+                "description": "TypeDID invoke envelope bound to /mcp/discover_fihrist_tables and the exact intent bytes.",
+                "type": "object"
+              },
+              "intent": {
+                "description": "Signed JSON: purpose, limit (1–100 tables examined), optional cursor; at most 64 KiB.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "intent",
+              "envelope"
+            ],
+            "type": "object"
+          },
+          "name": "discover_fihrist_ontology",
+          "outputSchema": {
+            "properties": {
+              "exports": {
+                "type": "object"
+              },
+              "next_cursor": {},
+              "search": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "search",
+              "exports",
+              "next_cursor"
+            ],
+            "type": "object"
+          }
+        }
+      ],
+      "ttlMs": 0
+    }
+  },
+  "transport": "stateless-streamable-http"
+}

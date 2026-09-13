@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QueryGraph with Pinax</title>
+<style>
+:root{color-scheme:light;--ink:#112b3b;--paper:#faf5e9;--copper:#a6532d}
+*{box-sizing:border-box}body{margin:0;background:#102633;color:var(--ink);font-family:Arial,sans-serif}
+.slide{width:1280px;height:720px;padding:64px 84px;background:var(--paper);position:relative;overflow:hidden;display:none}
+.slide.active{display:block}h1{font-size:76px;font-weight:600;margin:0 0 25px;letter-spacing:-2px}h2{font-size:48px;margin:0 0 32px;letter-spacing:-1px}p,li,td,th{font-size:28px;line-height:1.45}p{max-width:1040px;margin:20px 0}strong{color:var(--copper)}.large{font-size:40px;line-height:1.35}.muted{font-size:23px;color:#52636a}pre{font-size:27px;line-height:1.48;white-space:pre-wrap;margin:25px 0;font-family:Menlo,Consolas,monospace}code{font-family:Menlo,Consolas,monospace}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid #c8c3b7}th{font-size:22px;color:#52636a}td:first-child{width:25%;font-weight:bold}ul{padding-left:32px}li{margin:14px 0}.number{position:absolute;bottom:28px;right:50px;font-size:18px;color:#67716e}.banner{position:absolute;left:0;bottom:0;width:1280px;height:310px;object-fit:cover}.opening{padding-top:70px}.opening h1{font-size:80px}.opening p{font-size:32px}.cover{position:absolute;right:84px;top:48px;height:620px;width:auto}.book-copy{max-width:690px}.book-copy p{max-width:610px}.dark{background:var(--ink);color:var(--paper)}.dark strong{color:#efb477}.dark .muted{color:#b8c6c6}.dark th{color:#b8c6c6}.notes{display:none}#help{position:fixed;right:16px;bottom:12px;color:#c1cacc;font-size:13px;z-index:2}
+@media screen{body{display:flex;justify-content:center;align-items:center;min-height:100vh}.slide{flex:none;transform-origin:center center;transform:scale(var(--scale,1))}}
+@media print{@page{size:1280px 720px;margin:0}body{background:white;display:block}.slide,.slide.active{display:block;break-after:page;transform:none}.slide:last-of-type{break-after:auto}#help{display:none}}
+</style>
+</head>
+<body>
+<section class="slide opening active">
+  <h1>QueryGraph with Pinax</h1>
+  <p>Enterprise contracts for governed agent reads</p>
+  <p class="muted">Alexy Khrabrov, QueryGraph, September 2026</p>
+  <img class="banner" src="assets/pinax-headboard.png" alt="Pinax cataloger's workshop and connected records">
+  <aside class="notes">Introduce Pinax as the table-contract layer. The cover artwork belongs to the Pinax repository. The technical implementation uses Rust 2024. This presentation covers a prepared integration source build, not a claim that every execution extension is released.</aside>
+</section>
+<section class="slide">
+  <h2>The stack's responsibilities</h2>
+  <table><tr><th>Component</th><th>Responsibility</th></tr>
+  <tr><td>Grust</td><td>Property graphs and graph queries</td></tr>
+  <tr><td>TypeSec</td><td>Identity and policy evaluation</td></tr>
+  <tr><td>Marciana</td><td>Semantic catalog and agent workflows</td></tr>
+  <tr><td>LakeCat + Sail</td><td>Catalog authority and physical execution</td></tr>
+  <tr><td>Pinax</td><td>Validated, versioned table contracts</td></tr>
+  <tr><td>QueryGraph</td><td>Trusted composition and MCP</td></tr></table>
+  <aside class="notes">Source: Pinax docs/pinax.md and QueryGraph's Cargo dependencies. LakeCat owns the governed operation; Sail interprets the physical table. Pinax preserves these domain boundaries.</aside>
+</section>
+<section class="slide">
+  <h2>The original semantic demo</h2>
+  <p class="large">A question connects semantic discovery to a signed agent workflow and lineage</p>
+  <pre>querygraph dataverse-e2e --live-sail \
+  --sail-dir "$RUN/sail" \
+  --openlineage-file "$RUN/events.jsonl" \
+  --did-ledger-file "$RUN/attestations.jsonl"</pre>
+  <p class="muted">Live Sail: two datasets, 34 graph nodes, 33 edges and appended lineage.</p>
+  <aside class="notes">Source: evidence/grust-live-services.json. Set QG_SAIL_WAREHOUSE to an absolute run directory and use the Spark Connect endpoint on port 15051. Grust graph writes and a node readback passed on Sail, as did lineage append. The report's Cypher summary is computed in memory; it is not server-side Cypher pushdown.</aside>
+</section>
+<section class="slide">
+  <h2>What Pinax adds</h2>
+  <p class="large">A reviewed contract accompanies the table through discovery, planning and result release</p>
+  <ul><li>Stable field IDs, types and business semantics</li><li>Owner, steward and exact policy binding</li><li>Compatible revisions checked against a predecessor</li><li>Catalog schema and registry pins checked at use</li></ul>
+  <aside class="notes">Source: Pinax src/model.rs, src/registry.rs and docs/pinax.md. Retention and primary-key declarations need enforcement by lifecycle and ingestion systems. Classification does not grant access.</aside>
+</section>
+<section class="slide dark">
+  <h2>A bounded request</h2>
+  <pre>{
+  "table": "rows",
+  "columns": ["id"],
+  "purpose": "analytics",
+  "limit": 10
+}</pre>
+  <p>The host supplies identity, registry, policy and catalog credentials.</p>
+  <p class="muted">The request cannot choose a storage path or policy engine.</p>
+  <aside class="notes">Source: integration/pinax/execute_rows.py. The execution fixture uses the column name id. The book's separate custom authoring example uses customer_id. Signed MCP arguments include the exact intent string and an operation-bound envelope.</aside>
+</section>
+<section class="slide">
+  <h2>Checks before returning rows</h2>
+  <table><tr><th>Boundary</th><th>Required check</th></tr>
+  <tr><td>Pinax</td><td>Purpose, table and projected columns</td></tr>
+  <tr><td>Catalog</td><td>Exact contract and current state</td></tr>
+  <tr><td>LakeCat</td><td>Separate authority to execute</td></tr>
+  <tr><td>Sail</td><td>Exact snapshot and mandatory predicate</td></tr>
+  <tr><td>Release</td><td>Fresh authority and evidence integrity</td></tr></table>
+  <aside class="notes">Source: docs/governed-execution-contract.md and src/registry_service/. The owner buffers results and revalidates after reads and lineage work. QueryGraph independently checks returned scope and digests and reloads current catalog state.</aside>
+</section>
+<section class="slide">
+  <h2>The real-row experiment</h2>
+  <table><tr><th>Stored record</th><th>Tenant</th><th>Result</th></tr>
+  <tr><td>ID 1</td><td>other</td><td>Excluded by owner predicate</td></tr>
+  <tr><td>ID 2</td><td>acme</td><td>Returned as <code>{"id":2}</code></td></tr></table>
+  <p class="large">The private email stays out of the projection</p>
+  <p class="muted">Real Iceberg metadata and Parquet files. Direct Rust MCP and the Python CLI handoff both passed on EC2.</p>
+  <aside class="notes">Source: integration/pinax/execute_rows.py and evidence/grust-pinax-execution.json. The test verifies exact returned rows and independently recomputes row/evidence digests.</aside>
+</section>
+<section class="slide dark">
+  <h2>Changes after the read</h2>
+  <p class="large">Sail reads actual rows. Authority changes. The owner discards the buffer.</p>
+  <table><tr><th>Mutation</th><th>Observed outcome on grust</th></tr>
+  <tr><td>Purpose revoked</td><td>No protected rows released</td></tr>
+  <tr><td>Registry drift</td><td>No protected rows released</td></tr>
+  <tr><td>Snapshot drift</td><td>No protected rows released</td></tr></table>
+  <aside class="notes">Source: integration/pinax/read_mutation.rs, execute_rows.py and the grust report. A fixture decorator changes state after nonempty real engine reads. This proves the release check, rather than only admission-time denial.</aside>
+</section>
+<section class="slide">
+  <h2>Revision two</h2>
+  <p class="large">A reviewed optional column becomes a controlled consumer cutover</p>
+  <ol><li>Close consumers for the old registry</li><li>Apply the reviewed target and reconcile catalog pins</li><li>Start consumers pinned to the target digest</li><li>Read real rows under revision two</li></ol>
+  <p class="muted">Activation is an observation. The operator owns the maintenance window.</p>
+  <aside class="notes">Source: integration/pinax/execute_rows.py and run.py. The recorded EC2 execution fixture passed real_rows_after_reviewed_consumer_cutover. The separate deployment fixture covers full registry creation/reconciliation and stale activation rejection. No distributed publication transaction is claimed.</aside>
+</section>
+<section class="slide">
+  <h2>Stateless MCP · 2026-07-28</h2>
+  <ul><li>Per-request context; no modern initialization handshake</li><li>Central ontology discovery over stdio and HTTP</li><li>Explicit model handles keep conversations separate</li><li>Up to 16 requests; disconnect cancels its HTTP work</li></ul>
+  <p class="muted">A completed response cannot be retracted. Remote HTTP work may continue after local cancellation.</p>
+  <aside class="notes">Sources: docs/mcp-stateless.md, src/mcp/http.rs and separate transport tests. Modern HTTP, direct stdio and Python handoff passed on grust; captured wire results validate against the official 2026-07-28 schema. Legacy stdio remains compatible. MCP endpoint: loopback 18082/mcp.</aside>
+</section>
+<section class="slide dark">
+  <h2>Build and run on EC2</h2>
+  <pre>bash demo/pinax/deploy.sh "$DEMO_ROOT"
+
+ssh -N -L 18081:127.0.0.1:18081 grust
+# Open http://localhost:18081</pre>
+  <p>Our Sail source checkout and stack compile using Rust 2024.</p>
+  <p>The console and services stay available for the presentation.</p>
+  <p class="muted">Source overrides remain explicit. This correctness run makes no performance claim.</p>
+  <aside class="notes">Source: demo/pinax/README.md and deploy.sh. The fresh-deployment runner builds the prepared sources, runs destructive fault scenarios in temporary fixtures, creates a separate retained fixture and installs systemd services. Retained catalog state is seeded on restart. Use run-live.sh to repeat an existing deployment without replacing data.</aside>
+</section>
+<section class="slide">
+  <h2>Evidence and published release</h2>
+  <table><tr><th>Verified</th><th>Scope</th></tr>
+  <tr><td>EC2 build</td><td>QueryGraph and prepared owner/engine</td></tr>
+  <tr><td>Live Sail</td><td>Graph load, node readback and lineage append</td></tr>
+  <tr><td>Governed reads</td><td>Actual rows through both MCP entry paths</td></tr>
+  <tr><td>Rejection</td><td>Policy, projection, drift and backend failure</td></tr>
+  <tr><td>Cutover</td><td>Real rows after revision-two activation</td></tr></table>
+  <p class="muted">Persistent demo services are running. Pinax 0.2.0 (<code>pinax-registry</code>) is published on crates.io.</p>
+  <aside class="notes">Source: docs/pinax-integration-goal.md and the retained evidence files. The systemd services survive process exits and boot; the fixture catalog itself is in memory. This is a prepared-source demo, not a production catalog deployment.</aside>
+</section>
+<section class="slide dark">
+  <h2>A central ontology agents actually consult</h2>
+  <p class="large">“Account number” → Customer identifier → <code>rows.id</code></p>
+  <ul><li>Pinax inventories every registered table and field</li><li>Stewards review concepts and field mappings separately</li><li>Signed discovery filters metadata through current policy</li><li>The agent builds its read from the resolved binding</li></ul>
+  <p class="muted">Versioned central publication · Croissant 1.1 result data · CDIF and SKOS</p>
+  <aside class="notes">Source: docs/central-ontology.md and ontology acceptance evidence. The synthetic central inventory has one table and three fields. Only id is visible to the demo agent. Discovery descriptions are metadata-only; successful governed reads provide loadable Croissant inline data. New imported mappings remain drafts. Source inventory does not claim coverage of unregistered remote tables.</aside>
+</section>
+<section class="slide">
+  <div class="book-copy"><h2>Pinax</h2>
+  <p class="large">The contract, the implementation and the operational workflow</p>
+  <p>firstpair.org</p><p>github.com/querygraph/pinax</p>
+  <p class="muted">Book, source examples and the <code>announcing-pinax</code> story</p></div>
+  <img class="cover" src="assets/pinax-cover.png" alt="Pinax book by Alexy Khrabrov, First Pair Press">
+  <aside class="notes">Cover source: Pinax cover/pinax-cover.png. Book routes: https://firstpair.org/pinax/pdf/, https://firstpair.org/pinax/epub/, https://firstpair.org/read/pinax/. The story slug is announcing-pinax.</aside>
+</section>
+<div id="help">← → slides · Home / End · P print</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let current=Math.max(0,Math.min(slides.length-1,Number(location.hash.slice(1)||1)-1));
+slides.forEach((slide,index)=>{const label=document.createElement('span');label.className='number';label.textContent=`${index+1} / ${slides.length}`;if(index!==0)slide.append(label)});
+function show(index){current=Math.max(0,Math.min(slides.length-1,index));slides.forEach((slide,i)=>slide.classList.toggle('active',i===current));history.replaceState(null,'',`#${current+1}`)}
+function size(){document.documentElement.style.setProperty('--scale',Math.min(innerWidth/1280,innerHeight/720))}
+addEventListener('resize',size);addEventListener('keydown',event=>{if(['ArrowRight','PageDown',' '].includes(event.key)){event.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();show(current-1)}if(event.key==='Home')show(0);if(event.key==='End')show(slides.length-1);if(event.key.toLowerCase()==='p')print()});
+show(current);size();
+</script>
+</body>
+</html>

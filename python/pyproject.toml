@@ -57,7 +57,7 @@ crypto = [
   "cryptography>=42",
 ]
 mcp = [
-  "mcp>=1.2",
+  "mcp>=1.28.1,<2",
   "pyyaml>=6",
 ]
 lakehouse = [
@@ -80,7 +80,7 @@ all = [
   "grpcio>=1.81.0",
   "grpcio-status>=1.81.0",
   "langchain-core>=0.3,<2",
-  "mcp>=1.2",
+  "mcp>=1.28.1,<2",
   "pydantic-ai-slim>=2,<3",
   "pandas>=3.0.0",
   "pyarrow>=24.0.0",

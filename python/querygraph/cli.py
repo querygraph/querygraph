@@ -98,6 +98,11 @@ def main(argv: list[str] | None = None) -> int:
     mcp_serve.add_argument(
         "--transport", default="stdio", choices=["stdio", "sse", "streamable-http"]
     )
+    mcp_serve.add_argument(
+        "--rust-backend", default=None,
+        help="Explicit Rust querygraph executable; serve its authoritative tools over stdio.",
+    )
+    mcp_serve.add_argument("--registry-config", default=None, help="Host configuration passed to --rust-backend.")
 
     args = parser.parse_args(argv)
     if args.command == "navigator":
@@ -178,6 +183,16 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "mcp-serve":
+        if args.rust_backend is not None:
+            if args.osi is not None or args.rights is not None or args.transport != "stdio":
+                parser.error("--rust-backend requires stdio and cannot use Python --osi/--rights")
+            import asyncio
+            from querygraph.mcp_bridge import serve_rust_bridge
+
+            asyncio.run(serve_rust_bridge(args.rust_backend, registry_config=args.registry_config))
+            return 0
+        if args.registry_config is not None:
+            parser.error("--registry-config requires --rust-backend")
         from querygraph.mcp_server import serve
 
         serve(osi_path=args.osi, rights_path=args.rights, transport=args.transport)

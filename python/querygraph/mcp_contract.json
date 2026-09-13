@@ -1,0 +1,552 @@
+{
+  "version": 1,
+  "tools": [
+    {
+      "description": "Validate a proposed Pinax enterprise registry and optionally check compatibility against a previous snapshot. Does not publish or authorize access.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "document": {
+            "description": "Pinax registry JSON text, at most 8 MiB",
+            "type": "string"
+          },
+          "previous": {
+            "description": "Optional previous Pinax registry JSON text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document"
+        ],
+        "type": "object"
+      },
+      "name": "validate_pinax",
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "const": true
+          },
+          "enterprise": {
+            "type": "string"
+          },
+          "tables": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "digest": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "valid",
+          "enterprise",
+          "tables",
+          "digest"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "description": "Build the four-layer semantic bundle: Croissant, CDIF, DID, ODRL.",
+      "inputSchema": {
+        "properties": {
+          "agent_name": {
+            "description": "Agent name",
+            "type": "string"
+          },
+          "creator": {
+            "description": "Creator name",
+            "type": "string"
+          },
+          "data_url": {
+            "description": "Data file URL",
+            "type": "string"
+          },
+          "dataset_name": {
+            "description": "Dataset name",
+            "type": "string"
+          },
+          "description": {
+            "description": "Dataset description",
+            "type": "string"
+          },
+          "landing_page": {
+            "description": "Landing page URL",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dataset_name",
+          "description",
+          "landing_page",
+          "data_url",
+          "creator",
+          "agent_name"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "name": "build_navigator_bundle",
+      "outputSchema": {
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "description": "Run the governed multi-agent Resilience Desk story with the full evidence chain.",
+      "inputSchema": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      },
+      "name": "run_qglake_story",
+      "outputSchema": {
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "description": "Verify a TypeDID envelope's payload hash and Ed25519 signature.",
+      "inputSchema": {
+        "properties": {
+          "envelope": {
+            "description": "TypeDID envelope JSON",
+            "type": "object"
+          }
+        },
+        "required": [
+          "envelope"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "name": "verify_envelope",
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "payload_hash_valid": {
+            "type": "boolean"
+          },
+          "signed": {
+            "type": "boolean"
+          },
+          "signature_valid": {
+            "type": "boolean"
+          },
+          "scheme": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload_hash_valid",
+          "signed",
+          "signature_valid",
+          "scheme"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "description": "Import an OSI semantic model or a Semantic Croissant JSON-LD document into the registry.",
+      "inputSchema": {
+        "properties": {
+          "croissant": {
+            "description": "Croissant JSON-LD document",
+            "type": "object"
+          },
+          "osi": {
+            "description": "OSI document",
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "additionalProperties": false,
+        "oneOf": [
+          {
+            "required": [
+              "osi"
+            ]
+          },
+          {
+            "required": [
+              "croissant"
+            ]
+          }
+        ]
+      },
+      "name": "import_semantic_model",
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "imported": {
+            "type": "string"
+          },
+          "datasets": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "metrics": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "imported",
+          "datasets",
+          "metrics"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "description": "Find datasets, fields, metrics, and ontology terms matching a term.",
+      "inputSchema": {
+        "properties": {
+          "term": {
+            "description": "Business term or synonym",
+            "type": "string"
+          }
+        },
+        "required": [
+          "term"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "name": "search_semantic_models",
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string"
+          },
+          "matches": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "term",
+          "matches"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "description": "Answer over registered semantic models: search, plan SQL, synthesize, sign, and attach the OpenLineage run.",
+      "inputSchema": {
+        "properties": {
+          "question": {
+            "description": "Natural-language question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "name": "answer_question",
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "plans": {
+            "type": "array"
+          },
+          "envelope": {
+            "type": "object"
+          },
+          "openlineage": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "question",
+          "answer",
+          "plans",
+          "envelope",
+          "openlineage"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "description": "Compatibility alias for search_semantic_models.",
+      "inputSchema": {
+        "properties": {
+          "term": {
+            "description": "Business term or synonym",
+            "type": "string"
+          }
+        },
+        "required": [
+          "term"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "name": "search_semantic_model",
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string"
+          },
+          "matches": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "term",
+          "matches"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "plan_pinax_scan",
+      "description": "Authenticate and authorize a bounded Pinax scan intent against a deployment-owned registry and catalog. Returns planning evidence, not rows or an execution capability. Requires a configured backend.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "intent": {
+            "type": "string",
+            "description": "Exact ScanIntent JSON text signed by envelope payload.bodySha256; at most 64 KiB."
+          },
+          "envelope": {
+            "type": "object",
+            "description": "TypeDID invoke envelope bound to /mcp/plan_pinax_scan and the configured server DID."
+          }
+        },
+        "required": [
+          "intent",
+          "envelope"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "enterprise",
+          "table",
+          "revision",
+          "registry_digest",
+          "snapshot_id",
+          "columns",
+          "purpose",
+          "limit",
+          "planned_by"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "discover_pinax_tables",
+      "description": "Discover table and column metadata allowed by Pinax and TypeSec for a signed purpose. Bounded, registry-bound pages; no catalog access, execution, or grant issuance.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "intent": {
+            "type": "string",
+            "description": "Signed JSON: purpose, limit (1–100 tables examined), optional cursor; at most 64 KiB."
+          },
+          "envelope": {
+            "type": "object",
+            "description": "TypeDID invoke envelope bound to /mcp/discover_pinax_tables and the exact intent bytes."
+          }
+        },
+        "required": [
+          "intent",
+          "envelope"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "enterprise": {
+            "type": "string"
+          },
+          "registry_digest": {
+            "type": "string"
+          },
+          "tables": {
+            "type": "array"
+          },
+          "next_cursor": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "enterprise",
+          "registry_digest",
+          "tables",
+          "next_cursor"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "execute_pinax_scan",
+      "description": "Execute a signed Pinax scan through authenticated LakeCat and Sail. Requires separate owner execution permission; returns bounded rows and owner authorization/lineage evidence after fresh release checks.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "intent": {
+            "type": "string",
+            "description": "Signed JSON scan intent: table, columns, purpose, limit (1–1000); at most 64 KiB. No SQL, paths, tasks, or policy overrides."
+          },
+          "envelope": {
+            "type": "object",
+            "description": "TypeDID invoke envelope bound to /mcp/execute_pinax_scan and the exact intent bytes."
+          }
+        },
+        "required": [
+          "intent",
+          "envelope"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "rows",
+          "evidence",
+          "evidence_digest"
+        ],
+        "properties": {
+          "summary": {
+            "type": "object",
+            "required": [
+              "enterprise",
+              "table",
+              "revision",
+              "registry_digest",
+              "snapshot_id",
+              "columns",
+              "purpose",
+              "limit",
+              "planned_by"
+            ]
+          },
+          "rows": {
+            "type": "array"
+          },
+          "evidence": {
+            "type": "object"
+          },
+          "evidence_digest": {
+            "type": "string"
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "discover_pinax_ontology",
+      "description": "Consult the host-maintained central Pinax ontology for reviewed meanings, aliases and table/field mappings. Signed intent contains purpose, query, limit (1-100), optional cursor. Returns authorized Croissant/CDIF metadata and ontology digest. Never publishes or grants execution.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "intent": {
+            "type": "string",
+            "description": "Signed JSON: purpose, limit (1–100 tables examined), optional cursor; at most 64 KiB."
+          },
+          "envelope": {
+            "type": "object",
+            "description": "TypeDID invoke envelope bound to /mcp/discover_pinax_tables and the exact intent bytes."
+          }
+        },
+        "required": [
+          "intent",
+          "envelope"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "object"
+          },
+          "exports": {
+            "type": "object"
+          },
+          "next_cursor": {}
+        },
+        "required": [
+          "search",
+          "exports",
+          "next_cursor"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    }
+  ]
+}

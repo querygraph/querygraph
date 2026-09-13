@@ -135,7 +135,6 @@ pub(crate) fn croissant_for_lakehouse(
                             column.data_type.croissant_type(),
                             format!("Lakehouse column derived from {}", column.source_name),
                         )
-                        .semantic_type(semantic_type_for_column(&column.name))
                     })
                     .collect(),
             })
@@ -158,22 +157,6 @@ pub(crate) fn croissant_for_lakehouse(
             .chain(dataset.subjects.iter())
             .cloned()
             .collect(),
-    }
-}
-
-fn semantic_type_for_column(name: &str) -> String {
-    if name.contains("date") || name.contains("year") {
-        "https://schema.org/temporalCoverage".to_string()
-    } else if name.contains("lat")
-        || name.contains("lon")
-        || name.contains("state")
-        || name.contains("country")
-    {
-        "https://schema.org/spatialCoverage".to_string()
-    } else if name.contains("amount") || name.contains("cost") || name.contains("revenue") {
-        "https://schema.org/MonetaryAmount".to_string()
-    } else {
-        "https://schema.org/variableMeasured".to_string()
     }
 }
 
@@ -227,3 +210,7 @@ fn _string_batch(schema: Arc<Schema>, values: Vec<Vec<String>>) -> Result<Record
         .collect::<Vec<_>>();
     Ok(RecordBatch::try_new(schema, arrays)?)
 }
+
+#[cfg(test)]
+#[path = "project_tests.rs"]
+mod tests;

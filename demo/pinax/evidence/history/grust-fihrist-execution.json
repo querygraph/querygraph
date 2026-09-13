@@ -1,0 +1,52 @@
+{
+  "real_authenticated_owner_rows": true,
+  "mandatory_filter_applied": true,
+  "planning_permission_does_not_authorize_execution": true,
+  "denied_projection_purpose_and_stale_state": true,
+  "missing_data_releases_no_rows": true,
+  "lineage_and_authorization_evidence": {
+    "catalog_state": "sha256:250e1bf0171dbca1ba6930fc32d97e1f7fb7130d1dd8e30d4f7d80c01de5dfef",
+    "execution_authorization_digest": "sha256:9b242c453fed073e8fab511f53e4fb921be696da280730a563dc14d6fbf85081",
+    "fresh_authorization_digest": "sha256:afeb0de6a9954659d3d32fd876d3bcaca00c2ae6143441108080d69d1139b3e9",
+    "fresh_policy_decision_digest": "sha256:564c33586305014aef1894c95ca405d3e5c7d420924b1f64568fea4bf75cdd8a",
+    "lineage": {
+      "event_hash": "sha256:8df1ac74f2129d851eb3fe6ab4dcbdeeff509403ddb84dd413410206ddffd44c",
+      "open_lineage_hash": "sha256:60f4aa5d985a242ccd309064bee498a6baa3b4d80d562869d72fbbd778188150",
+      "sink": "lakecat-openlineage-hash"
+    },
+    "proof": {
+      "authorizationReceiptDigest": "sha256:b304287558598f5309afec96dee61a989f2e5b73ca1b1c23dba4bf5ac15245c5",
+      "catalogIdentity": "lakecat://warehouse",
+      "effectiveProjection": [
+        "id"
+      ],
+      "grantId": "sha256:f0e14784278fe19b35ec6c9e2dddb322f5383072829066869e4f87eeb7ba58ec",
+      "identityContextDigest": "sha256:199ef014b0628ca1a06a0621799f3df4d9fa793f51531fe058fcb9bac2225230",
+      "planTaskDigest": "sha256:a596a748146f6653f07745b92fd43ff6a784f13396661a36aacc8118e2285467",
+      "policyDecisionDigest": "sha256:564c33586305014aef1894c95ca405d3e5c7d420924b1f64568fea4bf75cdd8a",
+      "principalSubject": "did:key:z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3",
+      "purpose": "analytics",
+      "snapshotId": 3241372021327190637,
+      "table": {
+        "name": "rows",
+        "namespace": [
+          "acme"
+        ],
+        "warehouse": "warehouse"
+      },
+      "tableVersion": 0,
+      "version": "lakecat.governed-scan-proof.v2"
+    },
+    "revalidated_at": "2026-09-12T17:05:09.863544820Z",
+    "row_digest": "sha256:1f92c9cf43d29e6d3ba3dfa1caab7ca803117f269375663311f1676526948df8"
+  },
+  "row_and_evidence_digests_verified": true,
+  "real_buffer_discarded_after_mutations": [
+    "purpose_revoked",
+    "registry_drift",
+    "snapshot_drift"
+  ],
+  "real_rows_after_reviewed_consumer_cutover": true,
+  "temporary_data_removed": true,
+  "mcp_execution": "direct_and_bridged_passed"
+}

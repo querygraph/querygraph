@@ -1,0 +1,736 @@
+{
+  "agentRun": {
+    "access": {
+      "action": "answer",
+      "allowed": true,
+      "checked_at": "2026-09-13T09:52:54.455114617Z",
+      "odrl_allowed": true,
+      "principal": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+      "rbac": {
+        "action": "answer",
+        "allowed": true,
+        "matched_roles": [
+          "navigator"
+        ],
+        "principal": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+        "resource": "dataset"
+      },
+      "reason": "TypeSec capabilities, RBAC role assignment, and ODRL policy allow the answer path"
+    },
+    "codata_anchor": null,
+    "ollama_reply": "I found 2 governed Dataverse datasets staged in 4 Sail views. The most relevant titles are: Bay Area building energy observations; Enterprise data access survey.",
+    "ollama_typedid": null,
+    "prompt": "Answer using only the governed Dataverse metadata below.\nQuestion: Which governed datasets mention access control?\n\nDatasets:\n- Bay Area building energy observations (doi:10.7910/DVN/QGDEMO1): Sample Dataverse-shaped energy observations for QueryGraph integration testing. Keywords: energy, buildings, sensors. Subjects: Engineering, Computer and Information Science.\n- Enterprise data access survey (doi:10.7910/DVN/QGDEMO2): Sample Dataverse-shaped survey metadata for governed agent access. Keywords: access control, governance, survey. Subjects: Social Sciences.\n\nSail views: dataverse_1001_metadata, dataverse_1001_files, dataverse_1002_metadata, dataverse_1002_files\nLive Sail graph loaded 34 nodes and 33 edges; verified dataverse:dataset:doi:10.7910/DVN/QGDEMO1.",
+    "request": {
+      "action": "agent:delegate",
+      "content_type": "application/vnd.typedid.envelope+json",
+      "conversation_id": "querygraph.dataverse.answer",
+      "envelope_digest": "sha256:1182580f5c86ba4f069acc632e32ee390b62d6a033a7a89a8907eec9cb363112",
+      "mode": "request-reply",
+      "payload_sha256": "1b55a8b1e98727870ceb195700b01b91169f95989719f718930d4ec075ace3b9",
+      "privacy": "secret",
+      "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+      "protocol": "typedid/a2a",
+      "recipient": "did:key:z7e59ddf1eabfedc0398521ecc79d71caa1145c603da1b1ccae1cecca5149aa68",
+      "resource": "querygraph/dataverse",
+      "sender": "did:key:z73dce87f2d439cff8428b9c2e38d741148553b9b7b1d3a4c835e43cf90fd713e",
+      "signature": "f98fa2d648394144ed70e5d789f0b75981812a38fc0f0fdf7c6869024b9fd6c81132a51ccc8d719793c2361a07afe1fc238e664f7d37dc9ccb286083871a8e03"
+    },
+    "sail_views": [
+      "dataverse_1001_metadata",
+      "dataverse_1001_files",
+      "dataverse_1002_metadata",
+      "dataverse_1002_files"
+    ],
+    "selected_datasets": [
+      "doi:10.7910/DVN/QGDEMO1",
+      "doi:10.7910/DVN/QGDEMO2"
+    ]
+  },
+  "bundle": {
+    "@context": {
+      "cdif": "https://cdif.codata.org/",
+      "cr": "http://mlcommons.org/croissant/",
+      "dcat": "http://www.w3.org/ns/dcat#",
+      "dct": "http://purl.org/dc/terms/",
+      "odrl": "http://www.w3.org/ns/odrl/2/",
+      "querygraph": "https://querygraph.ai/ns#",
+      "schema": "https://schema.org/"
+    },
+    "@type": "querygraph:AiNavigatorSemanticBundle",
+    "generatedAt": "2026-09-13T09:52:53.445393417Z",
+    "identity": {
+      "@context": [
+        "https://www.w3.org/ns/did/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1"
+      ],
+      "controller": "QueryGraph Dataverse Navigator",
+      "id": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+      "public_key_multibase": "z8UernVhohiVB5a4QsHk7yPJk8HagWr1e9QJPSn5xnujf",
+      "service_endpoint": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1"
+    },
+    "layers": {
+      "cdif": {
+        "@context": {
+          "cdif": "https://cdif.codata.org/",
+          "dcat": "http://www.w3.org/ns/dcat#",
+          "dct": "http://purl.org/dc/terms/",
+          "odrl": "http://www.w3.org/ns/odrl/2/"
+        },
+        "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset",
+        "@type": "dcat:Dataset",
+        "cdif:controlledVocabulary": [
+          "https://schema.org/identifier",
+          "https://schema.org/identifier",
+          "https://schema.org/name",
+          "https://schema.org/contentUrl"
+        ],
+        "cdif:dataElement": [
+          {
+            "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/dataset_persistent_id",
+            "@type": "cdif:DataElement",
+            "cdif:dataType": "sc:Text",
+            "cdif:recordSet": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+            "cdif:semanticType": "https://schema.org/identifier",
+            "dct:description": "Dataverse persistent ID",
+            "dct:title": "dataset_persistent_id"
+          },
+          {
+            "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/file_id",
+            "@type": "cdif:DataElement",
+            "cdif:dataType": "sc:Text",
+            "cdif:recordSet": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+            "cdif:semanticType": "https://schema.org/identifier",
+            "dct:description": "Dataverse file ID",
+            "dct:title": "file_id"
+          },
+          {
+            "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/file_name",
+            "@type": "cdif:DataElement",
+            "cdif:dataType": "sc:Text",
+            "cdif:recordSet": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+            "cdif:semanticType": "https://schema.org/name",
+            "dct:description": "Dataverse file name",
+            "dct:title": "file_name"
+          },
+          {
+            "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/download_url",
+            "@type": "cdif:DataElement",
+            "cdif:dataType": "sc:URL",
+            "cdif:recordSet": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+            "cdif:semanticType": "https://schema.org/contentUrl",
+            "dct:description": "Dataverse file download URL",
+            "dct:title": "download_url"
+          }
+        ],
+        "cdif:profile": [
+          "https://cdif.codata.org/profile/discovery",
+          "https://cdif.codata.org/profile/manifest",
+          "https://cdif.codata.org/profile/data-description",
+          "https://cdif.codata.org/profile/data-access",
+          "https://cdif.codata.org/profile/access-rights",
+          "https://cdif.codata.org/profile/controlled-vocabularies",
+          "https://cdif.codata.org/profile/data-integration",
+          "https://cdif.codata.org/profile/universals"
+        ],
+        "cdif:unit": [],
+        "dcat:accessService": {
+          "@type": "dcat:DataService",
+          "endpointURL": "https://demo.dataverse.org/api/access/datafile/501"
+        },
+        "dcat:distribution": [
+          {
+            "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/file/501",
+            "@type": "dcat:Distribution",
+            "dcat:downloadURL": "https://demo.dataverse.org/api/access/datafile/501",
+            "dcat:mediaType": "text/csv",
+            "dct:title": "building_energy.csv"
+          }
+        ],
+        "dcat:keyword": [
+          "energy",
+          "buildings",
+          "sensors",
+          "Engineering",
+          "Computer and Information Science"
+        ],
+        "dcat:landingPage": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1",
+        "dct:accessRights": {
+          "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/policy/default",
+          "@type": "dct:RightsStatement",
+          "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+          "dct:license": "CC0 1.0",
+          "odrl:policy": {
+            "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/policy/default",
+            "@type": "odrl:Policy",
+            "odrl:assigner": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+            "odrl:permission": [
+              {
+                "odrl:action": "odrl:read",
+                "odrl:assignee": "public",
+                "odrl:constraint": "attribution required"
+              },
+              {
+                "odrl:action": "querygraph:index",
+                "odrl:assignee": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+                "odrl:constraint": "local semantic indexing for AI Navigator"
+              }
+            ],
+            "odrl:prohibition": [
+              {
+                "odrl:action": "odrl:derive",
+                "odrl:assignee": "public",
+                "odrl:constraint": "no model training without separate agreement"
+              }
+            ],
+            "odrl:target": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset"
+          }
+        },
+        "dct:description": "Sample Dataverse-shaped energy observations for QueryGraph integration testing.",
+        "dct:spatial": null,
+        "dct:temporal": null,
+        "dct:title": "Bay Area building energy observations"
+      },
+      "did": {
+        "@context": [
+          "https://www.w3.org/ns/did/v1",
+          "https://w3id.org/security/suites/ed25519-2020/v1"
+        ],
+        "controller": "QueryGraph Dataverse Navigator",
+        "id": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+        "public_key_multibase": "z8UernVhohiVB5a4QsHk7yPJk8HagWr1e9QJPSn5xnujf",
+        "service_endpoint": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1"
+      },
+      "odrl": {
+        "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/policy/default",
+        "@type": "odrl:Policy",
+        "odrl:assigner": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+        "odrl:permission": [
+          {
+            "odrl:action": "odrl:read",
+            "odrl:assignee": "public",
+            "odrl:constraint": "attribution required"
+          },
+          {
+            "odrl:action": "querygraph:index",
+            "odrl:assignee": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+            "odrl:constraint": "local semantic indexing for AI Navigator"
+          }
+        ],
+        "odrl:prohibition": [
+          {
+            "odrl:action": "odrl:derive",
+            "odrl:assignee": "public",
+            "odrl:constraint": "no model training without separate agreement"
+          }
+        ],
+        "odrl:target": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset"
+      },
+      "semanticCroissant": {
+        "@context": {
+          "@language": "en",
+          "@vocab": "https://schema.org/",
+          "arrayShape": "cr:arrayShape",
+          "cdif": "https://cdif.codata.org/",
+          "citeAs": "cr:citeAs",
+          "column": "cr:column",
+          "conformsTo": "dct:conformsTo",
+          "containedIn": "cr:containedIn",
+          "cr": "http://mlcommons.org/croissant/",
+          "data": {
+            "@id": "cr:data",
+            "@type": "@json"
+          },
+          "dataType": {
+            "@id": "cr:dataType",
+            "@type": "@vocab"
+          },
+          "dcat": "http://www.w3.org/ns/dcat#",
+          "dct": "http://purl.org/dc/terms/",
+          "description": {
+            "@container": "@language"
+          },
+          "equivalentProperty": "cr:equivalentProperty",
+          "examples": {
+            "@id": "cr:examples",
+            "@type": "@json"
+          },
+          "extract": "cr:extract",
+          "field": "cr:field",
+          "fileObject": "cr:fileObject",
+          "fileProperty": "cr:fileProperty",
+          "fileSet": "cr:fileSet",
+          "format": "cr:format",
+          "includes": "cr:includes",
+          "isArray": "cr:isArray",
+          "isLiveDataset": "cr:isLiveDataset",
+          "jsonPath": "cr:jsonPath",
+          "key": "cr:key",
+          "md5": "cr:md5",
+          "name": {
+            "@container": "@language"
+          },
+          "odrl": "http://www.w3.org/ns/odrl/2/",
+          "parentField": "cr:parentField",
+          "path": "cr:path",
+          "qg": "https://querygraph.ai/ns#",
+          "rai": "http://mlcommons.org/croissant/RAI/",
+          "recordSet": "cr:recordSet",
+          "references": "cr:references",
+          "regex": "cr:regex",
+          "repeated": "cr:repeated",
+          "replace": "cr:replace",
+          "samplingRate": "cr:samplingRate",
+          "sc": "https://schema.org/",
+          "separator": "cr:separator",
+          "skos": "http://www.w3.org/2004/02/skos/core#",
+          "source": "cr:source",
+          "subField": "cr:subField",
+          "transform": "cr:transform"
+        },
+        "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset",
+        "@type": "sc:Dataset",
+        "creator": [
+          {
+            "@type": "Person",
+            "name": "QueryGraph Demo Lab"
+          }
+        ],
+        "description": "Sample Dataverse-shaped energy observations for QueryGraph integration testing.",
+        "distribution": [
+          {
+            "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/file/501",
+            "@type": "cr:FileObject",
+            "contentUrl": "https://demo.dataverse.org/api/access/datafile/501",
+            "encodingFormat": "text/csv",
+            "name": "building_energy.csv"
+          }
+        ],
+        "keywords": [
+          "energy",
+          "buildings",
+          "sensors",
+          "Engineering",
+          "Computer and Information Science"
+        ],
+        "license": "CC0 1.0",
+        "name": "Bay Area building energy observations",
+        "qg:metadataOnly": true,
+        "recordSet": [
+          {
+            "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+            "@type": "cr:RecordSet",
+            "field": [
+              {
+                "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/dataset_persistent_id",
+                "@type": "cr:Field",
+                "dataType": "sc:Text",
+                "description": "Dataverse persistent ID",
+                "name": "dataset_persistent_id",
+                "sameAs": "https://schema.org/identifier"
+              },
+              {
+                "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/file_id",
+                "@type": "cr:Field",
+                "dataType": "sc:Text",
+                "description": "Dataverse file ID",
+                "name": "file_id",
+                "sameAs": "https://schema.org/identifier"
+              },
+              {
+                "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/file_name",
+                "@type": "cr:Field",
+                "dataType": "sc:Text",
+                "description": "Dataverse file name",
+                "name": "file_name",
+                "sameAs": "https://schema.org/name"
+              },
+              {
+                "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/download_url",
+                "@type": "cr:Field",
+                "dataType": "sc:URL",
+                "description": "Dataverse file download URL",
+                "name": "download_url",
+                "sameAs": "https://schema.org/contentUrl"
+              }
+            ],
+            "name": "building_energy"
+          }
+        ]
+      }
+    }
+  },
+  "datasets": [
+    {
+      "authors": [
+        "QueryGraph Demo Lab"
+      ],
+      "description": "Sample Dataverse-shaped energy observations for QueryGraph integration testing.",
+      "files": [
+        {
+          "content_type": "text/csv",
+          "description": "Hourly energy observations.",
+          "download_url": "https://demo.dataverse.org/api/access/datafile/501",
+          "filename": "building_energy.csv",
+          "id": "501"
+        }
+      ],
+      "id": "1001",
+      "keywords": [
+        "energy",
+        "buildings",
+        "sensors"
+      ],
+      "landing_page": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1",
+      "license": "CC0 1.0",
+      "persistent_id": "doi:10.7910/DVN/QGDEMO1",
+      "subjects": [
+        "Engineering",
+        "Computer and Information Science"
+      ],
+      "title": "Bay Area building energy observations"
+    },
+    {
+      "authors": [
+        "QueryGraph Governance Lab"
+      ],
+      "description": "Sample Dataverse-shaped survey metadata for governed agent access.",
+      "files": [
+        {
+          "content_type": "text/tab-separated-values",
+          "description": "Survey responses.",
+          "download_url": "https://demo.dataverse.org/api/access/datafile/502",
+          "filename": "access_survey.tab",
+          "id": "502"
+        }
+      ],
+      "id": "1002",
+      "keywords": [
+        "access control",
+        "governance",
+        "survey"
+      ],
+      "landing_page": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO2",
+      "license": "CC BY 4.0",
+      "persistent_id": "doi:10.7910/DVN/QGDEMO2",
+      "subjects": [
+        "Social Sciences"
+      ],
+      "title": "Enterprise data access survey"
+    }
+  ],
+  "openLineage": {
+    "attestation": {
+      "created_at": "2026-09-13T09:52:54.455946733Z",
+      "event_hash": "9054e0d75f803fdda573846d9c1fbe027521d7c61a08367bb5155679c89c2367",
+      "issuer": "did:key:za7399d2719bc9aaba7b93d44388df3a0abea1822fcad991d4d0f869e7c272d5f",
+      "merkle_root": "c6deeaff179d563aa6023773ec8217f8773bcfc7aa3a2e6f0e7b35a04dbea84a",
+      "signature": "bd102b432a8958a1b90641cd20f1318a422cc6ecbee1fb7f650ceb0bdeb372e90c9906ed779c07618a1ab1f4b349b034181559adf9617e2d3356c1d4d67d8004",
+      "signature_type": "Ed25519Signature2020",
+      "signed_payload_sha256": "093d88188bb226b9061ac2ff1d4882468404318f7c9df06674900401a34cbb52",
+      "subject": "querygraph.dataverse.e2e",
+      "verification_method": "did:key:za7399d2719bc9aaba7b93d44388df3a0abea1822fcad991d4d0f869e7c272d5f#key-1"
+    },
+    "didLedgerAppend": {
+      "appended_at": "2026-09-13T09:52:54.540119651Z",
+      "merkle_root": "c6deeaff179d563aa6023773ec8217f8773bcfc7aa3a2e6f0e7b35a04dbea84a",
+      "path": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/attestations.jsonl",
+      "signature": "bd102b432a8958a1b90641cd20f1318a422cc6ecbee1fb7f650ceb0bdeb372e90c9906ed779c07618a1ab1f4b349b034181559adf9617e2d3356c1d4d67d8004",
+      "subject": "querygraph.dataverse.e2e"
+    },
+    "emissions": [
+      {
+        "emitted_at": "2026-09-13T09:52:54.464469433Z",
+        "event_hash": "9054e0d75f803fdda573846d9c1fbe027521d7c61a08367bb5155679c89c2367",
+        "http_status": null,
+        "path": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/events.jsonl",
+        "status": "appended",
+        "target": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/events.jsonl"
+      },
+      {
+        "emitted_at": "2026-09-13T09:52:54.539342868Z",
+        "event_hash": "9054e0d75f803fdda573846d9c1fbe027521d7c61a08367bb5155679c89c2367",
+        "http_status": null,
+        "path": null,
+        "status": "sail_appended",
+        "target": "sail://http://127.0.0.1:15051/qg_audit.openlineage_events"
+      }
+    ],
+    "event": {
+      "eventTime": "2026-09-13T09:52:54.455507071Z",
+      "eventType": "COMPLETE",
+      "inputs": [
+        {
+          "facets": {
+            "dataSource": {
+              "_producer": "https://querygraph.ai/qg-rust",
+              "_schemaURL": "https://openlineage.io/spec/facets/1-0-0/DatasourceDatasetFacet.json",
+              "name": "Dataverse",
+              "uri": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1"
+            }
+          },
+          "name": "doi:10.7910/DVN/QGDEMO1",
+          "namespace": "dataverse"
+        },
+        {
+          "facets": {
+            "dataSource": {
+              "_producer": "https://querygraph.ai/qg-rust",
+              "_schemaURL": "https://openlineage.io/spec/facets/1-0-0/DatasourceDatasetFacet.json",
+              "name": "Dataverse",
+              "uri": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO2"
+            }
+          },
+          "name": "doi:10.7910/DVN/QGDEMO2",
+          "namespace": "dataverse"
+        }
+      ],
+      "job": {
+        "facets": {
+          "queryGraph_semanticBundle": {
+            "_producer": "https://querygraph.ai/qg-rust",
+            "_schemaURL": "https://querygraph.ai/schemas/openlineage/querygraph-semantic-bundle-facet/0.1.0.json",
+            "bundleHash": "6530b1199cc74dd0d6276282379e9948d2484c575dc5b86cda11aa4eb7a95249",
+            "loadedEdges": 33,
+            "loadedNodes": 34,
+            "sailEndpoint": "http://127.0.0.1:15051"
+          }
+        },
+        "name": "dataverse-e2e-agent-answer",
+        "namespace": "querygraph.dataverse"
+      },
+      "outputs": [
+        {
+          "facets": {
+            "queryGraph_sailLoad": {
+              "_producer": "https://querygraph.ai/qg-rust",
+              "_schemaURL": "https://querygraph.ai/schemas/openlineage/querygraph-sail-load-facet/0.1.0.json",
+              "filesPath": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1001/files.jsonl",
+              "metadataPath": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1001/metadata.jsonl"
+            }
+          },
+          "name": "dataverse_1001",
+          "namespace": "sail"
+        },
+        {
+          "facets": {
+            "queryGraph_sailLoad": {
+              "_producer": "https://querygraph.ai/qg-rust",
+              "_schemaURL": "https://querygraph.ai/schemas/openlineage/querygraph-sail-load-facet/0.1.0.json",
+              "filesPath": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1002/files.jsonl",
+              "metadataPath": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1002/metadata.jsonl"
+            }
+          },
+          "name": "dataverse_1002",
+          "namespace": "sail"
+        }
+      ],
+      "producer": "https://querygraph.ai/qg-rust",
+      "run": {
+        "facets": {
+          "queryGraph_typeDid": {
+            "_producer": "https://querygraph.ai/qg-rust",
+            "_schemaURL": "https://querygraph.ai/schemas/openlineage/querygraph-typedid-facet/0.1.0.json",
+            "conversationId": "querygraph.dataverse.answer",
+            "payloadSha256": "1b55a8b1e98727870ceb195700b01b91169f95989719f718930d4ec075ace3b9",
+            "protocol": "typedid/a2a",
+            "signature": "f98fa2d648394144ed70e5d789f0b75981812a38fc0f0fdf7c6869024b9fd6c81132a51ccc8d719793c2361a07afe1fc238e664f7d37dc9ccb286083871a8e03"
+          }
+        },
+        "runId": "e8195911-5c14-59c3-a300-773a7b896e72"
+      },
+      "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json"
+    },
+    "eventHash": "9054e0d75f803fdda573846d9c1fbe027521d7c61a08367bb5155679c89c2367"
+  },
+  "osi": {
+    "semantic_model": {
+      "ai_context": "Use dataset descriptions, subjects, keywords, and governed Sail views to answer.",
+      "datasets": [
+        {
+          "ai_context": "Dataverse dataset doi:10.7910/DVN/QGDEMO1 with subjects Engineering, Computer and Information Science and keywords energy, buildings, sensors.",
+          "description": "Sample Dataverse-shaped energy observations for QueryGraph integration testing.",
+          "fields": [
+            {
+              "description": "Dataverse persistent dataset identifier.",
+              "expression": null,
+              "name": "dataset_persistent_id",
+              "semantic_type": "https://schema.org/identifier"
+            },
+            {
+              "description": "Dataverse file name.",
+              "expression": null,
+              "name": "file_name",
+              "semantic_type": "https://schema.org/name"
+            },
+            {
+              "description": "Dataverse file download URL.",
+              "expression": null,
+              "name": "download_url",
+              "semantic_type": "https://schema.org/contentUrl"
+            }
+          ],
+          "name": "bay_area_building_energy_observations",
+          "source": "sail.dataverse_1001"
+        },
+        {
+          "ai_context": "Dataverse dataset doi:10.7910/DVN/QGDEMO2 with subjects Social Sciences and keywords access control, governance, survey.",
+          "description": "Sample Dataverse-shaped survey metadata for governed agent access.",
+          "fields": [
+            {
+              "description": "Dataverse persistent dataset identifier.",
+              "expression": null,
+              "name": "dataset_persistent_id",
+              "semantic_type": "https://schema.org/identifier"
+            },
+            {
+              "description": "Dataverse file name.",
+              "expression": null,
+              "name": "file_name",
+              "semantic_type": "https://schema.org/name"
+            },
+            {
+              "description": "Dataverse file download URL.",
+              "expression": null,
+              "name": "download_url",
+              "semantic_type": "https://schema.org/contentUrl"
+            }
+          ],
+          "name": "enterprise_data_access_survey",
+          "source": "sail.dataverse_1002"
+        }
+      ],
+      "description": "Open Semantic Interchange model over Dataverse datasets staged in Sail.",
+      "metrics": [
+        {
+          "ai_context": "Use this to summarize the governed dataset set available to the agent.",
+          "description": "Number of governed Dataverse datasets in the Sail staging area.",
+          "expression": {
+            "dialects": [
+              {
+                "dialect": "SAIL_SQL",
+                "expression": "COUNT(DISTINCT dataset_persistent_id)"
+              }
+            ]
+          },
+          "name": "governed_dataset_count"
+        }
+      ],
+      "name": "querygraph_dataverse_navigator",
+      "ontology_terms": [
+        {
+          "id": "qg:ontology:energy",
+          "label": "energy",
+          "source": "dataverse-citation-metadata"
+        },
+        {
+          "id": "qg:ontology:buildings",
+          "label": "buildings",
+          "source": "dataverse-citation-metadata"
+        },
+        {
+          "id": "qg:ontology:sensors",
+          "label": "sensors",
+          "source": "dataverse-citation-metadata"
+        },
+        {
+          "id": "qg:ontology:engineering",
+          "label": "Engineering",
+          "source": "dataverse-citation-metadata"
+        },
+        {
+          "id": "qg:ontology:computer_and_information_science",
+          "label": "Computer and Information Science",
+          "source": "dataverse-citation-metadata"
+        },
+        {
+          "id": "qg:ontology:access_control",
+          "label": "access control",
+          "source": "dataverse-citation-metadata"
+        },
+        {
+          "id": "qg:ontology:governance",
+          "label": "governance",
+          "source": "dataverse-citation-metadata"
+        },
+        {
+          "id": "qg:ontology:survey",
+          "label": "survey",
+          "source": "dataverse-citation-metadata"
+        },
+        {
+          "id": "qg:ontology:social_sciences",
+          "label": "Social Sciences",
+          "source": "dataverse-citation-metadata"
+        }
+      ]
+    },
+    "version": "0.2.0.dev0"
+  },
+  "sail": {
+    "bootstrap_sql": [
+      "CREATE OR REPLACE TEMP VIEW dataverse_1001_metadata USING json OPTIONS (path '/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1001/metadata.jsonl');",
+      "CREATE OR REPLACE TEMP VIEW dataverse_1001_files USING json OPTIONS (path '/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1001/files.jsonl');",
+      "CREATE OR REPLACE TEMP VIEW dataverse_1002_metadata USING json OPTIONS (path '/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1002/metadata.jsonl');",
+      "CREATE OR REPLACE TEMP VIEW dataverse_1002_files USING json OPTIONS (path '/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1002/files.jsonl');"
+    ],
+    "graph": {
+      "cypher_dataset_count": 2,
+      "cypher_labels": [
+        "CdifDataElement",
+        "DataverseDataset",
+        "DataverseFile",
+        "NavigatorBundle",
+        "OntologyTerm",
+        "OsiDataset",
+        "OsiField",
+        "OsiMetric",
+        "OsiModel"
+      ],
+      "edges": 33,
+      "endpoint": "http://127.0.0.1:15051",
+      "loaded_edges": 33,
+      "loaded_nodes": 34,
+      "nodes": 34,
+      "verified_node_id": "dataverse:dataset:doi:10.7910/DVN/QGDEMO1",
+      "verified_node_label": "DataverseDataset",
+      "views": [
+        {
+          "rows": 1,
+          "view_name": "dataverse_1001_metadata"
+        },
+        {
+          "rows": 1,
+          "view_name": "dataverse_1001_files"
+        },
+        {
+          "rows": 1,
+          "view_name": "dataverse_1002_metadata"
+        },
+        {
+          "rows": 1,
+          "view_name": "dataverse_1002_files"
+        }
+      ]
+    },
+    "loads": [
+      {
+        "create_files_view_sql": "CREATE OR REPLACE TEMP VIEW dataverse_1001_files USING json OPTIONS (path '/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1001/files.jsonl');",
+        "create_metadata_view_sql": "CREATE OR REPLACE TEMP VIEW dataverse_1001_metadata USING json OPTIONS (path '/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1001/metadata.jsonl');",
+        "dataset_id": "doi:10.7910/DVN/QGDEMO1",
+        "files_path": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1001/files.jsonl",
+        "metadata_path": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1001/metadata.jsonl",
+        "table_name": "dataverse_1001"
+      },
+      {
+        "create_files_view_sql": "CREATE OR REPLACE TEMP VIEW dataverse_1002_files USING json OPTIONS (path '/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1002/files.jsonl');",
+        "create_metadata_view_sql": "CREATE OR REPLACE TEMP VIEW dataverse_1002_metadata USING json OPTIONS (path '/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1002/metadata.jsonl');",
+        "dataset_id": "doi:10.7910/DVN/QGDEMO2",
+        "files_path": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1002/files.jsonl",
+        "metadata_path": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail/dataverse_1002/metadata.jsonl",
+        "table_name": "dataverse_1002"
+      }
+    ],
+    "root": "/home/admin/querygraph-pinax-demo-20260913/reports/live-tO0mhuMG/sail"
+  }
+}

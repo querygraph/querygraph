@@ -1,0 +1,3123 @@
+{
+  "browser_errors": [],
+  "actions": {
+    "navigator": {
+      "result": {
+        "@context": {
+          "cdif": "https://cdif.codata.org/",
+          "cr": "http://mlcommons.org/croissant/",
+          "dcat": "http://www.w3.org/ns/dcat#",
+          "dct": "http://purl.org/dc/terms/",
+          "odrl": "http://www.w3.org/ns/odrl/2/",
+          "querygraph": "https://querygraph.ai/ns#",
+          "schema": "https://schema.org/"
+        },
+        "@type": "querygraph:AiNavigatorSemanticBundle",
+        "generatedAt": "2026-09-12T17:33:42.083114586Z",
+        "identity": {
+          "@context": [
+            "https://www.w3.org/ns/did/v1",
+            "https://w3id.org/security/suites/ed25519-2020/v1"
+          ],
+          "controller": "AI Navigator",
+          "id": "did:oyd:zQmciWcCbpqbsYcNPVzdQ4YqznbAK9kRsnNRDdXg5Z73qCe",
+          "public_key_multibase": "zFNru6TqKpt4ymk5pbCM5Bq4beqJ9nEDgLucfyv9nr98e",
+          "service_endpoint": "https://querygraph.ai/datasets/hazards"
+        },
+        "layers": {
+          "cdif": {
+            "@context": {
+              "cdif": "https://cdif.codata.org/",
+              "dcat": "http://www.w3.org/ns/dcat#",
+              "dct": "http://purl.org/dc/terms/",
+              "odrl": "http://www.w3.org/ns/odrl/2/"
+            },
+            "@id": "https://querygraph.ai/datasets/hazards/#dataset",
+            "@type": "dcat:Dataset",
+            "cdif:controlledVocabulary": [
+              "https://schema.org/about",
+              "https://schema.org/value",
+              "https://schema.org/citation"
+            ],
+            "cdif:dataElement": [
+              {
+                "@id": "https://querygraph.ai/datasets/hazards/#dataset/recordset/default/field/subject",
+                "@type": "cdif:DataElement",
+                "cdif:dataType": "sc:Text",
+                "cdif:recordSet": "https://querygraph.ai/datasets/hazards/#dataset/recordset/default",
+                "cdif:semanticType": "https://schema.org/about",
+                "dct:description": "Primary entity or observation subject",
+                "dct:title": "subject"
+              },
+              {
+                "@id": "https://querygraph.ai/datasets/hazards/#dataset/recordset/default/field/value",
+                "@type": "cdif:DataElement",
+                "cdif:dataType": "sc:Text",
+                "cdif:recordSet": "https://querygraph.ai/datasets/hazards/#dataset/recordset/default",
+                "cdif:semanticType": "https://schema.org/value",
+                "dct:description": "Observed value, label, or narrative",
+                "dct:title": "value"
+              },
+              {
+                "@id": "https://querygraph.ai/datasets/hazards/#dataset/recordset/default/field/source",
+                "@type": "cdif:DataElement",
+                "cdif:dataType": "sc:URL",
+                "cdif:recordSet": "https://querygraph.ai/datasets/hazards/#dataset/recordset/default",
+                "cdif:semanticType": "https://schema.org/citation",
+                "dct:description": "Evidence or provenance URL",
+                "dct:title": "source"
+              }
+            ],
+            "cdif:profile": [
+              "https://cdif.codata.org/profile/discovery",
+              "https://cdif.codata.org/profile/manifest",
+              "https://cdif.codata.org/profile/data-description",
+              "https://cdif.codata.org/profile/data-access",
+              "https://cdif.codata.org/profile/access-rights",
+              "https://cdif.codata.org/profile/controlled-vocabularies",
+              "https://cdif.codata.org/profile/data-integration",
+              "https://cdif.codata.org/profile/universals"
+            ],
+            "cdif:unit": [],
+            "dcat:accessService": {
+              "@type": "dcat:DataService",
+              "endpointURL": "https://querygraph.ai/datasets/hazards.csv"
+            },
+            "dcat:distribution": [
+              {
+                "@id": "https://querygraph.ai/datasets/hazards/#dataset/file/source",
+                "@type": "dcat:Distribution",
+                "dcat:downloadURL": "https://querygraph.ai/datasets/hazards.csv",
+                "dcat:mediaType": "application/octet-stream",
+                "dct:title": "source-data"
+              }
+            ],
+            "dcat:keyword": [
+              "AI Navigator",
+              "Croissant",
+              "CDIF",
+              "DID",
+              "ODRL"
+            ],
+            "dcat:landingPage": "https://querygraph.ai/datasets/hazards",
+            "dct:accessRights": {
+              "@id": "https://querygraph.ai/datasets/hazards/#dataset/policy/default",
+              "@type": "dct:RightsStatement",
+              "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+              "dct:license": "https://creativecommons.org/licenses/by/4.0/",
+              "odrl:policy": {
+                "@id": "https://querygraph.ai/datasets/hazards/#dataset/policy/default",
+                "@type": "odrl:Policy",
+                "odrl:assigner": "did:oyd:zQmciWcCbpqbsYcNPVzdQ4YqznbAK9kRsnNRDdXg5Z73qCe",
+                "odrl:permission": [
+                  {
+                    "odrl:action": "odrl:read",
+                    "odrl:assignee": "public",
+                    "odrl:constraint": "attribution required"
+                  },
+                  {
+                    "odrl:action": "querygraph:index",
+                    "odrl:assignee": "did:oyd:zQmciWcCbpqbsYcNPVzdQ4YqznbAK9kRsnNRDdXg5Z73qCe",
+                    "odrl:constraint": "local semantic indexing for AI Navigator"
+                  }
+                ],
+                "odrl:prohibition": [
+                  {
+                    "odrl:action": "odrl:derive",
+                    "odrl:assignee": "public",
+                    "odrl:constraint": "no model training without separate agreement"
+                  }
+                ],
+                "odrl:target": "https://querygraph.ai/datasets/hazards/#dataset"
+              }
+            },
+            "dct:description": "Controlled vocabulary with multilingual technical terms, access control, governance, and public safety labels",
+            "dct:spatial": null,
+            "dct:temporal": null,
+            "dct:title": "Hazard vocabulary"
+          },
+          "did": {
+            "@context": [
+              "https://www.w3.org/ns/did/v1",
+              "https://w3id.org/security/suites/ed25519-2020/v1"
+            ],
+            "controller": "AI Navigator",
+            "id": "did:oyd:zQmciWcCbpqbsYcNPVzdQ4YqznbAK9kRsnNRDdXg5Z73qCe",
+            "public_key_multibase": "zFNru6TqKpt4ymk5pbCM5Bq4beqJ9nEDgLucfyv9nr98e",
+            "service_endpoint": "https://querygraph.ai/datasets/hazards"
+          },
+          "odrl": {
+            "@id": "https://querygraph.ai/datasets/hazards/#dataset/policy/default",
+            "@type": "odrl:Policy",
+            "odrl:assigner": "did:oyd:zQmciWcCbpqbsYcNPVzdQ4YqznbAK9kRsnNRDdXg5Z73qCe",
+            "odrl:permission": [
+              {
+                "odrl:action": "odrl:read",
+                "odrl:assignee": "public",
+                "odrl:constraint": "attribution required"
+              },
+              {
+                "odrl:action": "querygraph:index",
+                "odrl:assignee": "did:oyd:zQmciWcCbpqbsYcNPVzdQ4YqznbAK9kRsnNRDdXg5Z73qCe",
+                "odrl:constraint": "local semantic indexing for AI Navigator"
+              }
+            ],
+            "odrl:prohibition": [
+              {
+                "odrl:action": "odrl:derive",
+                "odrl:assignee": "public",
+                "odrl:constraint": "no model training without separate agreement"
+              }
+            ],
+            "odrl:target": "https://querygraph.ai/datasets/hazards/#dataset"
+          },
+          "semanticCroissant": {
+            "@context": {
+              "@vocab": "https://schema.org/",
+              "cr": "http://mlcommons.org/croissant/",
+              "dcat": "http://www.w3.org/ns/dcat#",
+              "odrl": "http://www.w3.org/ns/odrl/2/"
+            },
+            "@id": "https://querygraph.ai/datasets/hazards/#dataset",
+            "@type": "cr:Dataset",
+            "creator": [
+              {
+                "@type": "Person",
+                "name": "QueryGraph"
+              }
+            ],
+            "description": "Controlled vocabulary with multilingual technical terms, access control, governance, and public safety labels",
+            "distribution": [
+              {
+                "@id": "https://querygraph.ai/datasets/hazards/#dataset/file/source",
+                "@type": "cr:FileObject",
+                "contentUrl": "https://querygraph.ai/datasets/hazards.csv",
+                "encodingFormat": "application/octet-stream",
+                "name": "source-data"
+              }
+            ],
+            "keywords": [
+              "AI Navigator",
+              "Croissant",
+              "CDIF",
+              "DID",
+              "ODRL"
+            ],
+            "license": "https://creativecommons.org/licenses/by/4.0/",
+            "name": "Hazard vocabulary",
+            "recordSet": [
+              {
+                "@id": "https://querygraph.ai/datasets/hazards/#dataset/recordset/default",
+                "@type": "cr:RecordSet",
+                "field": [
+                  {
+                    "@type": "cr:Field",
+                    "dataType": "sc:Text",
+                    "description": "Primary entity or observation subject",
+                    "name": "subject",
+                    "sameAs": "https://schema.org/about"
+                  },
+                  {
+                    "@type": "cr:Field",
+                    "dataType": "sc:Text",
+                    "description": "Observed value, label, or narrative",
+                    "name": "value",
+                    "sameAs": "https://schema.org/value"
+                  },
+                  {
+                    "@type": "cr:Field",
+                    "dataType": "sc:URL",
+                    "description": "Evidence or provenance URL",
+                    "name": "source",
+                    "sameAs": "https://schema.org/citation"
+                  }
+                ],
+                "name": "default observations"
+              }
+            ]
+          }
+        }
+      },
+      "status": "passed"
+    },
+    "qglake": {
+      "result": {
+        "did_attestation": {
+          "created_at": "2026-09-12T17:33:42.385266916Z",
+          "event_hash": "8ef54d99d7462b422ed5099f7bad9400fdc471a4f9ea172a1f521faba684d8d8",
+          "issuer": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1",
+          "merkle_root": "d0ad17a62a8393215bc8d25009193d14fd8816f9815e2689ba545a5111e41188",
+          "signature": "a184f28c8e3e7fb06f76603961d4109f1fefabe56b10ceed89ca7401f53c1a4f70ad5a339da46f81f59a16820fc259d7b172aa952943e265943ad85167652a0d",
+          "signature_type": "Ed25519Signature2020",
+          "signed_payload_sha256": "b57154ab9b37470b3d65c0d9f7e43a939145850f8baff013f6aca173494975ce",
+          "subject": "querygraph.qglake.story",
+          "verification_method": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1#key-1"
+        },
+        "generated_at": "2026-09-12T17:33:42.222989937Z",
+        "open_lineage": {
+          "eventTime": "2026-09-12T17:33:42.384720026Z",
+          "eventType": "COMPLETE",
+          "inputs": [
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": true,
+                  "compartment": "compartment:finance"
+                }
+              },
+              "name": "qg_lakehouse.government_finance__countydata",
+              "namespace": "sail"
+            },
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": true,
+                  "compartment": "compartment:finance"
+                }
+              },
+              "name": "qg_lakehouse.government_finance__municipaldata",
+              "namespace": "sail"
+            },
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": true,
+                  "compartment": "compartment:energy"
+                }
+              },
+              "name": "qg_lakehouse.energy_insecurity_covid__replication_survey",
+              "namespace": "sail"
+            },
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": true,
+                  "compartment": "compartment:energy"
+                }
+              },
+              "name": "qg_lakehouse.access_2018_energy__ceew_access2018",
+              "namespace": "sail"
+            },
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": true,
+                  "compartment": "compartment:mobility"
+                }
+              },
+              "name": "qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1",
+              "namespace": "sail"
+            },
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": true,
+                  "compartment": "compartment:mobility"
+                }
+              },
+              "name": "qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx",
+              "namespace": "sail"
+            },
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": true,
+                  "compartment": "compartment:climate-health"
+                }
+              },
+              "name": "qg_lakehouse.climate_health_pathways__imhdss_climate_mortality",
+              "namespace": "sail"
+            },
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": true,
+                  "compartment": "compartment:reference"
+                }
+              },
+              "name": "qg_lakehouse.codata_constants_2022__codata_constants_2022",
+              "namespace": "sail"
+            },
+            {
+              "facets": {
+                "queryGraph_compartment": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-compartment/0.1.0.json",
+                  "accessAllowed": false,
+                  "compartment": "compartment:restricted:raw"
+                }
+              },
+              "name": "qg_lakehouse.haalsi_baseline__restricted_raw",
+              "namespace": "sail"
+            }
+          ],
+          "job": {
+            "name": "resilience-desk-supervised-agent-briefing",
+            "namespace": "querygraph.qglake"
+          },
+          "outputs": [
+            {
+              "facets": {
+                "queryGraph_signedSummaries": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-signed-summaries/0.1.0.json",
+                  "briefing": "Priority areas are those where weak fiscal capacity, energy burden, mobility fragility, and climate-health exposure overlap. Restricted health data contributed only a signed metadata/denial receipt, so the briefing uses approved compartment summaries rather than raw restricted rows.",
+                  "summaryPayloads": [
+                    "a214cc567269fbe451cd6d21448b5ae492ce8bd9c9817e9cc4406e882591cac6",
+                    "397e94c09a19c96fe08af774eec476db4c68448e5e622714602dc8501c788403",
+                    "abc545ecb41d51f350353aa8362b7c8df1e001b2834d7dd785174a29da85aaeb",
+                    "a98be5b04d353c7ce5435a6927bce19540a192172bc654b9b8a0927a1b904c43",
+                    "07f4bf568f56a0cfbac3aa2ef970d829eb1a59312b1920920b45c7e14bac1971",
+                    "19e9a6a566a2413ffd08181d09c6cadcff19d9ee6d043a91f14113910cf0ba05"
+                  ]
+                }
+              },
+              "name": "qglake.resilience-desk.briefing",
+              "namespace": "querygraph"
+            }
+          ],
+          "producer": "https://querygraph.ai/qg-rust",
+          "run": {
+            "facets": {
+              "queryGraph_typeDidHierarchy": {
+                "_producer": "https://querygraph.ai/qg-rust",
+                "_schemaURL": "https://querygraph.ai/schemas/openlineage/qglake-agent-hierarchy/0.1.0.json",
+                "specialists": [
+                  "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie",
+                  "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw",
+                  "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe",
+                  "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh",
+                  "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2",
+                  "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb"
+                ],
+                "supervisor": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+                "synthesis": "did:oyd:zQmPRVZEKbd1i7Y5RGCCPcx7ucCsgfeiiHrL4JmStCA6pvh"
+              }
+            },
+            "runId": "47c15299-55ff-56c8-8e6d-60eff79e25bf"
+          },
+          "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json"
+        },
+        "policies": [
+          {
+            "assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+            "id": "urn:qglake:policy:compartment-finance",
+            "permissions": [
+              {
+                "action": "Read",
+                "assignee": "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie",
+                "constraint": "FinanceAgent may produce fiscal-capacity summary; raw rows stay inside compartment:finance"
+              }
+            ],
+            "prohibitions": [
+              {
+                "action": "Use",
+                "assignee": "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie",
+                "constraint": "No unrestricted export of raw rows."
+              }
+            ],
+            "target": "compartment:finance"
+          },
+          {
+            "assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+            "id": "urn:qglake:policy:compartment-energy",
+            "permissions": [
+              {
+                "action": "Derive",
+                "assignee": "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw",
+                "constraint": "EnergyAgent may produce energy-burden summary; raw rows stay inside compartment:energy"
+              }
+            ],
+            "prohibitions": [
+              {
+                "action": "Use",
+                "assignee": "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw",
+                "constraint": "No unrestricted export of raw rows."
+              }
+            ],
+            "target": "compartment:energy"
+          },
+          {
+            "assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+            "id": "urn:qglake:policy:compartment-mobility",
+            "permissions": [
+              {
+                "action": "Derive",
+                "assignee": "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe",
+                "constraint": "MobilityAgent may produce mobility-disruption summary; raw rows stay inside compartment:mobility"
+              }
+            ],
+            "prohibitions": [
+              {
+                "action": "Use",
+                "assignee": "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe",
+                "constraint": "No unrestricted export of raw rows."
+              }
+            ],
+            "target": "compartment:mobility"
+          },
+          {
+            "assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+            "id": "urn:qglake:policy:compartment-climate-health",
+            "permissions": [
+              {
+                "action": "Derive",
+                "assignee": "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh",
+                "constraint": "ClimateHealthAgent may produce climate-health risk summary; raw rows stay inside compartment:climate-health"
+              }
+            ],
+            "prohibitions": [
+              {
+                "action": "Use",
+                "assignee": "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh",
+                "constraint": "No unrestricted export of raw rows."
+              }
+            ],
+            "target": "compartment:climate-health"
+          },
+          {
+            "assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+            "id": "urn:qglake:policy:compartment-reference",
+            "permissions": [
+              {
+                "action": "Read",
+                "assignee": "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2",
+                "constraint": "ReferenceAgent may produce unit and vocabulary normalization summary; raw rows stay inside compartment:reference"
+              }
+            ],
+            "prohibitions": [
+              {
+                "action": "Use",
+                "assignee": "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2",
+                "constraint": "No unrestricted export of raw rows."
+              }
+            ],
+            "target": "compartment:reference"
+          },
+          {
+            "assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+            "id": "urn:qglake:policy:compartment-restricted-raw",
+            "permissions": [
+              {
+                "action": "Read",
+                "assignee": "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb",
+                "constraint": "RestrictedDataBroker may produce restricted-data denial receipt; raw rows stay inside compartment:restricted:raw"
+              }
+            ],
+            "prohibitions": [
+              {
+                "action": "Read",
+                "assignee": "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb",
+                "constraint": "Raw restricted data requires external credential and explicit approval."
+              }
+            ],
+            "target": "compartment:restricted:raw"
+          }
+        ],
+        "question": "Where do fiscal capacity, energy burden, mobility disruption, and climate-health risk overlap?",
+        "rbac": {
+          "assignments": {
+            "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe": [
+              "mobility-specialist"
+            ],
+            "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi": [
+              "supervisor"
+            ],
+            "did:oyd:zQmPRVZEKbd1i7Y5RGCCPcx7ucCsgfeiiHrL4JmStCA6pvh": [
+              "synthesis"
+            ],
+            "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie": [
+              "finance-specialist"
+            ],
+            "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb": [
+              "restricted-broker"
+            ],
+            "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw": [
+              "energy-specialist"
+            ],
+            "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2": [
+              "reference-specialist"
+            ],
+            "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh": [
+              "climate-health-specialist"
+            ]
+          },
+          "roles": {
+            "climate-health-specialist": {
+              "id": "climate-health-specialist",
+              "permissions": [
+                {
+                  "action": "summarize",
+                  "resource": "compartment:climate-health"
+                }
+              ]
+            },
+            "energy-specialist": {
+              "id": "energy-specialist",
+              "permissions": [
+                {
+                  "action": "summarize",
+                  "resource": "compartment:energy"
+                }
+              ]
+            },
+            "finance-specialist": {
+              "id": "finance-specialist",
+              "permissions": [
+                {
+                  "action": "read",
+                  "resource": "compartment:finance"
+                }
+              ]
+            },
+            "mobility-specialist": {
+              "id": "mobility-specialist",
+              "permissions": [
+                {
+                  "action": "summarize",
+                  "resource": "compartment:mobility"
+                }
+              ]
+            },
+            "reference-specialist": {
+              "id": "reference-specialist",
+              "permissions": [
+                {
+                  "action": "normalize",
+                  "resource": "compartment:reference"
+                }
+              ]
+            },
+            "restricted-broker": {
+              "id": "restricted-broker",
+              "permissions": [
+                {
+                  "action": "read",
+                  "resource": "compartment:restricted:metadata"
+                }
+              ]
+            },
+            "supervisor": {
+              "id": "supervisor",
+              "permissions": [
+                {
+                  "action": "delegate",
+                  "resource": "agents:*"
+                },
+                {
+                  "action": "aggregate",
+                  "resource": "summaries:*"
+                }
+              ]
+            },
+            "synthesis": {
+              "id": "synthesis",
+              "permissions": [
+                {
+                  "action": "aggregate",
+                  "resource": "summaries:*"
+                }
+              ]
+            }
+          }
+        },
+        "semantic_catalog": [
+          {
+            "cdif": {
+              "@context": {
+                "cdif": "https://cdif.codata.org/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "dct": "http://purl.org/dc/terms/",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:finance",
+              "@type": "dcat:Dataset",
+              "cdif:controlledVocabulary": [
+                "https://schema.org/spatialCoverage",
+                "https://schema.org/variableMeasured",
+                "https://schema.org/conditionsOfAccess"
+              ],
+              "cdif:dataElement": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:finance/recordset/summary/field/geography",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:finance/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/spatialCoverage",
+                  "dct:description": "Approved geographic aggregation key",
+                  "dct:title": "geography"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:finance/recordset/summary/field/risk_signal",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:finance/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/variableMeasured",
+                  "dct:description": "Compartment risk signal",
+                  "dct:title": "risk_signal"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:finance/recordset/summary/field/policy_receipt",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:finance/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/conditionsOfAccess",
+                  "dct:description": "RBAC, ODRL, and TypeDID evidence",
+                  "dct:title": "policy_receipt"
+                }
+              ],
+              "cdif:profile": [
+                "https://cdif.codata.org/profile/discovery",
+                "https://cdif.codata.org/profile/manifest",
+                "https://cdif.codata.org/profile/data-description",
+                "https://cdif.codata.org/profile/data-access",
+                "https://cdif.codata.org/profile/access-rights",
+                "https://cdif.codata.org/profile/controlled-vocabularies",
+                "https://cdif.codata.org/profile/data-integration",
+                "https://cdif.codata.org/profile/universals"
+              ],
+              "cdif:unit": [],
+              "dcat:accessService": {
+                "@type": "dcat:DataService",
+                "endpointURL": "sail://qg_lakehouse/compartment_finance"
+              },
+              "dcat:distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:finance/file/qg_lakehouse.government_finance__countydata",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.government_finance__countydata",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.government_finance__countydata"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:finance/file/qg_lakehouse.government_finance__municipaldata",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.government_finance__municipaldata",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.government_finance__municipaldata"
+                }
+              ],
+              "dcat:keyword": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:finance"
+              ],
+              "dcat:landingPage": "https://querygraph.ai/qglake/compartment:finance",
+              "dct:accessRights": {
+                "@id": null,
+                "@type": "dct:RightsStatement",
+                "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+                "dct:license": "Policy governed enterprise lakehouse access",
+                "odrl:policy": null
+              },
+              "dct:description": "Semantic Croissant compartment for FinanceAgent over qg_lakehouse.government_finance__countydata, qg_lakehouse.government_finance__municipaldata.",
+              "dct:spatial": null,
+              "dct:temporal": null,
+              "dct:title": "QGLake fiscal-capacity summary"
+            },
+            "compartment": "compartment:finance",
+            "croissant": {
+              "@context": {
+                "@vocab": "https://schema.org/",
+                "cr": "http://mlcommons.org/croissant/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:finance",
+              "@type": "cr:Dataset",
+              "creator": [
+                {
+                  "@type": "Person",
+                  "name": "QueryGraph"
+                },
+                {
+                  "@type": "Person",
+                  "name": "FinanceAgent"
+                }
+              ],
+              "description": "Semantic Croissant compartment for FinanceAgent over qg_lakehouse.government_finance__countydata, qg_lakehouse.government_finance__municipaldata.",
+              "distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:finance/file/qg_lakehouse.government_finance__countydata",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.government_finance__countydata",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.government_finance__countydata"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:finance/file/qg_lakehouse.government_finance__municipaldata",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.government_finance__municipaldata",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.government_finance__municipaldata"
+                }
+              ],
+              "keywords": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:finance"
+              ],
+              "license": "Policy governed enterprise lakehouse access",
+              "name": "QGLake fiscal-capacity summary",
+              "recordSet": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:finance/recordset/summary",
+                  "@type": "cr:RecordSet",
+                  "field": [
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Approved geographic aggregation key",
+                      "name": "geography",
+                      "sameAs": "https://schema.org/spatialCoverage"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Compartment risk signal",
+                      "name": "risk_signal",
+                      "sameAs": "https://schema.org/variableMeasured"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "RBAC, ODRL, and TypeDID evidence",
+                      "name": "policy_receipt",
+                      "sameAs": "https://schema.org/conditionsOfAccess"
+                    }
+                  ],
+                  "name": "fiscal-capacity summary"
+                }
+              ]
+            },
+            "odrl": {
+              "@id": "urn:qglake:policy:compartment-finance",
+              "@type": "odrl:Policy",
+              "odrl:assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+              "odrl:permission": [
+                {
+                  "odrl:action": "odrl:read",
+                  "odrl:assignee": "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie",
+                  "odrl:constraint": "FinanceAgent may produce fiscal-capacity summary; raw rows stay inside compartment:finance"
+                }
+              ],
+              "odrl:prohibition": [
+                {
+                  "odrl:action": "odrl:use",
+                  "odrl:assignee": "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie",
+                  "odrl:constraint": "No unrestricted export of raw rows."
+                }
+              ],
+              "odrl:target": "compartment:finance"
+            }
+          },
+          {
+            "cdif": {
+              "@context": {
+                "cdif": "https://cdif.codata.org/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "dct": "http://purl.org/dc/terms/",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:energy",
+              "@type": "dcat:Dataset",
+              "cdif:controlledVocabulary": [
+                "https://schema.org/spatialCoverage",
+                "https://schema.org/variableMeasured",
+                "https://schema.org/conditionsOfAccess"
+              ],
+              "cdif:dataElement": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:energy/recordset/summary/field/geography",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:energy/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/spatialCoverage",
+                  "dct:description": "Approved geographic aggregation key",
+                  "dct:title": "geography"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:energy/recordset/summary/field/risk_signal",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:energy/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/variableMeasured",
+                  "dct:description": "Compartment risk signal",
+                  "dct:title": "risk_signal"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:energy/recordset/summary/field/policy_receipt",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:energy/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/conditionsOfAccess",
+                  "dct:description": "RBAC, ODRL, and TypeDID evidence",
+                  "dct:title": "policy_receipt"
+                }
+              ],
+              "cdif:profile": [
+                "https://cdif.codata.org/profile/discovery",
+                "https://cdif.codata.org/profile/manifest",
+                "https://cdif.codata.org/profile/data-description",
+                "https://cdif.codata.org/profile/data-access",
+                "https://cdif.codata.org/profile/access-rights",
+                "https://cdif.codata.org/profile/controlled-vocabularies",
+                "https://cdif.codata.org/profile/data-integration",
+                "https://cdif.codata.org/profile/universals"
+              ],
+              "cdif:unit": [],
+              "dcat:accessService": {
+                "@type": "dcat:DataService",
+                "endpointURL": "sail://qg_lakehouse/compartment_energy"
+              },
+              "dcat:distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:energy/file/qg_lakehouse.energy_insecurity_covid__replication_survey",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.energy_insecurity_covid__replication_survey",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.energy_insecurity_covid__replication_survey"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:energy/file/qg_lakehouse.access_2018_energy__ceew_access2018",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.access_2018_energy__ceew_access2018",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.access_2018_energy__ceew_access2018"
+                }
+              ],
+              "dcat:keyword": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:energy"
+              ],
+              "dcat:landingPage": "https://querygraph.ai/qglake/compartment:energy",
+              "dct:accessRights": {
+                "@id": null,
+                "@type": "dct:RightsStatement",
+                "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+                "dct:license": "Policy governed enterprise lakehouse access",
+                "odrl:policy": null
+              },
+              "dct:description": "Semantic Croissant compartment for EnergyAgent over qg_lakehouse.energy_insecurity_covid__replication_survey, qg_lakehouse.access_2018_energy__ceew_access2018.",
+              "dct:spatial": null,
+              "dct:temporal": null,
+              "dct:title": "QGLake energy-burden summary"
+            },
+            "compartment": "compartment:energy",
+            "croissant": {
+              "@context": {
+                "@vocab": "https://schema.org/",
+                "cr": "http://mlcommons.org/croissant/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:energy",
+              "@type": "cr:Dataset",
+              "creator": [
+                {
+                  "@type": "Person",
+                  "name": "QueryGraph"
+                },
+                {
+                  "@type": "Person",
+                  "name": "EnergyAgent"
+                }
+              ],
+              "description": "Semantic Croissant compartment for EnergyAgent over qg_lakehouse.energy_insecurity_covid__replication_survey, qg_lakehouse.access_2018_energy__ceew_access2018.",
+              "distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:energy/file/qg_lakehouse.energy_insecurity_covid__replication_survey",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.energy_insecurity_covid__replication_survey",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.energy_insecurity_covid__replication_survey"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:energy/file/qg_lakehouse.access_2018_energy__ceew_access2018",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.access_2018_energy__ceew_access2018",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.access_2018_energy__ceew_access2018"
+                }
+              ],
+              "keywords": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:energy"
+              ],
+              "license": "Policy governed enterprise lakehouse access",
+              "name": "QGLake energy-burden summary",
+              "recordSet": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:energy/recordset/summary",
+                  "@type": "cr:RecordSet",
+                  "field": [
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Approved geographic aggregation key",
+                      "name": "geography",
+                      "sameAs": "https://schema.org/spatialCoverage"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Compartment risk signal",
+                      "name": "risk_signal",
+                      "sameAs": "https://schema.org/variableMeasured"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "RBAC, ODRL, and TypeDID evidence",
+                      "name": "policy_receipt",
+                      "sameAs": "https://schema.org/conditionsOfAccess"
+                    }
+                  ],
+                  "name": "energy-burden summary"
+                }
+              ]
+            },
+            "odrl": {
+              "@id": "urn:qglake:policy:compartment-energy",
+              "@type": "odrl:Policy",
+              "odrl:assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+              "odrl:permission": [
+                {
+                  "odrl:action": "odrl:derive",
+                  "odrl:assignee": "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw",
+                  "odrl:constraint": "EnergyAgent may produce energy-burden summary; raw rows stay inside compartment:energy"
+                }
+              ],
+              "odrl:prohibition": [
+                {
+                  "odrl:action": "odrl:use",
+                  "odrl:assignee": "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw",
+                  "odrl:constraint": "No unrestricted export of raw rows."
+                }
+              ],
+              "odrl:target": "compartment:energy"
+            }
+          },
+          {
+            "cdif": {
+              "@context": {
+                "cdif": "https://cdif.codata.org/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "dct": "http://purl.org/dc/terms/",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:mobility",
+              "@type": "dcat:Dataset",
+              "cdif:controlledVocabulary": [
+                "https://schema.org/spatialCoverage",
+                "https://schema.org/variableMeasured",
+                "https://schema.org/conditionsOfAccess"
+              ],
+              "cdif:dataElement": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:mobility/recordset/summary/field/geography",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:mobility/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/spatialCoverage",
+                  "dct:description": "Approved geographic aggregation key",
+                  "dct:title": "geography"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:mobility/recordset/summary/field/risk_signal",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:mobility/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/variableMeasured",
+                  "dct:description": "Compartment risk signal",
+                  "dct:title": "risk_signal"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:mobility/recordset/summary/field/policy_receipt",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:mobility/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/conditionsOfAccess",
+                  "dct:description": "RBAC, ODRL, and TypeDID evidence",
+                  "dct:title": "policy_receipt"
+                }
+              ],
+              "cdif:profile": [
+                "https://cdif.codata.org/profile/discovery",
+                "https://cdif.codata.org/profile/manifest",
+                "https://cdif.codata.org/profile/data-description",
+                "https://cdif.codata.org/profile/data-access",
+                "https://cdif.codata.org/profile/access-rights",
+                "https://cdif.codata.org/profile/controlled-vocabularies",
+                "https://cdif.codata.org/profile/data-integration",
+                "https://cdif.codata.org/profile/universals"
+              ],
+              "cdif:unit": [],
+              "dcat:accessService": {
+                "@type": "dcat:DataService",
+                "endpointURL": "sail://qg_lakehouse/compartment_mobility"
+              },
+              "dcat:distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:mobility/file/qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:mobility/file/qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx"
+                }
+              ],
+              "dcat:keyword": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:mobility"
+              ],
+              "dcat:landingPage": "https://querygraph.ai/qglake/compartment:mobility",
+              "dct:accessRights": {
+                "@id": null,
+                "@type": "dct:RightsStatement",
+                "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+                "dct:license": "Policy governed enterprise lakehouse access",
+                "odrl:policy": null
+              },
+              "dct:description": "Semantic Croissant compartment for MobilityAgent over qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1, qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx.",
+              "dct:spatial": null,
+              "dct:temporal": null,
+              "dct:title": "QGLake mobility-disruption summary"
+            },
+            "compartment": "compartment:mobility",
+            "croissant": {
+              "@context": {
+                "@vocab": "https://schema.org/",
+                "cr": "http://mlcommons.org/croissant/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:mobility",
+              "@type": "cr:Dataset",
+              "creator": [
+                {
+                  "@type": "Person",
+                  "name": "QueryGraph"
+                },
+                {
+                  "@type": "Person",
+                  "name": "MobilityAgent"
+                }
+              ],
+              "description": "Semantic Croissant compartment for MobilityAgent over qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1, qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx.",
+              "distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:mobility/file/qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:mobility/file/qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx"
+                }
+              ],
+              "keywords": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:mobility"
+              ],
+              "license": "Policy governed enterprise lakehouse access",
+              "name": "QGLake mobility-disruption summary",
+              "recordSet": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:mobility/recordset/summary",
+                  "@type": "cr:RecordSet",
+                  "field": [
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Approved geographic aggregation key",
+                      "name": "geography",
+                      "sameAs": "https://schema.org/spatialCoverage"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Compartment risk signal",
+                      "name": "risk_signal",
+                      "sameAs": "https://schema.org/variableMeasured"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "RBAC, ODRL, and TypeDID evidence",
+                      "name": "policy_receipt",
+                      "sameAs": "https://schema.org/conditionsOfAccess"
+                    }
+                  ],
+                  "name": "mobility-disruption summary"
+                }
+              ]
+            },
+            "odrl": {
+              "@id": "urn:qglake:policy:compartment-mobility",
+              "@type": "odrl:Policy",
+              "odrl:assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+              "odrl:permission": [
+                {
+                  "odrl:action": "odrl:derive",
+                  "odrl:assignee": "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe",
+                  "odrl:constraint": "MobilityAgent may produce mobility-disruption summary; raw rows stay inside compartment:mobility"
+                }
+              ],
+              "odrl:prohibition": [
+                {
+                  "odrl:action": "odrl:use",
+                  "odrl:assignee": "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe",
+                  "odrl:constraint": "No unrestricted export of raw rows."
+                }
+              ],
+              "odrl:target": "compartment:mobility"
+            }
+          },
+          {
+            "cdif": {
+              "@context": {
+                "cdif": "https://cdif.codata.org/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "dct": "http://purl.org/dc/terms/",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:climate-health",
+              "@type": "dcat:Dataset",
+              "cdif:controlledVocabulary": [
+                "https://schema.org/spatialCoverage",
+                "https://schema.org/variableMeasured",
+                "https://schema.org/conditionsOfAccess"
+              ],
+              "cdif:dataElement": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:climate-health/recordset/summary/field/geography",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:climate-health/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/spatialCoverage",
+                  "dct:description": "Approved geographic aggregation key",
+                  "dct:title": "geography"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:climate-health/recordset/summary/field/risk_signal",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:climate-health/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/variableMeasured",
+                  "dct:description": "Compartment risk signal",
+                  "dct:title": "risk_signal"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:climate-health/recordset/summary/field/policy_receipt",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:climate-health/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/conditionsOfAccess",
+                  "dct:description": "RBAC, ODRL, and TypeDID evidence",
+                  "dct:title": "policy_receipt"
+                }
+              ],
+              "cdif:profile": [
+                "https://cdif.codata.org/profile/discovery",
+                "https://cdif.codata.org/profile/manifest",
+                "https://cdif.codata.org/profile/data-description",
+                "https://cdif.codata.org/profile/data-access",
+                "https://cdif.codata.org/profile/access-rights",
+                "https://cdif.codata.org/profile/controlled-vocabularies",
+                "https://cdif.codata.org/profile/data-integration",
+                "https://cdif.codata.org/profile/universals"
+              ],
+              "cdif:unit": [],
+              "dcat:accessService": {
+                "@type": "dcat:DataService",
+                "endpointURL": "sail://qg_lakehouse/compartment_climate-health"
+              },
+              "dcat:distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:climate-health/file/qg_lakehouse.climate_health_pathways__imhdss_climate_mortality",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.climate_health_pathways__imhdss_climate_mortality",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.climate_health_pathways__imhdss_climate_mortality"
+                }
+              ],
+              "dcat:keyword": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:climate-health"
+              ],
+              "dcat:landingPage": "https://querygraph.ai/qglake/compartment:climate-health",
+              "dct:accessRights": {
+                "@id": null,
+                "@type": "dct:RightsStatement",
+                "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+                "dct:license": "Policy governed enterprise lakehouse access",
+                "odrl:policy": null
+              },
+              "dct:description": "Semantic Croissant compartment for ClimateHealthAgent over qg_lakehouse.climate_health_pathways__imhdss_climate_mortality.",
+              "dct:spatial": null,
+              "dct:temporal": null,
+              "dct:title": "QGLake climate-health risk summary"
+            },
+            "compartment": "compartment:climate-health",
+            "croissant": {
+              "@context": {
+                "@vocab": "https://schema.org/",
+                "cr": "http://mlcommons.org/croissant/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:climate-health",
+              "@type": "cr:Dataset",
+              "creator": [
+                {
+                  "@type": "Person",
+                  "name": "QueryGraph"
+                },
+                {
+                  "@type": "Person",
+                  "name": "ClimateHealthAgent"
+                }
+              ],
+              "description": "Semantic Croissant compartment for ClimateHealthAgent over qg_lakehouse.climate_health_pathways__imhdss_climate_mortality.",
+              "distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:climate-health/file/qg_lakehouse.climate_health_pathways__imhdss_climate_mortality",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.climate_health_pathways__imhdss_climate_mortality",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.climate_health_pathways__imhdss_climate_mortality"
+                }
+              ],
+              "keywords": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:climate-health"
+              ],
+              "license": "Policy governed enterprise lakehouse access",
+              "name": "QGLake climate-health risk summary",
+              "recordSet": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:climate-health/recordset/summary",
+                  "@type": "cr:RecordSet",
+                  "field": [
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Approved geographic aggregation key",
+                      "name": "geography",
+                      "sameAs": "https://schema.org/spatialCoverage"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Compartment risk signal",
+                      "name": "risk_signal",
+                      "sameAs": "https://schema.org/variableMeasured"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "RBAC, ODRL, and TypeDID evidence",
+                      "name": "policy_receipt",
+                      "sameAs": "https://schema.org/conditionsOfAccess"
+                    }
+                  ],
+                  "name": "climate-health risk summary"
+                }
+              ]
+            },
+            "odrl": {
+              "@id": "urn:qglake:policy:compartment-climate-health",
+              "@type": "odrl:Policy",
+              "odrl:assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+              "odrl:permission": [
+                {
+                  "odrl:action": "odrl:derive",
+                  "odrl:assignee": "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh",
+                  "odrl:constraint": "ClimateHealthAgent may produce climate-health risk summary; raw rows stay inside compartment:climate-health"
+                }
+              ],
+              "odrl:prohibition": [
+                {
+                  "odrl:action": "odrl:use",
+                  "odrl:assignee": "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh",
+                  "odrl:constraint": "No unrestricted export of raw rows."
+                }
+              ],
+              "odrl:target": "compartment:climate-health"
+            }
+          },
+          {
+            "cdif": {
+              "@context": {
+                "cdif": "https://cdif.codata.org/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "dct": "http://purl.org/dc/terms/",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:reference",
+              "@type": "dcat:Dataset",
+              "cdif:controlledVocabulary": [
+                "https://schema.org/spatialCoverage",
+                "https://schema.org/variableMeasured",
+                "https://schema.org/conditionsOfAccess"
+              ],
+              "cdif:dataElement": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:reference/recordset/summary/field/geography",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:reference/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/spatialCoverage",
+                  "dct:description": "Approved geographic aggregation key",
+                  "dct:title": "geography"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:reference/recordset/summary/field/risk_signal",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:reference/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/variableMeasured",
+                  "dct:description": "Compartment risk signal",
+                  "dct:title": "risk_signal"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:reference/recordset/summary/field/policy_receipt",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:reference/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/conditionsOfAccess",
+                  "dct:description": "RBAC, ODRL, and TypeDID evidence",
+                  "dct:title": "policy_receipt"
+                }
+              ],
+              "cdif:profile": [
+                "https://cdif.codata.org/profile/discovery",
+                "https://cdif.codata.org/profile/manifest",
+                "https://cdif.codata.org/profile/data-description",
+                "https://cdif.codata.org/profile/data-access",
+                "https://cdif.codata.org/profile/access-rights",
+                "https://cdif.codata.org/profile/controlled-vocabularies",
+                "https://cdif.codata.org/profile/data-integration",
+                "https://cdif.codata.org/profile/universals"
+              ],
+              "cdif:unit": [],
+              "dcat:accessService": {
+                "@type": "dcat:DataService",
+                "endpointURL": "sail://qg_lakehouse/compartment_reference"
+              },
+              "dcat:distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:reference/file/qg_lakehouse.codata_constants_2022__codata_constants_2022",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.codata_constants_2022__codata_constants_2022",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.codata_constants_2022__codata_constants_2022"
+                }
+              ],
+              "dcat:keyword": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:reference"
+              ],
+              "dcat:landingPage": "https://querygraph.ai/qglake/compartment:reference",
+              "dct:accessRights": {
+                "@id": null,
+                "@type": "dct:RightsStatement",
+                "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+                "dct:license": "Policy governed enterprise lakehouse access",
+                "odrl:policy": null
+              },
+              "dct:description": "Semantic Croissant compartment for ReferenceAgent over qg_lakehouse.codata_constants_2022__codata_constants_2022.",
+              "dct:spatial": null,
+              "dct:temporal": null,
+              "dct:title": "QGLake unit and vocabulary normalization summary"
+            },
+            "compartment": "compartment:reference",
+            "croissant": {
+              "@context": {
+                "@vocab": "https://schema.org/",
+                "cr": "http://mlcommons.org/croissant/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:reference",
+              "@type": "cr:Dataset",
+              "creator": [
+                {
+                  "@type": "Person",
+                  "name": "QueryGraph"
+                },
+                {
+                  "@type": "Person",
+                  "name": "ReferenceAgent"
+                }
+              ],
+              "description": "Semantic Croissant compartment for ReferenceAgent over qg_lakehouse.codata_constants_2022__codata_constants_2022.",
+              "distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:reference/file/qg_lakehouse.codata_constants_2022__codata_constants_2022",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.codata_constants_2022__codata_constants_2022",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.codata_constants_2022__codata_constants_2022"
+                }
+              ],
+              "keywords": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:reference"
+              ],
+              "license": "Policy governed enterprise lakehouse access",
+              "name": "QGLake unit and vocabulary normalization summary",
+              "recordSet": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:reference/recordset/summary",
+                  "@type": "cr:RecordSet",
+                  "field": [
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Approved geographic aggregation key",
+                      "name": "geography",
+                      "sameAs": "https://schema.org/spatialCoverage"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Compartment risk signal",
+                      "name": "risk_signal",
+                      "sameAs": "https://schema.org/variableMeasured"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "RBAC, ODRL, and TypeDID evidence",
+                      "name": "policy_receipt",
+                      "sameAs": "https://schema.org/conditionsOfAccess"
+                    }
+                  ],
+                  "name": "unit and vocabulary normalization summary"
+                }
+              ]
+            },
+            "odrl": {
+              "@id": "urn:qglake:policy:compartment-reference",
+              "@type": "odrl:Policy",
+              "odrl:assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+              "odrl:permission": [
+                {
+                  "odrl:action": "odrl:read",
+                  "odrl:assignee": "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2",
+                  "odrl:constraint": "ReferenceAgent may produce unit and vocabulary normalization summary; raw rows stay inside compartment:reference"
+                }
+              ],
+              "odrl:prohibition": [
+                {
+                  "odrl:action": "odrl:use",
+                  "odrl:assignee": "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2",
+                  "odrl:constraint": "No unrestricted export of raw rows."
+                }
+              ],
+              "odrl:target": "compartment:reference"
+            }
+          },
+          {
+            "cdif": {
+              "@context": {
+                "cdif": "https://cdif.codata.org/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "dct": "http://purl.org/dc/terms/",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:restricted:raw",
+              "@type": "dcat:Dataset",
+              "cdif:controlledVocabulary": [
+                "https://schema.org/spatialCoverage",
+                "https://schema.org/variableMeasured",
+                "https://schema.org/conditionsOfAccess"
+              ],
+              "cdif:dataElement": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:restricted:raw/recordset/summary/field/geography",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:restricted:raw/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/spatialCoverage",
+                  "dct:description": "Approved geographic aggregation key",
+                  "dct:title": "geography"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:restricted:raw/recordset/summary/field/risk_signal",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:restricted:raw/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/variableMeasured",
+                  "dct:description": "Compartment risk signal",
+                  "dct:title": "risk_signal"
+                },
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:restricted:raw/recordset/summary/field/policy_receipt",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://querygraph.ai/qglake/compartment:restricted:raw/recordset/summary",
+                  "cdif:semanticType": "https://schema.org/conditionsOfAccess",
+                  "dct:description": "RBAC, ODRL, and TypeDID evidence",
+                  "dct:title": "policy_receipt"
+                }
+              ],
+              "cdif:profile": [
+                "https://cdif.codata.org/profile/discovery",
+                "https://cdif.codata.org/profile/manifest",
+                "https://cdif.codata.org/profile/data-description",
+                "https://cdif.codata.org/profile/data-access",
+                "https://cdif.codata.org/profile/access-rights",
+                "https://cdif.codata.org/profile/controlled-vocabularies",
+                "https://cdif.codata.org/profile/data-integration",
+                "https://cdif.codata.org/profile/universals"
+              ],
+              "cdif:unit": [],
+              "dcat:accessService": {
+                "@type": "dcat:DataService",
+                "endpointURL": "sail://qg_lakehouse/compartment_restricted_raw"
+              },
+              "dcat:distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:restricted:raw/file/qg_lakehouse.haalsi_baseline__restricted_raw",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "sail://qg_lakehouse.haalsi_baseline__restricted_raw",
+                  "dcat:mediaType": "application/vnd.apache.parquet",
+                  "dct:title": "qg_lakehouse.haalsi_baseline__restricted_raw"
+                }
+              ],
+              "dcat:keyword": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:restricted:raw"
+              ],
+              "dcat:landingPage": "https://querygraph.ai/qglake/compartment:restricted:raw",
+              "dct:accessRights": {
+                "@id": null,
+                "@type": "dct:RightsStatement",
+                "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+                "dct:license": "Policy governed enterprise lakehouse access",
+                "odrl:policy": null
+              },
+              "dct:description": "Semantic Croissant compartment for RestrictedDataBroker over qg_lakehouse.haalsi_baseline__restricted_raw.",
+              "dct:spatial": null,
+              "dct:temporal": null,
+              "dct:title": "QGLake restricted-data denial receipt"
+            },
+            "compartment": "compartment:restricted:raw",
+            "croissant": {
+              "@context": {
+                "@vocab": "https://schema.org/",
+                "cr": "http://mlcommons.org/croissant/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://querygraph.ai/qglake/compartment:restricted:raw",
+              "@type": "cr:Dataset",
+              "creator": [
+                {
+                  "@type": "Person",
+                  "name": "QueryGraph"
+                },
+                {
+                  "@type": "Person",
+                  "name": "RestrictedDataBroker"
+                }
+              ],
+              "description": "Semantic Croissant compartment for RestrictedDataBroker over qg_lakehouse.haalsi_baseline__restricted_raw.",
+              "distribution": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:restricted:raw/file/qg_lakehouse.haalsi_baseline__restricted_raw",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "sail://qg_lakehouse.haalsi_baseline__restricted_raw",
+                  "encodingFormat": "application/vnd.apache.parquet",
+                  "name": "qg_lakehouse.haalsi_baseline__restricted_raw"
+                }
+              ],
+              "keywords": [
+                "QueryGraph",
+                "QGLake",
+                "compartment:restricted:raw"
+              ],
+              "license": "Policy governed enterprise lakehouse access",
+              "name": "QGLake restricted-data denial receipt",
+              "recordSet": [
+                {
+                  "@id": "https://querygraph.ai/qglake/compartment:restricted:raw/recordset/summary",
+                  "@type": "cr:RecordSet",
+                  "field": [
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Approved geographic aggregation key",
+                      "name": "geography",
+                      "sameAs": "https://schema.org/spatialCoverage"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Compartment risk signal",
+                      "name": "risk_signal",
+                      "sameAs": "https://schema.org/variableMeasured"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "RBAC, ODRL, and TypeDID evidence",
+                      "name": "policy_receipt",
+                      "sameAs": "https://schema.org/conditionsOfAccess"
+                    }
+                  ],
+                  "name": "restricted-data denial receipt"
+                }
+              ]
+            },
+            "odrl": {
+              "@id": "urn:qglake:policy:compartment-restricted-raw",
+              "@type": "odrl:Policy",
+              "odrl:assigner": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+              "odrl:permission": [
+                {
+                  "odrl:action": "odrl:read",
+                  "odrl:assignee": "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb",
+                  "odrl:constraint": "RestrictedDataBroker may produce restricted-data denial receipt; raw rows stay inside compartment:restricted:raw"
+                }
+              ],
+              "odrl:prohibition": [
+                {
+                  "odrl:action": "odrl:read",
+                  "odrl:assignee": "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb",
+                  "odrl:constraint": "Raw restricted data requires external credential and explicit approval."
+                }
+              ],
+              "odrl:target": "compartment:restricted:raw"
+            }
+          }
+        ],
+        "specialists": [
+          {
+            "access": {
+              "action": "read",
+              "allowed": true,
+              "checked_at": "2026-09-12T17:33:42.222989937Z",
+              "odrl_allowed": true,
+              "principal": "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie",
+              "rbac": {
+                "action": "read",
+                "allowed": true,
+                "matched_roles": [
+                  "finance-specialist"
+                ],
+                "principal": "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie",
+                "resource": "compartment:finance"
+              },
+              "reason": "RBAC role, ODRL permission, and TypeDID delegation permit a compartment summary."
+            },
+            "agent": {
+              "did": {
+                "@context": [
+                  "https://www.w3.org/ns/did/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1"
+                ],
+                "controller": "FinanceAgent",
+                "id": "did:oyd:zQmQyhrKD7DuQF866uFEVnpbLpnMQiGi8oaKNDyx3SJ8hie",
+                "public_key_multibase": "z3e49D57i8QmVVTV5CJ5LwB6nqvrg4VEtF4D8Ft2yw1ee",
+                "service_endpoint": "qglake://agents/finance-specialist"
+              },
+              "name": "FinanceAgent",
+              "role": "finance-specialist",
+              "seed": "querygraph-qglake-FinanceAgent"
+            },
+            "cdif_dataset_id": "https://querygraph.ai/qglake/compartment:finance",
+            "compartment": "compartment:finance",
+            "croissant_dataset_id": "https://querygraph.ai/qglake/compartment:finance",
+            "odrl_policy_id": "urn:qglake:policy:compartment-finance",
+            "raw_scope": [
+              "qg_lakehouse.government_finance__countydata",
+              "qg_lakehouse.government_finance__municipaldata"
+            ],
+            "request": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:finance.request",
+              "envelope_digest": "sha256:20cdceec8e8453d9f2db628569b7e7a4a2bab0b746d24c6ee7e31ccc91f8d939",
+              "mode": "request-reply",
+              "payload_sha256": "63f3cf7b1ce7e0402fe75478d6fd8f35704906a409dfefe409e667dcec2845e4",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z648a3c7c2016191470a8d01c41beee24c3599f4d53045d62a41476ee75448cfa",
+              "resource": "compartment:finance",
+              "sender": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1",
+              "signature": "af8238f795183debe3423d453bce16fbde77a50e9a10e01ff5f539594819947b938d0efcf8b9a996ece6c4aa9ef013da0674b8667a0277d8a1bc88c3124e250b"
+            },
+            "response": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:finance.response",
+              "envelope_digest": "sha256:a71a89068a85ad94ddd20870edd0fb78acb05ed6dd2eb4645e92e8dff49f9d8d",
+              "mode": "request-reply",
+              "payload_sha256": "a214cc567269fbe451cd6d21448b5ae492ce8bd9c9817e9cc4406e882591cac6",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z644ffff770e60b61328616bb41c5ed06b99aea0f03fa274ca3447a7735512910",
+              "resource": "summaries:qglake",
+              "sender": "did:key:z648a3c7c2016191470a8d01c41beee24c3599f4d53045d62a41476ee75448cfa",
+              "signature": "03642377d0df3f2ce7585f52970aa0fd9ffc1c21f27c2e297183b3579b0935b6f7a78b709a1d6809419b55b56538300b17c65d843af1c0f62288ac6e6c5d8b0d"
+            },
+            "shared_output": "fiscal-capacity summary",
+            "summary": {
+              "evidence": "County and municipal finance tables expose aggregate revenue, expenditure, and district capacity signals.",
+              "redactions": [
+                "raw rows",
+                "direct identifiers",
+                "unauthorized joins"
+              ],
+              "sharedOutput": "fiscal-capacity summary",
+              "signal": "low fiscal capacity and constrained district budgets",
+              "status": "allowed"
+            }
+          },
+          {
+            "access": {
+              "action": "summarize",
+              "allowed": true,
+              "checked_at": "2026-09-12T17:33:42.222989937Z",
+              "odrl_allowed": true,
+              "principal": "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw",
+              "rbac": {
+                "action": "summarize",
+                "allowed": true,
+                "matched_roles": [
+                  "energy-specialist"
+                ],
+                "principal": "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw",
+                "resource": "compartment:energy"
+              },
+              "reason": "RBAC role, ODRL permission, and TypeDID delegation permit a compartment summary."
+            },
+            "agent": {
+              "did": {
+                "@context": [
+                  "https://www.w3.org/ns/did/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1"
+                ],
+                "controller": "EnergyAgent",
+                "id": "did:oyd:zQmaEKmRFcr1byWmHkaQyUayHF4qQAQMXdpyhbXdYp7m7Bw",
+                "public_key_multibase": "zCtg4K7dLEcVtAeLQNmm7K7X5KvJoht58uPafwPQoZR7w",
+                "service_endpoint": "qglake://agents/energy-specialist"
+              },
+              "name": "EnergyAgent",
+              "role": "energy-specialist",
+              "seed": "querygraph-qglake-EnergyAgent"
+            },
+            "cdif_dataset_id": "https://querygraph.ai/qglake/compartment:energy",
+            "compartment": "compartment:energy",
+            "croissant_dataset_id": "https://querygraph.ai/qglake/compartment:energy",
+            "odrl_policy_id": "urn:qglake:policy:compartment-energy",
+            "raw_scope": [
+              "qg_lakehouse.energy_insecurity_covid__replication_survey",
+              "qg_lakehouse.access_2018_energy__ceew_access2018"
+            ],
+            "request": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:energy.request",
+              "envelope_digest": "sha256:5d6236b05ead33c555342d938a959ffaa4f36784425609c6f0ce215a1096dfbf",
+              "mode": "request-reply",
+              "payload_sha256": "b07760fc9dfd92d2db5b74daff2b9402d88bff6c2d0ce2f3b3aeb7c1bc8e4a18",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:zf2aecfd7594b642efff49644acde5286cfd6e388a8838173adfec78ba6a2ba05",
+              "resource": "compartment:energy",
+              "sender": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1",
+              "signature": "51a1a3e869f3717eeaac8258045ccc5524d81f0f3cbd7d39b4cb5ab6d58d641c8b5d28710e5a810c15ab75580bfbd417c515811994e19d3041e40431b883df0f"
+            },
+            "response": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:energy.response",
+              "envelope_digest": "sha256:7f5e0d09c75bca32d30c810b0666596941218e83e73d0f24a40359b2d5ecb958",
+              "mode": "request-reply",
+              "payload_sha256": "397e94c09a19c96fe08af774eec476db4c68448e5e622714602dc8501c788403",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z644ffff770e60b61328616bb41c5ed06b99aea0f03fa274ca3447a7735512910",
+              "resource": "summaries:qglake",
+              "sender": "did:key:zf2aecfd7594b642efff49644acde5286cfd6e388a8838173adfec78ba6a2ba05",
+              "signature": "4330563182b5e4627b011f1815c4f0076f770550998efa0700a7953b079bddb6412a8f73e584f5b11bc420e36072c0a7c45c92bbcc02a0b83b36b5574489f20b"
+            },
+            "shared_output": "energy-burden summary",
+            "summary": {
+              "evidence": "Energy insecurity and ACCESS survey tables support aggregate burden indicators after redaction.",
+              "redactions": [
+                "raw rows",
+                "direct identifiers",
+                "unauthorized joins"
+              ],
+              "sharedOutput": "energy-burden summary",
+              "signal": "elevated household energy burden and access fragility",
+              "status": "allowed"
+            }
+          },
+          {
+            "access": {
+              "action": "summarize",
+              "allowed": true,
+              "checked_at": "2026-09-12T17:33:42.222989937Z",
+              "odrl_allowed": true,
+              "principal": "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe",
+              "rbac": {
+                "action": "summarize",
+                "allowed": true,
+                "matched_roles": [
+                  "mobility-specialist"
+                ],
+                "principal": "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe",
+                "resource": "compartment:mobility"
+              },
+              "reason": "RBAC role, ODRL permission, and TypeDID delegation permit a compartment summary."
+            },
+            "agent": {
+              "did": {
+                "@context": [
+                  "https://www.w3.org/ns/did/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1"
+                ],
+                "controller": "MobilityAgent",
+                "id": "did:oyd:zQmNZAphWF77jTE4wrYvjR4mqiYr6hiHWgQcdcrLVdzkXFe",
+                "public_key_multibase": "zDX7bNFbLjybUJSNtXhb7fzZLcr7ds7iYKbzeLEgYqBe",
+                "service_endpoint": "qglake://agents/mobility-specialist"
+              },
+              "name": "MobilityAgent",
+              "role": "mobility-specialist",
+              "seed": "querygraph-qglake-MobilityAgent"
+            },
+            "cdif_dataset_id": "https://querygraph.ai/qglake/compartment:mobility",
+            "compartment": "compartment:mobility",
+            "croissant_dataset_id": "https://querygraph.ai/qglake/compartment:mobility",
+            "odrl_policy_id": "urn:qglake:policy:compartment-mobility",
+            "raw_scope": [
+              "qg_lakehouse.dockless_transportation__ca_bg_level_prediction_data_v1",
+              "qg_lakehouse.pedestrian_injury_ct__data_neutc_submit_ped_injury_severity_july_14_2025_xlsx"
+            ],
+            "request": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:mobility.request",
+              "envelope_digest": "sha256:9dc02ebbdb94ef40f45a17cd48c64b072c8663afb09d275e069ac2d8e0104047",
+              "mode": "request-reply",
+              "payload_sha256": "c0f0e29347b70297601c58e6b5b1ea6c68a729aed9fd812621f752a2ee5ba4ac",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:zb7bf3232132c274b97ad8a7a01800ffe7ad0dc7380b9a145dd77c335d5ce7f56",
+              "resource": "compartment:mobility",
+              "sender": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1",
+              "signature": "d40977f6a76261926eb8823caa08f017c90a9af5a5ff40b17e41aec0c6a1d750cf08a1e5bf58e71815551346bcb93eac9d617430ef59c8df86473a94ed90030f"
+            },
+            "response": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:mobility.response",
+              "envelope_digest": "sha256:089b17af1ec69187d92f4a99f0d36d705504eecd18b457c0e9cffa9e54604413",
+              "mode": "request-reply",
+              "payload_sha256": "abc545ecb41d51f350353aa8362b7c8df1e001b2834d7dd785174a29da85aaeb",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z644ffff770e60b61328616bb41c5ed06b99aea0f03fa274ca3447a7735512910",
+              "resource": "summaries:qglake",
+              "sender": "did:key:zb7bf3232132c274b97ad8a7a01800ffe7ad0dc7380b9a145dd77c335d5ce7f56",
+              "signature": "a19c96da0f6e893904039c1d59484ee690bc690cd1f5652b7957361455e880a9bd37be40ef7b48211c0333abeb8e0fb782e11e51cab63482e8c737fa14c0eb0d"
+            },
+            "shared_output": "mobility-disruption summary",
+            "summary": {
+              "evidence": "Dockless trip predictions, urban form, and injury severity features support corridor-level summaries.",
+              "redactions": [
+                "raw rows",
+                "direct identifiers",
+                "unauthorized joins"
+              ],
+              "sharedOutput": "mobility-disruption summary",
+              "signal": "mobility disruption near fragile corridors and pedestrian injury hot spots",
+              "status": "allowed"
+            }
+          },
+          {
+            "access": {
+              "action": "summarize",
+              "allowed": true,
+              "checked_at": "2026-09-12T17:33:42.222989937Z",
+              "odrl_allowed": true,
+              "principal": "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh",
+              "rbac": {
+                "action": "summarize",
+                "allowed": true,
+                "matched_roles": [
+                  "climate-health-specialist"
+                ],
+                "principal": "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh",
+                "resource": "compartment:climate-health"
+              },
+              "reason": "RBAC role, ODRL permission, and TypeDID delegation permit a compartment summary."
+            },
+            "agent": {
+              "did": {
+                "@context": [
+                  "https://www.w3.org/ns/did/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1"
+                ],
+                "controller": "ClimateHealthAgent",
+                "id": "did:oyd:zQmagS5C9XiR4bvmGpn2V1Jx4D8fR6ooKjc9n4enFShFgCh",
+                "public_key_multibase": "zDLnN61YCe58JAdQbzHHqHtV99wFD9gAv5U3o663P3z8h",
+                "service_endpoint": "qglake://agents/climate-health-specialist"
+              },
+              "name": "ClimateHealthAgent",
+              "role": "climate-health-specialist",
+              "seed": "querygraph-qglake-ClimateHealthAgent"
+            },
+            "cdif_dataset_id": "https://querygraph.ai/qglake/compartment:climate-health",
+            "compartment": "compartment:climate-health",
+            "croissant_dataset_id": "https://querygraph.ai/qglake/compartment:climate-health",
+            "odrl_policy_id": "urn:qglake:policy:compartment-climate-health",
+            "raw_scope": [
+              "qg_lakehouse.climate_health_pathways__imhdss_climate_mortality"
+            ],
+            "request": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:climate-health.request",
+              "envelope_digest": "sha256:7696bb35c74950205c1d30bb91e5535f4875dedba5838b3a7bcd541dee2ce779",
+              "mode": "request-reply",
+              "payload_sha256": "90be6c090e7749ce436e86f5800d06e1a1bcff54fcf23a2bddecb7241ab271e4",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z7012fc433e70b3bf740c41629a2103d6ddee42813afe3232c82c490e3a3fdf40",
+              "resource": "compartment:climate-health",
+              "sender": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1",
+              "signature": "d90d9eb910d44547782a0b37127172cf2f761be870fd2713d8e6a0ca14efd0fa57c4a8e1fd1137892caf9395abf5cc5193ccb8699ef7ac77e926cf54677ecb0b"
+            },
+            "response": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:climate-health.response",
+              "envelope_digest": "sha256:ef45079cc7d02524243f0ea0a1dca67fd0c2963258eefc7dfa90551536475924",
+              "mode": "request-reply",
+              "payload_sha256": "a98be5b04d353c7ce5435a6927bce19540a192172bc654b9b8a0927a1b904c43",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z644ffff770e60b61328616bb41c5ed06b99aea0f03fa274ca3447a7735512910",
+              "resource": "summaries:qglake",
+              "sender": "did:key:z7012fc433e70b3bf740c41629a2103d6ddee42813afe3232c82c490e3a3fdf40",
+              "signature": "ce2632f211347fa9f9acc9b561885960a8799593c286ad382d9bbe56abf2a55912f694f5597eeb1063c84636d4276d338cc2c466c229180f3caf7fbc3cf10106"
+            },
+            "shared_output": "climate-health risk summary",
+            "summary": {
+              "evidence": "Climate and mortality pathway tables support time-windowed aggregate health-risk signals.",
+              "redactions": [
+                "raw rows",
+                "direct identifiers",
+                "unauthorized joins"
+              ],
+              "sharedOutput": "climate-health risk summary",
+              "signal": "heat and climate pathway exposure with mortality-sensitive periods",
+              "status": "allowed"
+            }
+          },
+          {
+            "access": {
+              "action": "normalize",
+              "allowed": true,
+              "checked_at": "2026-09-12T17:33:42.222989937Z",
+              "odrl_allowed": true,
+              "principal": "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2",
+              "rbac": {
+                "action": "normalize",
+                "allowed": true,
+                "matched_roles": [
+                  "reference-specialist"
+                ],
+                "principal": "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2",
+                "resource": "compartment:reference"
+              },
+              "reason": "RBAC role, ODRL permission, and TypeDID delegation permit a compartment summary."
+            },
+            "agent": {
+              "did": {
+                "@context": [
+                  "https://www.w3.org/ns/did/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1"
+                ],
+                "controller": "ReferenceAgent",
+                "id": "did:oyd:zQmaMrUhBTtiUJGKkF7CeeJLXcTc2pvTA4v5LRJoEUzEip2",
+                "public_key_multibase": "zD2Cmb3UNwUpdj6pwASvpgMtU6YyKoWWE12QT755g32k2",
+                "service_endpoint": "qglake://agents/reference-specialist"
+              },
+              "name": "ReferenceAgent",
+              "role": "reference-specialist",
+              "seed": "querygraph-qglake-ReferenceAgent"
+            },
+            "cdif_dataset_id": "https://querygraph.ai/qglake/compartment:reference",
+            "compartment": "compartment:reference",
+            "croissant_dataset_id": "https://querygraph.ai/qglake/compartment:reference",
+            "odrl_policy_id": "urn:qglake:policy:compartment-reference",
+            "raw_scope": [
+              "qg_lakehouse.codata_constants_2022__codata_constants_2022"
+            ],
+            "request": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:reference.request",
+              "envelope_digest": "sha256:97ffc68d7b4e03df3a3eaf3de147dc85ba9f27578b5d501dd7409e6948127219",
+              "mode": "request-reply",
+              "payload_sha256": "3c4874eefa20089ac239754938e9db3c8a5b3bd6a1662afccfe433d5575975dc",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:zb3f9ac605154bac084fde540e3750241958e66c7abc791a836dcee883a51a038",
+              "resource": "compartment:reference",
+              "sender": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1",
+              "signature": "c7390e0a3134cb9ffb4d4dbccf442b0780aaeca53f78de01fa36d566d2227fb379d942a0f001845cd338ef5fd3556df56fbb75ff8ede7783fa1d36beadbe640b"
+            },
+            "response": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:reference.response",
+              "envelope_digest": "sha256:931674b5e951c4dbe3f5d5f9c18f337cb190d35b1cc4d037daf9e52ab2ed9720",
+              "mode": "request-reply",
+              "payload_sha256": "07f4bf568f56a0cfbac3aa2ef970d829eb1a59312b1920920b45c7e14bac1971",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z644ffff770e60b61328616bb41c5ed06b99aea0f03fa274ca3447a7735512910",
+              "resource": "summaries:qglake",
+              "sender": "did:key:zb3f9ac605154bac084fde540e3750241958e66c7abc791a836dcee883a51a038",
+              "signature": "556a9d7895e00619e0a51e73ce14e53f19e43e28119ca5ef8f7f262ef35930a4f8ccbe24ef2e78ae620d13aca5be597a174571832d8ea52c068e4e9e88981008"
+            },
+            "shared_output": "unit and vocabulary normalization summary",
+            "summary": {
+              "evidence": "CODATA constants provide a clean, typed reference-data table for units and measurement semantics.",
+              "redactions": [
+                "raw rows",
+                "direct identifiers",
+                "unauthorized joins"
+              ],
+              "sharedOutput": "unit and vocabulary normalization summary",
+              "signal": "reference units and controlled vocabulary normalization are available",
+              "status": "allowed"
+            }
+          },
+          {
+            "access": {
+              "action": "read",
+              "allowed": false,
+              "checked_at": "2026-09-12T17:33:42.222989937Z",
+              "odrl_allowed": false,
+              "principal": "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb",
+              "rbac": {
+                "action": "read",
+                "allowed": true,
+                "matched_roles": [
+                  "restricted-broker"
+                ],
+                "principal": "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb",
+                "resource": "compartment:restricted:metadata"
+              },
+              "reason": "Compartment policy returned a signed denial or metadata-only receipt."
+            },
+            "agent": {
+              "did": {
+                "@context": [
+                  "https://www.w3.org/ns/did/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1"
+                ],
+                "controller": "RestrictedDataBroker",
+                "id": "did:oyd:zQmR21H6xy7UduJNZXXUVVHmaX8dqZUtpqeEq69TQb8QKrb",
+                "public_key_multibase": "z3gMZzpybheRfmv7MSHmp7Qo98MhtFBGxAX5HmFBpCdnb",
+                "service_endpoint": "qglake://agents/restricted-broker"
+              },
+              "name": "RestrictedDataBroker",
+              "role": "restricted-broker",
+              "seed": "querygraph-qglake-RestrictedDataBroker"
+            },
+            "cdif_dataset_id": "https://querygraph.ai/qglake/compartment:restricted:raw",
+            "compartment": "compartment:restricted:raw",
+            "croissant_dataset_id": "https://querygraph.ai/qglake/compartment:restricted:raw",
+            "odrl_policy_id": "urn:qglake:policy:compartment-restricted-raw",
+            "raw_scope": [
+              "qg_lakehouse.haalsi_baseline__restricted_raw"
+            ],
+            "request": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:restricted:raw.request",
+              "envelope_digest": "sha256:c9b918307be21d37807855e03d1f38738e1ece4d17bca15aef3502111ee81086",
+              "mode": "request-reply",
+              "payload_sha256": "1bcacb2686dbc29e7718e6a315056d8794eeff90810465f7659dd0eeffb35167",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z634957b1c03e6d44a5688eb34c88671f79a6c2405eafb05f3b65c04be9473c4a",
+              "resource": "compartment:restricted:raw",
+              "sender": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1",
+              "signature": "78818e8deca553da29b10d95fbea491936c279e999298a4bf3d3811050b6dd844a3bec3556b6f43b5a4e28c62040c49e80c90fab44766a347ca6f03bf76d8b0c"
+            },
+            "response": {
+              "action": "agent:delegate",
+              "content_type": "application/vnd.typedid.envelope+json",
+              "conversation_id": "qglake.compartment:restricted:raw.response",
+              "envelope_digest": "sha256:a3f82af3e362f5947c3d67803e251fbe2d9a10afbe1b446944e373ea0602cdab",
+              "mode": "request-reply",
+              "payload_sha256": "19e9a6a566a2413ffd08181d09c6cadcff19d9ee6d043a91f14113910cf0ba05",
+              "privacy": "secret",
+              "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+              "protocol": "typedid/a2a",
+              "recipient": "did:key:z644ffff770e60b61328616bb41c5ed06b99aea0f03fa274ca3447a7735512910",
+              "resource": "summaries:qglake",
+              "sender": "did:key:z634957b1c03e6d44a5688eb34c88671f79a6c2405eafb05f3b65c04be9473c4a",
+              "signature": "5e15601b4ee70b4dc0f9b33aa68544334284a1bffe31f4a4f0e52cc5689d2ac1a468c006ee5e77ce26c631e569a202409a824b529677023d0d8b16dee8d2ae04"
+            },
+            "shared_output": "restricted-data denial receipt",
+            "summary": {
+              "denialReason": "RBAC/ODRL permits metadata inspection but raw restricted data requires an external credential.",
+              "evidence": "Restricted raw access was denied; only CDIF/Croissant metadata may be shared.",
+              "sharedOutput": "restricted-data denial receipt",
+              "signal": "metadata-only",
+              "status": "denied"
+            }
+          }
+        ],
+        "supervisor": {
+          "did": {
+            "@context": [
+              "https://www.w3.org/ns/did/v1",
+              "https://w3id.org/security/suites/ed25519-2020/v1"
+            ],
+            "controller": "SupervisorAgent",
+            "id": "did:oyd:zQmPNAeNnJStjMbB3nC3LTodJefJEhLKCByyj7wnqUPjNSi",
+            "public_key_multibase": "z22WwGeJw7jsxaQN218kKy8vfnkqjfYdHuR766g55XgNi",
+            "service_endpoint": "qglake://agents/supervisor"
+          },
+          "name": "SupervisorAgent",
+          "role": "supervisor",
+          "seed": "querygraph-qglake-SupervisorAgent"
+        },
+        "synthesis": {
+          "access": {
+            "action": "aggregate",
+            "allowed": true,
+            "checked_at": "2026-09-12T17:33:42.222989937Z",
+            "odrl_allowed": true,
+            "principal": "did:oyd:zQmPRVZEKbd1i7Y5RGCCPcx7ucCsgfeiiHrL4JmStCA6pvh",
+            "rbac": {
+              "action": "aggregate",
+              "allowed": true,
+              "matched_roles": [
+                "synthesis"
+              ],
+              "principal": "did:oyd:zQmPRVZEKbd1i7Y5RGCCPcx7ucCsgfeiiHrL4JmStCA6pvh",
+              "resource": "summaries:*"
+            },
+            "reason": "Synthesis agent can aggregate signed summaries, not raw compartments."
+          },
+          "agent": {
+            "did": {
+              "@context": [
+                "https://www.w3.org/ns/did/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1"
+              ],
+              "controller": "SynthesisAgent",
+              "id": "did:oyd:zQmPRVZEKbd1i7Y5RGCCPcx7ucCsgfeiiHrL4JmStCA6pvh",
+              "public_key_multibase": "z25qr8Bc7EiduUmr2ABuUTjtDNCp454jAFkHukinqu8rh",
+              "service_endpoint": "qglake://agents/synthesis"
+            },
+            "name": "SynthesisAgent",
+            "role": "synthesis",
+            "seed": "querygraph-qglake-SynthesisAgent"
+          },
+          "briefing": "Priority areas are those where weak fiscal capacity, energy burden, mobility fragility, and climate-health exposure overlap. Restricted health data contributed only a signed metadata/denial receipt, so the briefing uses approved compartment summaries rather than raw restricted rows.",
+          "inputs": [
+            "FinanceAgent:fiscal-capacity summary",
+            "EnergyAgent:energy-burden summary",
+            "MobilityAgent:mobility-disruption summary",
+            "ClimateHealthAgent:climate-health risk summary",
+            "ReferenceAgent:unit and vocabulary normalization summary",
+            "RestrictedDataBroker:restricted-data denial receipt"
+          ],
+          "request": {
+            "action": "agent:delegate",
+            "content_type": "application/vnd.typedid.envelope+json",
+            "conversation_id": "qglake.synthesis.request",
+            "envelope_digest": "sha256:12863d5f343429a301898f430ada236772669442a02aee45f57c587ca1815be8",
+            "mode": "request-reply",
+            "payload_sha256": "53abd2fdab004e762e6721241c3a205aba1ca148c896430f8c4557b8678f366a",
+            "privacy": "secret",
+            "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+            "protocol": "typedid/a2a",
+            "recipient": "did:key:z644ffff770e60b61328616bb41c5ed06b99aea0f03fa274ca3447a7735512910",
+            "resource": "summaries:qglake",
+            "sender": "did:key:z37b2c6e322a4436949d556ae6e217be6c4af709eea3cf765f1af29850e171ef1",
+            "signature": "699b72c804f56b532f685bf1b8f7dce36a9bd7ed981b687bea4b9408cb050f2e9e9841970055a8fbb72fc3b3f7af29ea6210a8f895714aff1fea35ee0e6e2c0a"
+          }
+        },
+        "title": "QGLake: The Resilience Desk",
+        "typesec": {
+          "envelope_count": 13,
+          "mode": "request-reply",
+          "protocol": "typedid/a2a",
+          "verified_delegate_capabilities": [
+            "ai:infer",
+            "read_sensitive",
+            "CanDelegate",
+            "CanAggregateSummaries",
+            "CanReadDatasetCompartment",
+            "CanDeriveRedactedSummary"
+          ]
+        }
+      },
+      "status": "passed"
+    },
+    "semantic": {
+      "result": {
+        "agentRun": {
+          "access": {
+            "action": "answer",
+            "allowed": true,
+            "checked_at": "2026-09-12T17:33:43.784836889Z",
+            "odrl_allowed": true,
+            "principal": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+            "rbac": {
+              "action": "answer",
+              "allowed": true,
+              "matched_roles": [
+                "navigator"
+              ],
+              "principal": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+              "resource": "dataset"
+            },
+            "reason": "TypeSec capabilities, RBAC role assignment, and ODRL policy allow the answer path"
+          },
+          "codata_anchor": null,
+          "ollama_reply": "I found 2 governed Dataverse datasets staged in 4 Sail views. The most relevant titles are: Bay Area building energy observations; Enterprise data access survey.",
+          "ollama_typedid": null,
+          "prompt": "Answer using only the governed Dataverse metadata below.\nQuestion: Which governed datasets are relevant?\n\nDatasets:\n- Bay Area building energy observations (doi:10.7910/DVN/QGDEMO1): Sample Dataverse-shaped energy observations for QueryGraph integration testing. Keywords: energy, buildings, sensors. Subjects: Engineering, Computer and Information Science.\n- Enterprise data access survey (doi:10.7910/DVN/QGDEMO2): Sample Dataverse-shaped survey metadata for governed agent access. Keywords: access control, governance, survey. Subjects: Social Sciences.\n\nSail views: dataverse_1001_metadata, dataverse_1001_files, dataverse_1002_metadata, dataverse_1002_files\nLive Sail graph loaded 34 nodes and 33 edges; verified dataverse:dataset:doi:10.7910/DVN/QGDEMO1.",
+          "request": {
+            "action": "agent:delegate",
+            "content_type": "application/vnd.typedid.envelope+json",
+            "conversation_id": "querygraph.dataverse.answer",
+            "envelope_digest": "sha256:ad028546225e451ef0babbe3d5ce9b2b4fe98d6c8ae4cf2957e0edc1119d7f50",
+            "mode": "request-reply",
+            "payload_sha256": "81981fbcee5b6bfb22f05c791b3d0bafc4e96de66fc9eebecced3a4bf343da36",
+            "privacy": "secret",
+            "profile": "typedid/v1/x25519-chacha20poly1305-ed25519",
+            "protocol": "typedid/a2a",
+            "recipient": "did:key:z7e59ddf1eabfedc0398521ecc79d71caa1145c603da1b1ccae1cecca5149aa68",
+            "resource": "querygraph/dataverse",
+            "sender": "did:key:z73dce87f2d439cff8428b9c2e38d741148553b9b7b1d3a4c835e43cf90fd713e",
+            "signature": "ee4888dbfa06cdec051372337e30820c99eda32659cde47e6e340908523c74470e52c27a9890bc017613115522ad02f3f312159f73a4857ac04d7348a642d405"
+          },
+          "sail_views": [
+            "dataverse_1001_metadata",
+            "dataverse_1001_files",
+            "dataverse_1002_metadata",
+            "dataverse_1002_files"
+          ],
+          "selected_datasets": [
+            "doi:10.7910/DVN/QGDEMO1",
+            "doi:10.7910/DVN/QGDEMO2"
+          ]
+        },
+        "bundle": {
+          "@context": {
+            "cdif": "https://cdif.codata.org/",
+            "cr": "http://mlcommons.org/croissant/",
+            "dcat": "http://www.w3.org/ns/dcat#",
+            "dct": "http://purl.org/dc/terms/",
+            "odrl": "http://www.w3.org/ns/odrl/2/",
+            "querygraph": "https://querygraph.ai/ns#",
+            "schema": "https://schema.org/"
+          },
+          "@type": "querygraph:AiNavigatorSemanticBundle",
+          "generatedAt": "2026-09-12T17:33:42.776180718Z",
+          "identity": {
+            "@context": [
+              "https://www.w3.org/ns/did/v1",
+              "https://w3id.org/security/suites/ed25519-2020/v1"
+            ],
+            "controller": "QueryGraph Dataverse Navigator",
+            "id": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+            "public_key_multibase": "z8UernVhohiVB5a4QsHk7yPJk8HagWr1e9QJPSn5xnujf",
+            "service_endpoint": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1"
+          },
+          "layers": {
+            "cdif": {
+              "@context": {
+                "cdif": "https://cdif.codata.org/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "dct": "http://purl.org/dc/terms/",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset",
+              "@type": "dcat:Dataset",
+              "cdif:controlledVocabulary": [
+                "https://schema.org/identifier",
+                "https://schema.org/identifier",
+                "https://schema.org/name",
+                "https://schema.org/contentUrl"
+              ],
+              "cdif:dataElement": [
+                {
+                  "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/dataset_persistent_id",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+                  "cdif:semanticType": "https://schema.org/identifier",
+                  "dct:description": "Dataverse persistent ID",
+                  "dct:title": "dataset_persistent_id"
+                },
+                {
+                  "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/file_id",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+                  "cdif:semanticType": "https://schema.org/identifier",
+                  "dct:description": "Dataverse file ID",
+                  "dct:title": "file_id"
+                },
+                {
+                  "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/file_name",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:Text",
+                  "cdif:recordSet": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+                  "cdif:semanticType": "https://schema.org/name",
+                  "dct:description": "Dataverse file name",
+                  "dct:title": "file_name"
+                },
+                {
+                  "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy/field/download_url",
+                  "@type": "cdif:DataElement",
+                  "cdif:dataType": "sc:URL",
+                  "cdif:recordSet": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+                  "cdif:semanticType": "https://schema.org/contentUrl",
+                  "dct:description": "Dataverse file download URL",
+                  "dct:title": "download_url"
+                }
+              ],
+              "cdif:profile": [
+                "https://cdif.codata.org/profile/discovery",
+                "https://cdif.codata.org/profile/manifest",
+                "https://cdif.codata.org/profile/data-description",
+                "https://cdif.codata.org/profile/data-access",
+                "https://cdif.codata.org/profile/access-rights",
+                "https://cdif.codata.org/profile/controlled-vocabularies",
+                "https://cdif.codata.org/profile/data-integration",
+                "https://cdif.codata.org/profile/universals"
+              ],
+              "cdif:unit": [],
+              "dcat:accessService": {
+                "@type": "dcat:DataService",
+                "endpointURL": "https://demo.dataverse.org/api/access/datafile/501"
+              },
+              "dcat:distribution": [
+                {
+                  "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/file/501",
+                  "@type": "dcat:Distribution",
+                  "dcat:downloadURL": "https://demo.dataverse.org/api/access/datafile/501",
+                  "dcat:mediaType": "text/csv",
+                  "dct:title": "building_energy.csv"
+                }
+              ],
+              "dcat:keyword": [
+                "energy",
+                "buildings",
+                "sensors",
+                "Engineering",
+                "Computer and Information Science"
+              ],
+              "dcat:landingPage": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1",
+              "dct:accessRights": {
+                "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/policy/default",
+                "@type": "dct:RightsStatement",
+                "dct:description": "Access and usage must satisfy the attached ODRL/TypeSec policy before agent use.",
+                "dct:license": "CC0 1.0",
+                "odrl:policy": {
+                  "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/policy/default",
+                  "@type": "odrl:Policy",
+                  "odrl:assigner": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+                  "odrl:permission": [
+                    {
+                      "odrl:action": "odrl:read",
+                      "odrl:assignee": "public",
+                      "odrl:constraint": "attribution required"
+                    },
+                    {
+                      "odrl:action": "querygraph:index",
+                      "odrl:assignee": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+                      "odrl:constraint": "local semantic indexing for AI Navigator"
+                    }
+                  ],
+                  "odrl:prohibition": [
+                    {
+                      "odrl:action": "odrl:derive",
+                      "odrl:assignee": "public",
+                      "odrl:constraint": "no model training without separate agreement"
+                    }
+                  ],
+                  "odrl:target": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset"
+                }
+              },
+              "dct:description": "Sample Dataverse-shaped energy observations for QueryGraph integration testing.",
+              "dct:spatial": null,
+              "dct:temporal": null,
+              "dct:title": "Bay Area building energy observations"
+            },
+            "did": {
+              "@context": [
+                "https://www.w3.org/ns/did/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1"
+              ],
+              "controller": "QueryGraph Dataverse Navigator",
+              "id": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+              "public_key_multibase": "z8UernVhohiVB5a4QsHk7yPJk8HagWr1e9QJPSn5xnujf",
+              "service_endpoint": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1"
+            },
+            "odrl": {
+              "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/policy/default",
+              "@type": "odrl:Policy",
+              "odrl:assigner": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+              "odrl:permission": [
+                {
+                  "odrl:action": "odrl:read",
+                  "odrl:assignee": "public",
+                  "odrl:constraint": "attribution required"
+                },
+                {
+                  "odrl:action": "querygraph:index",
+                  "odrl:assignee": "did:oyd:zQmVpJZtdhKUhxogDUauVTbdZ2jdmSHAVaLDiKF8wVGzbof",
+                  "odrl:constraint": "local semantic indexing for AI Navigator"
+                }
+              ],
+              "odrl:prohibition": [
+                {
+                  "odrl:action": "odrl:derive",
+                  "odrl:assignee": "public",
+                  "odrl:constraint": "no model training without separate agreement"
+                }
+              ],
+              "odrl:target": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset"
+            },
+            "semanticCroissant": {
+              "@context": {
+                "@vocab": "https://schema.org/",
+                "cr": "http://mlcommons.org/croissant/",
+                "dcat": "http://www.w3.org/ns/dcat#",
+                "odrl": "http://www.w3.org/ns/odrl/2/"
+              },
+              "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset",
+              "@type": "cr:Dataset",
+              "creator": [
+                {
+                  "@type": "Person",
+                  "name": "QueryGraph Demo Lab"
+                }
+              ],
+              "description": "Sample Dataverse-shaped energy observations for QueryGraph integration testing.",
+              "distribution": [
+                {
+                  "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/file/501",
+                  "@type": "cr:FileObject",
+                  "contentUrl": "https://demo.dataverse.org/api/access/datafile/501",
+                  "encodingFormat": "text/csv",
+                  "name": "building_energy.csv"
+                }
+              ],
+              "keywords": [
+                "energy",
+                "buildings",
+                "sensors",
+                "Engineering",
+                "Computer and Information Science"
+              ],
+              "license": "CC0 1.0",
+              "name": "Bay Area building energy observations",
+              "recordSet": [
+                {
+                  "@id": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1/#dataset/recordset/building_energy",
+                  "@type": "cr:RecordSet",
+                  "field": [
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Dataverse persistent ID",
+                      "name": "dataset_persistent_id",
+                      "sameAs": "https://schema.org/identifier"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Dataverse file ID",
+                      "name": "file_id",
+                      "sameAs": "https://schema.org/identifier"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:Text",
+                      "description": "Dataverse file name",
+                      "name": "file_name",
+                      "sameAs": "https://schema.org/name"
+                    },
+                    {
+                      "@type": "cr:Field",
+                      "dataType": "sc:URL",
+                      "description": "Dataverse file download URL",
+                      "name": "download_url",
+                      "sameAs": "https://schema.org/contentUrl"
+                    }
+                  ],
+                  "name": "building_energy"
+                }
+              ]
+            }
+          }
+        },
+        "datasets": [
+          {
+            "authors": [
+              "QueryGraph Demo Lab"
+            ],
+            "description": "Sample Dataverse-shaped energy observations for QueryGraph integration testing.",
+            "files": [
+              {
+                "content_type": "text/csv",
+                "description": "Hourly energy observations.",
+                "download_url": "https://demo.dataverse.org/api/access/datafile/501",
+                "filename": "building_energy.csv",
+                "id": "501"
+              }
+            ],
+            "id": "1001",
+            "keywords": [
+              "energy",
+              "buildings",
+              "sensors"
+            ],
+            "landing_page": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1",
+            "license": "CC0 1.0",
+            "persistent_id": "doi:10.7910/DVN/QGDEMO1",
+            "subjects": [
+              "Engineering",
+              "Computer and Information Science"
+            ],
+            "title": "Bay Area building energy observations"
+          },
+          {
+            "authors": [
+              "QueryGraph Governance Lab"
+            ],
+            "description": "Sample Dataverse-shaped survey metadata for governed agent access.",
+            "files": [
+              {
+                "content_type": "text/tab-separated-values",
+                "description": "Survey responses.",
+                "download_url": "https://demo.dataverse.org/api/access/datafile/502",
+                "filename": "access_survey.tab",
+                "id": "502"
+              }
+            ],
+            "id": "1002",
+            "keywords": [
+              "access control",
+              "governance",
+              "survey"
+            ],
+            "landing_page": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO2",
+            "license": "CC BY 4.0",
+            "persistent_id": "doi:10.7910/DVN/QGDEMO2",
+            "subjects": [
+              "Social Sciences"
+            ],
+            "title": "Enterprise data access survey"
+          }
+        ],
+        "openLineage": {
+          "attestation": {
+            "created_at": "2026-09-12T17:33:43.785594186Z",
+            "event_hash": "1299edda410ff3c4b23133858b8c3b1bbb46f2ed69300fe2b41fdd81919789ca",
+            "issuer": "did:key:za7399d2719bc9aaba7b93d44388df3a0abea1822fcad991d4d0f869e7c272d5f",
+            "merkle_root": "e5ee7d22f9886878d6787d6d9b26f2536bb8b7ffed3fb4bc425158b62d160d6d",
+            "signature": "a551bcbfbbcc9018b232bd7e3ba696664cfb28c686a7da17f23b84e041b6fc06b25c2577b9ab326fb4638d8f876b10b59dabc7d28165a646c143c1683ef8ec0d",
+            "signature_type": "Ed25519Signature2020",
+            "signed_payload_sha256": "44d584652ba5528135756a730678a054a6d3fdcd5a7aaa981118fc0c1f80a1d9",
+            "subject": "querygraph.dataverse.e2e",
+            "verification_method": "did:key:za7399d2719bc9aaba7b93d44388df3a0abea1822fcad991d4d0f869e7c272d5f#key-1"
+          },
+          "didLedgerAppend": {
+            "appended_at": "2026-09-12T17:33:43.869999465Z",
+            "merkle_root": "e5ee7d22f9886878d6787d6d9b26f2536bb8b7ffed3fb4bc425158b62d160d6d",
+            "path": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/attestations.jsonl",
+            "signature": "a551bcbfbbcc9018b232bd7e3ba696664cfb28c686a7da17f23b84e041b6fc06b25c2577b9ab326fb4638d8f876b10b59dabc7d28165a646c143c1683ef8ec0d",
+            "subject": "querygraph.dataverse.e2e"
+          },
+          "emissions": [
+            {
+              "emitted_at": "2026-09-12T17:33:43.794041110Z",
+              "event_hash": "1299edda410ff3c4b23133858b8c3b1bbb46f2ed69300fe2b41fdd81919789ca",
+              "http_status": null,
+              "path": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/events.jsonl",
+              "status": "appended",
+              "target": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/events.jsonl"
+            },
+            {
+              "emitted_at": "2026-09-12T17:33:43.868530208Z",
+              "event_hash": "1299edda410ff3c4b23133858b8c3b1bbb46f2ed69300fe2b41fdd81919789ca",
+              "http_status": null,
+              "path": null,
+              "status": "sail_appended",
+              "target": "sail://http://127.0.0.1:15051/qg_audit.openlineage_events"
+            }
+          ],
+          "event": {
+            "eventTime": "2026-09-12T17:33:43.785152555Z",
+            "eventType": "COMPLETE",
+            "inputs": [
+              {
+                "facets": {
+                  "dataSource": {
+                    "_producer": "https://querygraph.ai/qg-rust",
+                    "_schemaURL": "https://openlineage.io/spec/facets/1-0-0/DatasourceDatasetFacet.json",
+                    "name": "Dataverse",
+                    "uri": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO1"
+                  }
+                },
+                "name": "doi:10.7910/DVN/QGDEMO1",
+                "namespace": "dataverse"
+              },
+              {
+                "facets": {
+                  "dataSource": {
+                    "_producer": "https://querygraph.ai/qg-rust",
+                    "_schemaURL": "https://openlineage.io/spec/facets/1-0-0/DatasourceDatasetFacet.json",
+                    "name": "Dataverse",
+                    "uri": "https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.7910/DVN/QGDEMO2"
+                  }
+                },
+                "name": "doi:10.7910/DVN/QGDEMO2",
+                "namespace": "dataverse"
+              }
+            ],
+            "job": {
+              "facets": {
+                "queryGraph_semanticBundle": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/querygraph-semantic-bundle-facet/0.1.0.json",
+                  "bundleHash": "463eb558a6d6760f6dc3a7544d6a2756da403b97613e75df4b0819a4cf94f3e8",
+                  "loadedEdges": 33,
+                  "loadedNodes": 34,
+                  "sailEndpoint": "http://127.0.0.1:15051"
+                }
+              },
+              "name": "dataverse-e2e-agent-answer",
+              "namespace": "querygraph.dataverse"
+            },
+            "outputs": [
+              {
+                "facets": {
+                  "queryGraph_sailLoad": {
+                    "_producer": "https://querygraph.ai/qg-rust",
+                    "_schemaURL": "https://querygraph.ai/schemas/openlineage/querygraph-sail-load-facet/0.1.0.json",
+                    "filesPath": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1001/files.jsonl",
+                    "metadataPath": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1001/metadata.jsonl"
+                  }
+                },
+                "name": "dataverse_1001",
+                "namespace": "sail"
+              },
+              {
+                "facets": {
+                  "queryGraph_sailLoad": {
+                    "_producer": "https://querygraph.ai/qg-rust",
+                    "_schemaURL": "https://querygraph.ai/schemas/openlineage/querygraph-sail-load-facet/0.1.0.json",
+                    "filesPath": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1002/files.jsonl",
+                    "metadataPath": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1002/metadata.jsonl"
+                  }
+                },
+                "name": "dataverse_1002",
+                "namespace": "sail"
+              }
+            ],
+            "producer": "https://querygraph.ai/qg-rust",
+            "run": {
+              "facets": {
+                "queryGraph_typeDid": {
+                  "_producer": "https://querygraph.ai/qg-rust",
+                  "_schemaURL": "https://querygraph.ai/schemas/openlineage/querygraph-typedid-facet/0.1.0.json",
+                  "conversationId": "querygraph.dataverse.answer",
+                  "payloadSha256": "81981fbcee5b6bfb22f05c791b3d0bafc4e96de66fc9eebecced3a4bf343da36",
+                  "protocol": "typedid/a2a",
+                  "signature": "ee4888dbfa06cdec051372337e30820c99eda32659cde47e6e340908523c74470e52c27a9890bc017613115522ad02f3f312159f73a4857ac04d7348a642d405"
+                }
+              },
+              "runId": "ffc4a046-bc2d-5320-92be-f9403f50a5fd"
+            },
+            "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json"
+          },
+          "eventHash": "1299edda410ff3c4b23133858b8c3b1bbb46f2ed69300fe2b41fdd81919789ca"
+        },
+        "osi": {
+          "semantic_model": {
+            "ai_context": "Use dataset descriptions, subjects, keywords, and governed Sail views to answer.",
+            "datasets": [
+              {
+                "ai_context": "Dataverse dataset doi:10.7910/DVN/QGDEMO1 with subjects Engineering, Computer and Information Science and keywords energy, buildings, sensors.",
+                "description": "Sample Dataverse-shaped energy observations for QueryGraph integration testing.",
+                "fields": [
+                  {
+                    "description": "Dataverse persistent dataset identifier.",
+                    "expression": null,
+                    "name": "dataset_persistent_id",
+                    "semantic_type": "https://schema.org/identifier"
+                  },
+                  {
+                    "description": "Dataverse file name.",
+                    "expression": null,
+                    "name": "file_name",
+                    "semantic_type": "https://schema.org/name"
+                  },
+                  {
+                    "description": "Dataverse file download URL.",
+                    "expression": null,
+                    "name": "download_url",
+                    "semantic_type": "https://schema.org/contentUrl"
+                  }
+                ],
+                "name": "bay_area_building_energy_observations",
+                "source": "sail.dataverse_1001"
+              },
+              {
+                "ai_context": "Dataverse dataset doi:10.7910/DVN/QGDEMO2 with subjects Social Sciences and keywords access control, governance, survey.",
+                "description": "Sample Dataverse-shaped survey metadata for governed agent access.",
+                "fields": [
+                  {
+                    "description": "Dataverse persistent dataset identifier.",
+                    "expression": null,
+                    "name": "dataset_persistent_id",
+                    "semantic_type": "https://schema.org/identifier"
+                  },
+                  {
+                    "description": "Dataverse file name.",
+                    "expression": null,
+                    "name": "file_name",
+                    "semantic_type": "https://schema.org/name"
+                  },
+                  {
+                    "description": "Dataverse file download URL.",
+                    "expression": null,
+                    "name": "download_url",
+                    "semantic_type": "https://schema.org/contentUrl"
+                  }
+                ],
+                "name": "enterprise_data_access_survey",
+                "source": "sail.dataverse_1002"
+              }
+            ],
+            "description": "Open Semantic Interchange model over Dataverse datasets staged in Sail.",
+            "metrics": [
+              {
+                "ai_context": "Use this to summarize the governed dataset set available to the agent.",
+                "description": "Number of governed Dataverse datasets in the Sail staging area.",
+                "expression": {
+                  "dialects": [
+                    {
+                      "dialect": "SAIL_SQL",
+                      "expression": "COUNT(DISTINCT dataset_persistent_id)"
+                    }
+                  ]
+                },
+                "name": "governed_dataset_count"
+              }
+            ],
+            "name": "querygraph_dataverse_navigator",
+            "ontology_terms": [
+              {
+                "id": "qg:ontology:energy",
+                "label": "energy",
+                "source": "dataverse-citation-metadata"
+              },
+              {
+                "id": "qg:ontology:buildings",
+                "label": "buildings",
+                "source": "dataverse-citation-metadata"
+              },
+              {
+                "id": "qg:ontology:sensors",
+                "label": "sensors",
+                "source": "dataverse-citation-metadata"
+              },
+              {
+                "id": "qg:ontology:engineering",
+                "label": "Engineering",
+                "source": "dataverse-citation-metadata"
+              },
+              {
+                "id": "qg:ontology:computer_and_information_science",
+                "label": "Computer and Information Science",
+                "source": "dataverse-citation-metadata"
+              },
+              {
+                "id": "qg:ontology:access_control",
+                "label": "access control",
+                "source": "dataverse-citation-metadata"
+              },
+              {
+                "id": "qg:ontology:governance",
+                "label": "governance",
+                "source": "dataverse-citation-metadata"
+              },
+              {
+                "id": "qg:ontology:survey",
+                "label": "survey",
+                "source": "dataverse-citation-metadata"
+              },
+              {
+                "id": "qg:ontology:social_sciences",
+                "label": "Social Sciences",
+                "source": "dataverse-citation-metadata"
+              }
+            ]
+          },
+          "version": "0.2.0.dev0"
+        },
+        "sail": {
+          "bootstrap_sql": [
+            "CREATE OR REPLACE TEMP VIEW dataverse_1001_metadata USING json OPTIONS (path '/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1001/metadata.jsonl');",
+            "CREATE OR REPLACE TEMP VIEW dataverse_1001_files USING json OPTIONS (path '/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1001/files.jsonl');",
+            "CREATE OR REPLACE TEMP VIEW dataverse_1002_metadata USING json OPTIONS (path '/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1002/metadata.jsonl');",
+            "CREATE OR REPLACE TEMP VIEW dataverse_1002_files USING json OPTIONS (path '/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1002/files.jsonl');"
+          ],
+          "graph": {
+            "cypher_dataset_count": 2,
+            "cypher_labels": [
+              "CdifDataElement",
+              "DataverseDataset",
+              "DataverseFile",
+              "NavigatorBundle",
+              "OntologyTerm",
+              "OsiDataset",
+              "OsiField",
+              "OsiMetric",
+              "OsiModel"
+            ],
+            "edges": 33,
+            "endpoint": "http://127.0.0.1:15051",
+            "loaded_edges": 33,
+            "loaded_nodes": 34,
+            "nodes": 34,
+            "verified_node_id": "dataverse:dataset:doi:10.7910/DVN/QGDEMO1",
+            "verified_node_label": "DataverseDataset",
+            "views": [
+              {
+                "rows": 1,
+                "view_name": "dataverse_1001_metadata"
+              },
+              {
+                "rows": 1,
+                "view_name": "dataverse_1001_files"
+              },
+              {
+                "rows": 1,
+                "view_name": "dataverse_1002_metadata"
+              },
+              {
+                "rows": 1,
+                "view_name": "dataverse_1002_files"
+              }
+            ]
+          },
+          "loads": [
+            {
+              "create_files_view_sql": "CREATE OR REPLACE TEMP VIEW dataverse_1001_files USING json OPTIONS (path '/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1001/files.jsonl');",
+              "create_metadata_view_sql": "CREATE OR REPLACE TEMP VIEW dataverse_1001_metadata USING json OPTIONS (path '/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1001/metadata.jsonl');",
+              "dataset_id": "doi:10.7910/DVN/QGDEMO1",
+              "files_path": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1001/files.jsonl",
+              "metadata_path": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1001/metadata.jsonl",
+              "table_name": "dataverse_1001"
+            },
+            {
+              "create_files_view_sql": "CREATE OR REPLACE TEMP VIEW dataverse_1002_files USING json OPTIONS (path '/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1002/files.jsonl');",
+              "create_metadata_view_sql": "CREATE OR REPLACE TEMP VIEW dataverse_1002_metadata USING json OPTIONS (path '/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1002/metadata.jsonl');",
+              "dataset_id": "doi:10.7910/DVN/QGDEMO2",
+              "files_path": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1002/files.jsonl",
+              "metadata_path": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail/dataverse_1002/metadata.jsonl",
+              "table_name": "dataverse_1002"
+            }
+          ],
+          "root": "/home/admin/querygraph-fihrist-demo-20260912/reports/console-b070c160-935e-4fc5-b677-f708c431140c/sail"
+        }
+      },
+      "status": "passed"
+    },
+    "discover": {
+      "result": {
+        "enterprise": "acme",
+        "next_cursor": null,
+        "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+        "tables": [
+          {
+            "columns": [
+              {
+                "classification": "internal",
+                "data_type": {
+                  "kind": "int64"
+                },
+                "description": "id",
+                "id": 1,
+                "name": "id",
+                "nullability": "required",
+                "semantic": "row.id"
+              }
+            ],
+            "metadata": {
+              "description": "Customer identifiers",
+              "owner": "platform",
+              "retention_days": 30,
+              "steward": "data"
+            },
+            "name": "rows",
+            "profile": "custom",
+            "revision": 1
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    "plan": {
+      "result": {
+        "columns": [
+          "id"
+        ],
+        "enterprise": "acme",
+        "limit": 10,
+        "planned_by": "sail-rest-models",
+        "purpose": "analytics",
+        "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+        "revision": 1,
+        "snapshot_id": 2861732854189750300,
+        "table": "rows"
+      },
+      "status": "passed"
+    },
+    "execute": {
+      "result": {
+        "evidence": {
+          "catalog_state": "sha256:52246e6c6538d505d7a982adf568e2a47da05a101b2eabaff306ff6fe0c8604d",
+          "execution_authorization_digest": "sha256:5b25fa5e88535b3606137f120fe3ef6096a9fe01375ecde78a622c803c4259e7",
+          "fresh_authorization_digest": "sha256:fe1fe869deaead59a0cbb8b941105b20685efc6c305465415f3cb55a5ff165e4",
+          "fresh_policy_decision_digest": "sha256:564c33586305014aef1894c95ca405d3e5c7d420924b1f64568fea4bf75cdd8a",
+          "lineage": {
+            "event_hash": "sha256:57d44c64f30ec3f970882d25e3f0957357f08c77ed2e7344e518d938fff2eda3",
+            "open_lineage_hash": "sha256:1747e606906601b4216285235e56378d542f94a4dd03f2c4503b7d301ca3c982",
+            "sink": "lakecat-openlineage-hash"
+          },
+          "proof": {
+            "authorizationReceiptDigest": "sha256:41e955c8ada47d8d18af8df6a45a5cc07c34c22c9151dc99a47b09b58fad3fc0",
+            "catalogIdentity": "lakecat://warehouse",
+            "effectiveProjection": [
+              "id"
+            ],
+            "grantId": "sha256:5993e2a1180bd2931a7b0e6e760dc9857d0ccb91a87f454dc32e0231dc91c539",
+            "identityContextDigest": "sha256:8e097770bd9feefb684d650f0cb4cbf924da31a972731d0bf793b0f76c269f64",
+            "planTaskDigest": "sha256:a5223385ccbb4ad4e035d77ec1b7c57ed3e86ad30cadcb4041078b1c34b0d4e8",
+            "policyDecisionDigest": "sha256:564c33586305014aef1894c95ca405d3e5c7d420924b1f64568fea4bf75cdd8a",
+            "principalSubject": "did:key:z6MkuEYwA1t6QZPdmTWDKcLCUzHpLbdaUU8dC3j6LRbZTwF3",
+            "purpose": "analytics",
+            "snapshotId": 2861732854189750300,
+            "table": {
+              "name": "rows",
+              "namespace": [
+                "acme"
+              ],
+              "warehouse": "warehouse"
+            },
+            "tableVersion": 0,
+            "version": "lakecat.governed-scan-proof.v2"
+          },
+          "revalidated_at": "2026-09-12T17:33:44.636335642Z",
+          "row_digest": "sha256:1f92c9cf43d29e6d3ba3dfa1caab7ca803117f269375663311f1676526948df8"
+        },
+        "evidence_digest": "sha256:64ea37b1a61207c69315b1741f3340a7dd7921ba96edea4f30eaa49ed2388fd8",
+        "rows": [
+          {
+            "id": 2
+          }
+        ],
+        "summary": {
+          "columns": [
+            "id"
+          ],
+          "enterprise": "acme",
+          "limit": 10,
+          "planned_by": "sail-rest-models",
+          "purpose": "analytics",
+          "registry_digest": "sha256:00788ec98e66b7f2eb5f11fb08054bc93ca3d7105b6cc00842f7039105557e1d",
+          "revision": 1,
+          "snapshot_id": 2861732854189750300,
+          "table": "rows"
+        }
+      },
+      "status": "passed"
+    },
+    "deny-column": {
+      "detail": "Error: registry scan rejected\n\nCaused by:\n    Fihrist scan denied\n",
+      "rows_released": false,
+      "status": "denied"
+    },
+    "deny-purpose": {
+      "detail": "Error: registry scan rejected\n\nCaused by:\n    Fihrist scan denied\n",
+      "rows_released": false,
+      "status": "denied"
+    }
+  }
+}

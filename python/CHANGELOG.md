@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add `mcp-serve --rust-backend /path/to/querygraph` to forward the authoritative
+  Rust tool contract, including Pinax validation, planning, and owner execution.
+  The compatibility CLI supports `--registry-config` and replaces itself with
+  Rust so protocol IDs, cancellation, and cleanup have a single owner.
+  The MCP extra uses SDK `>=1.28.1,<2`, verified by conformance tests.
+
 - Add a stock Spark HadoopCatalog-to-LakeCat migration verifier with explicit
   schema, spec, snapshot, ref, hash-only metadata-pointer, and exact-data loss
   reporting over a shared run-owned filesystem volume, using an explicit

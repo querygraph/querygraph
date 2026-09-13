@@ -59,13 +59,9 @@ pub struct CroissantDataset {
 impl CroissantDataset {
     pub fn to_json_ld(&self) -> Value {
         json!({
-            "@context": {
-                "@vocab": "https://schema.org/",
-                "cr": "http://mlcommons.org/croissant/",
-                "dcat": "http://www.w3.org/ns/dcat#",
-                "odrl": "http://www.w3.org/ns/odrl/2/"
-            },
-            "@type": "cr:Dataset",
+            "@context": pinax::ontology::croissant_context(),
+            "@type": "sc:Dataset",
+            "qg:metadataOnly": true,
             "@id": self.id,
             "name": self.name,
             "description": self.description,
@@ -89,6 +85,7 @@ impl CroissantDataset {
                     "field": record_set.fields.iter().map(|field| {
                         json!({
                             "@type": "cr:Field",
+                            "@id": format!("{}/field/{}", record_set.id, field.name),
                             "name": field.name,
                             "dataType": field.data_type,
                             "description": field.description,
