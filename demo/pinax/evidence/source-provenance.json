@@ -1,10 +1,10 @@
 {
   "date": "2026-09-13",
-  "description": "Pinax rename; exact delivered sources are identified by SOURCE-SHA256SUMS",
+  "description": "Whole-stack walkthrough: lakehouse, catalog, enterprise standards, ontology, MCP and agent workflows. Commits identify source bases; SOURCE-SHA256SUMS identifies every delivered file.",
   "repositories": [
     {
       "name": "querygraph",
-      "commit": "c77e294d40b19938c4c15082024f67c8611fb26f",
+      "commit": "01005d032f70f89a07a1b59f6321aa51d593df31",
       "dirty": false
     },
     {
