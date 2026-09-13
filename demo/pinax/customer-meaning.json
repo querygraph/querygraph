@@ -1,0 +1,217 @@
+{
+  "meanings": {
+    "crm_customers": {
+      "label": "CRM customer",
+      "definition": "Sales calls an enterprise customer a customer: an organization with a commercial relationship. One row per organization; prospects are excluded.",
+      "aliases": [
+        "customer",
+        "customers"
+      ],
+      "steward": "sales-data"
+    },
+    "billing_accounts": {
+      "label": "Billing account",
+      "definition": "Finance calls the billable relationship an account, and sometimes a customer. An enterprise customer can have several billing accounts; an account is not the customer organization.",
+      "aliases": [
+        "account",
+        "accounts",
+        "customer"
+      ],
+      "steward": "finance-data"
+    },
+    "product_users": {
+      "label": "Product user",
+      "definition": "Product calls a person with a login a user, and sometimes a customer. Many users can belong to one enterprise customer; a free user need not be a paying customer.",
+      "aliases": [
+        "user",
+        "users",
+        "customer"
+      ],
+      "steward": "product-data"
+    },
+    "enterprise.customer.id": {
+      "label": "Enterprise customer identifier",
+      "definition": "Master identifier of the enterprise customer organization. CRM customer_id, billing customer_ref, and product customer_ref use this same reviewed identifier domain. This does not make account_id or user_id equivalent.",
+      "aliases": [
+        "enterprise customer id",
+        "customer id"
+      ],
+      "steward": "master-data"
+    },
+    "billing.account.id": {
+      "label": "Billing account identifier",
+      "definition": "Identifier of a billing account. Different from the enterprise customer identifier; use customer_ref for the owning customer. No one-to-one customer/account equivalence is implied.",
+      "aliases": [
+        "billing account id"
+      ],
+      "steward": "finance-data"
+    },
+    "product.user.id": {
+      "label": "Product user identifier",
+      "definition": "Identifier of an individual product user. Different from the enterprise customer identifier; customer_ref records the organization when known. Never join user_id directly to account_id.",
+      "aliases": [
+        "product user id"
+      ],
+      "steward": "product-data"
+    }
+  },
+  "tables": [
+    {
+      "name": "crm_customers",
+      "revision": 1,
+      "profile": "custom",
+      "metadata": {
+        "owner": "sales",
+        "steward": "sales-data",
+        "description": "Sales calls an enterprise customer a customer: an organization with a commercial relationship. One row per organization; prospects are excluded.",
+        "retention_days": 30
+      },
+      "security": {
+        "policy": "enterprise",
+        "revision": 1,
+        "classification": "internal",
+        "purposes": [
+          "customer_discovery"
+        ]
+      },
+      "columns": [
+        {
+          "id": 1,
+          "name": "customer_id",
+          "data_type": {
+            "kind": "int64"
+          },
+          "nullability": "required",
+          "semantic": "enterprise.customer.id",
+          "description": "Master identifier of the enterprise customer organization. CRM customer_id, billing customer_ref, and product customer_ref use this same reviewed identifier domain. This does not make account_id or user_id equivalent.",
+          "classification": "internal"
+        }
+      ],
+      "primary_key": [
+        1
+      ]
+    },
+    {
+      "name": "billing_accounts",
+      "revision": 1,
+      "profile": "custom",
+      "metadata": {
+        "owner": "finance",
+        "steward": "finance-data",
+        "description": "Finance calls the billable relationship an account, and sometimes a customer. An enterprise customer can have several billing accounts; an account is not the customer organization.",
+        "retention_days": 30
+      },
+      "security": {
+        "policy": "enterprise",
+        "revision": 1,
+        "classification": "internal",
+        "purposes": [
+          "customer_discovery"
+        ]
+      },
+      "columns": [
+        {
+          "id": 1,
+          "name": "account_id",
+          "data_type": {
+            "kind": "int64"
+          },
+          "nullability": "required",
+          "semantic": "billing.account.id",
+          "description": "Identifier of a billing account. Different from the enterprise customer identifier; use customer_ref for the owning customer. No one-to-one customer/account equivalence is implied.",
+          "classification": "internal"
+        },
+        {
+          "id": 2,
+          "name": "customer_ref",
+          "data_type": {
+            "kind": "int64"
+          },
+          "nullability": "optional",
+          "semantic": "enterprise.customer.id",
+          "description": "Master identifier of the enterprise customer organization. CRM customer_id, billing customer_ref, and product customer_ref use this same reviewed identifier domain. This does not make account_id or user_id equivalent.",
+          "classification": "internal"
+        }
+      ],
+      "primary_key": [
+        1
+      ]
+    },
+    {
+      "name": "product_users",
+      "revision": 1,
+      "profile": "custom",
+      "metadata": {
+        "owner": "product",
+        "steward": "product-data",
+        "description": "Product calls a person with a login a user, and sometimes a customer. Many users can belong to one enterprise customer; a free user need not be a paying customer.",
+        "retention_days": 30
+      },
+      "security": {
+        "policy": "enterprise",
+        "revision": 1,
+        "classification": "internal",
+        "purposes": [
+          "customer_discovery"
+        ]
+      },
+      "columns": [
+        {
+          "id": 1,
+          "name": "user_id",
+          "data_type": {
+            "kind": "int64"
+          },
+          "nullability": "required",
+          "semantic": "product.user.id",
+          "description": "Identifier of an individual product user. Different from the enterprise customer identifier; customer_ref records the organization when known. Never join user_id directly to account_id.",
+          "classification": "internal"
+        },
+        {
+          "id": 2,
+          "name": "customer_ref",
+          "data_type": {
+            "kind": "int64"
+          },
+          "nullability": "optional",
+          "semantic": "enterprise.customer.id",
+          "description": "Master identifier of the enterprise customer organization. CRM customer_id, billing customer_ref, and product customer_ref use this same reviewed identifier domain. This does not make account_id or user_id equivalent.",
+          "classification": "internal"
+        }
+      ],
+      "primary_key": [
+        1
+      ]
+    }
+  ],
+  "records": {
+    "crm_customers": [
+      {
+        "customer_id": 101
+      },
+      {
+        "customer_id": 102
+      }
+    ],
+    "billing_accounts": [
+      {
+        "account_id": 2001,
+        "customer_ref": 101
+      },
+      {
+        "account_id": 2002,
+        "customer_ref": 101
+      }
+    ],
+    "product_users": [
+      {
+        "user_id": 3001,
+        "customer_ref": 101
+      },
+      {
+        "user_id": 3002,
+        "customer_ref": null
+      }
+    ]
+  }
+}

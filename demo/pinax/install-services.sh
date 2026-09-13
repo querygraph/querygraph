@@ -3,6 +3,8 @@
 set -euo pipefail
 demo_root="${1:?usage: install-services.sh DEMO_ROOT}"
 demo_root="$(cd "$demo_root" && pwd)"
+fixture_root="$demo_root/run/pinax"
+if test -e "$demo_root/run/active-pinax"; then fixture_root="$demo_root/run/active-pinax"; fi
 [[ "$demo_root" =~ ^/[A-Za-z0-9_./-]+$ ]] || { echo 'Unsupported service path' >&2; exit 1; }
 demo_user="$(id -un)"
 querygraph="$demo_root/src/querygraph/target/debug/querygraph"
@@ -10,7 +12,7 @@ sail="$demo_root/src/lakecat/target/debug/sail"
 owner="$demo_root/src/lakecat/target/debug/querygraph-registry-live-fixture"
 console="$demo_root/src/querygraph/target/debug/examples/pinax-demo"
 for binary in "$querygraph" "$sail" "$owner" "$console"; do test -x "$binary"; done
-test -f "$demo_root/run/pinax/registry-service.json"
+test -f "$fixture_root/registry-service.json"
 test -f "$demo_root/run/owner.env"
 scratch="$(mktemp -d)"
 trap 'rm -rf "$scratch"' EXIT
@@ -43,7 +45,7 @@ write_unit querygraph-pinax-sail 'QueryGraph demo Spark Connect' \
   "$sail spark server --ip 127.0.0.1 --port 15051" \
   "Environment=PYTHONPATH=$demo_root/src/sail/python"
 write_unit querygraph-pinax-owner 'QueryGraph demo governed Iceberg owner' \
-  "$owner $demo_root/run/pinax" \
+  "$owner $fixture_root" \
   "Environment=QG_FIXTURE_PORT=18181
 EnvironmentFile=$demo_root/run/owner.env"
 write_unit querygraph-pinax-api 'QueryGraph signed semantic HTTP API' \
@@ -52,7 +54,7 @@ write_unit querygraph-pinax-api 'QueryGraph signed semantic HTTP API' \
 write_unit querygraph-pinax-console 'QueryGraph Pinax demonstration console' \
   "$console --demo-root $demo_root --port 18081" ""
 write_unit querygraph-pinax-mcp 'QueryGraph stateless MCP and central ontology' \
-  "$querygraph mcp-serve --listen 127.0.0.1:18082 --registry-config $demo_root/run/pinax/registry-service.json" ""
+  "$querygraph mcp-serve --listen 127.0.0.1:18082 --registry-config $fixture_root/registry-service.json" ""
 
 for name in querygraph-pinax-sail querygraph-pinax-owner querygraph-pinax-api querygraph-pinax-console querygraph-pinax-mcp; do
   if systemctl cat "$name.service" > "$scratch/existing" 2>/dev/null; then

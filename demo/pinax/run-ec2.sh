@@ -13,11 +13,13 @@ querygraph="$demo_root/src/querygraph/target/debug/querygraph"
 test -x "$querygraph"
 report_dir="$(mktemp -d "$demo_root/reports/run-XXXXXXXX")"
 cd "$demo_root/src/querygraph"
-"$querygraph" dataverse-e2e --sail-dir "$report_dir/sail" \
+if [[ "${2:-}" == "--part-ii" ]]; then
+  "$querygraph" dataverse-e2e --sail-dir "$report_dir/sail" \
   --openlineage-file "$report_dir/openlineage.jsonl" \
   --did-ledger-file "$report_dir/attestations.jsonl" \
   --question "Which governed datasets mention access control?" \
   > "$report_dir/dataverse-e2e.json"
+fi
 uv sync --project python --extra mcp
 uv run --project python --with 'pyiceberg[pyarrow,sql-sqlite]==0.10.0' \
   python integration/pinax/execute_rows.py \

@@ -27,6 +27,17 @@ struct Demo {
     capacity: Semaphore,
 }
 
+impl Demo {
+    fn fixture(&self) -> PathBuf {
+        let active = self.root.join("run/active-pinax");
+        if active.exists() {
+            active
+        } else {
+            self.root.join("run/pinax")
+        }
+    }
+}
+
 #[derive(Clone, Copy, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 enum Operation {
@@ -160,8 +171,30 @@ async fn execute(demo: &Demo, operation: Operation) -> Result<Value> {
     // A fresh signed plan verifies the catalog/registry agreement; seed metadata
     // is labelled as such and is never substituted for live agent discovery.
     if matches!(operation, Operation::Lakehouse) {
+        let customer_path = demo.fixture().join("customer-tables.json");
+        if customer_path.exists() {
+            let discovery = execute_operation(demo, Operation::Discover).await?;
+            let bytes = tokio::task::spawn_blocking(move || -> Result<Vec<u8>> {
+                use std::io::Read;
+                let mut bytes = Vec::new();
+                std::fs::File::open(customer_path)?
+                    .take(2 * 1024 * 1024 + 1)
+                    .read_to_end(&mut bytes)?;
+                if bytes.len() > 2 * 1024 * 1024 {
+                    bail!("Fixture metadata exceeded 2 MiB");
+                }
+                Ok(bytes)
+            })
+            .await??;
+            let tables: Value = serde_json::from_slice(&bytes)?;
+            return Ok(json!({"status":"passed", "result":{
+                "tables":tables, "discovery":discovery["result"],
+                "schema_source":"operator-owned real Iceberg seed metadata; live catalog activation checks the registered contracts",
+                "engine":"Sail", "catalog":"LakeCat", "registry":"Pinax"
+            }}));
+        }
         let plan = execute_operation(demo, Operation::Plan).await?;
-        let path = demo.root.join("run/pinax/seed.json");
+        let path = demo.fixture().join("seed.json");
         let seed = tokio::task::spawn_blocking(move || -> Result<Value> {
             use std::io::Read;
             let mut bytes = Vec::new();
@@ -209,8 +242,14 @@ async fn execute_operation(demo: &Demo, operation: Operation) -> Result<Value> {
         let mut command = Command::new(target.join("examples/pinax-client"));
         command
             .arg("--config")
-            .arg(demo.root.join("run/pinax/registry-service.json"))
+            .arg(demo.fixture().join("registry-service.json"))
             .arg(argument);
+        if matches!(operation, Operation::Discover | Operation::Ontology) {
+            command.args(["--purpose", "customer_discovery"]);
+        }
+        if matches!(operation, Operation::Ontology) {
+            command.args(["--query", "customer"]);
+        }
         command
     } else if matches!(operation, Operation::Standards) {
         let mut command = Command::new(target.join("querygraph"));
@@ -229,7 +268,12 @@ async fn execute_operation(demo: &Demo, operation: Operation) -> Result<Value> {
         command
     } else if matches!(operation, Operation::Mcp) {
         let mut command = Command::new(target.join("examples/pinax-mcp-client"));
-        command.args(["--url", "http://127.0.0.1:18082/mcp"]);
+        command.args([
+            "--url",
+            "http://127.0.0.1:18082/mcp",
+            "--scenario",
+            "customer-discovery",
+        ]);
         command
     } else if matches!(operation, Operation::Navigator) {
         let mut command = Command::new(target.join("querygraph"));

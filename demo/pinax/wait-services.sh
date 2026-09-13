@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 demo_root="${1:?usage: wait-services.sh DEMO_ROOT}"
+fixture_root="$demo_root/run/pinax"
+if test -e "$demo_root/run/active-pinax"; then fixture_root="$demo_root/run/active-pinax"; fi
 client="$demo_root/src/querygraph/target/debug/examples/pinax-client"
 for attempt in {1..30}; do
   if curl --fail --silent --max-time 1 http://127.0.0.1:18080/v1/health > /dev/null \
@@ -10,7 +12,7 @@ for attempt in {1..30}; do
       -H 'MCP-Protocol-Version: 2026-07-28' -H 'Mcp-Method: server/discover' \
       --data '{"jsonrpc":"2.0","id":1,"method":"server/discover","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientCapabilities":{}}}}' > /dev/null \
     && (exec 3<>/dev/tcp/127.0.0.1/15051) 2>/dev/null \
-    && "$client" --config "$demo_root/run/pinax/registry-service.json" discover \
+    && "$client" --config "$fixture_root/registry-service.json" discover \
       > /dev/null 2> "$demo_root/logs/owner-startup.log"; then
     exit 0
   fi

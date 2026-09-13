@@ -1,6 +1,8 @@
-# QueryGraph stack demo with Pinax
+# Pinax customer discovery demo
 
-Introduce the whole QueryGraph stack: a lakehouse and schemas in Sail, a physical catalog in LakeCat, and enterprise table standards and a central ontology in Pinax. Agents with TypeSec access discover tables and operate through MCP, with Marciana workflows and Grust graph storage. The console follows ten main steps; access checks are optional.
+Part I answers **“What are customers called where?”** through four catalog, lakehouse, Pinax, and MCP steps. Three real synthetic business tables distinguish CRM customers, billing accounts, and product users. Reviewed concepts and bindings identify their actual fields. Graph operations and specialist workflows are hidden in an explicitly opened Part II.
+
+Start with [the presenter narrative](demo-narrative.md), [reviewed fixture](customer-meaning.json), and [design contract](customer-discovery-design.md).
 
 Sail is built from our selected source checkout. The demo and integration do
 not depend on upstream Sail review, merge or release. `build-ec2.sh` compiles
@@ -32,7 +34,7 @@ ssh -N -L 18081:127.0.0.1:18081 grust
 # Open http://localhost:18081
 ```
 
-The browser console runs ten main actions and two optional access checks, serves the presentation, and links
+The browser console runs four main discovery actions, with authoring, reads, access checks, and Part II collapsed. It serves the presentation and links
 to the published book. It uses a signed Rust fixture client. The separate
 acceptance runner exercises both MCP entry paths and the mutation scenarios.
 No EC2 security-group change is needed for the SSH tunnel.
@@ -50,7 +52,7 @@ Cargo jobs by default and disables development debug information. This is a
 correctness demonstration, with no performance claim.
 
 `run-ec2.sh` creates a new report directory each time. The original semantic
-workflow writes its report and signed lineage. The Pinax phase reads actual
+workflow is available only with `--part-ii`, and writes its report and signed lineage. The Pinax phase reads actual
 Iceberg/Parquet rows, verifies output and evidence digests, rejects unauthorized
 columns and purposes, discards buffers after policy/registry/snapshot mutation,
 and restarts consumers after a reviewed registry revision.
@@ -65,13 +67,11 @@ Fixture data and services are temporary and clean up after each phase.
 ssh grust 'bash /home/admin/querygraph-pinax-demo-20260913/src/querygraph/demo/pinax/run-live.sh /home/admin/querygraph-pinax-demo-20260913'
 ```
 
-`run-live.sh` verifies the live Spark Connect semantic workflow, signed Pinax
-discovery/planning/execution, private-column and purpose denial, and the original
-HTTP API health and QGLake story. Each run has an isolated absolute warehouse
+`run-live.sh` runs only the four Part I discovery actions. Pass `--part-ii` explicitly to exercise the retained Spark Connect graph workflow, governed reads, access checks, and QGLake story. Each run has an isolated absolute warehouse
 selected by `QG_SAIL_WAREHOUSE`. Omitting this environment variable preserves
 the library's server-managed warehouse default; relative values fail validation.
 
-The live run loaded **34 graph nodes and 33 edges** for two Dataverse datasets,
+The retained Part II live run loaded **34 graph nodes and 33 edges** for two Dataverse datasets,
 read a dataset node back from Sail, and appended lineage to
 `qg_audit.openlineage_events`. The report's Cypher summary is computed in memory;
 graph storage and node readback are verified through Spark Connect.
@@ -84,7 +84,7 @@ It signs the exact intent body and calls the trusted service. On the host:
 ```bash
 DEMO_ROOT=/home/admin/querygraph-pinax-demo-20260913
 CLIENT="$DEMO_ROOT/src/querygraph/target/debug/examples/pinax-client"
-CONFIG="$DEMO_ROOT/run/pinax/registry-service.json"
+CONFIG="$DEMO_ROOT/run/active-pinax/registry-service.json"
 "$CLIENT" --config "$CONFIG" discover
 "$CLIENT" --config "$CONFIG" plan
 "$CLIENT" --config "$CONFIG" execute
@@ -118,7 +118,7 @@ opened. The console admits only local-host requests with its custom header,
 runs one fixed operation at a time, bounds output and cancels children at its
 120-second deadline. It does not accept shell commands, paths or credentials.
 
-The retained fixture is under `run/pinax`. Its **in-memory catalog resets to
+The active fixture is selected by `run/active-pinax`, pointing to `run/customer-discovery`. The original `run/pinax` fixture and `run/ontology` publication remain intact. Its **in-memory catalog resets to
 the seed state on owner restart**. Data files and per-run semantic warehouses
 remain for inspection. Plan-signing material is generated on the destination
 with mode 0600 and excluded from the source bundle. `prepare-services.sh`
@@ -133,10 +133,12 @@ sudo systemctl disable --now querygraph-pinax-{console,mcp,api,owner,sail}
 
 ## Presentation and evidence
 
+- [`evidence/grust-customer-discovery-console.json`](evidence/grust-customer-discovery-console.json): live four-step customer discovery, shared/distinct field meanings, Part II hidden on load, all optional operations, and desktop/mobile checks. Earlier evidence below retains its original scope.
+
 - [`evidence/grust-whole-stack-console.json`](evidence/grust-whole-stack-console.json): all ten main actions, two optional checks, and component/layout regressions against the redesigned live console.
 - [`demo-narrative.md`](demo-narrative.md): complete presenter walkthrough, commands, and evidence.
-- [`slides.html`](slides.html): 14 editable slides with embedded speaker notes.
-- [`dist/querygraph-pinax-slides.pdf`](dist/querygraph-pinax-slides.pdf): exported deck.
+- [`slides.html`](slides.html): 10 main slides with an explicitly opened Part II appendix and embedded speaker notes.
+- [`dist/querygraph-pinax-slides.pdf`](dist/querygraph-pinax-slides.pdf): exported Part I deck.
 - [`evidence/grust-live-services.json`](evidence/grust-live-services.json): persistent live semantic run.
 - [`evidence/grust-pinax-execution.json`](evidence/grust-pinax-execution.json): both MCP paths, denials, real-read mutations and revision cutover.
 - [`evidence/grust-pinax-execution-final.json`](evidence/grust-pinax-execution-final.json): the repeated acceptance run after the final source changes.
@@ -150,9 +152,15 @@ or a performance benchmark.
 
 ## Central ontology
 
-The updated demo includes a Pinax-owned central ontology, signed semantic
+The demo includes a Pinax-owned central ontology, signed semantic
 discovery, and ontology-resolved plan/read requests. See [the integration guide](../../docs/central-ontology.md),
 [fixture review](ontology-review.md), and [presenter narrative](demo-narrative.md).
 The seed example installs the reviewed synthetic vocabulary in run/ontology.
-New schema imports remain drafts; operators publish revisions with reviewed
+The three business tables use the `customer_discovery` purpose. New schema imports remain drafts; operators publish revisions with reviewed
 digests and compare-and-swap. Runtime store contents stay out of source bundles.
+
+## Customer discovery fixture
+
+`integration/pinax/prepare_customers.py` extends a preserved single-table fixture into a **new** directory, creating three Iceberg tables and Parquet files. It never overwrites the old fixture. `pinax-ontology-seed` reviews only the exact source-owned synthetic contracts and publishes into a new central store. After verifying catalog activation, point the retained services at the new directory and restart consumers with its exact registry/ontology pins. Keep the original directory for rollback.
+
+The MCP customer-discovery scenario is metadata-only. The original `--scenario governed-read` still checks the original analytics fixture. The source archive and older evidence files describe their recorded runs; new customer-discovery evidence is stored separately.

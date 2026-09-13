@@ -150,15 +150,56 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             serde_json::json!({"lakecat:read-restriction":{"allowed-columns":["id"],"row-predicate":{"type":"eq","term":"tenant","value":"acme"}},
                 "permission":[{"action":"read","constraint":[{"leftOperand":"purpose","operator":"eq","rightOperand":"analytics"}]}]}))?).await?;
     }
-    let resources = ["customers", "transactions", "rows"]
-        .iter()
-        .map(|name| {
-            Ok(
-                TableIdent::new(warehouse.clone(), namespace.clone(), TableName::new(*name)?)
-                    .stable_id(),
-            )
-        })
-        .collect::<Result<Vec<_>, lakecat_core::LakeCatError>>()?;
+    // Additional synthetic enterprise tables are seeded from real Iceberg files.
+    // This operator-owned file is not an agent input or a general import endpoint.
+    let extra_path = directory.join("customer-tables.json");
+    if extra_path.exists() {
+        let tables: Vec<serde_json::Value> = serde_json::from_slice(&std::fs::read(extra_path)?)?;
+        if tables.len() != 3 {
+            return Err("expected three customer discovery tables".into());
+        }
+        for table in tables {
+            let name = table["name"].as_str().ok_or("customer table name")?;
+            if !["crm_customers", "billing_accounts", "product_users"].contains(&name) {
+                return Err("unreviewed customer fixture table".into());
+            }
+            let ident =
+                TableIdent::new(warehouse.clone(), namespace.clone(), TableName::new(name)?);
+            store
+                .create_table(TableRecord::new(
+                    ident,
+                    table["location"]
+                        .as_str()
+                        .ok_or("customer table location")?
+                        .into(),
+                    Some(
+                        table["metadata_location"]
+                            .as_str()
+                            .ok_or("customer metadata pointer")?
+                            .into(),
+                    ),
+                    table["metadata"].clone(),
+                    Principal::new(agent.to_string(), PrincipalKind::Agent)?,
+                ))
+                .await?;
+        }
+    }
+    let resources = [
+        "customers",
+        "transactions",
+        "rows",
+        "crm_customers",
+        "billing_accounts",
+        "product_users",
+    ]
+    .iter()
+    .map(|name| {
+        Ok(
+            TableIdent::new(warehouse.clone(), namespace.clone(), TableName::new(*name)?)
+                .stable_id(),
+        )
+    })
+    .collect::<Result<Vec<_>, lakecat_core::LakeCatError>>()?;
     let policy = format!(
         "roles:\n  - name: fixture_operator\n    permissions: [table.create, table.load, table.commit, table.plan_scan{execute_permission}]\n    resources: {}\nassignments:\n  - subject: {}\n    roles: [fixture_operator]\n",
         serde_json::to_string(&resources)?,

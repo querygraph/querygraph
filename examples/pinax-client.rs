@@ -15,6 +15,8 @@ struct Arguments {
     operation: Operation,
     #[arg(long, default_value = "customer identifier")]
     query: String,
+    #[arg(long, default_value = "analytics")]
+    purpose: String,
 }
 
 #[derive(Clone, Copy, ValueEnum)]
@@ -63,6 +65,9 @@ fn main() -> Result<()> {
     // Loading can perform the configured activation check before this runtime.
     let service = load_registry_service(&args.config)?;
     let (resource, mut request) = args.operation.request();
+    if matches!(args.operation, Operation::Ontology | Operation::Discover) {
+        request["purpose"] = json!(args.purpose);
+    }
     if matches!(args.operation, Operation::Ontology) {
         request["query"] = json!(args.query);
     }

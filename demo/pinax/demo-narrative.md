@@ -1,276 +1,199 @@
-# The QueryGraph stack: presenter narrative
+# Part I — What are customers called where?
 
-A 15–20 minute introduction for an audience seeing the stack for the first time.
-The companion [14-slide deck](dist/querygraph-pinax-slides.pdf) and live console
-follow the same story. No prior Pinax version or migration demo is assumed.
+A 10–15 minute catalog discovery demo. The four main console steps exercise
+Sail, LakeCat, Pinax, and MCP. The default slides contain only Part I.
+Graph storage and specialist workflows are a separately opened Part II.
 
-## The opening
+## Open with the business question
 
-“A large company already has data. Different teams collect it in different
-systems, name similar fields differently, and use business terms differently.
-We want an agent to find the appropriate tables, understand their shape and
-meaning, and operate on them with the right access.”
+“Sales calls them customers. Finance calls them accounts. Product calls them
+users. Across the company, where do those meanings live, and which fields
+represent them?”
 
-“We have a lakehouse in Sail, a physical catalog in LakeCat, and an enterprise
-registry in Pinax. TypeSec gives agents identity and access. MCP provides their
-tool interface. Marciana contributes semantic and cognition capabilities, and
-Grust connects datasets and their meanings in a graph. QueryGraph composes the
-whole stack.”
+The useful answer is a set of locations with definitions, not a list of
+synonyms. A billing account can belong to a customer organization. A product
+user can belong to that organization, or be a free user with no customer
+reference. Calling all three “customer” does not make their populations or
+identifiers interchangeable.
 
-Use slides 1–2. Do not open with denied requests, drift, or revision cutover.
-The central question is how the company makes data understandable and usable.
-
-## Open the console
-
-Keep the laptop tunnel running:
+Open the live console through the existing tunnel:
 
 ```bash
 ssh -N -L 18081:127.0.0.1:18081 grust
+# http://localhost:18081
 ```
 
-Open http://localhost:18081. The presentation is at
-http://localhost:18081/slides. Component names across the top are buttons:
-clicking one explains its role on the left and selects its related step on the
-right. The explanation includes a source/documentation link.
+## 1. Inspect the company inventory
 
-Results remain on the left. The walkthrough scrolls independently on the right.
-Clicking an action aligns its card with the result pane. During execution, the
-result header shows elapsed time. Each completed response has a readable
-summary, followed by expandable complete JSON. Long results scroll inside the
-left pane, independently of the controls. On a narrow screen the two scrollable
-panes stack vertically, with the result above the controls.
+Click **Inspect lakehouse & catalog**. Three departments have real Iceberg
+metadata and Parquet records in the synthetic `acme` namespace:
 
-## 1. A lakehouse with a schema — slides 3–4
-
-Click **Inspect lakehouse & catalog**.
-
-“We begin with a real physical table. Sail executes reads over Iceberg metadata
-and Parquet files. LakeCat catalogs the table and the snapshot used by a read.”
-
-The small customer fixture is physically named `rows`. It has three fields:
-
-| Stable field ID | Column | Iceberg type | Required |
+| Department | Table | Fields | What one row means |
 | --- | --- | --- | --- |
-| 1 | id | long | yes |
-| 2 | tenant | string | no |
-| 3 | private_email | string | no |
+| Sales | `crm_customers` | `customer_id` | One customer organization |
+| Finance | `billing_accounts` | `account_id`, `customer_ref` | One billing relationship |
+| Product | `product_users` | `user_id`, `customer_ref` | One person with a login |
 
-The console displays the physical schema from the retained synthetic seed and
-runs a fresh signed plan against the live catalog. The plan verifies agreement
-between the registered contract and current catalog state. The seed display is
-an operator view of this public synthetic fixture; it is not the agent's
-filtered discovery response. Do not present a seed read as a remote catalog
-listing. The subsequent plan and row operations supply the live evidence.
+The fixture contains two organizations, two billing accounts for organization
+101, and two users, one of whom has no customer reference. These records make
+one-to-many and missing relationships concrete. Part I discovers metadata; it
+does not execute a join or count these populations.
 
-“The physical catalog tells us what table and snapshot exist. The registry
-tells the organization what shape and meaning it has agreed to use.”
+Sail supplies lakehouse execution. LakeCat catalogs physical table state.
+The operator schema display reads retained Iceberg metadata; the fresh service
+activation checks registered contracts against live LakeCat. Do not call a
+seed display a remote catalog enumeration. The next step is the agent's
+actual authorized discovery response.
 
-## 2. Standard table shapes — slide 5
+## 2. Discover tables and fields
 
-Click **Generate enterprise standards**.
+Click **Discover company tables**. Pinax returns the three registered tables
+for the `customer_discovery` purpose, with field names, stable field IDs,
+types, descriptions, owners and stewards. TypeSec still authenticates the
+agent and filters discovery; it is supporting infrastructure, not an extra
+main-stage workflow.
 
-“A large company should not need to rediscover the meaning and representation
-of customer, employee, and transaction records in every team. Pinax provides
-shared typed profiles with stable field identities, semantic terms, owners,
-and stewards. Teams can adopt, review, and maintain these definitions.”
+Explain that departments retain their names. A company does not have to
+rename every account or user table to customers before agents can find it.
+The registry provides physical contracts; the ontology provides reviewed meaning.
 
-This runs the actual authoring command:
+## 3. Ask what customers are called where
 
-```bash
-querygraph pinax init --enterprise acme \
-  --owner platform --steward data --policy enterprise
+Click **Find customer meanings**. The search for `customer` intentionally
+returns three different table concepts:
+
+- **CRM customer**: an organization with a commercial relationship, excluding prospects.
+- **Billing account**: a billing relationship; several may belong to one organization.
+- **Product user**: a person with a login, potentially a free user.
+
+All three accept the business alias `customer`. Each has its own stable concept
+ID, definition, steward, source reference, and reviewed table binding. The
+ambiguity is recorded, not erased. `account` finds the Finance meaning, and
+`user` finds the Product meaning.
+
+Then show field-level meaning. The same **Enterprise customer identifier**
+concept binds these physical fields:
+
+```text
+crm_customers.customer_id       field ID 1
+billing_accounts.customer_ref   field ID 2
+product_users.customer_ref      field ID 2
 ```
 
-The output contains `employees`, `customers`, and `transactions` profiles. Show
-the returned columns, types, and semantic keys. These are generated templates,
-not newly registered or populated physical tables. The live customer fixture
-remains the small `rows` table throughout the walkthrough.
+`billing_accounts.account_id` and `product_users.user_id` each have a separate
+identifier concept. The repeated field ID 2 is meaningful only together with
+its table and revision; it is not a globally unique column identity.
 
-Explain the practical adoption process: inventory existing schemas, choose
-shared profiles and definitions, map existing fields, validate the contracts,
-and reconcile the catalog before deploying consumers. An agent can help propose
-mappings; data stewards supply and review business meaning. Pinax validates
-representable shapes and compatibility. It does not infer currencies, units,
-or business keys from an ambiguous column name.
+This is how Pinax answers the question: business wording selects candidate
+concepts; reviewed bindings identify the tables and stable fields; registry
+metadata supplies the actual column names. Definitions explain when two names
+mean different things. A shared concept does not, by itself, prove key
+uniqueness, foreign-key integrity, completeness, or permission to join tables.
 
-## 3. Find the registered tables — slide 7
+### How the organization records this in Pinax
 
-Click **Discover tables**.
+The concrete reviewed synthetic vocabulary is
+[`customer-meaning.json`](customer-meaning.json). Its `meanings` section is an
+operator fixture input, not a new Pinax wire format. The publisher materializes
+standard `pinax.ontology.v1` concepts and bindings using the registry's exact
+digest. The source tables remain ordinary `pinax.v1` contracts.
 
-“The analytics agent now approaches the registry with an authenticated TypeSec
-identity and a purpose. Pinax returns the tables and fields it can use.”
+1. Inventory tables in the catalog and register their schemas, field IDs,
+   owners, and stewards in Pinax.
+2. Bootstrap or import draft ontology concepts and bindings.
+3. Have domain stewards define the populations, identifiers, aliases, and
+   distinctions. Reuse a concept ID only when meaning truly agrees.
+4. Review both the concepts and each table/field binding. Record source and
+   review evidence. Publish the reviewed digest.
+5. Update the consumer's registry and ontology pins and restart it at the
+   reviewed revision. Reconcile schema changes before publishing successors.
 
-The response identifies enterprise `acme`, the `rows` table, its customer
-identifier description, owner `platform`, steward `data`, and field `id` with
-stable field ID 1 and type `int64`. Its registry digest identifies the exact
-inventory consulted. This is the agent's usable view, unlike the operator
-schema display in step 1.
+Pinax's aliases belong to concepts. They are not a global replacement rule
+saying `customer = account = user`. Department scope comes from distinct
+concept definitions, stewardship, and the physical binding. Broader and related
+references can express additional vocabulary structure, but `related` does
+not assert equivalence. This example needs no graph workflow.
 
-Keep the emphasis on successful access: TypeSec lets identified agents work
-with the appropriate data. Optional negative checks are available at the end.
+## 4. Let the agent ask through MCP
 
-## 4. Find data by meaning — slide 6
+Click **Ask: what are customers called where?** The Rust protocol client:
 
-Click **Consult shared ontology**.
+1. Discovers the MCP server and tools.
+2. Calls `discover_pinax_ontology` for `customer`, `account`, `user`, and
+   `enterprise customer id`, using a signed intent and `customer_discovery` purpose.
+3. Follows registry cursors, including pages with no matches; rejects truncated
+   semantic result pages rather than silently presenting an incomplete answer.
+4. Reads definitions and bindings from the responses and resolves field IDs
+   against the authorized exported schemas.
+5. Displays department terminology, table and field names, stewards, and the
+   registry/ontology digests that support the answer.
 
-“An agent should be able to begin with the organization's vocabulary. Pinax's
-central ontology binds a reviewed concept to the physical field.”
+An intent inside a signed MCP tool call looks like:
 
-Show **Customer identifier**, its definition, and aliases **account number**
-and **customer id**. The binding identifies `rows`, field ID 1. The result
-contains the ontology digest and registry digest. The next MCP step uses the
-alias `account number` and derives the operation from this returned binding.
+```json
+{"purpose":"customer_discovery","query":"customer","limit":100,"cursor":null}
+```
 
-A schema describes representation. An ontology explains meaning: preferred
-labels, definitions, aliases, and broader/related concepts. Bindings connect
-that meaning to tables and fields. New imports remain drafts until their
-concepts and bindings are reviewed. Coverage refers to the complete registered
-inventory; remote tables must first be inventoried and registered.
+The tool arguments are the exact serialized `intent` and its TypeSec `envelope`.
+The client never accepts a publisher path or ontology replacement from an agent.
 
-## 5. Let an agent use MCP — slide 8
+Expected business answer:
 
-Click **Discover & read through MCP**.
+“Sales calls customer organizations **customers**, in `crm_customers`.
+Finance calls billing relationships **accounts**, in `billing_accounts`.
+Product calls people with logins **users**, in `product_users`.
+The customer reference fields share the enterprise customer identifier;
+account IDs and user IDs have different meanings. Do you need organizations,
+billing relationships, or people?”
 
-This runs `pinax-mcp-client` against the deployed HTTP MCP service. It discovers
-the server and its tools, signs a semantic search, resolves `account number`,
-derives the table and column from the reviewed result, and calls
-`execute_pinax_scan`. The read travels through LakeCat and Sail. The left pane
-shows the match and actual returned rows.
+The displayed locations and definitions come from the live responses. This is
+an executable MCP client, not a fresh language-model conversation. It performs
+metadata discovery and does not run graph algorithms, workflows, or joins.
 
 ```bash
 DEMO_ROOT=/home/admin/querygraph-pinax-demo-20260913
 "$DEMO_ROOT/src/querygraph/target/debug/examples/pinax-mcp-client" \
-  --url http://127.0.0.1:18082/mcp
+  --url http://127.0.0.1:18082/mcp --scenario customer-discovery
 ```
 
-This is an executable agent-protocol client using a public fixture identity.
-It does not invoke an external language model. Its complete JSON includes
-requests, responses, additional access assertions, and signature checks. Lead
-with the successful discovery-to-read path rather than those assertions.
+## What “across the company” means
 
-## 6–7. Inspect the plan and read — slide 9
+The answer covers the authorized **registered** inventory, not unregistered or
+inaccessible systems. Domain stewardship and explicit ingestion are required
+at enterprise scale. Cursors make inventory pagination visible; ontology
+and registry digests pin each interpretation. This small fixture demonstrates
+the process and does not claim enterprise-scale performance or automatic
+semantic inference. If two definitions still conflict, the agent presents both
+and asks for the intended population instead of choosing its first result.
 
-Click **Inspect scan plan**, then **Read selected rows**.
+## Optional authoring, reads, and access checks
 
-The signed client consults the central ontology, resolves the selected field,
-and constructs this bounded operation:
+These are collapsed outside the four-step introduction. Shared profile generation
+previews reusable templates. The original `rows` table, analytics purpose, and
+its governed read `[{"id":2}]` remain as a separate regression fixture. They
+must not be presented as a read from the three department tables. The original
+MCP read client remains available with `--scenario governed-read`.
 
-```json
-{"table":"rows","columns":["id"],"purpose":"analytics","limit":10}
-```
+# Part II — Graphs and specialist workflows
 
-The plan displays the table, selected columns, purpose, limit, and snapshot.
-The read returns:
+Open **Part II · Graphs and specialist workflows** explicitly. Its component
+buttons and operations remain hidden on initial load. The presentation's
+**Open Part II** link enables the appendix; the default arrow-key route ends
+with the catalog discovery demo.
 
-```json
-[{"id":2}]
-```
+The retained semantic workflow writes 34 nodes and 33 edges for two descriptive
+Dataverse fixtures through Sail, reads a dataset node back, and appends lineage.
+The Cypher summary and fixture answer are computed locally. Navigator produces
+semantic metadata; the Resilience Desk is deterministic specialist orchestration.
+These are separate datasets and capabilities, not prerequisites for the customer
+naming answer. External model inference is not enabled.
 
-The seed contains two records belonging to different synthetic tenants. This
-agent's context selects the Acme identifier. The returned projection carries
-execution evidence and semantic exports. The result is a physical read from
-Parquet, not a prefilled browser response. The direct actions show individual
-stages; step 5 shows the complete protocol journey over MCP.
+## Operating notes
 
-## 8. Connect the data as a graph — slide 10
+The five existing services and SSH tunnel remain the entrypoints. Prepared
+customer inventory lives in a new retained directory; preserve the original
+fixture and ontology on cutover. The owner remains an in-memory catalog restored
+from seed metadata on restart. This is a correctness demo, not a durability claim.
 
-Click **Build graph & run workflow**.
-
-“An organization also needs the relationships between datasets, files, fields,
-and concepts. Grust represents those relationships as a property graph.”
-
-The live workflow describes two Dataverse fixtures: Bay Area building energy
-observations and Enterprise data access survey. It writes **34 nodes and 33
-edges** through Sail Spark Connect, reads a dataset node back, and appends
-OpenLineage to `qg_audit.openlineage_events`. The result shows the loaded views
-and a readable fixture answer.
-
-These descriptive datasets are separate from the retained customer-row fixture.
-The graph's Cypher summary and agent answer are computed locally; graph storage,
-node readback, and lineage append use live Sail. Optional external model
-inference is not enabled. Each invocation gets an isolated report and warehouse.
-
-## 9–10. Describe data and coordinate agents — slide 11
-
-Click **Build semantic bundle**.
-
-“Marciana's semantic and cognition capabilities are composed into QueryGraph's
-workflows. Navigator packages a dataset description for other agents: Croissant
-fields, CDIF data elements, vocabulary references, identity, and usage terms.”
-
-Show the bundle's layer names and expand JSON if the audience wants the
-structure. The hazard vocabulary and its URLs are descriptive fixture metadata;
-this step does not download a remote dataset. It consults the central ontology
-before generating the bundle.
-
-Click **Run specialist workflow**.
-
-The Resilience Desk supervisor delegates to finance, energy, mobility,
-climate-health, reference, and restricted-data specialists. The synthesis agent
-combines their signed summaries into a briefing. TypeSec identities and
-operation scopes accompany the delegation; lineage connects the outputs to the
-workflow. Show the briefing and specialist inputs first.
-
-This is a deterministic orchestration fixture. Do not claim it runs a fresh
-language-model conversation or scans every named source. The real table read
-is demonstrated in steps 5–7. The central ontology consultation is a preflight
-for these workflows; it does not replace their domain-specific vocabulary.
-
-## Semantic interoperability — slide 12
-
-The shared ontology projects into Croissant descriptions, CDIF-oriented data
-elements, and a SKOS vocabulary. They refer to the same reviewed concepts.
-Discovery descriptions are explicitly metadata-only. Successful bounded reads
-include loadable Croissant inline records, validated separately with the
-MLCommons reference loader. CDIF support is the implemented projection, not a
-claim to implement every CDIF profile.
-
-## Close — slides 13–14
-
-“We started with company data. Sail executes it, LakeCat catalogs it, Pinax
-standardizes its shape and meaning, and TypeSec enables appropriate agent
-access. MCP makes the operations available; Marciana and Grust support the
-workflows and relationships around them. Pinax is where an agent begins.”
-
-The [book](https://firstpair.org/books/pinax/) and
-[announcement](https://querygraph.ai/announcing-pinax/) provide the longer
-explanation. The [ontology guide](../../docs/central-ontology.md) documents
-construction and maintenance.
-
-## Optional checks and operator notes
-
-The collapsed **Optional access checks** section contains field and purpose
-denials. These remain useful engineering checks, but are outside the main
-introduction. Mutation and registry-cutover scenarios remain in the separate
-acceptance suite; they are not audience prerequisites or slide topics.
-
-Five services support the retained deployment:
-
-| Service suffix (`querygraph-pinax-…`) | Port | Role |
-| --- | --- | --- |
-| console | 18081 | Walkthrough and slides |
-| mcp | 18082 | Agent MCP endpoint |
-| owner | 18181 | LakeCat catalog and table operations |
-| sail | 15051 | Spark Connect |
-| api | 18080 | QueryGraph HTTP API |
-
-Services are enabled at boot. The owner's catalog is an in-memory fixture and
-returns to its seed on restart. Destination-generated credentials stay outside
-the source archive. All Rust uses edition 2024. Sail runs from our selected
-source checkout; upstream merge is not required.
-
-Repeat live integration checks:
-
-```bash
-ssh grust 'bash /home/admin/querygraph-pinax-demo-20260913/src/querygraph/demo/pinax/run-live.sh /home/admin/querygraph-pinax-demo-20260913'
-```
-
-Verify every console action and the desktop/mobile layout through the tunnel:
-
-```bash
-node demo/pinax/verify-console.mjs /tmp/querygraph-stack-console-check
-```
-
-The prepared archive can deploy a new isolated instance using its
-`START-HERE.txt`. This demonstration establishes working integration for small
-fixtures; it makes no throughput or production-durability claim.
+See [customer-discovery-design.md](customer-discovery-design.md) for the change
+contract and [README.md](README.md) for build, lifecycle, and source packaging.

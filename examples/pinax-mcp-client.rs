@@ -1,15 +1,26 @@
 //! Executable MCP 2026-07-28 acceptance client using only the public demo identity.
 use anyhow::{Context, Result, ensure};
-use clap::Parser;
+use clap::{Parser, ValueEnum};
 use querygraph::{agent::PyTypeDidEnvelope, mcp::MCP_STATELESS_PROTOCOL_VERSION};
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
 use std::time::Duration;
 
+#[path = "pinax_mcp_client/customer_discovery.rs"]
+mod customer_discovery;
+
+#[derive(Clone, Copy, ValueEnum)]
+enum Scenario {
+    GovernedRead,
+    CustomerDiscovery,
+}
+
 #[derive(Parser)]
 struct Arguments {
     #[arg(long, default_value = "http://127.0.0.1:18082/mcp")]
     url: String,
+    #[arg(long, value_enum, default_value = "governed-read")]
+    scenario: Scenario,
 }
 
 fn message(id: usize, method: &str, mut params: Value) -> Value {
@@ -96,6 +107,17 @@ async fn main() -> Result<()> {
         "wrong protocol"
     );
     let tools = send(&client, &args.url, &message(2, "tools/list", json!({}))).await?;
+    if matches!(args.scenario, Scenario::CustomerDiscovery) {
+        let answer = customer_discovery::run(&client, &args.url).await?;
+        println!(
+            "{}",
+            serde_json::to_string_pretty(&json!({
+                "protocol": MCP_STATELESS_PROTOCOL_VERSION, "transport":"stateless-streamable-http",
+                "discovery":discovery, "tools":tools, "customer_discovery":answer
+            }))?
+        );
+        return Ok(());
+    }
     ensure!(
         tools["result"]["tools"]
             .as_array()

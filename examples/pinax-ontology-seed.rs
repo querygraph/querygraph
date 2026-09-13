@@ -7,10 +7,25 @@ use pinax::{
     ontology::{BindingReview, ConceptStatus, Ontology, store::OntologyStore},
 };
 use std::{
+    collections::BTreeMap,
     fs::File,
     io::{Read, Write},
     path::PathBuf,
 };
+
+#[derive(serde::Deserialize)]
+struct CustomerFixture {
+    meanings: BTreeMap<String, Meaning>,
+    tables: Vec<pinax::TableContract>,
+}
+
+#[derive(serde::Deserialize)]
+struct Meaning {
+    label: String,
+    definition: String,
+    aliases: Vec<String>,
+    steward: String,
+}
 
 #[derive(Parser)]
 struct Arguments {
@@ -32,10 +47,20 @@ fn bounded(path: &std::path::Path, limit: usize) -> Result<Vec<u8>> {
 fn main() -> Result<()> {
     let args = Arguments::parse();
     let registry = Registry::from_json(&bounded(&args.registry, pinax::MAX_DOCUMENT_BYTES)?)?;
+    let customer: CustomerFixture =
+        serde_json::from_str(include_str!("../demo/pinax/customer-meaning.json"))?;
     ensure!(
-        registry.enterprise() == "acme" && registry.tables().len() == 1,
+        registry.enterprise() == "acme" && matches!(registry.tables().len(), 1 | 4),
         "Only the synthetic demo registry is supported"
     );
+    if registry.tables().len() == 4 {
+        for expected in &customer.tables {
+            ensure!(
+                registry.table(&expected.name)? == expected,
+                "Customer fixture contract changed; review again"
+            );
+        }
+    }
     let table = registry.table("rows")?;
     ensure!(
         table
@@ -52,6 +77,18 @@ fn main() -> Result<()> {
     );
     let mut document = Ontology::bootstrap(&registry)?.document().clone();
     for concept in &mut document.concepts {
+        if let Some(meaning) = customer.meanings.get(&concept.label) {
+            concept.label = meaning.label.clone();
+            concept.definition = meaning.definition.clone();
+            concept.aliases = meaning.aliases.clone();
+            concept.steward = meaning.steward.clone();
+            concept.sources = vec!["demo/pinax/customer-meaning.json".into()];
+            concept.status = ConceptStatus::Approved {
+                reviewer: "querygraph-demo-steward".into(),
+                evidence: "demo/pinax/customer-discovery-design.md".into(),
+            };
+            continue;
+        }
         let (label, definition, aliases) = match concept.label.as_str() {
             "rows" => (
                 "Customer records",
@@ -114,7 +151,7 @@ fn main() -> Result<()> {
     std::fs::rename(pending, &args.config)?;
     println!(
         "{}",
-        serde_json::json!({"ontology_digest":digest,"tables":1,"fields":3,"concepts":4,"store":store_path})
+        serde_json::json!({"ontology_digest":digest,"tables":registry.tables().len(),"concepts":ontology.document().concepts.len(),"store":store_path})
     );
     Ok(())
 }

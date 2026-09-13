@@ -28,3 +28,16 @@ printf 'LAKECAT_PLAN_TASK_SIGNING_KEY=%s\n' "$(openssl rand -hex 32)" > "$demo_r
   --store "$demo_root/run/ontology" \
   --config "$demo_root/run/pinax/registry-service.json" \
   > "$demo_root/reports/ontology-seed.json"
+
+# Preserve the original fixture paths; activate the reviewed business inventory separately.
+uv run --project python --with 'pyiceberg[pyarrow,sql-sqlite]==0.10.0' \
+  python integration/pinax/prepare_customers.py \
+  --existing "$demo_root/run/pinax" --destination "$demo_root/run/customer-discovery" \
+  --querygraph-bin "$demo_root/src/querygraph/target/debug/querygraph" \
+  > "$demo_root/reports/customer-prepared.json"
+"$demo_root/src/querygraph/target/debug/examples/pinax-ontology-seed" \
+  --registry "$demo_root/run/customer-discovery/registry.json" \
+  --store "$demo_root/run/customer-ontology" \
+  --config "$demo_root/run/customer-discovery/registry-service.json" \
+  > "$demo_root/reports/customer-ontology.json"
+ln -s customer-discovery "$demo_root/run/active-pinax"
