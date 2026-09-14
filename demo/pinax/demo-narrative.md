@@ -217,3 +217,13 @@ The slide link carries the selected format. Switching clears the current result
 so a previous Iceberg result cannot be mistaken for a Delta result or vice versa.
 Grust's separate graph storage is Delta-based regardless of the company table
 format; the optional graph presentation identifies it separately.
+
+## Slide order and optional material
+
+The full deck contains 26 slides. Slides 1–10 introduce customer discovery.
+Slides 11–20 contain the Optional divider and the original stack, standards,
+TypeSec, MCP, and governed-read slides. Slides 21–26 contain the Part II divider
+and the original Grust, Marciana, semantic-export, walkthrough, and book slides.
+All 14 original whole-stack slides follow the new main presentation. The footer
+jumps to either section, and the matching console sections link directly to them.
+Both table-format selections use the same order and retain their format labels.
