@@ -1,0 +1,22 @@
+{
+  "kindle_name": "querygraph (0.4.2-9ef26f3)",
+  "base_edition": "0.4.2-9ef26f3",
+  "cover_source_commit": "48daf8bc20b79dca9c76e74bbe0b1901e953cd71",
+  "pdf_file": "querygraph.pdf",
+  "pdf_link": "querygraph (0.4.2-9ef26f3-cover-48daf8b).pdf",
+  "pdf_sha256": "0d6117418b8a9ac4dff4e8de89edbaff76f3db71054d2299676132fd484d3d53",
+  "epub_file": "querygraph.epub",
+  "epub_link": "querygraph (0.4.2-9ef26f3-cover-48daf8b).epub",
+  "epub_sha256": "ffe5b0dd9e880652a72c07b093183c3cd85629d53a10276739b3e6955299158c",
+  "cover_sha256": "9efce9d9675bf768a4e407ac92ebbd8ecc45bc91e92727ebb7a0df23d6569381",
+  "inputs": {
+    "pdf": [
+      "pdf/525f0b6e2c971704-querygraph.pdf",
+      "525f0b6e2c9717049a133067a46752e5b6c27b896963c773fbd1b794d7472755"
+    ],
+    "epub": [
+      "epub/8a202c7a334a9cd1-querygraph.epub",
+      "8a202c7a334a9cd150425f423c226f8cf8981e89a00ea0ef30c384cba83ce62b"
+    ]
+  }
+}
