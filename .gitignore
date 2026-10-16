@@ -4,6 +4,7 @@ __pycache__/
 *.py[cod]
 /target/
 /python/.venv/
+/cover/.venv/
 /python/.pytest_cache/
 /python/dist/
 spark-warehouse/

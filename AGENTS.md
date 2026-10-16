@@ -26,6 +26,16 @@ types, advanced type-level abstractions must improve real guarantees without
 type gymnastics, and performance claims require optimized representative
 benchmarks.
 
+## Book Cover and Version Information
+
+Every PDF and EPUB reading edition must begin with the image cover, followed
+immediately by a title/information page displaying `firstpair.press`, the exact
+semantic version of the book, and its source Git commit hash. Use the full
+commit hash and identify a separate cover revision explicitly when refreshing
+artwork on an existing edition; do not imply that unchanged book content was
+rebuilt from the cover revision. Validate the page order and version text in
+both formats before publishing.
+
 ## Python Environment
 
 Use the shared Python bootstrap helper instead of Homebrew or system Python:
