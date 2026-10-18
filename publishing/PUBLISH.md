@@ -15,7 +15,7 @@ Use it as the source template when a repo needs a book/blog pipeline with:
 - repaired and validated EPUB metadata/layout;
 - exact-copy delivery to `~/icloud/books`.
 - versioned blog `.textpack` bundles delivered to `~/icloud/blogs`.
-- repo-pinned Python helper environments managed by asdf and uv, so publishing
+- repo-pinned Python helper environments managed by uv alone, so publishing
   never depends on a broken Homebrew or system Python.
 
 ## Canonical Layout
@@ -151,16 +151,17 @@ inspection, PDF page checks, textpack creation, or source extraction, pin and
 sync the repo-local Python environment:
 
 ```text
-.tool-versions
+.python-version
 pyproject.toml
 uv.lock
 .venv/                 # ignored, created by uv sync
 ```
 
-The recommended `.tool-versions` entry is the repo's asdf Python, for example:
+`.python-version` holds the repo's Python for uv; keep it at the latest
+CPython, for example:
 
 ```text
-python 3.12.3
+3.15
 ```
 
 Declare publishing helpers in `pyproject.toml`; illustrated book pipelines
@@ -170,7 +171,7 @@ should include Pillow:
 [project]
 name = "my-book-publishing"
 version = "0.1.0"
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.15"
 dependencies = [
   "pillow>=11.0.0",
 ]
@@ -179,8 +180,8 @@ dependencies = [
 Then run:
 
 ```sh
-asdf install
-uv sync --no-dev --python "$(asdf which python)"
+uv python install
+uv sync --no-dev
 ```
 
 Automation can resolve the correct Python with:

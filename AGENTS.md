@@ -44,8 +44,9 @@ Use the shared Python bootstrap helper instead of Homebrew or system Python:
 publishing/scripts/ensure-python-env.sh python
 ```
 
-The helper resolves the project root, prefers `asdf which python` when
-available, and runs `uv sync` for the selected uv project. Use the printed
+The helper resolves the project root and runs `uv sync` for the selected uv
+project. uv alone manages Python: the root `.python-version` pins the latest
+CPython (3.15), and uv installs it when missing. Do not use asdf. Use the printed
 interpreter path only when a tool needs an explicit Python binary; otherwise run
 commands through `uv run` from the target project:
 
